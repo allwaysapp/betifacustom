@@ -1,0 +1,167 @@
+img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* fill yerine cover daha iyi */
+}
+
+.custom-section {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    gap: 2rem; /* 32px yerine rem kullanıyoruz */
+    align-items: stretch; /* center yerine stretch */
+    justify-content: space-between;
+}
+
+.left-content {
+    display: flex;
+    flex: 1;
+    min-width: 0; /* Flex shrinking için önemli */
+    height: auto;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+}
+
+.left-first {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    width: 100%;
+    height: auto;
+   flex: 2;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.left-tittle {
+    width: 100%;
+    height: auto;
+}
+
+/* Responsive font boyutları */
+.left-first h2 {
+    font-size: clamp(1.25rem, 4vw, 1.5rem); /* Responsive font */
+    color: #d0c3d9;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.left-first p {
+    font-size: clamp(1rem, 2.5vw, 1.25rem); /* Responsive font */
+    color: #f21f51;
+    margin: 0;
+}
+
+.left-second{
+    display: flex;
+    width: 100%;
+    height: auto;
+    gap: 8px;
+    flex: 3;
+   
+}
+
+.sport-product{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.casino-product{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.right-content {
+    width: 100%;
+    height: auto;
+    display: grid;
+    flex: 1;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.right-content a {
+    display: block;
+    border-radius: 16px;
+    overflow: hidden; /* Önemli: görselin köşelerini keser */
+}
+
+.crash-game {
+    grid-column: span 6 / span 6;
+    grid-row: span 2 / span 2;
+}
+
+.lucky-wheel {
+    grid-column: span 6 / span 6;
+    grid-row: span 2 / span 2;
+    grid-column-start: 7;
+}
+
+.dice-game {
+    grid-column: span 4 / span 4;
+    grid-row: span 2 / span 2;
+    grid-row-start: 3;
+}
+
+.plinko-game {
+    grid-column: span 4 / span 4;
+    grid-row: span 2 / span 2;
+    grid-column-start: 5;
+    grid-row-start: 3;
+}
+
+.coinflip-game {
+    grid-column: span 4 / span 4;
+    grid-row: span 2 / span 2;
+    grid-column-start: 9;
+    grid-row-start: 3;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.social-btn {
+    background: #140718;
+    border-radius: 10px;
+    transition: all 0.3s 
+ease;
+    position: relative;
+    overflow: hidden;
+    height: 40px;
+    width: 40px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 1024px) {
+   .custom-section{
+    display: flex;
+    flex-direction: column;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .custom-section{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    }
+
+
+}
