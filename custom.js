@@ -1,1 +1,189 @@
+(function () {
+    // Geçiş sırasında özel bölümlerin görünmesini engellemek için flag
+    let isNavigating = false;
 
+    // Anasayfa olup olmadığını kontrol eden fonksiyon
+    function isHomePage() {
+        const url = window.location.pathname;
+        return url === '/' || 
+               url === '/tr/' || 
+               url === '/tr' || 
+               url === '/en/' || 
+               url === '/en';
+    }
+
+    // Custom section'ı ekleyen fonksiyon
+    function createCustomSection() {
+        // Navigasyon sırasında veya anasayfa değilse ekleme
+        if (isNavigating || !isHomePage()) {
+            removeCustomSection();
+            return;
+        }
+
+        const mainSlider = document.getElementById('main-slider');
+        if (!mainSlider) return;
+
+        // Eğer daha önce eklenmemişse custom section ekle
+        if (!document.querySelector('.betifa-custom-section')) {
+            const customSection = document.createElement('div');
+            customSection.className = 'section container betifa-custom-section';
+            customSection.innerHTML = `
+                <div class="custom-section">
+                    <div class="left-content">
+                        <div class="left-first">
+                            <div class="left-tittle">
+                                <h2>GİRİŞ YAP HESAPLARIMIZI <br> TAKİP ET !</h2>
+                                <p>kazanmaya başla !</p>
+                            </div>
+                            <div class="social-buttons">
+                                <a class="social-btn" href="https://telegram.me/betifaresmi"> <img class="social-icon" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/telegram-icon.png" alt="Telegram"></a>
+                                <a class="social-btn" href="https://www.instagram.com/betifatr"> <img class="social-icon" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/instagram-icon.png" alt="Instagram"></a>
+                                <a class="social-btn" href="https://x.com/betifatr"> <img class="social-icon" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/twitter-icon.png" alt="X"></a>
+                            </div>
+                        </div>
+                        <div class="left-second">
+                            <div class="sport-product">
+                                <a href="/sportsbook"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/spor-bahisleri-product.png" alt=""></a>
+                            </div>
+                            <div class="casino-product">
+                                <a href="/casino"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/casino-bahisleri-product.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="crash-game">
+                            <a href="/casino/games/ebetlab-crash-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/crash.jpg" alt=""></a>
+                        </div>
+                        <div class="lucky-wheel">
+                            <a href="/casino/games/ebetlab-wheel-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/lucky-wheel.jpg" alt=""></a>
+                        </div>
+                        <div class="dice-game">
+                            <a href="/casino/games/ebetlab-dice-originals"><img src="https://github.com/allwaysapp/betifacustom/blob/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/dice.jpg?raw=true" alt=""></a>
+                        </div>
+                        <div class="plinko-game">
+                            <a href="/casino/games/ebetlab-plinko-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/plinko.jpg" alt=""></a>
+                        </div>
+                        <div class="coinflip-game">
+                            <a href="/casino/games/ebetlab-coinflip-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/coinflip.jpg" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // main-slider'ın hemen altına ekle
+            if (mainSlider.nextSibling) {
+                mainSlider.parentNode.insertBefore(customSection, mainSlider.nextSibling);
+            } else {
+                mainSlider.parentNode.appendChild(customSection);
+            }
+            
+            console.log('Betifa custom section eklendi:', customSection);
+        }
+    }
+
+    // Custom section'ı kaldıran fonksiyon
+    function removeCustomSection() {
+        const customSection = document.querySelector('.betifa-custom-section');
+        if (customSection && customSection.parentNode) {
+            customSection.parentNode.removeChild(customSection);
+            console.log('Betifa custom section kaldırıldı');
+        }
+    }
+
+    // Sayfa içeriğini güncelleyen ana fonksiyon
+    function initializePage() {
+        const currentIsHomePage = isHomePage();
+        
+        // Custom section sadece anasayfada gösterilir
+        if (currentIsHomePage) {
+            createCustomSection();
+        } else {
+            removeCustomSection();
+        }
+    }
+
+    // İç sayfa linklerine tıklandığında önleyici işlem
+    function setupLinkInterceptors() {
+        document.body.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (!link) return;
+            
+            if (!link.target || link.target === '_self') {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('/')) {
+                    isNavigating = true;
+                    removeCustomSection();
+                    
+                    setTimeout(() => {
+                        isNavigating = false;
+                        initializePage();
+                    }, 500);
+                }
+            }
+        });
+    }
+
+    // İlk sayfa yüklenmesi
+    function initialize() {
+        initializePage();
+        setupLinkInterceptors();
+    }
+
+    // URL değişikliklerini izle
+    function handleUrlChange() {
+        isNavigating = true;
+        removeCustomSection();
+        
+        setTimeout(() => {
+            isNavigating = false;
+            initializePage();
+        }, 500);
+    }
+
+    // popstate olayını dinle
+    window.addEventListener('popstate', handleUrlChange);
+    
+    // SPA route değişikliklerini yakalamak için history API'larını override et
+    const originalPushState = history.pushState;
+    history.pushState = function() {
+        originalPushState.apply(this, arguments);
+        handleUrlChange();
+    };
+    
+    const originalReplaceState = history.replaceState;
+    history.replaceState = function() {
+        originalReplaceState.apply(this, arguments);
+        handleUrlChange();
+    };
+
+    // DOM değişikliklerini izleyen observer
+    const contentObserver = new MutationObserver((mutations, observer) => {
+        if (isNavigating) return;
+        
+        const hasMainSlider = mutations.some(mutation => {
+            return Array.from(mutation.addedNodes).some(node => 
+                node.nodeType === 1 && 
+                (node.id === 'main-slider' || 
+                 (node.querySelector && node.querySelector('#main-slider')))
+            );
+        });
+
+        if (hasMainSlider) {
+            initializePage();
+        }
+    });
+    
+    // Observer'ı başlat
+    contentObserver.observe(document.body, { childList: true, subtree: true });
+
+    // Sayfa yüklendiğinde ilk çalıştırma
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initialize);
+    } else {
+        initialize();
+    }
+
+    // Ayrıca window load event'i için de dinle
+    window.addEventListener('load', initializePage);
+
+})();
