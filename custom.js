@@ -12,6 +12,14 @@
                url === '/en';
     }
 
+    // Mevcut dil prefix'ini alan fonksiyon
+    function getCurrentLanguagePrefix() {
+        const path = window.location.pathname;
+        if (path.startsWith('/tr')) return '/tr';
+        if (path.startsWith('/en')) return '/en';
+        return ''; // Ana domain için
+    }
+
     // Custom section'ı ekleyen fonksiyon
     function createCustomSection() {
         // Navigasyon sırasında veya anasayfa değilse ekleme
@@ -25,6 +33,8 @@
 
         // Eğer daha önce eklenmemişse custom section ekle
         if (!document.querySelector('.betifa-custom-section')) {
+            const langPrefix = getCurrentLanguagePrefix();
+            
             const customSection = document.createElement('div');
             customSection.className = 'section container betifa-custom-section';
             customSection.innerHTML = `
@@ -43,28 +53,28 @@
                         </div>
                         <div class="left-second">
                             <div class="sport-product">
-                                <a href="/sportsbook"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/spor-bahisleri-product.png" alt=""></a>
+                                <a href="${langPrefix}/sportsbook"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/spor-bahisleri-product.png" alt=""></a>
                             </div>
                             <div class="casino-product">
-                                <a href="/casino"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/casino-bahisleri-product.png" alt=""></a>
+                                <a href="${langPrefix}/casino"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/casino-bahisleri-product.png" alt=""></a>
                             </div>
                         </div>
                     </div>
                     <div class="right-content">
                         <div class="crash-game">
-                            <a href="/casino/games/ebetlab-crash-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/crash.jpg" alt=""></a>
+                            <a href="${langPrefix}/casino/games/ebetlab-crash-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/crash.jpg" alt=""></a>
                         </div>
                         <div class="lucky-wheel">
-                            <a href="/casino/games/ebetlab-wheel-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/lucky-wheel.jpg" alt=""></a>
+                            <a href="${langPrefix}/casino/games/ebetlab-wheel-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/lucky-wheel.jpg" alt=""></a>
                         </div>
                         <div class="dice-game">
-                            <a href="/casino/games/ebetlab-dice-originals"><img src="https://github.com/allwaysapp/betifacustom/blob/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/dice.jpg?raw=true" alt=""></a>
+                            <a href="${langPrefix}/casino/games/ebetlab-dice-originals"><img src="https://github.com/allwaysapp/betifacustom/blob/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/dice.jpg?raw=true" alt=""></a>
                         </div>
                         <div class="plinko-game">
-                            <a href="/casino/games/ebetlab-plinko-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/plinko.jpg" alt=""></a>
+                            <a href="${langPrefix}/casino/games/ebetlab-plinko-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/plinko.jpg" alt=""></a>
                         </div>
                         <div class="coinflip-game">
-                            <a href="/casino/games/ebetlab-coinflip-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/coinflip.jpg" alt=""></a>
+                            <a href="${langPrefix}/casino/games/ebetlab-coinflip-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/coinflip.jpg" alt=""></a>
                         </div>
                     </div>
                 </div>
@@ -108,11 +118,44 @@
             const link = e.target.closest('a');
             if (!link) return;
             
+            // Dış linkler için (sosyal medya vs) dokunma
+            if (link.href && (link.href.startsWith('http') && !link.href.includes(window.location.hostname))) {
+                return;
+            }
+            
+            // İç linkler için
             if (!link.target || link.target === '_self') {
                 const href = link.getAttribute('href');
                 if (href && href.startsWith('/')) {
+                    // Custom section içindeki linkler için özel işlem
+                    const isCustomSectionLink = link.closest('.betifa-custom-section');
+                    if (isCustomSectionLink) {
+                        e.preventDefault();
+                        
+                        // Navigasyon öncesi custom section'ı geciktirilmiş olarak kaldır
+                        isNavigating = true;
+                        
+                        // Manuel navigasyon yap
+                        window.history.pushState({}, '', href);
+                        window.dispatchEvent(new PopStateEvent('popstate'));
+                        
+                        // Kısa gecikme sonrası initialize et
+                        setTimeout(() => {
+                            removeCustomSection();
+                            isNavigating = false;
+                            initializePage();
+                        }, 100);
+                        
+                        return;
+                    }
+                    
+                    // Diğer site içi linkler için normal işlem
                     isNavigating = true;
-                    removeCustomSection();
+                    
+                    // Geciktirilmiş kaldırma
+                    setTimeout(() => {
+                        removeCustomSection();
+                    }, 300);
                     
                     setTimeout(() => {
                         isNavigating = false;
@@ -132,7 +175,11 @@
     // URL değişikliklerini izle
     function handleUrlChange() {
         isNavigating = true;
-        removeCustomSection();
+        
+        // Geciktirilmiş kaldırma
+        setTimeout(() => {
+            removeCustomSection();
+        }, 200);
         
         setTimeout(() => {
             isNavigating = false;
@@ -140,7 +187,7 @@
         }, 500);
     }
 
-    // popstate olayını dinle
+    // popstate olayını dinle (geri/ileri butonları)
     window.addEventListener('popstate', handleUrlChange);
     
     // SPA route değişikliklerini yakalamak için history API'larını override et
