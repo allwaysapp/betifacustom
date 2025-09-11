@@ -1,4 +1,21 @@
 (function () {
+    // Fetch'i intercept et - EN BAŞTA
+    const originalFetch = window.fetch;
+    window.fetch = function(...args) {
+        return originalFetch.apply(this, args).then(response => {
+            if (args[0].includes('games2/welcome/popular')) {
+                console.log('✅ Popular games API çağrısı yakalandı!');
+                response.clone().json().then(data => {
+                    console.log('📦 Popular games data:', data);
+                    console.log('🎮 Oyun sayısı:', data.data ? data.data.length : 'Veri bulunamadı');
+                    window.popularGamesData = data;
+                    console.log('💾 Veri window.popularGamesData değişkenine kaydedildi');
+                });
+            }
+            return response;
+        });
+    };
+
     // Geçiş sırasında özel bölümlerin görünmesini engellemek için flag
     let isNavigating = false;
 
