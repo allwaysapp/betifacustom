@@ -132,35 +132,26 @@
                     if (isCustomSectionLink) {
                         e.preventDefault();
                         
-                        // Navigasyon öncesi custom section'ı geciktirilmiş olarak kaldır
+                        // Navigasyon öncesi custom section'ı anında kaldır
                         isNavigating = true;
+                        removeCustomSection();
                         
                         // Manuel navigasyon yap
                         window.history.pushState({}, '', href);
                         window.dispatchEvent(new PopStateEvent('popstate'));
                         
-                        // Kısa gecikme sonrası initialize et
-                        setTimeout(() => {
-                            removeCustomSection();
-                            isNavigating = false;
-                            initializePage();
-                        }, 100);
+                        // Anında initialize et
+                        isNavigating = false;
+                        initializePage();
                         
                         return;
                     }
                     
                     // Diğer site içi linkler için normal işlem
                     isNavigating = true;
-                    
-                    // Geciktirilmiş kaldırma
-                    setTimeout(() => {
-                        removeCustomSection();
-                    }, 300);
-                    
-                    setTimeout(() => {
-                        isNavigating = false;
-                        initializePage();
-                    }, 500);
+                    removeCustomSection();
+                    isNavigating = false;
+                    initializePage();
                 }
             }
         });
@@ -175,16 +166,9 @@
     // URL değişikliklerini izle
     function handleUrlChange() {
         isNavigating = true;
-        
-        // Geciktirilmiş kaldırma
-        setTimeout(() => {
-            removeCustomSection();
-        }, 200);
-        
-        setTimeout(() => {
-            isNavigating = false;
-            initializePage();
-        }, 500);
+        removeCustomSection();
+        isNavigating = false;
+        initializePage();
     }
 
     // popstate olayını dinle (geri/ileri butonları)
