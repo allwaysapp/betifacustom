@@ -20,6 +20,125 @@
         return ''; // Ana domain için
     }
 
+    // 20 Popüler Oyun Listesi
+    function getPopularGames(langPrefix) {
+        const games = [
+            {
+                name: "Fury and Fortune",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/QaZs1lzHE94a4Zm6yai9AguiBfthudpTuzWUXZBc.png",
+                url: `${langPrefix}/casino/games/hacksaw-fury-and-fortune`
+            },
+            {
+                name: "Burning Hot",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/C7hr8yQqA2aYG5cQ0SaRRrnLACABWT2cQr1E5Qdd.png",
+                url: `${langPrefix}/casino/games/EGTInteractive-burning-hot`
+            },
+            {
+                name: "Gates of Olympus",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/u4I5cMm6zbu1qESyB92CirlVuCLc2OJXwgkQw5ao.png",
+                url: `${langPrefix}/casino/games/pragmaticplay-gates-of-olympus`
+            },
+            {
+                name: "Sugar Rush 1000",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/E1T0nBXudYAn2gL2NnVb5xRCW4CrjoBEaOdoLyhY.png",
+                url: `${langPrefix}/casino/games/pragmaticplay-sugar-rush-1000`
+            },
+            {
+                name: "Sweet Bonanza 1000",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/a3rF588ISUTN7mxmyG7dX7wa6DbdsiDtN2wBs933.png",
+                url: `${langPrefix}/casino/games/pragmaticplay-sweet-bonanza-1000`
+            },
+            {
+                name: "Big Bass Splash",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/ou4WgdAPJ31lxYFRTXSNGcQuCGGQhv90Ms3w5zfI.png",
+                url: `${langPrefix}/casino/games/pragmaticplay-big-bass-splash`
+            },
+            {
+                name: "Flaming Hot",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/GmSrDBXPGCM13RMQwHkjWHNMddVb1mbf39xlDdKM.png",
+                url: `${langPrefix}/casino/games/EGTInteractive-flaming-hot`
+            },
+            {
+                name: "The Dog House Megaways",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/s2hTx8LFGsbE3jLaSVkkKz8nah0Sei6JYV077HNT.png",
+                url: `${langPrefix}/casino/games/pragmaticplay-the-dog-house-megaways`
+            },
+            {
+                name: "Sweet Baklava",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/j1fRB8YJzgXt0ayV1zPOd0fnQhZRK7CXFy3m8B2z.png",
+                url: `${langPrefix}/casino/games/pragmaticplay-sweet-baklava`
+            },
+            {
+                name: "Sweet Bonanza",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/zrBmN6uNnX2bQzDVZvbxIvK4s66AwhqdHbPDATSq.png",
+                url: `${langPrefix}/casino/games/pragmaticplay-sweet-bonanza`
+            },
+            {
+                name: "Sugar Rush",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/DOQjMOaeW7lxtnx71236s3pi837rxicjU4S7FUp5.png",
+                url: `${langPrefix}/casino/games/pragmaticplay-sugar-rush`
+            },
+            {
+                name: "Gates of Olympus 1000",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/VtCqWeoBzoUWS80XOX1yfdHGUC7DJuKfrsaUjDRJ.png",
+                url: `${langPrefix}/casino/games/pragmaticplay-gates-of-olympus-1000`
+            },
+            {
+                name: "Big Bass Mission Fishin'",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/NtQeNzDe8uyunG15rT5k3H6TKHG6hmTAkqJpwRM9.jpg",
+                url: `${langPrefix}/casino/games/pragmaticplay-big-bass-mission-fishin`
+            },
+            {
+                name: "Buffalo King Megaways",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/FFfRWIF1Liwb9gCUcMCqXBpUPu1wRoESgEbo5DB3.avif",
+                url: `${langPrefix}/casino/games/pragmaticplay-buffalo-king-megaways`
+            },
+            {
+                name: "Bigger Bass Bonanza",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/KayYal8Y5gtJ1HM6FDeLyFtCUniZQI9ALUDpwSyH.avif",
+                url: `${langPrefix}/casino/games/pragmaticplay-bigger-bass-bonanza`
+            },
+            {
+                name: "Power of Thor Megaways",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/1JriPTQ04m3nsbTakirKBBeXnq4y5tFwQtxS63r4.avif",
+                url: `${langPrefix}/casino/games/pragmaticplay-power-of-thor-megaways`
+            },
+            {
+                name: "Big Bass Bonanza Megaways",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/m6wr8HLhZIna3aJnA3zrslEDWQST31EKDCx55kCO.avif",
+                url: `${langPrefix}/casino/games/pragmaticplay-big-bass-bonanza-megaways`
+            },
+            {
+                name: "5 Lions Megaways",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/2Izea5fJK3uevSlURmRv67Cn7zphram7cytGvjGq.avif",
+                url: `${langPrefix}/casino/games/pragmaticplay-5-lions-megaways`
+            },
+            {
+                name: "Cash Bonanza",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/omoxnXh4d85vBFwsY9RDqqw2yAxcz0TK4DvAczul.avif",
+                url: `${langPrefix}/casino/games/pragmaticplay-cash-bonanza`
+            },
+            {
+                name: "Mustang Gold Megaways",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/EqigmGLZZ6SJRkbMa4vz0JbL4dWPRm9fP8CbTXuV.avif",
+                url: `${langPrefix}/casino/games/pragmaticplay-mustang-gold-megaways`
+            }
+        ];
+
+        return games;
+    }
+
+    // Oyunları HTML'e dönüştüren fonksiyon
+    function createGamesHTML(games) {
+        return games.map(game => `
+            <div class="game-item">
+                <a href="${game.url}">
+                    <img src="${game.image}" alt="${game.name}" loading="lazy">
+                </a>
+            </div>
+        `).join('');
+    }
+
     // Custom section'ı ekleyen fonksiyon
     function createCustomSection() {
         // Navigasyon sırasında veya anasayfa değilse ekleme
@@ -34,6 +153,11 @@
         // Eğer daha önce eklenmemişse custom section ekle
         if (!document.querySelector('.betifa-custom-section')) {
             const langPrefix = getCurrentLanguagePrefix();
+            const games = getPopularGames(langPrefix);
+            
+            // İlk 10 ve ikinci 10 oyunu ayır
+            const firstTenGames = games.slice(0, 10);
+            const secondTenGames = games.slice(10, 20);
             
             const customSection = document.createElement('div');
             customSection.className = 'section container betifa-custom-section';
@@ -76,6 +200,19 @@
                         <div class="coinflip-game">
                             <a href="${langPrefix}/casino/games/ebetlab-coinflip-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/coinflip.jpg" alt=""></a>
                         </div>
+                    </div>
+                </div>
+                
+                <div class="custom-section1">
+                    <div class="game-header">
+                        <h2>EN POPÜLER OYUNLAR</h2>
+                        <a class="game-link" href="${langPrefix}/casino/games">tüm oyunlar</a>
+                    </div>
+                    <div class="games-grid">
+                        ${createGamesHTML(firstTenGames)}
+                    </div>
+                    <div class="games-grid">
+                        ${createGamesHTML(secondTenGames)}
                     </div>
                 </div>
             `;
