@@ -206,7 +206,7 @@
                 <div class="custom-section1">
                     <div class="game-header">
                         <h2>EN POPÜLER OYUNLAR</h2>
-                        <a class="game-link" href="${langPrefix}/casino/games">tüm oyunlar</a>
+                        <a class="game-link" href="${langPrefix}/casino">tüm oyunlar</a>
                     </div>
                     <div class="games-grid">
                         ${createGamesHTML(firstTenGames)}
