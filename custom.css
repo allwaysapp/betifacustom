@@ -1,7 +1,7 @@
 img {
     width: 100%;
     height: auto;
-    object-fit: cover; /* fill yerine cover daha iyi */
+    object-fit: cover;
 }
 
 .custom-section {
@@ -9,15 +9,16 @@ img {
     flex-direction: row;
     width: 100%;
     height: auto;
-    gap: 2rem; /* 32px yerine rem kullanıyoruz */
-    align-items: stretch; /* center yerine stretch */
+    gap: 2rem;
+    align-items: stretch;
     justify-content: space-between;
+    margin: 1rem 0;
 }
 
 .left-content {
     display: flex;
     flex: 1;
-    min-width: 0; /* Flex shrinking için önemli */
+    min-width: 0;
     height: auto;
     justify-content: space-between;
     gap: 1rem;
@@ -30,7 +31,7 @@ img {
     padding: 1rem 0;
     width: 100%;
     height: auto;
-   flex: 2;
+    flex: 2;
     gap: 1rem;
     min-width: 0;
 }
@@ -42,39 +43,72 @@ img {
 
 /* Responsive font boyutları */
 .left-first h2 {
-    font-size: clamp(1.25rem, 4vw, 1.5rem); /* Responsive font */
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
     color: #d0c3d9;
     line-height: 1.2;
     margin-bottom: 0.5rem;
 }
 
 .left-first p {
-    font-size: clamp(1rem, 2.5vw, 1.25rem); /* Responsive font */
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
     color: #f21f51;
     margin: 0;
 }
 
-.left-second{
+.left-second {
     display: flex;
     width: 100%;
     height: auto;
     gap: 8px;
     flex: 3;
-   
 }
 
-.sport-product{
+/* Sport Product - Yukarı Aşağı Animasyon */
+.sport-product {
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: floatUp 4s ease-in-out infinite;
+    transition: transform 0.3s ease;
 }
 
-.casino-product{
+.sport-product:hover {
+    transform: translateY(-8px) scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Casino Product - Ters Yönde Animasyon */
+.casino-product {
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: floatDown 4s ease-in-out infinite;
+    transition: transform 0.3s ease;
 }
 
+.casino-product:hover {
+    transform: translateY(-8px) scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Animasyon Keyframe'leri */
+@keyframes floatUp {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes floatDown {
+    0%, 100% {
+        transform: translateY(-6px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+}
 
 .right-content {
     width: 100%;
@@ -89,7 +123,42 @@ img {
 .right-content a {
     display: block;
     border-radius: 16px;
-    overflow: hidden; /* Önemli: görselin köşelerini keser */
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Modern Hover Efektleri - Right Content Items */
+.right-content a:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1) saturate(1.1);
+}
+
+.right-content a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(242, 31, 81, 0.1), rgba(208, 195, 217, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.right-content a:hover::before {
+    opacity: 1;
+}
+
+.right-content img {
+    transition: transform 0.3s ease;
+}
+
+.right-content a:hover img {
+    transform: scale(1.05);
 }
 
 .crash-game {
@@ -131,8 +200,7 @@ img {
 .social-btn {
     background: #140718;
     border-radius: 10px;
-    transition: all 0.3s 
-ease;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     height: 40px;
@@ -143,25 +211,59 @@ ease;
     justify-content: center;
 }
 
+/* Social Button Hover Efekti */
+.social-btn:hover {
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(242, 31, 81, 0.3);
+    background: linear-gradient(135deg, #140718, #2a1a2e);
+}
+
 .social-icon {
     width: 20px;
     height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.social-btn:hover .social-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 @media (max-width: 1024px) {
-   .custom-section{
-    display: flex;
-    flex-direction: column;
+    .custom-section {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Mobilde animasyonları hafiflet */
+    .sport-product, .casino-product {
+        animation-duration: 6s;
+    }
+    
+    @keyframes floatUp {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-3px); }
+    }
+    
+    @keyframes floatDown {
+        0%, 100% { transform: translateY(-3px); }
+        50% { transform: translateY(0px); }
     }
 }
 
-
 @media (max-width: 768px) {
-    .custom-section{
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    .custom-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
     }
-
-
+    
+    /* Mobilde hover efektlerini azalt */
+    .sport-product:hover,
+    .casino-product:hover {
+        transform: translateY(-4px) scale(1.02);
+    }
+    
+    .right-content a:hover {
+        transform: translateY(-2px) scale(1.01);
+    }
 }
