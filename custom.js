@@ -128,6 +128,114 @@
         return games;
     }
 
+    // 20 Canlı Casino Oyunu Listesi
+    function getLiveCasinoGames(langPrefix) {
+        const games = [
+            {
+                name: "Blackjack 94",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/amn1QOpFHNXZa6vcc6NksiE5c92R67SIkxYU1dGj.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-94`
+            },
+            {
+                name: "Blackjack 7",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/Iv9O3jeGFBWNOuadqoM8kpNtbY8YzjC9D5S2aN7f.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-7`
+            },
+            {
+                name: "Blackjack 6",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/JrlyLfowLdHVfxszhMcKKYiWTTO8WlIXm7Fut8Or.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-6`
+            },
+            {
+                name: "Blackjack 3",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/FG5Irtzoy5DvBAUgBhiZURiCUWU6bUzfn3GIMJrX.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-3`
+            },
+            {
+                name: "Blackjack 33",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/YwYAZeD6mjC1yv6vawUjvapTcgGlGHT5pF4P2FsL.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-33`
+            },
+            {
+                name: "Blackjack D",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/iCryXakTB2YWDBjt9bbF0qha6p2rEjmBxrxiFLvS.png",
+                url: `${langPrefix}/casino/games/sagaming-blackjack-d`
+            },
+            {
+                name: "Multihand Blackjack",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/game-images/multihand_blackjack.jpg",
+                url: `${langPrefix}/casino/games/pragmaticplay-multihand-blackjack`
+            },
+            {
+                name: "Blackjack",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/game-images/blackjack.jpg",
+                url: `${langPrefix}/casino/games/evolution-blackjack`
+            },
+            {
+                name: "American Blackjack",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/UD7LIvF7JFrXcXSFT4lZnLGPwivYVLRe2zZ8007r.avif",
+                url: `${langPrefix}/casino/games/betsoft-american-blackjack`
+            },
+            {
+                name: "Unlimited Blackjack",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/Afo1oDXTPlc0O9fUf2ffP8fp7x9U2j1PNGPcSfmp.png",
+                url: `${langPrefix}/casino/games/ezugi-unlimited-blackjack`
+            },
+            {
+                name: "Mega Roulette",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/hOdx7dHhYXCTSAaXBZvKV9ooqhF5q8bcfI7NowQn.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-mega-roulette`
+            },
+            {
+                name: "Auto Mega Roulette",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/ruMnftBIG1GhmdheZgXIh3o4LvxOrTpCEnawWC75.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-auto-mega-roulette`
+            },
+            {
+                name: "Speed Roulette 1",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/s7Z7cPEWMVR73epTGlvLwAP0Ta6imtgC3eCgN3z0.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-speed-roulette-1`
+            },
+            {
+                name: "VIP Auto Roulette",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/mbiPBwKFqAVibhEWvuLT5nTiiccpiO58Y6p4WxnI.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-vip-auto-roulette`
+            },
+            {
+                name: "Roulette 1",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/TngoMrnAhG5Zb0y8rAaVJexrfVgixB7VPDpN9L20.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-roulette-1`
+            },
+            {
+                name: "Virtual Roulette",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/mFBwCglhuWfTMUBsM3tuKrYThEaWe6JwXztfw2V0.png",
+                url: `${langPrefix}/casino/games/egt-interactive-virtual-roulette`
+            },
+            {
+                name: "Virtual Monaco Roulette",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/wfnY8E4G0l0BVrRCjz8Hu28KcwajYDOBHdkHzDKQ.png",
+                url: `${langPrefix}/casino/games/egt-interactive-virtual-monaco-roulette`
+            },
+            {
+                name: "Live Speed Roulette",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/Jx93pMUM4p20l1aNnO4USoXPzmXxvx52lFxBezKh.png",
+                url: `${langPrefix}/casino/games/egt-interactive-live-speed-roulette`
+            },
+            {
+                name: "Vegas Roulette 500x",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/6uQdTaDaeM4P3dlEuijYtHeI9vRF8RURfSlSr76c.png",
+                url: `${langPrefix}/casino/games/egt-interactive-vegas-roulette-500x`
+            },
+            {
+                name: "Live European Roulette",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/fCJL6ZWLyvoDzj3sb6JqMDxBY6lujNDs9NrYVWKx.png",
+                url: `${langPrefix}/casino/games/egt-interactive-live-european-roulette`
+            }
+        ];
+
+        return games;
+    }
+
     // Oyunları HTML'e dönüştüren fonksiyon
     function createGamesHTML(games) {
         return games.map(game => `
@@ -154,10 +262,15 @@
         if (!document.querySelector('.betifa-custom-section')) {
             const langPrefix = getCurrentLanguagePrefix();
             const games = getPopularGames(langPrefix);
+            const liveCasinoGames = getLiveCasinoGames(langPrefix);
             
             // İlk 10 ve ikinci 10 oyunu ayır
             const firstTenGames = games.slice(0, 10);
             const secondTenGames = games.slice(10, 20);
+            
+            // Canlı casino oyunları için de aynı şekilde ayır
+            const firstTenLiveGames = liveCasinoGames.slice(0, 10);
+            const secondTenLiveGames = liveCasinoGames.slice(10, 20);
             
             const customSection = document.createElement('div');
             customSection.className = 'section container betifa-custom-section';
@@ -235,6 +348,19 @@
                                 <a href="${langPrefix}/casino/games/EGTInteractive-20-super-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/P6qP3RrfVbsBlp2R63eoVZVuJu40q8kAmv5F1hTa.png" alt=""></a>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="custom-section3">
+                    <div class="game-header">
+                        <h2>CANLI CASINO OYUNLARI</h2>
+                        <a class="game-link" href="${langPrefix}/casino">tüm oyunlar</a>
+                    </div>
+                    <div class="games-grid">
+                        ${createGamesHTML(firstTenLiveGames)}
+                    </div>
+                    <div class="games-grid">
+                        ${createGamesHTML(secondTenLiveGames)}
                     </div>
                 </div>
             `;
