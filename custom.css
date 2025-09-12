@@ -312,6 +312,13 @@ img {
     overflow: hidden;
     position: relative;
     aspect-ratio: 3/4;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.game-item:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .game-item img {
@@ -319,6 +326,12 @@ img {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: all 0.3s ease;
+}
+
+.game-item:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1) saturate(1.1);
 }
 
 /* Responsive breakpoints */
