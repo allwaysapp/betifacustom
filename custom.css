@@ -268,10 +268,6 @@ img {
     }
 }
 
-
-
-
-
 .custom-section1{
     width: 100%;
     display: flex;
@@ -279,14 +275,12 @@ img {
     gap: 0.5rem;
 }
 
-
 .game-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
-
 
 .game-header h2{
     color: #d0c3d9;
@@ -317,21 +311,26 @@ img {
     border-radius: 12px;
     overflow: hidden;
     position: relative;
+    aspect-ratio: 3/4;
+}
+
+.game-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 /* Responsive breakpoints */
-
 @media (max-width: 1024px) {
     .games-grid {
         grid-template-columns: repeat(5, 1fr);
-        
     }
 }
 
 @media (max-width: 768px) {
     .games-grid {
         grid-template-columns: repeat(5, 1fr);
-        
     }
     .games-grid:nth-child(3) {
         display: none;
@@ -341,17 +340,13 @@ img {
 @media (max-width: 480px) {
     .games-grid {
         grid-template-columns: repeat(5, 1fr);
-        
     }
-
 }
-
 
 .custom-section2{
     width: 100%;
     height: auto;
     margin: 1rem 0;
-   
 }
 
 .game-showcase{
@@ -369,7 +364,6 @@ img {
     background-size: cover;
     background-repeat: no-repeat;
     gap: 2rem;
-    
 }
 
 .game-showcase-tittle {
@@ -377,7 +371,6 @@ img {
     width: 100%;
     flex: 1;
 }
-
 
 .game-showcase-tittle img{
     max-width: 300px;
@@ -391,7 +384,6 @@ img {
     height: auto;
     gap: 1rem;
     flex: 1;
-
 }
 
 .game-showcase-content .game-item{
@@ -410,14 +402,13 @@ img {
 .game-showcase-content .game-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Görseli kırpmadan tam kaplar */
+    object-fit: cover;
     transition: all 0.3s ease;
 }
 
 .game-showcase-content .game-item:hover img {
     filter: brightness(1.1) saturate(1.1);
 }
-
 
 @media (max-width: 768px) {
     .game-showcase{
@@ -426,6 +417,14 @@ img {
         border-radius: 0;
         gap: 1rem;
     }
+}
+
+/* Custom Section 3 CSS (Canlı Casino) */
+.custom-section3{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 #high-rtp-games-wrapper{
@@ -439,7 +438,6 @@ img {
     display:none;
 }
 
-
 #mini-games-wrapper{
     display:none;
 }
@@ -447,4 +445,3 @@ img {
 #top-games-wrapper{
     display:none;
 }
-
