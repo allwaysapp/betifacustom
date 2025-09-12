@@ -215,6 +215,28 @@
                         ${createGamesHTML(secondTenGames)}
                     </div>
                 </div>
+                
+                <div class="custom-section2">
+                    <div class="game-showcase">
+                        <div class="game-showcase-tittle">
+                            <img src="${langPrefix}/img/originals-text.png" alt="">
+                        </div>
+                        <div class="game-showcase-content">
+                            <div class="game-item">
+                                <a href="${langPrefix}/casino/games/EGTInteractive-flaming-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/ef0pKVRuRxOOI7JpBu5KcwIEkOxPQTZSsjZbwrzW.png" alt=""></a>
+                            </div>
+                            <div class="game-item">
+                                <a href="${langPrefix}/casino/games/EGTInteractive-shining-crown-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/Dx3g2ara2ofhfSo8XawtCOGEshzyXZ1KYWKOx275.png" alt=""></a>
+                            </div>
+                            <div class="game-item">
+                                <a href="${langPrefix}/casino/games/EGTInteractive-40-burning-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/bHW8HLS6L9zHubXtAAldQEGsqfaiyjuHX4yB9Ibb.png" alt=""></a>
+                            </div>
+                            <div class="game-item">
+                                <a href="${langPrefix}/casino/games/EGTInteractive-20-super-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/P6qP3RrfVbsBlp2R63eoVZVuJu40q8kAmv5F1hTa.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             `;
             
             // main-slider'ın hemen altına ekle
