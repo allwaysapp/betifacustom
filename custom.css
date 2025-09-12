@@ -427,3 +427,24 @@ img {
         gap: 1rem;
     }
 }
+
+#high-rtp-games-wrapper{
+    display:none;
+}
+#buy-bonus-games-wrapper{
+    display:none;
+}
+
+#new-games-wrapper{
+    display:none;
+}
+
+
+#mini-games-wrapper{
+    display:none;
+}
+
+#top-games-wrapper{
+    display:none;
+}
+
