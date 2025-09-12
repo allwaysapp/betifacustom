@@ -219,7 +219,7 @@
                 <div class="custom-section2">
                     <div class="game-showcase">
                         <div class="game-showcase-tittle">
-                            <img src="${langPrefix}https://github.com/allwaysapp/betifacustom/blob/main/img/originals-text.png?raw=true" alt="">
+                            <img src="${langPrefix}https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="">
                         </div>
                         <div class="game-showcase-content">
                             <div class="game-item">
