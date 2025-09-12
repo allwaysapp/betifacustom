@@ -299,19 +299,19 @@
                     </div>
                     <div class="right-content">
                         <div class="crash-game">
-                            <a href="${langPrefix}/casino/games/ebetlab-crash-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/crash.jpg" alt=""></a>
+                            <a href="${langPrefix}/payments/deposit"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/yatirim-product.jpg" alt=""></a>
                         </div>
                         <div class="lucky-wheel">
-                            <a href="${langPrefix}/casino/games/ebetlab-wheel-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/lucky-wheel.jpg" alt=""></a>
+                            <a href="${langPrefix}/payments/withdrawal"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cekim-product.jpg" alt=""></a>
                         </div>
                         <div class="dice-game">
-                            <a href="${langPrefix}/casino/games/ebetlab-dice-originals"><img src="https://github.com/allwaysapp/betifacustom/blob/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/dice.jpg?raw=true" alt=""></a>
+                            <a href="${langPrefix}/casino/games/spribe-aviator"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/aviator-product.jpg" alt=""></a>
                         </div>
                         <div class="plinko-game">
-                            <a href="${langPrefix}/casino/games/ebetlab-plinko-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/plinko.jpg" alt=""></a>
+                            <a href="${langPrefix}#"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/canli-tv-product.jpg" alt=""></a>
                         </div>
                         <div class="coinflip-game">
-                            <a href="${langPrefix}/casino/games/ebetlab-coinflip-originals"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/coinflip.jpg" alt=""></a>
+                            <a href="${langPrefix}/promotions"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/gunun-firsatlari.jpg" alt=""></a>
                         </div>
                     </div>
                 </div>
