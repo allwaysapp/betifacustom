@@ -354,7 +354,7 @@
                 <div class="custom-section3">
                     <div class="game-header">
                         <h2>CANLI CASINO OYUNLARI</h2>
-                        <a class="game-link" href="${langPrefix}/casino">tüm oyunlar</a>
+                        <a class="game-link" href="${langPrefix}/live-casino">tüm oyunlar</a>
                     </div>
                     <div class="games-grid">
                         ${createGamesHTML(firstTenLiveGames)}
