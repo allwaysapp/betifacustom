@@ -345,3 +345,84 @@ img {
     }
 
 }
+
+
+.custom-section1{
+    width: 100%;
+    height: auto;
+   
+}
+
+.game-showcase{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5rem;
+    border-radius: 1rem;
+    background: 
+        linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 75%, transparent 100%),
+        url(https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/game-showcase-back-slotgame.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    gap: 2rem;
+    
+}
+
+.game-showcase-tittle {
+    display: flex;
+    width: 100%;
+    flex: 1;
+}
+
+
+.game-showcase-tittle img{
+    max-width: 300px;
+    height: auto;
+    object-fit: contain;
+}
+
+.game-showcase-content{
+    display: flex;
+    width: 100%;
+    height: auto;
+    gap: 1rem;
+    flex: 1;
+
+}
+
+.game-showcase-content .game-item{
+    width: 100%;
+    height: auto;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.9) 0px 30px 60px -30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.game-showcase-content .game-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: rgba(50, 50, 93, 0.4) 0px 60px 120px -20px, rgba(0, 0, 0, 0.9) 0px 40px 80px -30px;
+}
+
+.game-showcase-content .game-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Görseli kırpmadan tam kaplar */
+    transition: all 0.3s ease;
+}
+
+.game-showcase-content .game-item:hover img {
+    filter: brightness(1.1) saturate(1.1);
+}
+
+
+@media (max-width: 768px) {
+    .game-showcase{
+        flex-direction: column;
+        padding: 1rem 1rem ;
+        border-radius: 0;
+        gap: 1rem;
+    }
+}
