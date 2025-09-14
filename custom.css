@@ -458,3 +458,8 @@ img {
 #top-games-wrapper{
     display:none;
 }
+
+.slot__pos {
+visibility: hidden !important;
+display: none !important;
+}
