@@ -504,7 +504,6 @@ display: none !important;
 .sidebar__nav li {
     position: relative !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    overflow: hidden !important;
 }
 
 .sidebar__nav li a {
@@ -626,11 +625,6 @@ display: none !important;
 
 .sidebar__nav li:hover {
     filter: drop-shadow(0 0 12px rgba(243, 31, 81, 0.15)) !important;
-}
-
-.sidebar__nav li a:focus {
-    outline: 2px solid rgba(243, 31, 81, 0.6) !important;
-    outline-offset: 2px !important;
 }
 
 .sidebar__nav li,
