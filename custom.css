@@ -574,7 +574,7 @@ display: none !important;
 }
 
 .sidebar__nav li span {
-    background: linear-gradient(135deg, #f31f51, #ff6384, #feca57) !important;
+        background: linear-gradient(135deg, #f31f51, #f31f51, #ed7d98) !important;
     color: #ffffff !important;
     font-size: 9px !important;
     font-weight: bold !important;
