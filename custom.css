@@ -512,7 +512,6 @@ display: none !important;
     display: flex !important;
     align-items: center !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    z-index: 2 !important;
     border-radius:0px !important;
     border-bottom: solid #24182f 0.5px;
 }
