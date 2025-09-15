@@ -514,6 +514,7 @@ display: none !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     z-index: 2 !important;
     border-radius:0px !important;
+    border-bottom: solid #24182f 0.5px;
 }
 
 .sidebar__nav li:hover {
@@ -638,11 +639,4 @@ display: none !important;
 .sidebar__nav li .svg-icon,
 .sidebar__nav li span {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-
-.sidebar__nav li.active a, .sidebar__nav li.active a svg {
-    color: #f31f51 !important;
-    stroke: #f31f51 !important;
-    border-color: var(--tf-active) !important;
 }
