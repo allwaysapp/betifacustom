@@ -478,3 +478,164 @@ display: none !important;
     padding: 16px;
     border-radius: 15px 15px 0 0;
 }
+
+
+.sidebar__nav li.active {
+    border: none !important;
+    background: none !important;
+    background-image: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.sidebar__nav li.active a {
+    border: none !important;
+    background: none !important;
+    background-image: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.sidebar__nav {
+    background: #120b18 !important;
+    position: relative !important;
+}
+
+.sidebar__nav li {
+    position: relative !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow: hidden !important;
+}
+
+.sidebar__nav li a {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 2 !important;
+    border-radius:0px !important;
+}
+
+.sidebar__nav li:hover {
+    background: linear-gradient(90deg, rgba(243, 31, 81, 0.08), rgba(30, 20, 35, 0.6)) !important;
+}
+
+.sidebar__nav li:hover a {
+    color: #ffffff !important;
+    transform: translateX(8px) !important;
+}
+
+.sidebar__nav li:hover .svg-icon {
+    transform: scale(1.15) rotate(8deg) !important;
+    filter: drop-shadow(0 0 10px rgba(243, 31, 81, 0.7)) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.sidebar__nav li:hover::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 4px !important;
+    background: linear-gradient(to bottom, #f31f51, #ff6384) !important;
+    box-shadow: 0 0 10px rgba(243, 31, 81, 0.6) !important;
+    z-index: 3 !important;
+}
+
+.sidebar__nav li.active {
+    background: linear-gradient(90deg, rgba(243, 31, 81, 0.15), rgba(35, 25, 40, 0.8)) !important;
+    border-left: 4px solid #f31f51 !important;
+    box-shadow: inset 0 0 20px rgba(243, 31, 81, 0.1) !important;
+}
+
+.sidebar__nav li.active a {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+.sidebar__nav li.active .svg-icon {
+    filter: drop-shadow(0 0 8px rgba(243, 31, 81, 0.8)) !important;
+    transform: scale(1.1) !important;
+}
+
+.sidebar__nav li.active:hover {
+    background: linear-gradient(90deg, rgba(243, 31, 81, 0.2), rgba(40, 30, 45, 0.9)) !important;
+    box-shadow: inset 0 0 25px rgba(243, 31, 81, 0.2), 0 0 15px rgba(243, 31, 81, 0.3) !important;
+}
+
+.sidebar__nav li.active:hover a {
+    transform: translateX(12px) !important;
+}
+
+.sidebar__nav li.active:hover .svg-icon {
+    transform: scale(1.2) rotate(10deg) !important;
+    filter: drop-shadow(0 0 15px rgba(243, 31, 81, 1)) !important;
+}
+
+.sidebar__nav li span {
+    background: linear-gradient(135deg, #f31f51, #ff6384, #feca57) !important;
+    color: #ffffff !important;
+    font-size: 9px !important;
+    font-weight: bold !important;
+    padding: 3px 8px !important;
+    border-radius: 12px !important;
+    margin-left: auto !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 2px 8px rgba(243, 31, 81, 0.4) !important;
+    animation: pulseGlow 2s ease-in-out infinite !important;
+}
+
+.sidebar__nav li:hover span {
+    animation: pulseGlow 1s ease-in-out infinite !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 15px rgba(243, 31, 81, 0.6) !important;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { 
+        box-shadow: 0 2px 8px rgba(243, 31, 81, 0.4), 0 0 0 rgba(243, 31, 81, 0.4);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 4px 15px rgba(243, 31, 81, 0.8), 0 0 20px rgba(243, 31, 81, 0.3);
+        transform: scale(1.02);
+    }
+}
+
+.sidebar__nav li::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: radial-gradient(circle, rgba(243, 31, 81, 0.25) 0%, transparent 70%) !important;
+    transform: translateY(-50%) !important;
+    border-radius: 50% !important;
+    transition: width 0.5s ease-out, height 0.5s ease-out !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+}
+
+.sidebar__nav li:hover::after {
+    width: 150px !important;
+    height: 150px !important;
+}
+
+.sidebar__nav li:hover {
+    filter: drop-shadow(0 0 12px rgba(243, 31, 81, 0.15)) !important;
+}
+
+.sidebar__nav li a:focus {
+    outline: 2px solid rgba(243, 31, 81, 0.6) !important;
+    outline-offset: 2px !important;
+}
+
+.sidebar__nav li,
+.sidebar__nav li a,
+.sidebar__nav li .svg-icon,
+.sidebar__nav li span {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
