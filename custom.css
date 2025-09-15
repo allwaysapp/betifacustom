@@ -463,3 +463,18 @@ img {
 visibility: hidden !important;
 display: none !important;
 }
+
+
+.sidebar__title {
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    width: 100%;
+    background: #f31f51 !important;
+    padding: 16px;
+    border-radius: 15px 15px 0 0;
+}
