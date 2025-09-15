@@ -633,3 +633,14 @@ display: none !important;
 .sidebar__nav li span {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
+
+
+.sidebar__link:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 6px 20px rgba(243, 31, 81, 0.3) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.sidebar__links a:nth-child(2):hover {
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3) !important;
+}
