@@ -651,3 +651,81 @@ display: none !important;
         margin-left: 20px;
     }
 }
+
+/* Giriş Yap Butonu */
+.header__signin {
+    background: rgba(13, 3, 17, 0.7) !important;
+    border: 1px solid rgba(243, 31, 81, 0.3) !important;
+    border-radius: 8px !important;
+    padding: 8px 16px !important;
+    color: #ffffff !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: all 0.3s ease !important;
+}
+
+.header__signin:hover {
+    background: rgba(243, 31, 81, 0.1) !important;
+    border-color: #f31f51 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(243, 31, 81, 0.2) !important;
+}
+
+.header__signin .svg-icon {
+    width: 16px !important;
+    height: 16px !important;
+    fill: #ffffff !important;
+    transition: fill 0.3s ease !important;
+}
+
+.header__signin:hover .svg-icon {
+    fill: #f31f51 !important;
+}
+
+/* Kayıt Ol Butonu */
+.header__signup {
+    background: #f31f51 !important;
+    border: 1px solid #f31f51 !important;
+    border-radius: 8px !important;
+    padding: 8px 18px !important;
+    color: #ffffff !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.header__signup:hover {
+    background: #ff4d7a !important;
+    border-color: #ff4d7a !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 15px rgba(243, 31, 81, 0.3) !important;
+}
+
+/* Arama Butonu */
+.header__search-btnmob {
+    background: rgba(13, 3, 17, 0.6) !important;
+    border: 1px solid rgba(243, 31, 81, 0.2) !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
+    transition: all 0.3s ease !important;
+}
+
+.header__search-btnmob:hover {
+    background: rgba(243, 31, 81, 0.1) !important;
+    border-color: #f31f51 !important;
+    transform: translateY(-1px) !important;
+}
+
+.header__search-btnmob .svg-icon {
+    width: 16px !important;
+    height: 16px !important;
+    fill: #ffffff !important;
+    transition: fill 0.3s ease !important;
+}
+
+.header__search-btnmob:hover .svg-icon {
+    fill: #f31f51 !important;
+}
