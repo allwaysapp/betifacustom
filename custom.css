@@ -733,9 +733,7 @@ display: none !important;
 /* Footer Awards Section Styles */
 .betifa-footer-awards {
     margin: 20px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.2);
+    background: rgb(13 3 17);
 }
 
 .footer-awards-container {
