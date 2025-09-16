@@ -644,3 +644,10 @@ display: none !important;
 .sidebar__links a:nth-child(2):hover {
     box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3) !important;
 }
+
+@media (min-width: 768px) {
+    .header__signup {
+        height: 36px !important;
+        margin-left: 20px;
+    }
+}
