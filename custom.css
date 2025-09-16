@@ -729,3 +729,81 @@ display: none !important;
 .header__search-btnmob:hover .svg-icon {
     fill: #f31f51 !important;
 }
+
+/* Footer Awards Section Styles */
+.betifa-footer-awards {
+    margin: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.footer-awards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+}
+
+.footer-awards-container img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    filter: brightness(0.9);
+}
+
+.footer-awards-container img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    opacity: 0.9;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .footer-awards-container {
+        gap: 15px;
+        padding: 15px 10px;
+    }
+    
+    .footer-awards-container img {
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-awards-container {
+        gap: 10px;
+        padding: 15px 5px;
+    }
+    
+    .footer-awards-container img {
+        height: 45px;
+    }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .footer-awards-container {
+        gap: 18px;
+        padding: 18px 0;
+    }
+    
+    .footer-awards-container img {
+        height: 55px;
+    }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .footer-awards-container {
+        gap: 25px;
+        padding: 25px 0;
+    }
+    
+    .footer-awards-container img {
+        height: 65px;
+    }
+}
