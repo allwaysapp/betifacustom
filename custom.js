@@ -236,6 +236,34 @@
         return games;
     }
 
+
+// Footer Awards bölümünü ekleyen fonksiyon
+    function createFooterAwards() {
+        // Footer'da awards section'ı daha önce eklenmişse çıkış yap
+        if (document.querySelector('.betifa-footer-awards')) return;
+
+        // footer__description içeren row'u bul
+        const targetRow = document.querySelector('.footer__description')?.closest('.row');
+        if (!targetRow) return;
+
+        // Awards section'ını oluştur
+        const awardsSection = document.createElement('div');
+        awardsSection.className = 'row betifa-footer-awards';
+        awardsSection.innerHTML = `
+            <div class="col-12">
+                <div class="footer-awards-container" style="display: flex; justify-content: center; align-items: center; gap: 20px; padding: 20px 0;">
+                    <img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/qADFxttxrDUm1nvMsr1JTkBiWw4pXptrkfwjkjOy.png" alt="Award 1" style="height: 60px; width: auto;">
+                    <img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/ax9rmrivANIojaeX3J44vR2MZUgT2WvjnvE5LElQ.webp" alt="Award 2" style="height: 60px; width: auto;">
+                    <img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/Vybopxz1lksdu65Pjg7lbSQsWDYkQJd392IyVD88.png" alt="Award 3" style="height: 60px; width: auto;">
+                </div>
+            </div>
+        `;
+
+        // Target row'un altına ekle
+        targetRow.insertAdjacentElement('afterend', awardsSection);
+        console.log('Footer awards section eklendi');
+    }
+
     // Oyunları HTML'e dönüştüren fonksiyon
     function createGamesHTML(games) {
         return games.map(game => `
@@ -446,6 +474,7 @@
     function initialize() {
         initializePage();
         setupLinkInterceptors();
+        createFooterAwards();
     }
 
     // URL değişikliklerini izle
@@ -454,6 +483,7 @@
         removeCustomSection();
         isNavigating = false;
         initializePage();
+        createFooterAwards();
     }
 
     // popstate olayını dinle (geri/ileri butonları)
@@ -499,7 +529,9 @@
         initialize();
     }
 
-    // Ayrıca window load event'i için de dinle
-    window.addEventListener('load', initializePage);
+    window.addEventListener('load', function() {
+        initializePage();
+        createFooterAwards(); // Window load'da da footer awards ekle
+    });
 
 })();
