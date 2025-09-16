@@ -805,3 +805,7 @@ display: none !important;
         height: 65px;
     }
 }
+
+.chat__user {
+    display: none !important;
+}
