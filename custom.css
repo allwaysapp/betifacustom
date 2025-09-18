@@ -941,3 +941,10 @@ display: none !important;
         height: 40px;
     }
 }
+
+@media screen and (min-width: 991px) {
+    .container {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
