@@ -1,3 +1,8 @@
+html {
+    --tf-active: #f31f51 !important;
+}
+
+
 img {
     width: 100%;
     height: auto;
@@ -948,3 +953,5 @@ display: none !important;
         padding-right: 0px !important;
     }
 }
+
+
