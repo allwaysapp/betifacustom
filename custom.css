@@ -809,3 +809,153 @@ display: none !important;
 .chat__user {
     display: none !important;
 }
+
+/* Provider Carousel Stilleri */
+.custom-section4 {
+    margin: 30px 0;
+    padding: 0;
+}
+
+.provider-carousel-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.provider-carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.provider-carousel-header h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.provider-carousel-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.provider-nav-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.provider-nav-btn:hover:not(.disabled) {
+    background: #fff;
+    color: #000;
+    transform: scale(1.05);
+}
+
+.provider-nav-btn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: #666;
+    color: #666;
+}
+
+.provider-carousel-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.provider-carousel {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.provider-item {
+    width: 100%;
+}
+
+.provider-link {
+    display: block;
+    text-decoration: none;
+    width: 100%;
+}
+
+.provider-container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.provider-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-color: #007bff;
+}
+
+.provider-container img {
+    max-width: 100%;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Mobil responsive */
+@media (max-width: 768px) {
+    .provider-carousel {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    .provider-carousel-header h3 {
+        font-size: 20px;
+    }
+    
+    .provider-nav-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    
+    .provider-container {
+        padding: 15px;
+        min-height: 70px;
+    }
+    
+    .provider-container img {
+        max-height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .provider-carousel {
+        gap: 8px;
+    }
+    
+    .provider-container {
+        padding: 12px;
+        min-height: 60px;
+    }
+    
+    .provider-container img {
+        max-height: 40px;
+    }
+}
