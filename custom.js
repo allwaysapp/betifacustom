@@ -420,21 +420,18 @@
         updateProviderCarousel();
     }
 
-    // Provider carousel güncelleme fonksiyonu
-    function updateProviderCarousel() {
-        const carousel = document.querySelector('.provider-carousel-wrapper');
-        if (!carousel) return;
-        
-        const langPrefix = getCurrentLanguagePrefix();
-        const providers = getGameProviders(langPrefix);
-        
-        carousel.innerHTML = createProviderCarouselHTML(providers).replace(
-            '<div class="provider-carousel-wrapper">',
-            ''
-        ).replace('</div>', '').slice(0, -6); // Wrapper div'ini kaldır
-        
-        console.log('Provider carousel güncellendi:', providerCarouselState);
-    }
+// Provider carousel güncelleme fonksiyonu
+function updateProviderCarousel() {
+    const carousel = document.querySelector('.provider-carousel-wrapper');
+    if (!carousel) return;
+    
+    const langPrefix = getCurrentLanguagePrefix();
+    const providers = getGameProviders(langPrefix);
+    
+    carousel.innerHTML = createProviderCarouselHTML(providers);
+    
+    console.log('Provider carousel güncellendi:', providerCarouselState);
+}
 
     // Responsive güncellemeleri için window resize listener
     function setupProviderCarouselResize() {
