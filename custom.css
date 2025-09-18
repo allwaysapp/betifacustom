@@ -815,12 +815,10 @@ display: none !important;
     margin: 30px 0;
     padding: 0;
 }
-
 .provider-carousel-wrapper {
     width: 100%;
     margin: 0 auto;
 }
-
 .provider-carousel-header {
     display: flex;
     justify-content: space-between;
@@ -828,19 +826,16 @@ display: none !important;
     margin-bottom: 20px;
     padding: 0 10px;
 }
-
 .provider-carousel-header h3 {
     margin: 0;
     font-size: 24px;
     font-weight: bold;
     color: #fff;
 }
-
 .provider-carousel-controls {
     display: flex;
     gap: 10px;
 }
-
 .provider-nav-btn {
     width: 40px;
     height: 40px;
@@ -856,41 +851,39 @@ display: none !important;
     justify-content: center;
     transition: all 0.3s ease;
 }
-
 .provider-nav-btn:hover:not(.disabled) {
     background: #fff;
     color: #000;
     transform: scale(1.05);
 }
-
 .provider-nav-btn.disabled {
     opacity: 0.3;
     cursor: not-allowed;
     border-color: #666;
     color: #666;
 }
-
 .provider-carousel-container {
     width: 100%;
     overflow: hidden;
 }
-
 .provider-carousel {
     display: grid;
     gap: 15px;
     grid-template-columns: repeat(8, 1fr);
+    transition: all 0.5s ease-in-out; /* Kayma efekti */
 }
-
+.provider-carousel.transitioning {
+    transform: translateX(-20px);
+    opacity: 0.7;
+}
 .provider-item {
     width: 100%;
 }
-
 .provider-link {
     display: block;
     text-decoration: none;
     width: 100%;
 }
-
 .provider-container {
     background: #120b18;
     border-radius: 12px;
@@ -902,13 +895,11 @@ display: none !important;
     transition: all 0.3s ease;
     border: 2px solid transparent;
 }
-
 .provider-container:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     border-color: #007bff;
 }
-
 .provider-container img {
     max-width: 100%;
     max-height: 60px;
@@ -916,7 +907,6 @@ display: none !important;
     height: auto;
     object-fit: contain;
 }
-
 /* Mobil responsive */
 @media (max-width: 768px) {
     .provider-carousel {
@@ -943,7 +933,6 @@ display: none !important;
         max-height: 50px;
     }
 }
-
 @media (max-width: 480px) {
     .provider-carousel {
         gap: 8px;
