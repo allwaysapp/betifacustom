@@ -696,48 +696,54 @@ function updateProviderCarousel() {
 
     // İç sayfa linklerine tıklandığında önleyici işlem
     function setupLinkInterceptors() {
-        document.body.addEventListener('click', function(e) {
-            const link = e.target.closest('a');
-            if (!link) return;
-            
-            // Dış linkler için (sosyal medya vs) dokunma
-            if (link.href && (link.href.startsWith('http') && !link.href.includes(window.location.hostname))) {
-                return;
-            }
-            
-// İç linkler için
-            if (!link.target || link.target === '_self') {
-                const href = link.getAttribute('href');
-                if (href && href.startsWith('/')) {
-                    // Custom section içindeki linkler için özel işlem
-                    const isCustomSectionLink = link.closest('.betifa-custom-section');
-                    if (isCustomSectionLink) {
-                        e.preventDefault();
+    document.body.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (!link) return;
 
-                        // Navigasyon öncesi custom section'ı anında kaldır
-                        isNavigating = true;
-                        removeCustomSection();
+        const href = link.getAttribute('href');
 
-                        // Manuel navigasyon yap
-                        window.history.pushState({}, '', href);
-                        window.dispatchEvent(new PopStateEvent('popstate'));
+        // Dış linkler veya özel şemalar: dokunma
+        const isExternal = link.href && (link.href.startsWith('http') && !link.href.includes(window.location.hostname));
+        if (
+            isExternal ||
+            !href ||
+            href.startsWith('mailto:') ||
+            href.startsWith('tel:') ||
+            href.startsWith('#')
+        ) {
+            return;
+        }
 
-                        // Anında initialize et
-                        isNavigating = false;
-                        initializePage();
+        // --- ÖNEMLİ: Provider carousel alanını da SPA yönlendirmesine dahil ediyoruz ---
+        const isCustomSectionLink     = !!link.closest('.betifa-custom-section');
+        const isProviderCarouselLink  = !!link.closest('.custom-section4, .provider-carousel-wrapper');
 
-                        return;
-                    }
+        // Provider carousel VEYA custom section içindeyse: tam sayfa yenileme yok → SPA navigasyon
+        if (href.startsWith('/') && (isCustomSectionLink || isProviderCarouselLink)) {
+            e.preventDefault();
 
-                    // Diğer site içi linkler için normal işlem
-                    isNavigating = true;
-                    removeCustomSection();
-                    isNavigating = false;
-                    initializePage();
-                }
-            }
-        });
-    }
+            // Geçiş öncesi eklenen bölümleri kaldır
+            isNavigating = true;
+            removeCustomSection();
+            removeProviderCarouselFromSlots();
+            isNavigating = false;
+
+            // SPA rotalama
+            window.history.pushState({}, '', href);
+            handleUrlChange(); // tek tetikleyici
+            return;
+        }
+
+        // Diğer iç linkler için mevcut (eski) davranışı koru
+        if (href.startsWith('/')) {
+            isNavigating = true;
+            removeCustomSection();
+            isNavigating = false;
+            initializePage();
+        }
+    });
+}
+
 
     // İlk sayfa yüklenmesi
     function initialize() {
