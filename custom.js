@@ -425,20 +425,12 @@ function updateProviderCarousel() {
     const carousel = document.querySelector('.provider-carousel-wrapper');
     if (!carousel) return;
     
-    const providerGrid = carousel.querySelector('.provider-carousel');
-    if (!providerGrid) return;
+    const langPrefix = getCurrentLanguagePrefix();
+    const providers = getGameProviders(langPrefix);
     
-    // Kayma animasyonu başlat
-    providerGrid.classList.add('transitioning');
+    carousel.innerHTML = createProviderCarouselHTML(providers);
     
-    setTimeout(() => {
-        const langPrefix = getCurrentLanguagePrefix();
-        const providers = getGameProviders(langPrefix);
-        
-        carousel.innerHTML = createProviderCarouselHTML(providers);
-        
-        console.log('Provider carousel güncellendi:', providerCarouselState);
-    }, 250); // 250ms sonra içeriği değiştir
+    console.log('Provider carousel güncellendi:', providerCarouselState);
 }
 
     // Responsive güncellemeleri için window resize listener
