@@ -459,36 +459,34 @@ function updateProviderCarousel() {
     }
 
     // Provider carousel'i slots sayfasına ekleyen fonksiyon
-    function createProviderCarouselForSlots() {
-        // Slots sayfası değilse veya navigasyon sırasındaysa ekleme
-        if (!isCasinoSlotsPage() || isNavigating) {
-            removeProviderCarouselFromSlots();
-            return;
-        }
-
-        // Hedef container: .container.section'dan sonra eklenecek
-        const targetContainer = document.querySelector('.container.section');
-        if (!targetContainer) return;
-
-        // Daha önce eklenmemişse provider carousel ekle
-        if (!document.querySelector('.custom-section4')) {
-            const langPrefix = getCurrentLanguagePrefix();
-            const providers = getGameProviders(langPrefix);
-            
-            const providerSection = document.createElement('div');
-            providerSection.className = 'container custom-section4';
-            providerSection.innerHTML = createProviderCarouselHTML(providers);
-            
-            // Target container'ın hemen altına ekle
-            if (targetContainer.nextSibling) {
-                targetContainer.parentNode.insertBefore(providerSection, targetContainer.nextSibling);
-            } else {
-                targetContainer.parentNode.appendChild(providerSection);
-            }
-            
-            console.log('Provider carousel slots sayfasına eklendi');
-        }
+   function createProviderCarouselForSlots() {
+    if (!isCasinoSlotsPage() || isNavigating) {
+        removeProviderCarouselFromSlots();
+        return;
     }
+    const targetContainer = document.querySelector('.container.section');
+    if (!targetContainer) return;
+
+    if (!document.querySelector('.custom-section4')) {
+        const langPrefix = getCurrentLanguagePrefix();
+        const providers = getGameProviders(langPrefix);
+
+        const providerSection = document.createElement('div');
+        providerSection.className = 'container custom-section4';
+        providerSection.innerHTML = createProviderCarouselHTML(providers);
+
+        if (targetContainer.nextSibling) {
+            targetContainer.parentNode.insertBefore(providerSection, targetContainer.nextSibling);
+        } else {
+            targetContainer.parentNode.appendChild(providerSection);
+        }
+
+        // ← ilk render sonrası tek sefer güncelle
+        updateProviderCarousel();
+
+        console.log('Provider carousel slots sayfasına eklendi');
+    }
+}
 
     // Provider carousel'i slots sayfasından kaldıran fonksiyon
     function removeProviderCarouselFromSlots() {
@@ -696,48 +694,69 @@ function updateProviderCarousel() {
 
     // İç sayfa linklerine tıklandığında önleyici işlem
     function setupLinkInterceptors() {
-        document.body.addEventListener('click', function(e) {
-            const link = e.target.closest('a');
-            if (!link) return;
-            
-            // Dış linkler için (sosyal medya vs) dokunma
-            if (link.href && (link.href.startsWith('http') && !link.href.includes(window.location.hostname))) {
-                return;
-            }
-            
-// İç linkler için
-            if (!link.target || link.target === '_self') {
-                const href = link.getAttribute('href');
-                if (href && href.startsWith('/')) {
-                    // Custom section içindeki linkler için özel işlem
-                    const isCustomSectionLink = link.closest('.betifa-custom-section');
-                    if (isCustomSectionLink) {
-                        e.preventDefault();
+    document.body.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (!link) return;
 
-                        // Navigasyon öncesi custom section'ı anında kaldır
-                        isNavigating = true;
-                        removeCustomSection();
+        // Dış linkler (sosyal medya vb.) → dokunma
+        if (link.href && (link.href.startsWith('http') && !link.href.includes(window.location.hostname))) {
+            return;
+        }
 
-                        // Manuel navigasyon yap
-                        window.history.pushState({}, '', href);
-                        window.dispatchEvent(new PopStateEvent('popstate'));
+        // İç linkler
+        if (!link.target || link.target === '_self') {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('/')) {
 
-                        // Anında initialize et
-                        isNavigating = false;
-                        initializePage();
+                // 1) Custom section içindeki linkler (mevcut davranış)
+                const isCustomSectionLink = link.closest('.betifa-custom-section');
+                if (isCustomSectionLink) {
+                    e.preventDefault();
 
-                        return;
-                    }
-
-                    // Diğer site içi linkler için normal işlem
+                    // Geçiş öncesi özel alanı kaldır
                     isNavigating = true;
                     removeCustomSection();
+
+                    // SPA navigasyon
+                    window.history.pushState({}, '', href);
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+
+                    // Anında initialize
                     isNavigating = false;
                     initializePage();
+                    return;
                 }
+
+                // 2) Provider carousel içindeki linkler → AYNI YAKLAŞIM
+                const isProviderCarouselLink = link.closest('.custom-section4') || link.closest('.provider-carousel-wrapper');
+                if (isProviderCarouselLink) {
+                    e.preventDefault();
+
+                    // Geçiş öncesi provider alanını ve custom section'ı kaldır
+                    isNavigating = true;
+                    removeProviderCarouselFromSlots();
+                    removeCustomSection();
+
+                    // SPA navigasyon
+                    window.history.pushState({}, '', href);
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+
+                    // Anında initialize
+                    isNavigating = false;
+                    initializePage();
+                    return;
+                }
+
+                // 3) Diğer iç linkler: mevcut davranışı koru
+                isNavigating = true;
+                removeCustomSection();
+                isNavigating = false;
+                initializePage();
             }
-        });
-    }
+        }
+    });
+}
+
 
     // İlk sayfa yüklenmesi
     function initialize() {
