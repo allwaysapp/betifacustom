@@ -1,5 +1,6 @@
 html {
     --tf-active: #f31f51 !important;
+    --tf-cool-button: linear-gradient(to right, #0d0311 0%, #0d0311 51%, #f31f51 100%) !important;
 }
 
 
