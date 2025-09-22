@@ -717,25 +717,22 @@
     }
 
 function updateJackpotImages() {
-    // TRY/TL görselini güncelle
+    // Önce mevcut elementleri kontrol et
     const tryImg = document.querySelector('img.jackpot__logo.try');
-    if (tryImg) {
-        tryImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/vl4k5b75jyTx5jREitJf1ACDTMdRJD0lx3dftYAo.png';
-    }
-
-    // USD görselini güncelle  
     const usdImg = document.querySelector('img.jackpot__logo.usd');
-    if (usdImg) {
-        usdImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/FMhxFRKcmA9F6uj64aTBNMj01Fkthz3GAQ0qrlYK.png';
-    }
-
-    // BTC görselini güncelle
     const btcImg = document.querySelector('img.jackpot__logo.btc');
-    if (btcImg) {
-        btcImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/d7vPkTXRsNo5fFefMdKHrAWW0BkgeZEDZ8TTasSm.png';
-    }
 
-    console.log('Jackpot görselleri güncellendi');
+    if (tryImg && usdImg && btcImg) {
+        // Hepsi mevcut, güncelle
+        tryImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/vl4k5b75jyTx5jREitJf1ACDTMdRJD0lx3dftYAo.png';
+        usdImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/FMhxFRKcmA9F6uj64aTBNMj01Fkthz3GAQ0qrlYK.png';
+        btcImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/d7vPkTXRsNo5fFefMdKHrAWW0BkgeZEDZ8TTasSm.png';
+        console.log('Jackpot görselleri güncellendi');
+    } else {
+        // Henüz yüklenmemiş, bekle ve tekrar dene
+        console.log('Jackpot elementleri henüz yüklenmemiş, bekleniyor...');
+        setTimeout(updateJackpotImages, 500); // 500ms sonra tekrar dene
+    }
 }
     
 
