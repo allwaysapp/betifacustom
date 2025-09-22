@@ -21,7 +21,13 @@
             create: createFooterAwards,
             remove: removeFooterAwards,
             selector: '.betifa-footer-awards'
-        }
+        },
+        jackpotImages: {
+            condition: () => isHomePage(),
+            create: updateJackpotImages,
+            remove: () => {},
+            selector: '.jackpot__logo'
+    }
     };
 
     // Anasayfa olup olmadığını kontrol eden fonksiyon
@@ -709,6 +715,30 @@
             console.log('Footer awards kaldırıldı');
         }
     }
+
+    function updateJackpotImages() {
+    // TRY/TL görselini güncelle
+    const tryImg = document.querySelector('.jackpot__logo.try');
+    if (tryImg) {
+        tryImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/vl4k5b75jyTx5jREitJf1ACDTMdRJD0lx3dftYAo.png';
+    }
+
+    // USD görselini güncelle  
+    const usdImg = document.querySelector('.jackpot__logo.usd');
+    if (usdImg) {
+        usdImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/FMhxFRKcmA9F6uj64aTBNMj01Fkthz3GAQ0qrlYK.png';
+    }
+
+    // BTC görselini güncelle
+    const btcImg = document.querySelector('.jackpot__logo.btc');
+    if (btcImg) {
+        btcImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/d7vPkTXRsNo5fFefMdKHrAWW0BkgeZEDZ8TTasSm.png';
+    }
+
+    console.log('Jackpot görselleri güncellendi');
+}
+
+    
 
     // LINK YÖNETİMİ
     function setupLinkInterceptors() {
