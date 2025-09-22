@@ -1054,3 +1054,81 @@ ease;
     background: none !important;
     box-shadow: none !important;
 }
+
+.jackpot__value--grand-gold span {
+    background: radial-gradient(circle at 10% 20%, #af0003 0, #710000 90%);
+    border-radius: 10px !important;
+    color: #d0c2d9 !important;
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.jackpot__value--major-gold span {
+    background: radial-gradient(circle at 10% 20%, #af0003 0, #710000 90%);
+    border-radius: 10px !important;
+    color: #d0c2d9 !important;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.jackpot__value--minor-gold span {
+    background: radial-gradient(circle at 10% 20%, #af0003 0, #710000 90%);
+    border-radius: 10px !important;
+    color: #d0c2d9 !important;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.jackpot__value--mini-gold span {
+    color: #d0c2d9 !important;
+    font-size: 16px;
+    font-weight: 700;
+    background: radial-gradient(circle at 10% 20%, #af0003 0, #710000 90%);
+    border-radius: 10px;
+}
+
+.jackpot__value--grand-7 span {
+    background: radial-gradient(circle at 10% 20%, #26694acc 0, #002918cc 90%);
+    border-radius: 10px !important;
+    color: #d0c2d9 !important;
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.jackpot__value--major-7 span {
+    background: radial-gradient(circle at 10% 20%, #26694acc 0, #002918cc 90%);
+    border-radius: 10px !important;
+    color: #d0c2d9 !important;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.jackpot__value--mini-7 span, .jackpot__value--minor-7 span {
+    background: radial-gradient(circle at 10% 20%, #26694acc 0, #002918cc 90%);
+    border-radius: 10px !important;
+    font-size: 16px;
+    font-weight: 700;
+    color: #d0c2d9 !important;
+}
+
+.jackpot__value--zebra span {
+    background: radial-gradient(circle at 10% 20%, #fa0c 0, #864f01cc 90%);
+    border-radius: 10px !important;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.jackpot__value--major-zebra span {
+    background: linear-gradient(90deg, #0575e6cc, #021b79cc);
+    border-radius: 10px !important;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.jackpot__value--minor-zebra span {
+    background: linear-gradient(90deg, #84358eb3, #5f0a87b3);
+    border-radius: 10px !important;
+    font-size: 16px;
+    font-weight: 700;
+}
