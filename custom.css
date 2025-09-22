@@ -1010,3 +1010,12 @@ display: none !important;
     border-radius: 18px;
     box-shadow: none !important;
 }
+
+
+.jackpot__value--grand-7 span:after,.jackpot__value--grand-7 span:before {
+    background: none !important;
+    background-size: 30px 30px;
+    height: 30px;
+    margin-top: -15px;
+    width: 30px
+}
