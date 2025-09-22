@@ -1019,3 +1019,11 @@ display: none !important;
     margin-top: -15px;
     width: 30px
 }
+
+.jackpot__value--grand-gold span:after,.jackpot__value--grand-gold span:before {
+    color: #c7342b;
+    content: "" !important;
+    height: 30px;
+    margin-top: -16px;
+    width: 30px
+}
