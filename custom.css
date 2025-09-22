@@ -1027,3 +1027,14 @@ display: none !important;
     margin-top: -16px;
     width: 30px
 }
+
+.jackpot__logo {
+    display: block;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, .15)) drop-shadow(0 0 12px rgba(255, 215, 0, .25));
+    height: auto;
+    margin: 0 auto;
+    max-width: 100% !important;
+    transition: transform .3s 
+ease;
+    width: 100%;
+}
