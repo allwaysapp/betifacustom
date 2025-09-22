@@ -956,3 +956,57 @@ display: none !important;
 }
 
 
+.jackpot__value.half {
+    width: 100% !important;
+}
+
+.jackpot__value--grand-gold::before {
+    box-shadow: none !important;
+    border-radius: 16px;
+}
+
+.jackpot__value--grand-gold {
+    animation: pulse2 1.4s infinite;
+    border-radius: 24px;
+    box-shadow: none !important;
+    height: 36px;
+}
+
+.jackpot__value--major-gold:before {
+    border-radius: 18px;
+    box-shadow: none !important;
+}
+
+.jackpot__value--mini-gold:before {
+    border-radius: 18px;
+    box-shadow: none !important;
+}
+
+.jackpot__value--minor-gold:before {
+    border-radius: 18px;
+    box-shadow: none !important;
+}
+
+.jackpot__value--grand-7:before {
+    border-radius: 16px;
+    box-shadow: none !important;
+}
+
+.jackpot__value--mini-7:before {
+    border-radius: 18px;
+    box-shadow: none !important;
+}
+
+.jackpot__value--zebra:before {
+    border-radius: 24px;
+    bottom: -4px;
+    box-shadow: none !important;
+    left: -4px;
+    right: -4px;
+    top: -4px;
+}
+
+.jackpot__value--mini-zebra:before {
+    border-radius: 18px;
+    box-shadow: none !important;
+}
