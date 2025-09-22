@@ -1030,11 +1030,27 @@ display: none !important;
 
 .jackpot__logo {
     display: block;
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, .15)) drop-shadow(0 0 12px rgba(255, 215, 0, .25));
+    filter: none !important;
     height: auto;
     margin: 0 auto;
     max-width: 100% !important;
     transition: transform .3s 
 ease;
     width: 100%;
+}
+
+
+.jackpot__logo-wrapper--try {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+.jackpot__logo-wrapper--usd {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+.jackpot__logo-wrapper--btc {
+    background: none !important;
+    box-shadow: none !important;
 }
