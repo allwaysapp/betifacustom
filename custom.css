@@ -1132,3 +1132,13 @@ ease;
     font-size: 16px;
     font-weight: 700;
 }
+
+.jackpot__logo-wrapper {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 16px;
+    box-shadow: 0 0 20px #ffffff0d;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    padding: 0px !important;
+}
