@@ -2,6 +2,28 @@
     // Geçiş sırasında özel bölümlerin görünmesini engellemek için flag
     let isNavigating = false;
 
+    // MERKEZI COMPONENT YÖNETİMİ - Yeni bölümler buraya eklenir
+    const COMPONENTS = {
+        customSection: {
+            condition: () => isHomePage(),
+            create: createCustomSection,
+            remove: removeCustomSection,
+            selector: '.betifa-custom-section'
+        },
+        providerCarousel: {
+            condition: () => isCasinoSlotsPage(),
+            create: createProviderCarouselForSlots, 
+            remove: removeProviderCarouselFromSlots,
+            selector: '.custom-section4'
+        },
+        footerAwards: {
+            condition: () => true, // Her sayfada göster
+            create: createFooterAwards,
+            remove: removeFooterAwards,
+            selector: '.betifa-footer-awards'
+        }
+    };
+
     // Anasayfa olup olmadığını kontrol eden fonksiyon
     function isHomePage() {
         const url = window.location.pathname;
@@ -18,6 +40,12 @@
         if (path.startsWith('/tr')) return '/tr';
         if (path.startsWith('/en')) return '/en';
         return ''; // Ana domain için
+    }
+
+    // /casino/slots sayfası kontrolü
+    function isCasinoSlotsPage() {
+        const url = window.location.pathname;
+        return url.includes('/casino/slots') || url === '/casino/slots' || url === '/tr/casino/slots' || url === '/en/casino/slots';
     }
 
     // 20 Popüler Oyun Listesi
@@ -128,8 +156,6 @@
         return games;
     }
 
-
-
     // 20 Canlı Casino Oyunu Listesi
     function getLiveCasinoGames(langPrefix) {
         const games = [
@@ -238,101 +264,101 @@
         return games;
     }
 
-// 92 Game Provider Listesi
+    // 92 Game Provider Listesi
     function getGameProviders(langPrefix) {
         const providers = [
             { name: "Pragmatic Play", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/pragmaticplay.svg", slug: "pragmaticplay" },
             { name: "Evolution", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Evolution%20Gaming.svg", slug: "evolution" },
-{ name: "Pragmatic Live", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/pragmatic-live-light.svg", slug: "pragmaticlive" },
-{ name: "HackSaw Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/hacksaw.svg", slug: "hacksaw" },
-{ name: "EGT", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/egt.svg", slug: "EGTInteractive" },
-{ name: "No Limit City", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/NoLimitCity.svg", slug: "nolimitcity" },
-{ name: "Netent", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/netent.svg", slug: "netent" },
-{ name: "Ezugi", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/ezugi.svg", slug: "ezugi" },
-{ name: "Amusnet", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/amusnet.svg", slug: "egt-interactive" },
-{ name: "1x2 Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/1x2gaming.svg", slug: "1x2gaming" },
-{ name: "5men", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/5men.svg", slug: "5men" },
-{ name: "Endorphina", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/endorphina.svg", slug: "endorphina" },
-{ name: "MrSlotty", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/mrslotty.svg", slug: "mrslotty" },
-{ name: "Amatic", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/amatic.svg", slug: "amatic" },
-{ name: "Red Tiger", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Red%20Tiger%20Gaming.svg", slug: "redtiger" },
-{ name: "BGAMING", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/softswiss.svg", slug: "bgaming" },
-{ name: "Booming Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/booming.svg", slug: "booming" },
-{ name: "1spin4win", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/1spin4win.svg", slug: "1spin4win" },
-{ name: "AvatarUX", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/avatarux.svg", slug: "avatarux" },
-{ name: "Belatra", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/belatra.svg", slug: "belatra" },
-{ name: "Beter.Live", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/beterlive.svg", slug: "beterlive" },
-{ name: "Evoplay Entertainment", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/evoplay.svg", slug: "evoplay" },
-{ name: "Gamebeat", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/gamebeat.svg", slug: "gamebeat" },
-{ name: "Gamzix", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/gamezix.svg", slug: "gamzix" },
-{ name: "iGTech", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/igtech.svg", slug: "igtech" },
-{ name: "Playson", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/playson.svg", slug: "playson" },
-{ name: "Mascot Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/mascot.svg", slug: "mascotgaming" },
-{ name: "Mancala Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/mancala.svg", slug: "mancala" },
-{ name: "NetGame", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/netgame.svg", slug: "netgame" },
-{ name: "Novomatic", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/novomatic.svg", slug: "novomatic" },
-{ name: "Nucleus", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/nucleus.svg", slug: "nucleus" },
-{ name: "OnlyPlay", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/onlyplay.svg", slug: "onlyplay" },
-{ name: "ORYX", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/oryx.svg", slug: "oryx" },
-{ name: "Platipus", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/platipus.svg", slug: "platipus" },
-{ name: "Popiplay", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/popiplay.svg", slug: "popiplay" },
-{ name: "Quickspin", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/quickspin.svg", slug: "quickspin" },
-{ name: "Slotmill", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/slotmill.svg", slug: "slotmill" },
-{ name: "SmartSoft", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/smartsoft.svg", slug: "smartsoft" },
-{ name: "Spadegaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/spadegaming.svg", slug: "spadegaming" },
-{ name: "Spribe", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/spribe.svg", slug: "spribe" },
-{ name: "Thunderkick", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/thunderkick.svg", slug: "thunderkick" },
-{ name: "Tom Horn", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/tomhorn.svg", slug: "tomhornnative" },
-{ name: "Truelab", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/truelab.svg", slug: "truelab" },
-{ name: "Turbo Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/turbogames.svg", slug: "turbogames" },
-{ name: "AsiaGaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Asia%20Gaming.svg", slug: "asiagaming" },
-{ name: "BeeFee", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/BeeFee%20Games.svg", slug: "beefee" },
-{ name: "BetRadar VS", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Betradar%20Virtual%20sports.svg", slug: "betradarvs" },
-{ name: "BetSoft", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/betsoft.svg", slug: "betsoft" },
-{ name: "CQ9", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/CQ9.svg", slug: "cq9" },
-{ name: "CT Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/CT%20Gaming.svg", slug: "ctgaming" },
-{ name: "Genii", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Genii.svg", slug: "genii" },
-{ name: "Habanero", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/habanero.svg", slug: "habanero" },
-{ name: "IgroSoft", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Igrosoft.svg", slug: "igrosoft" },
-{ name: "Leap", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Leap.svg", slug: "leap" },
-{ name: "Live Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Live%20Games.svg", slug: "livegames" },
-{ name: "Lucky Streak", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/luckystreak.svg", slug: "luckystreak" },
-{ name: "PlayTech", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Playtech%20slots.svg", slug: "playtech" },
-{ name: "RedRake Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Red%20Rake%20Gaming.svg", slug: "redrake" },
-{ name: "SA Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/SA%20Gaming.svg", slug: "sagaming" },
-{ name: "Salsa Tech", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Salsa%20technology.svg", slug: "salsa" },
-{ name: "Vivo Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Vivo%20Gaming.svg", slug: "vivogaming" },
-{ name: "Wizard Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/wazdan.svg", slug: "wizard" },
-{ name: "WorldMatch", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/World%20Match.svg", slug: "worldmatch" },
-{ name: "YGG Drasil", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/yggdrasil.svg", slug: "yggdrasil" },
-{ name: "PGSoft", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Pocket%20Games%20Soft.svg", slug: "pgsoft" },
-{ name: "JDB", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/JDB.svg", slug: "jdb" },
-{ name: "Gaming7777", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Gaming%207777.svg", slug: "gaming7777" },
-{ name: "IronDog", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/irondog.svg", slug: "irondog" },
-{ name: "Gamomat", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/gamomat.svg", slug: "gamomat" },
-{ name: "Golden Hero", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/golden%20hero.svg", slug: "goldenhero" },
-{ name: "Fugaso", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/fugaso.svg", slug: "fugaso" },
-{ name: "Ebetlab", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/originals.svg", slug: "ebetlab" },
-{ name: "Galaxys", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/galaxy%20gaming.svg", slug: "galaxys" },
-{ name: "Imagine Live", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/imageinelive.svg", slug: "imagine-live" },
-{ name: "Imoon", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/imoon.svg", slug: "imoon" },
-{ name: "InOut", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/InOut.svg", slug: "inout" },
-{ name: "Jiliasia", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Jiliasia.svg", slug: "jiliasia" },
-{ name: "Zeus Play", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Zeus%20Play.svg", slug: "zeus-play" },
-{ name: "Peter And Sons", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Peter%20And%20Sons.svg", slug: "peter-and-sons" },
-{ name: "TopSpin", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/topspin.svg", slug: "topspin" },
-{ name: "Popok", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Popok.svg", slug: "popok" },
-{ name: "Bet Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/booming.svg", slug: "betgames" },
-{ name: "Raw Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Raw%20Gaming.svg", slug: "rawgames" },
-{ name: "YGR Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/YGR.svg", slug: "ygrgames" },
-{ name: "EurasianGaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/eurasian-gaming.svg", slug: "eurasian-gaming" },
-{ name: "Gaming Corps", image: "https://cdn.ebetlab.com/ebetlab/game-providers/light/Gaming%20Corps%20Dark%20Logo%20SVG.svg", slug: "gaming-corps" },
-{ name: "F*Bastards", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/F_Bastards.svg", slug: "fbastards" },
-{ name: "Victory Ark", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Victory%20Ark.svg", slug: "victoryark" },
-{ name: "Urgent Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Urgent%20games.svg", slug: "urgentgames" },
-{ name: "Ruby Play", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/ruby%20play.svg", slug: "rubyplay" },
-{ name: "Push Gaming", image: "https://cdn.ebetlab.com/ebetlab/game-providers/light/push_gaming.svg", slug: "pushgaming" },
-{ name: "Relax Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/relax%20gaming.svg", slug: "relaxgaming" }
+            { name: "Pragmatic Live", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/pragmatic-live-light.svg", slug: "pragmaticlive" },
+            { name: "HackSaw Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/hacksaw.svg", slug: "hacksaw" },
+            { name: "EGT", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/egt.svg", slug: "EGTInteractive" },
+            { name: "No Limit City", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/NoLimitCity.svg", slug: "nolimitcity" },
+            { name: "Netent", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/netent.svg", slug: "netent" },
+            { name: "Ezugi", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/ezugi.svg", slug: "ezugi" },
+            { name: "Amusnet", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/amusnet.svg", slug: "egt-interactive" },
+            { name: "1x2 Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/1x2gaming.svg", slug: "1x2gaming" },
+            { name: "5men", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/5men.svg", slug: "5men" },
+            { name: "Endorphina", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/endorphina.svg", slug: "endorphina" },
+            { name: "MrSlotty", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/mrslotty.svg", slug: "mrslotty" },
+            { name: "Amatic", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/amatic.svg", slug: "amatic" },
+            { name: "Red Tiger", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Red%20Tiger%20Gaming.svg", slug: "redtiger" },
+            { name: "BGAMING", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/softswiss.svg", slug: "bgaming" },
+            { name: "Booming Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/booming.svg", slug: "booming" },
+            { name: "1spin4win", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/1spin4win.svg", slug: "1spin4win" },
+            { name: "AvatarUX", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/avatarux.svg", slug: "avatarux" },
+            { name: "Belatra", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/belatra.svg", slug: "belatra" },
+            { name: "Beter.Live", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/beterlive.svg", slug: "beterlive" },
+            { name: "Evoplay Entertainment", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/evoplay.svg", slug: "evoplay" },
+            { name: "Gamebeat", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/gamebeat.svg", slug: "gamebeat" },
+            { name: "Gamzix", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/gamezix.svg", slug: "gamzix" },
+            { name: "iGTech", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/igtech.svg", slug: "igtech" },
+            { name: "Playson", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/playson.svg", slug: "playson" },
+            { name: "Mascot Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/mascot.svg", slug: "mascotgaming" },
+            { name: "Mancala Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/mancala.svg", slug: "mancala" },
+            { name: "NetGame", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/netgame.svg", slug: "netgame" },
+            { name: "Novomatic", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/novomatic.svg", slug: "novomatic" },
+            { name: "Nucleus", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/nucleus.svg", slug: "nucleus" },
+            { name: "OnlyPlay", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/onlyplay.svg", slug: "onlyplay" },
+            { name: "ORYX", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/oryx.svg", slug: "oryx" },
+            { name: "Platipus", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/platipus.svg", slug: "platipus" },
+            { name: "Popiplay", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/popiplay.svg", slug: "popiplay" },
+            { name: "Quickspin", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/quickspin.svg", slug: "quickspin" },
+            { name: "Slotmill", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/slotmill.svg", slug: "slotmill" },
+            { name: "SmartSoft", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/smartsoft.svg", slug: "smartsoft" },
+            { name: "Spadegaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/spadegaming.svg", slug: "spadegaming" },
+            { name: "Spribe", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/spribe.svg", slug: "spribe" },
+            { name: "Thunderkick", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/thunderkick.svg", slug: "thunderkick" },
+            { name: "Tom Horn", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/tomhorn.svg", slug: "tomhornnative" },
+            { name: "Truelab", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/truelab.svg", slug: "truelab" },
+            { name: "Turbo Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/turbogames.svg", slug: "turbogames" },
+            { name: "AsiaGaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Asia%20Gaming.svg", slug: "asiagaming" },
+            { name: "BeeFee", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/BeeFee%20Games.svg", slug: "beefee" },
+            { name: "BetRadar VS", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Betradar%20Virtual%20sports.svg", slug: "betradarvs" },
+            { name: "BetSoft", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/betsoft.svg", slug: "betsoft" },
+            { name: "CQ9", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/CQ9.svg", slug: "cq9" },
+            { name: "CT Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/CT%20Gaming.svg", slug: "ctgaming" },
+            { name: "Genii", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Genii.svg", slug: "genii" },
+            { name: "Habanero", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/habanero.svg", slug: "habanero" },
+            { name: "IgroSoft", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Igrosoft.svg", slug: "igrosoft" },
+            { name: "Leap", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Leap.svg", slug: "leap" },
+            { name: "Live Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Live%20Games.svg", slug: "livegames" },
+            { name: "Lucky Streak", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/luckystreak.svg", slug: "luckystreak" },
+            { name: "PlayTech", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Playtech%20slots.svg", slug: "playtech" },
+            { name: "RedRake Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Red%20Rake%20Gaming.svg", slug: "redrake" },
+            { name: "SA Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/SA%20Gaming.svg", slug: "sagaming" },
+            { name: "Salsa Tech", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Salsa%20technology.svg", slug: "salsa" },
+            { name: "Vivo Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Vivo%20Gaming.svg", slug: "vivogaming" },
+            { name: "Wizard Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/wazdan.svg", slug: "wizard" },
+            { name: "WorldMatch", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/World%20Match.svg", slug: "worldmatch" },
+            { name: "YGG Drasil", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/yggdrasil.svg", slug: "yggdrasil" },
+            { name: "PGSoft", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Pocket%20Games%20Soft.svg", slug: "pgsoft" },
+            { name: "JDB", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/JDB.svg", slug: "jdb" },
+            { name: "Gaming7777", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Gaming%207777.svg", slug: "gaming7777" },
+            { name: "IronDog", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/irondog.svg", slug: "irondog" },
+            { name: "Gamomat", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/gamomat.svg", slug: "gamomat" },
+            { name: "Golden Hero", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/golden%20hero.svg", slug: "goldenhero" },
+            { name: "Fugaso", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/fugaso.svg", slug: "fugaso" },
+            { name: "Ebetlab", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/originals.svg", slug: "ebetlab" },
+            { name: "Galaxys", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/galaxy%20gaming.svg", slug: "galaxys" },
+            { name: "Imagine Live", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/imageinelive.svg", slug: "imagine-live" },
+            { name: "Imoon", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/imoon.svg", slug: "imoon" },
+            { name: "InOut", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/InOut.svg", slug: "inout" },
+            { name: "Jiliasia", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Jiliasia.svg", slug: "jiliasia" },
+            { name: "Zeus Play", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Zeus%20Play.svg", slug: "zeus-play" },
+            { name: "Peter And Sons", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Peter%20And%20Sons.svg", slug: "peter-and-sons" },
+            { name: "TopSpin", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/topspin.svg", slug: "topspin" },
+            { name: "Popok", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Popok.svg", slug: "popok" },
+            { name: "Bet Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/booming.svg", slug: "betgames" },
+            { name: "Raw Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Raw%20Gaming.svg", slug: "rawgames" },
+            { name: "YGR Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/YGR.svg", slug: "ygrgames" },
+            { name: "EurasianGaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/eurasian-gaming.svg", slug: "eurasian-gaming" },
+            { name: "Gaming Corps", image: "https://cdn.ebetlab.com/ebetlab/game-providers/light/Gaming%20Corps%20Dark%20Logo%20SVG.svg", slug: "gaming-corps" },
+            { name: "F*Bastards", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/F_Bastards.svg", slug: "fbastards" },
+            { name: "Victory Ark", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Victory%20Ark.svg", slug: "victoryark" },
+            { name: "Urgent Games", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/Urgent%20games.svg", slug: "urgentgames" },
+            { name: "Ruby Play", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/ruby%20play.svg", slug: "rubyplay" },
+            { name: "Push Gaming", image: "https://cdn.ebetlab.com/ebetlab/game-providers/light/push_gaming.svg", slug: "pushgaming" },
+            { name: "Relax Gaming", image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/game-providers/light/relax%20gaming.svg", slug: "relaxgaming" }
         ];
 
         return providers.map(provider => ({
@@ -341,7 +367,7 @@
         }));
     }
 
-// Provider carousel state yönetimi
+    // Provider carousel state yönetimi
     let providerCarouselState = {
         currentIndex: 0,
         itemsPerPage: window.innerWidth <= 768 ? 3 : 8
@@ -420,18 +446,18 @@
         updateProviderCarousel();
     }
 
-// Provider carousel güncelleme fonksiyonu
-function updateProviderCarousel() {
-    const carousel = document.querySelector('.provider-carousel-wrapper');
-    if (!carousel) return;
-    
-    const langPrefix = getCurrentLanguagePrefix();
-    const providers = getGameProviders(langPrefix);
-    
-    carousel.innerHTML = createProviderCarouselHTML(providers);
-    
-    console.log('Provider carousel güncellendi:', providerCarouselState);
-}
+    // Provider carousel güncelleme fonksiyonu
+    function updateProviderCarousel() {
+        const carousel = document.querySelector('.provider-carousel-wrapper');
+        if (!carousel) return;
+        
+        const langPrefix = getCurrentLanguagePrefix();
+        const providers = getGameProviders(langPrefix);
+        
+        carousel.innerHTML = createProviderCarouselHTML(providers);
+        
+        console.log('Provider carousel güncellendi:', providerCarouselState);
+    }
 
     // Responsive güncellemeleri için window resize listener
     function setupProviderCarouselResize() {
@@ -452,62 +478,212 @@ function updateProviderCarousel() {
     // Global navigasyon fonksiyonunu window'a ekle
     window.navigateProviders = navigateProviders;
 
-// /casino/slots sayfası kontrolü
-    function isCasinoSlotsPage() {
-        const url = window.location.pathname;
-        return url.includes('/casino/slots') || url === '/casino/slots' || url === '/tr/casino/slots' || url === '/en/casino/slots';
+    // Oyunları HTML'e dönüştüren fonksiyon
+    function createGamesHTML(games) {
+        return games.map(game => `
+            <div class="game-item">
+                <a href="${game.url}">
+                    <img src="${game.image}" alt="${game.name}" loading="lazy">
+                </a>
+            </div>
+        `).join('');
     }
 
-    // Provider carousel'i slots sayfasına ekleyen fonksiyon
-   function createProviderCarouselForSlots() {
-    if (!isCasinoSlotsPage() || isNavigating) {
-        removeProviderCarouselFromSlots();
-        return;
+    // MERKEZI COMPONENT YÖNETİM FONKSİYONLARI
+    function initializeComponents() {
+        Object.entries(COMPONENTS).forEach(([name, component]) => {
+            if (component.condition() && !isNavigating) {
+                // Component yoksa oluştur
+                if (!document.querySelector(component.selector)) {
+                    component.create();
+                }
+            } else {
+                // Component varsa kaldır
+                component.remove();
+            }
+        });
     }
-    const targetContainer = document.querySelector('.container.section');
-    if (!targetContainer) return;
 
-    if (!document.querySelector('.custom-section4')) {
+    function removeAllComponents() {
+        Object.values(COMPONENTS).forEach(component => {
+            component.remove();
+        });
+    }
+
+    // COMPONENT FONKSİYONLARI
+    function createCustomSection() {
+        if (isNavigating || !isHomePage()) return;
+
+        const mainSlider = document.getElementById('main-slider');
+        if (!mainSlider || document.querySelector('.betifa-custom-section')) return;
+
         const langPrefix = getCurrentLanguagePrefix();
-        const providers = getGameProviders(langPrefix);
+        const games = getPopularGames(langPrefix);
+        const liveCasinoGames = getLiveCasinoGames(langPrefix);
+        
+        // İlk 10 ve ikinci 10 oyunu ayır
+        const firstTenGames = games.slice(0, 10);
+        const secondTenGames = games.slice(10, 20);
+        
+        // Canlı casino oyunları için de aynı şekilde ayır
+        const firstTenLiveGames = liveCasinoGames.slice(0, 10);
+        const secondTenLiveGames = liveCasinoGames.slice(10, 20);
+        
+        const customSection = document.createElement('div');
+        customSection.className = 'section container betifa-custom-section';
+        customSection.innerHTML = `
+            <div class="custom-section">
+                <div class="left-content">
+                    <div class="left-first">
+                        <div class="left-tittle">
+                            <h2>GİRİŞ YAP HESAPLARIMIZI <br> TAKİP ET !</h2>
+                            <p>kazanmaya başla !</p>
+                        </div>
+                        <div class="social-buttons">
+                            <a class="social-btn" href="https://telegram.me/betifaresmi"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/telegram-icon.png" alt="Telegram"></a>
+                            <a class="social-btn" href="https://www.instagram.com/betifatr"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/instagram-icon.png" alt="Instagram"></a>
+                            <a class="social-btn" href="https://x.com/betifatr"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/twitter-icon.png" alt="X"></a>
+                            <a class="social-btn" href="https://wa.me/38977516531" target="_blank" rel="noopener"><img class="social-icon-2" src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/ZfI3560mQtcDrZG9U8fpug53aJxCW9JFnAUw7iWA.png" alt="WhatsApp"></a>
+                        </div>
+                    </div>
+                    <div class="left-second">
+                        <div class="sport-product">
+                            <a href="${langPrefix}/sportsbook"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/spor-bahisleri-product.png" alt=""></a>
+                        </div>
+                        <div class="casino-product">
+                            <a href="${langPrefix}/casino"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/casino-bahisleri-product.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-content">
+                    <div class="crash-game">
+                        <a href="${langPrefix}/payments/deposit"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/yatirim-product.jpg" alt=""></a>
+                    </div>
+                    <div class="lucky-wheel">
+                        <a href="${langPrefix}/payments/withdrawal"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cekim-product.jpg" alt=""></a>
+                    </div>
+                    <div class="dice-game">
+                        <a href="${langPrefix}/casino/games/spribe-aviator"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/aviator-product.jpg" alt=""></a>
+                    </div>
+                    <div class="plinko-game">
+                        <a href="${langPrefix}#"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/canli-tv-product.jpg" alt=""></a>
+                    </div>
+                    <div class="coinflip-game">
+                        <a href="${langPrefix}/promotions"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/gunun-firsatlari.jpg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="custom-section1">
+                <div class="game-header">
+                    <h2>EN POPÜLER OYUNLAR</h2>
+                    <a class="game-link" href="${langPrefix}/casino">tüm oyunlar</a>
+                </div>
+                <div class="games-grid">
+                    ${createGamesHTML(firstTenGames)}
+                </div>
+                <div class="games-grid">
+                    ${createGamesHTML(secondTenGames)}
+                </div>
+            </div>
+            
+            <div class="custom-section2">
+                <div class="game-showcase">
+                    <div class="game-showcase-tittle">
+                        <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="">
+                    </div>
+                    <div class="game-showcase-content">
+                        <div class="game-item">
+                            <a href="${langPrefix}/casino/games/EGTInteractive-flaming-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/ef0pKVRuRxOOI7JpBu5KcwIEkOxPQTZSsjZbwrzW.png" alt=""></a>
+                        </div>
+                        <div class="game-item">
+                            <a href="${langPrefix}/casino/games/EGTInteractive-shining-crown-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/Dx3g2ara2ofhfSo8XawtCOGEshzyXZ1KYWKOx275.png" alt=""></a>
+                        </div>
+                        <div class="game-item">
+                            <a href="${langPrefix}/casino/games/EGTInteractive-40-burning-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/bHW8HLS6L9zHubXtAAldQEGsqfaiyjuHX4yB9Ibb.png" alt=""></a>
+                        </div>
+                        <div class="game-item">
+                            <a href="${langPrefix}/casino/games/EGTInteractive-20-super-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/P6qP3RrfVbsBlp2R63eoVZVuJu40q8kAmv5F1hTa.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        const providerSection = document.createElement('div');
-        providerSection.className = 'container custom-section4';
-        providerSection.innerHTML = createProviderCarouselHTML(providers);
-
-        if (targetContainer.nextSibling) {
-            targetContainer.parentNode.insertBefore(providerSection, targetContainer.nextSibling);
+            <div class="custom-section3">
+                <div class="game-header">
+                    <h2>CANLI CASINO OYUNLARI</h2>
+                    <a class="game-link" href="${langPrefix}/live-casino">tüm oyunlar</a>
+                </div>
+                <div class="games-grid">
+                    ${createGamesHTML(firstTenLiveGames)}
+                </div>
+                <div class="games-grid">
+                    ${createGamesHTML(secondTenLiveGames)}
+                </div>
+            </div>
+        `;
+        
+        if (mainSlider.nextSibling) {
+            mainSlider.parentNode.insertBefore(customSection, mainSlider.nextSibling);
         } else {
-            targetContainer.parentNode.appendChild(providerSection);
+            mainSlider.parentNode.appendChild(customSection);
         }
-
-        // ← ilk render sonrası tek sefer güncelle
-        updateProviderCarousel();
-
-        console.log('Provider carousel slots sayfasına eklendi');
+        
+        console.log('Betifa custom section eklendi');
     }
-}
 
-    // Provider carousel'i slots sayfasından kaldıran fonksiyon
+    function removeCustomSection() {
+        const element = document.querySelector('.betifa-custom-section');
+        if (element && element.parentNode) {
+            element.parentNode.removeChild(element);
+            console.log('Betifa custom section kaldırıldı');
+        }
+    }
+
+    function createProviderCarouselForSlots() {
+        if (!isCasinoSlotsPage() || isNavigating) {
+            removeProviderCarouselFromSlots();
+            return;
+        }
+        
+        const targetContainer = document.querySelector('.container.section');
+        if (!targetContainer) return;
+
+        if (!document.querySelector('.custom-section4')) {
+            const langPrefix = getCurrentLanguagePrefix();
+            const providers = getGameProviders(langPrefix);
+
+            const providerSection = document.createElement('div');
+            providerSection.className = 'container custom-section4';
+            providerSection.innerHTML = createProviderCarouselHTML(providers);
+
+            if (targetContainer.nextSibling) {
+                targetContainer.parentNode.insertBefore(providerSection, targetContainer.nextSibling);
+            } else {
+                targetContainer.parentNode.appendChild(providerSection);
+            }
+
+            // İlk render sonrası tek sefer güncelle
+            updateProviderCarousel();
+
+            console.log('Provider carousel slots sayfasına eklendi');
+        }
+    }
+
     function removeProviderCarouselFromSlots() {
-        const providerSection = document.querySelector('.custom-section4');
-        if (providerSection && providerSection.parentNode) {
-            providerSection.parentNode.removeChild(providerSection);
+        const element = document.querySelector('.custom-section4');
+        if (element && element.parentNode) {
+            element.parentNode.removeChild(element);
             console.log('Provider carousel slots sayfasından kaldırıldı');
         }
     }
 
-
-// Footer Awards bölümünü ekleyen fonksiyon
     function createFooterAwards() {
-        // Footer'da awards section'ı daha önce eklenmişse çıkış yap
         if (document.querySelector('.betifa-footer-awards')) return;
 
-        // footer__description içeren row'u bul
         const targetRow = document.querySelector('.footer__description')?.closest('.row');
         if (!targetRow) return;
 
-        // Awards section'ını oluştur
         const awardsSection = document.createElement('div');
         awardsSection.className = 'row betifa-footer-awards';
         awardsSection.innerHTML = `
@@ -522,263 +698,101 @@ function updateProviderCarousel() {
             </div>
         `;
 
-        // Target row'un altına ekle
         targetRow.insertAdjacentElement('afterend', awardsSection);
         console.log('Footer awards section eklendi');
     }
 
-    // Oyunları HTML'e dönüştüren fonksiyon
-    function createGamesHTML(games) {
-        return games.map(game => `
-            <div class="game-item">
-                <a href="${game.url}">
-                    <img src="${game.image}" alt="${game.name}" loading="lazy">
-                </a>
-            </div>
-        `).join('');
-    }
-
-    // Custom section'ı ekleyen fonksiyon
-    function createCustomSection() {
-        // Navigasyon sırasında veya anasayfa değilse ekleme
-        if (isNavigating || !isHomePage()) {
-            removeCustomSection();
-            return;
-        }
-
-        const mainSlider = document.getElementById('main-slider');
-        if (!mainSlider) return;
-
-        // Eğer daha önce eklenmemişse custom section ekle
-        if (!document.querySelector('.betifa-custom-section')) {
-            const langPrefix = getCurrentLanguagePrefix();
-            const games = getPopularGames(langPrefix);
-            const liveCasinoGames = getLiveCasinoGames(langPrefix);
-            
-            // İlk 10 ve ikinci 10 oyunu ayır
-            const firstTenGames = games.slice(0, 10);
-            const secondTenGames = games.slice(10, 20);
-            
-            // Canlı casino oyunları için de aynı şekilde ayır
-            const firstTenLiveGames = liveCasinoGames.slice(0, 10);
-            const secondTenLiveGames = liveCasinoGames.slice(10, 20);
-            
-            const customSection = document.createElement('div');
-            customSection.className = 'section container betifa-custom-section';
-            customSection.innerHTML = `
-                <div class="custom-section">
-                    <div class="left-content">
-                        <div class="left-first">
-                            <div class="left-tittle">
-                                <h2>GİRİŞ YAP HESAPLARIMIZI <br> TAKİP ET !</h2>
-                                <p>kazanmaya başla !</p>
-                            </div>
-                            <div class="social-buttons">
-                                <a class="social-btn" href="https://telegram.me/betifaresmi"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/telegram-icon.png" alt="Telegram"></a>
-                                <a class="social-btn" href="https://www.instagram.com/betifatr"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/instagram-icon.png" alt="Instagram"></a>
-                                <a class="social-btn" href="https://x.com/betifatr"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/twitter-icon.png" alt="X"></a>
-                                <a class="social-btn" href="https://wa.me/38977516531" target="_blank" rel="noopener"><img class="social-icon-2" src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/ZfI3560mQtcDrZG9U8fpug53aJxCW9JFnAUw7iWA.png" alt="WhatsApp"></a>
-                                </div>
-                            </div>
-                        <div class="left-second">
-                            <div class="sport-product">
-                                <a href="${langPrefix}/sportsbook"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/spor-bahisleri-product.png" alt=""></a>
-                            </div>
-                            <div class="casino-product">
-                                <a href="${langPrefix}/casino"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/casino-bahisleri-product.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-content">
-                        <div class="crash-game">
-                            <a href="${langPrefix}/payments/deposit"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/yatirim-product.jpg" alt=""></a>
-                        </div>
-                        <div class="lucky-wheel">
-                            <a href="${langPrefix}/payments/withdrawal"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cekim-product.jpg" alt=""></a>
-                        </div>
-                        <div class="dice-game">
-                            <a href="${langPrefix}/casino/games/spribe-aviator"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/aviator-product.jpg" alt=""></a>
-                        </div>
-                        <div class="plinko-game">
-                            <a href="${langPrefix}#"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/canli-tv-product.jpg" alt=""></a>
-                        </div>
-                        <div class="coinflip-game">
-                            <a href="${langPrefix}/promotions"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/gunun-firsatlari.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="custom-section1">
-                    <div class="game-header">
-                        <h2>EN POPÜLER OYUNLAR</h2>
-                        <a class="game-link" href="${langPrefix}/casino">tüm oyunlar</a>
-                    </div>
-                    <div class="games-grid">
-                        ${createGamesHTML(firstTenGames)}
-                    </div>
-                    <div class="games-grid">
-                        ${createGamesHTML(secondTenGames)}
-                    </div>
-                </div>
-                
-                <div class="custom-section2">
-                    <div class="game-showcase">
-                        <div class="game-showcase-tittle">
-                            <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="">
-                        </div>
-                        <div class="game-showcase-content">
-                            <div class="game-item">
-                                <a href="${langPrefix}/casino/games/EGTInteractive-flaming-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/ef0pKVRuRxOOI7JpBu5KcwIEkOxPQTZSsjZbwrzW.png" alt=""></a>
-                            </div>
-                            <div class="game-item">
-                                <a href="${langPrefix}/casino/games/EGTInteractive-shining-crown-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/Dx3g2ara2ofhfSo8XawtCOGEshzyXZ1KYWKOx275.png" alt=""></a>
-                            </div>
-                            <div class="game-item">
-                                <a href="${langPrefix}/casino/games/EGTInteractive-40-burning-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/bHW8HLS6L9zHubXtAAldQEGsqfaiyjuHX4yB9Ibb.png" alt=""></a>
-                            </div>
-                            <div class="game-item">
-                                <a href="${langPrefix}/casino/games/EGTInteractive-20-super-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/P6qP3RrfVbsBlp2R63eoVZVuJu40q8kAmv5F1hTa.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="custom-section3">
-                    <div class="game-header">
-                        <h2>CANLI CASINO OYUNLARI</h2>
-                        <a class="game-link" href="${langPrefix}/live-casino">tüm oyunlar</a>
-                    </div>
-                    <div class="games-grid">
-                        ${createGamesHTML(firstTenLiveGames)}
-                    </div>
-                    <div class="games-grid">
-                        ${createGamesHTML(secondTenLiveGames)}
-                    </div>
-                </div>
-            `;
-            
-            // main-slider'ın hemen altına ekle
-            if (mainSlider.nextSibling) {
-                mainSlider.parentNode.insertBefore(customSection, mainSlider.nextSibling);
-            } else {
-                mainSlider.parentNode.appendChild(customSection);
-            }
-            
-            console.log('Betifa custom section eklendi:', customSection);
+    function removeFooterAwards() {
+        const element = document.querySelector('.betifa-footer-awards');
+        if (element && element.parentNode) {
+            element.parentNode.removeChild(element);
+            console.log('Footer awards kaldırıldı');
         }
     }
 
-    // Custom section'ı kaldıran fonksiyon
-    function removeCustomSection() {
-        const customSection = document.querySelector('.betifa-custom-section');
-        if (customSection && customSection.parentNode) {
-            customSection.parentNode.removeChild(customSection);
-            console.log('Betifa custom section kaldırıldı');
-        }
-    }
-
-    // Sayfa içeriğini güncelleyen ana fonksiyon
-    function initializePage() {
-        const currentIsHomePage = isHomePage();
-        
-        // Custom section sadece anasayfada gösterilir
-        if (currentIsHomePage) {
-            createCustomSection();
-        } else {
-            removeCustomSection();
-        }
-
-// Provider carousel slots sayfasında gösterilir
-    createProviderCarouselForSlots();
-    }
-
-    // İç sayfa linklerine tıklandığında önleyici işlem
+    // LINK YÖNETİMİ
     function setupLinkInterceptors() {
-    document.body.addEventListener('click', function(e) {
-        const link = e.target.closest('a');
-        if (!link) return;
+        document.body.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (!link) return;
 
-        // Dış linkler (sosyal medya vb.) → dokunma
-        if (link.href && (link.href.startsWith('http') && !link.href.includes(window.location.hostname))) {
-            return;
-        }
-
-        // İç linkler
-        if (!link.target || link.target === '_self') {
-            const href = link.getAttribute('href');
-            if (href && href.startsWith('/')) {
-
-                // 1) Custom section içindeki linkler (mevcut davranış)
-                const isCustomSectionLink = link.closest('.betifa-custom-section');
-                if (isCustomSectionLink) {
-                    e.preventDefault();
-
-                    // Geçiş öncesi özel alanı kaldır
-                    isNavigating = true;
-                    removeCustomSection();
-
-                    // SPA navigasyon
-                    window.history.pushState({}, '', href);
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-
-                    // Anında initialize
-                    isNavigating = false;
-                    initializePage();
-                    return;
-                }
-
-                // 2) Provider carousel içindeki linkler → AYNI YAKLAŞIM
-                const isProviderCarouselLink = link.closest('.custom-section4') || link.closest('.provider-carousel-wrapper');
-                if (isProviderCarouselLink) {
-                    e.preventDefault();
-
-                    // Geçiş öncesi provider alanını ve custom section'ı kaldır
-                    isNavigating = true;
-                    removeProviderCarouselFromSlots();
-                    removeCustomSection();
-
-                    // SPA navigasyon
-                    window.history.pushState({}, '', href);
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-
-                    // Anında initialize
-                    isNavigating = false;
-                    initializePage();
-                    return;
-                }
-
-                // 3) Diğer iç linkler: mevcut davranışı koru
-                isNavigating = true;
-                removeCustomSection();
-                isNavigating = false;
-                initializePage();
+            // Dış linkler (sosyal medya vb.) → dokunma
+            if (link.href && (link.href.startsWith('http') && !link.href.includes(window.location.hostname))) {
+                return;
             }
-        }
-    });
-}
 
+            // İç linkler
+            if (!link.target || link.target === '_self') {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('/')) {
 
-    // İlk sayfa yüklenmesi
+                    // 1) Custom section içindeki linkler (mevcut davranış)
+                    const isCustomSectionLink = link.closest('.betifa-custom-section');
+                    if (isCustomSectionLink) {
+                        e.preventDefault();
+
+                        // Geçiş öncesi özel alanı kaldır
+                        isNavigating = true;
+                        removeCustomSection();
+
+                        // SPA navigasyon
+                        window.history.pushState({}, '', href);
+                        window.dispatchEvent(new PopStateEvent('popstate'));
+
+                        // Anında initialize
+                        isNavigating = false;
+                        initializeComponents();
+                        return;
+                    }
+
+                    // 2) Provider carousel içindeki linkler → AYNI YAKLAŞIM
+                    const isProviderCarouselLink = link.closest('.custom-section4') || link.closest('.provider-carousel-wrapper');
+                    if (isProviderCarouselLink) {
+                        e.preventDefault();
+
+                        // Geçiş öncesi provider alanını ve custom section'ı kaldır
+                        isNavigating = true;
+                        removeProviderCarouselFromSlots();
+                        removeCustomSection();
+
+                        // SPA navigasyon
+                        window.history.pushState({}, '', href);
+                        window.dispatchEvent(new PopStateEvent('popstate'));
+
+                        // Anında initialize
+                        isNavigating = false;
+                        initializeComponents();
+                        return;
+                    }
+
+                    // 3) Diğer iç linkler: mevcut davranışı koru
+                    isNavigating = true;
+                    removeAllComponents();
+                    isNavigating = false;
+                    initializeComponents();
+                }
+            }
+        });
+    }
+
+    // URL YÖNETİMİ
+    function handleUrlChange() {
+        isNavigating = true;
+        removeAllComponents();
+        isNavigating = false;
+        initializeComponents();
+    }
+
+    // İNİTİALİZE FONKSİYONLARI
     function initialize() {
-        initializePage();
+        initializeComponents();
         setupLinkInterceptors();
-        createFooterAwards();
         setupProviderCarouselResize();
     }
-// URL değişikliklerini izle
-function handleUrlChange() {
-    isNavigating = true;
-    removeCustomSection();
-    removeProviderCarouselFromSlots();
-    isNavigating = false;
-    initializePage();
-    createFooterAwards();
-}
 
-    // popstate olayını dinle (geri/ileri butonları)
+    // EVENT LİSTENER'LAR
     window.addEventListener('popstate', handleUrlChange);
     
-    // SPA route değişikliklerini yakalamak için history API'larını override et
     const originalPushState = history.pushState;
     history.pushState = function() {
         originalPushState.apply(this, arguments);
@@ -804,7 +818,7 @@ function handleUrlChange() {
         });
 
         if (hasMainSlider) {
-            initializePage();
+            initializeComponents();
         }
     });
     
@@ -819,8 +833,7 @@ function handleUrlChange() {
     }
 
     window.addEventListener('load', function() {
-        initializePage();
-        createFooterAwards(); // Window load'da da footer awards ekle
+        initializeComponents();
     });
 
 })();
