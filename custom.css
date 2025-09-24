@@ -1171,3 +1171,10 @@ ease;
 .tabs-nav {
     padding: 0px !important;
 }
+
+@media (min-width: 768px) {
+    .tabs-nav--modal .tabs-nav__btn {
+        padding: 0 15px;
+        width: 100% !important;
+    }
+}
