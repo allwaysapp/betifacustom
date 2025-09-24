@@ -502,11 +502,6 @@ display: none !important;
     box-shadow: none !important;
 }
 
-.sidebar__nav {
-    background: #120b18 !important;
-    position: relative !important;
-}
-
 .sidebar__nav li {
     position: relative !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
