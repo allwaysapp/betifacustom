@@ -50,9 +50,9 @@ img {
 /* Responsive font boyutları */
 .left-first h2 {
     font-size: clamp(1.25rem, 4vw, 1.5rem);
-    color: #d0c3d9;
     line-height: 1.2;
     margin-bottom: 0.5rem;
+    color: var(--tf-tc) !important;
 }
 
 .left-first p {
