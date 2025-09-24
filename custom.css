@@ -288,9 +288,9 @@ img {
     margin-bottom: 1rem;
 }
 
-.game-header h2{
-    color: #d0c3d9;
+.game-header h2 {
     font-size: 1.3rem;
+    color: var(--tf-tc) !important;
 }
 
 .game-link{
