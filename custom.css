@@ -1167,3 +1167,7 @@ ease;
     margin: auto;
     width: 100% !important;
 }
+
+.tabs-nav {
+    padding: 0px !important;
+}
