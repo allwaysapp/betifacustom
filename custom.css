@@ -1162,3 +1162,8 @@ ease;
 ;
     flex-direction: column-reverse !important;
 }
+
+.tabs-nav li {
+    margin: auto;
+    width: 100% !important;
+}
