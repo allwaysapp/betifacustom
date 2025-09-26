@@ -1179,3 +1179,14 @@ ease;
         width: 100% !important;
     }
 }
+
+.sb-tabs {
+    display: flex
+;
+    justify-content: flex-start;
+    background: #192132 !important;
+    margin: var(--app-tabs-margins);
+    border-radius: var(--app-tabs-border-radius);
+    box-shadow: var(--app-tabs-box-shadow);
+    padding: var(--app-tabs-paddings);
+}
