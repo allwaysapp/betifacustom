@@ -1190,3 +1190,8 @@ ease;
     box-shadow: var(--app-tabs-box-shadow);
     padding: var(--app-tabs-paddings);
 }
+
+.profile-menu-wrapper .sb-tabs, .sb-category-page .sb-tabs, .sb-ctournament-page .sb-tabs, .sb-sports-page .sb-tabs {
+    overflow: hidden;
+    background: #192132 !important;
+}
