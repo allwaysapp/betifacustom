@@ -1242,3 +1242,8 @@ ease;
     margin-right: calc(-.5 * var(--bs-gutter-x));
     margin-left: calc(-.5 * var(--bs-gutter-x));
 }
+
+.col-slot {
+        width: 10%;
+        padding: 0.5rem;
+    }
