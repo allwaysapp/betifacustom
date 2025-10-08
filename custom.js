@@ -1,8 +1,6 @@
 (function () {
-    // Geçiş sırasında özel bölümlerin görünmesini engellemek için flag
     let isNavigating = false;
 
-    // MERKEZI COMPONENT YÖNETİMİ - Yeni bölümler buraya eklenir
     const COMPONENTS = {
         customSection: {
             condition: () => isHomePage(),
@@ -11,7 +9,7 @@
             selector: '.betifa-custom-section'
         },
         footerAwards: {
-            condition: () => true, // Her sayfada göster
+            condition: () => true, 
             create: createFooterAwards,
             remove: removeFooterAwards,
             selector: '.betifa-footer-awards'
@@ -30,7 +28,7 @@
 }
     };
 
-    // Anasayfa olup olmadığını kontrol eden fonksiyon
+
     function isHomePage() {
         const url = window.location.pathname;
         return url === '/' || 
@@ -40,7 +38,7 @@
                url === '/en';
     }
 
-    // Mevcut dil prefix'ini alan fonksiyon
+
     function getCurrentLanguagePrefix() {
         const path = window.location.pathname;
         if (path.startsWith('/tr')) return '/tr';
@@ -48,12 +46,12 @@
         return ''; // Ana domain için
     }
 
-    // Login kontrolü fonksiyonu
+
     function isUserLoggedIn() {
     return document.querySelector('.header__wallet') !== null;
 }
 
-    // 20 Popüler Oyun Listesi
+
     function getPopularGames(langPrefix) {
         const games = [
             {
@@ -161,7 +159,7 @@
         return games;
     }
 
-    // 20 Canlı Casino Oyunu Listesi
+
     function getLiveCasinoGames(langPrefix) {
         const games = [
             {
@@ -270,7 +268,7 @@
     }
 
 
-    // Oyunları HTML'e dönüştüren fonksiyon
+ 
     function createGamesHTML(games) {
         return games.map(game => `
             <div class="game-item">
@@ -281,16 +279,16 @@
         `).join('');
     }
 
-    // MERKEZI COMPONENT YÖNETİM FONKSİYONLARI
+
     function initializeComponents() {
         Object.entries(COMPONENTS).forEach(([name, component]) => {
             if (component.condition() && !isNavigating) {
-                // Component yoksa oluştur
+            
                 if (!document.querySelector(component.selector)) {
                     component.create();
                 }
             } else {
-                // Component varsa kaldır
+               
                 component.remove();
             }
         });
@@ -302,7 +300,7 @@
         });
     }
 
-    // COMPONENT FONKSİYONLARI
+
     function createCustomSection() {
         if (isNavigating || !isHomePage()) return;
 
@@ -313,11 +311,11 @@
         const games = getPopularGames(langPrefix);
         const liveCasinoGames = getLiveCasinoGames(langPrefix);
         
-        // İlk 10 ve ikinci 10 oyunu ayır
+
         const firstTenGames = games.slice(0, 10);
         const secondTenGames = games.slice(10, 20);
         
-        // Canlı casino oyunları için de aynı şekilde ayır
+
         const firstTenLiveGames = liveCasinoGames.slice(0, 10);
         const secondTenLiveGames = liveCasinoGames.slice(10, 20);
         
@@ -510,7 +508,7 @@ function showSectionLast() {
     }
 }
 
-// Banner linklerini dinamik yap
+
 function setupDynamicBannerLinks() {
     
     function updateBannerLinks() {
@@ -550,10 +548,10 @@ function setupDynamicBannerLinks() {
         console.log('Banner linkleri güncellendi. Login:', isLoggedIn);
     }
     
-    // İlk yükleme
+
     updateBannerLinks();
     
-    // Header'ı izle
+
     const header = document.querySelector('header') || document.querySelector('.header');
     
     if (header) {
@@ -569,13 +567,13 @@ function setupDynamicBannerLinks() {
 }
     
 
-    // LINK YÖNETİMİ
+
     function setupLinkInterceptors() {
         document.body.addEventListener('click', function(e) {
             const link = e.target.closest('a');
             if (!link) return;
 
-            // Dış linkler (sosyal medya vb.) → dokunma
+           
             if (link.href && (link.href.startsWith('http') && !link.href.includes(window.location.hostname))) {
                 return;
             }
@@ -585,26 +583,26 @@ function setupDynamicBannerLinks() {
                 const href = link.getAttribute('href');
                 if (href && href.startsWith('/')) {
 
-                    // 1) Custom section içindeki linkler (mevcut davranış)
+               
                     const isCustomSectionLink = link.closest('.betifa-custom-section');
                     if (isCustomSectionLink) {
                         e.preventDefault();
 
-                        // Geçiş öncesi özel alanı kaldır
+                       
                         isNavigating = true;
                         removeCustomSection();
 
-                        // SPA navigasyon
+                    
                         window.history.pushState({}, '', href);
                         window.dispatchEvent(new PopStateEvent('popstate'));
 
-                        // Anında initialize
+                       
                         isNavigating = false;
                         initializeComponents();
                         return;
                     }
 
-                    // 3) Diğer iç linkler: mevcut davranışı koru
+                  
                     isNavigating = true;
                     removeAllComponents();
                     isNavigating = false;
@@ -614,7 +612,7 @@ function setupDynamicBannerLinks() {
         });
     }
 
-    // URL YÖNETİMİ
+
     function handleUrlChange() {
         isNavigating = true;
         removeAllComponents();
@@ -622,14 +620,13 @@ function setupDynamicBannerLinks() {
         initializeComponents();
     }
 
-    // İNİTİALİZE FONKSİYONLARI
+
     function initialize() {
         initializeComponents();
         setupLinkInterceptors();
         setupDynamicBannerLinks();
     }
 
-    // EVENT LİSTENER'LAR
     window.addEventListener('popstate', handleUrlChange);
     
     const originalPushState = history.pushState;
@@ -644,7 +641,7 @@ function setupDynamicBannerLinks() {
         handleUrlChange();
     };
 
-    // DOM değişikliklerini izleyen observer
+
     const contentObserver = new MutationObserver((mutations, observer) => {
         if (isNavigating) return;
         
@@ -661,10 +658,10 @@ function setupDynamicBannerLinks() {
         }
     });
     
-    // Observer'ı başlat
+
     contentObserver.observe(document.body, { childList: true, subtree: true });
 
-    // Sayfa yüklendiğinde ilk çalıştırma
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initialize);
     } else {
