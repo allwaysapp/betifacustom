@@ -527,7 +527,8 @@ function setupDynamicBannerLinks() {
                 depositBanner.href = '#';
                 depositBanner.onclick = function(e) {
                     e.preventDefault();
-                    window.location.href = '?modal=login';
+                    window.history.pushState({}, '', '?modal=login');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
                 };
             }
         }
@@ -540,7 +541,8 @@ function setupDynamicBannerLinks() {
                 withdrawBanner.href = '#';
                 withdrawBanner.onclick = function(e) {
                     e.preventDefault();
-                    window.location.href = '?modal=login';
+                    window.history.pushState({}, '', '?modal=login');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
                 };
             }
         }
