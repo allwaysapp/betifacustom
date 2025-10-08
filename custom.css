@@ -1195,3 +1195,8 @@ ease;
     overflow: hidden;
     background: #192132 !important;
 }
+
+.section--last {
+        padding-bottom: 0px !important;
+        order: -1;
+}
