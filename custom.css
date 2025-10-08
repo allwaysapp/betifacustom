@@ -1229,3 +1229,9 @@ ease;
     padding: 0 10px; /* üst-alt 0, sağ-sol 10px */
   }
 }
+
+.slot--carousel, .slot--hero {
+    margin-top: 0;
+    padding-top: 16px;
+    margin-right: 0.8rem;
+}
