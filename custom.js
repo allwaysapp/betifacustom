@@ -21,7 +21,7 @@
             selector: '.jackpot__logo'
     },
     hideSectionLast: {
-    condition: () => isHomePage(),
+    condition: () => isHomePage() || isCasinoGamePage(),
     create: hideSectionLastOnHomePage,
     remove: showSectionLast,
     selector: '.betifa-section-last-hidden'
@@ -51,6 +51,10 @@
     return document.querySelector('.header__wallet') !== null;
 }
 
+function isCasinoGamePage() {
+    const url = window.location.pathname;
+    return url.includes('/casino/games/');
+}
 
     function getPopularGames(langPrefix) {
         const games = [
