@@ -21,6 +21,12 @@
             create: updateJackpotImages,
             remove: () => {},
             selector: '.jackpot__logo'
+    },
+    hideSectionLast: {
+        condition: () => isHomePage(),
+        create: hideSectionLastOnHomePage,
+        remove: showSectionLast,
+        selector: '.section--last'
     }
     };
 
@@ -469,6 +475,22 @@ function updateJackpotImages() {
         // Henüz yüklenmemiş, bekle ve tekrar dene
         console.log('Jackpot elementleri henüz yüklenmemiş, bekleniyor...');
         setTimeout(updateJackpotImages, 500); // 500ms sonra tekrar dene
+    }
+}
+
+function hideSectionLastOnHomePage() {
+    const sectionLast = document.querySelector('.section.section--last');
+    if (sectionLast) {
+        sectionLast.style.display = 'none';
+        console.log('section--last anasayfada gizlendi');
+    }
+}
+
+function showSectionLast() {
+    const sectionLast = document.querySelector('.section.section--last');
+    if (sectionLast) {
+        sectionLast.style.display = '';
+        console.log('section--last gösterildi');
     }
 }
     
