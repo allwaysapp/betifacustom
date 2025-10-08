@@ -1218,3 +1218,8 @@ ease;
     font-size: 12px;
     text-transform: uppercase;
 }
+
+#main__content > .container {
+  display:flex;
+    flex-direction:column;
+}
