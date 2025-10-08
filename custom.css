@@ -1250,3 +1250,11 @@ ease;
 .section.section--first{
     order: -2 !important;
 }
+
+.post__title {
+    color: var(--tf-tc);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    margin-bottom: 0px !important;
+}
