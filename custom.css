@@ -1223,3 +1223,9 @@ ease;
   display:flex;
     flex-direction:column;
 }
+
+@media (max-width: 768px) {
+  .main__content {
+    padding: 0 10px; /* üst-alt 0, sağ-sol 10px */
+  }
+}
