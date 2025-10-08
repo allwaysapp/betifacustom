@@ -23,11 +23,11 @@
             selector: '.jackpot__logo'
     },
     hideSectionLast: {
-        condition: () => isHomePage(),
-        create: hideSectionLastOnHomePage,
-        remove: showSectionLast,
-        selector: '.section--last'
-    }
+    condition: () => isHomePage(),
+    create: hideSectionLastOnHomePage,
+    remove: showSectionLast,
+    selector: '.betifa-section-last-hidden'
+}
     };
 
     // Anasayfa olup olmadığını kontrol eden fonksiyon
@@ -482,9 +482,9 @@ function hideSectionLastOnHomePage() {
     const sectionLast = document.querySelector('.section.section--last');
     if (sectionLast) {
         sectionLast.style.display = 'none';
+        sectionLast.classList.add('betifa-section-last-hidden');
         console.log('section--last anasayfada gizlendi');
     } else {
-        // Element henüz yoksa, 500ms sonra tekrar dene
         console.log('section--last henüz yüklenmemiş, bekleniyor...');
         setTimeout(hideSectionLastOnHomePage, 500);
     }
@@ -494,6 +494,7 @@ function showSectionLast() {
     const sectionLast = document.querySelector('.section.section--last');
     if (sectionLast) {
         sectionLast.style.display = '';
+        sectionLast.classList.remove('betifa-section-last-hidden');
         console.log('section--last gösterildi');
     }
 }
