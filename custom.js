@@ -48,6 +48,11 @@
         return ''; // Ana domain için
     }
 
+    // Login kontrolü fonksiyonu
+    function isUserLoggedIn() {
+    return document.querySelector('.header__wallet') !== null;
+}
+
     // 20 Popüler Oyun Listesi
     function getPopularGames(langPrefix) {
         const games = [
@@ -344,10 +349,10 @@
                 </div>
                 <div class="right-content">
                     <div class="crash-game">
-                        <a href="${langPrefix}/payments/deposit"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/yatirim-product.jpg" alt=""></a>
+                        <a href="#"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/yatirim-product.jpg" alt=""></a>
                     </div>
                     <div class="lucky-wheel">
-                        <a href="${langPrefix}/payments/withdrawal"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cekim-product.jpg" alt=""></a>
+                        <a href="#"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cekim-product.jpg" alt=""></a>
                     </div>
                     <div class="dice-game">
                         <a href="${langPrefix}/casino/games/spribe-aviator"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/aviator-product.jpg" alt=""></a>
@@ -411,12 +416,18 @@
         `;
         
         if (mainSlider.nextSibling) {
-            mainSlider.parentNode.insertBefore(customSection, mainSlider.nextSibling);
-        } else {
-            mainSlider.parentNode.appendChild(customSection);
-        }
-        
-        console.log('Betifa custom section eklendi');
+    mainSlider.parentNode.insertBefore(customSection, mainSlider.nextSibling);
+} else {
+    mainSlider.parentNode.appendChild(customSection);
+}
+
+console.log('Betifa custom section eklendi');
+
+setTimeout(() => {
+    if (typeof setupDynamicBannerLinks === 'function') {
+        setupDynamicBannerLinks();
+    }
+}, 100);
     }
 
     function removeCustomSection() {
@@ -498,6 +509,62 @@ function showSectionLast() {
         console.log('section--last gösterildi');
     }
 }
+
+// Banner linklerini dinamik yap
+function setupDynamicBannerLinks() {
+    
+    function updateBannerLinks() {
+        const depositBanner = document.querySelector('.crash-game a');
+        const withdrawBanner = document.querySelector('.lucky-wheel a');
+        
+        const isLoggedIn = isUserLoggedIn();
+        
+        if (depositBanner) {
+            if (isLoggedIn) {
+                depositBanner.href = getCurrentLanguagePrefix() + '/payments/deposit';
+                depositBanner.onclick = null;
+            } else {
+                depositBanner.href = '#';
+                depositBanner.onclick = function(e) {
+                    e.preventDefault();
+                    window.location.href = '?modal=login';
+                };
+            }
+        }
+        
+        if (withdrawBanner) {
+            if (isLoggedIn) {
+                withdrawBanner.href = getCurrentLanguagePrefix() + '/payments/withdrawal';
+                withdrawBanner.onclick = null;
+            } else {
+                withdrawBanner.href = '#';
+                withdrawBanner.onclick = function(e) {
+                    e.preventDefault();
+                    window.location.href = '?modal=login';
+                };
+            }
+        }
+        
+        console.log('Banner linkleri güncellendi. Login:', isLoggedIn);
+    }
+    
+    // İlk yükleme
+    updateBannerLinks();
+    
+    // Header'ı izle
+    const header = document.querySelector('header') || document.querySelector('.header');
+    
+    if (header) {
+        const observer = new MutationObserver(updateBannerLinks);
+        
+        observer.observe(header, {
+            childList: true,
+            subtree: true
+        });
+        
+        console.log('Header izleme başlatıldı');
+    }
+}
     
 
     // LINK YÖNETİMİ
@@ -557,6 +624,7 @@ function showSectionLast() {
     function initialize() {
         initializeComponents();
         setupLinkInterceptors();
+        setupDynamicBannerLinks();
     }
 
     // EVENT LİSTENER'LAR
