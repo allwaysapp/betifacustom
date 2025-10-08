@@ -483,6 +483,10 @@ function hideSectionLastOnHomePage() {
     if (sectionLast) {
         sectionLast.style.display = 'none';
         console.log('section--last anasayfada gizlendi');
+    } else {
+        // Element henüz yoksa, 500ms sonra tekrar dene
+        console.log('section--last henüz yüklenmemiş, bekleniyor...');
+        setTimeout(hideSectionLastOnHomePage, 500);
     }
 }
 
