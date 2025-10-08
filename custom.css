@@ -1235,3 +1235,10 @@ ease;
     padding-top: 16px;
     margin-right: 0.8rem;
 }
+
+.row {
+    --bs-gutter-x: 0px !important;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+}
