@@ -1200,3 +1200,21 @@ ease;
         padding-bottom: 0px !important;
         order: -1;
 }
+
+.section__view {
+    display: flex
+;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 110px;
+    padding: 0 10px;
+    height: 40px;
+    border-radius: 8px;
+    color: var(--tf-tc);
+    background: #0d0311 !important;
+    border: 1px solid var(--tf-border);
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+}
