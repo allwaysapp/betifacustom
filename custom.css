@@ -1288,3 +1288,11 @@ ease;
     border-bottom: 3px solid var(--tf-active);
     opacity: 1;
 }
+
+#jackpots-container{
+    order:0 !important;
+}
+
+.section.section--first {
+    order: -2;
+}
