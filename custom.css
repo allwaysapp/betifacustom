@@ -1258,3 +1258,8 @@ ease;
     line-height: 32px;
     margin-bottom: 0px !important;
 }
+
+
+#mini-slider-wrapper{
+    order:-1;
+}
