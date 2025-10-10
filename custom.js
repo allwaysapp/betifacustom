@@ -381,27 +381,27 @@ function isCasinoGamePage() {
                 </div>
             </div>
             
-            <div class="custom-section2">
-                <div class="game-showcase">
-                    <div class="game-showcase-tittle">
-                        <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="">
-                    </div>
-                    <div class="game-showcase-content">
-                        <div class="game-item">
-                            <a href="${langPrefix}/casino/games/EGTInteractive-flaming-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/ef0pKVRuRxOOI7JpBu5KcwIEkOxPQTZSsjZbwrzW.png" alt=""></a>
-                        </div>
-                        <div class="game-item">
-                            <a href="${langPrefix}/casino/games/EGTInteractive-shining-crown-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/Dx3g2ara2ofhfSo8XawtCOGEshzyXZ1KYWKOx275.png" alt=""></a>
-                        </div>
-                        <div class="game-item">
-                            <a href="${langPrefix}/casino/games/EGTInteractive-40-burning-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/bHW8HLS6L9zHubXtAAldQEGsqfaiyjuHX4yB9Ibb.png" alt=""></a>
-                        </div>
-                        <div class="game-item">
-                            <a href="${langPrefix}/casino/games/EGTInteractive-20-super-hot-bell-link"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/P6qP3RrfVbsBlp2R63eoVZVuJu40q8kAmv5F1hTa.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
+           <div class="custom-section2">
+    <div class="game-showcase">
+        <div class="game-showcase-tittle">
+            <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="">
+        </div>
+        <div class="game-showcase-content">
+            <div class="game-item">
+                <a href="${langPrefix}/casino/games/amatic-book-of-aztec"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/NcfKK4W5Q883lMpcQ0buVTOch5IAynibVGkKG0RA.jpg" alt=""></a>
             </div>
+            <div class="game-item">
+                <a href="${langPrefix}/casino/games/egt-interactive-clover-islands"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Je1FwYPpVn3xv1X3BrKhSgon2ysfoxTYNV9a87q4.jpg" alt=""></a>
+            </div>
+            <div class="game-item">
+                <a href="${langPrefix}/casino/games/EGTInteractive-flaming-hot-vip-bell-link"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/mzj4Ewrkn3SyKOguBIjAE4lqPieU7rwB5OpR0Fgd.jpg" alt=""></a>
+            </div>
+            <div class="game-item">
+                <a href="${langPrefix}/casino/games/onlyplay-lady-lemon-fruits"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/lWtqQt0z9JzNn9fnLGptZqc9FRKwD5OHZ7XUXa61.jpg" alt=""></a>
+            </div>
+        </div>
+    </div>
+</div>
 
             <div class="custom-section3">
                 <div class="game-header">
