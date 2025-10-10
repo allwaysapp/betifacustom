@@ -1164,9 +1164,8 @@ ease;
 }
 
 .tabs-nav {
-    padding: 0px !important;
+    padding: 10px !important;
 }
-
 @media (min-width: 768px) {
     .tabs-nav--modal .tabs-nav__btn {
         padding: 0 15px;
@@ -1296,3 +1295,16 @@ ease;
 .section.section--first {
     order: -2;
 }
+
+.tabs-nav__btn.active {
+    color: var(--tf-tc);
+    background: #f31f51 !important;
+    border-color: var(--tf-border);
+}
+
+.table-wrap__head {
+        justify-content: space-between;
+        overflow-x: hidden;
+        margin-bottom: 40px;
+        padding: 0px !important;
+    }
