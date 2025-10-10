@@ -75,7 +75,7 @@ function getPopularGames(langPrefix) {
         },
         {
             name: "Aviator",
-            image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/dsux8pQe8IaeWVxRPLje03mmnbdDVYQ8BXr4s3SO.png",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/kIZYLOqf1oTay1LVUcZuVn89bl4E9oG3jAD26Zfb.avif",
             url: `${langPrefix}/casino/games/spribe-aviator`
         },
         {
