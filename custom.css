@@ -1263,3 +1263,17 @@ ease;
 #mini-slider-wrapper{
     order:-1;
 }
+
+.post {
+    display: flex
+;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 24px;
+    height: auto;
+    background: #120b18 !important;
+    padding: 1rem !important;
+    border-radius: 1rem !important;
+}
