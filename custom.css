@@ -1286,3 +1286,9 @@ ease;
     margin-right: 16px;
     display: none !important;
 }
+
+.category-tile.active {
+    background: #120b18 !important;
+    border-bottom: 3px solid var(--tf-active);
+    opacity: 1;
+}
