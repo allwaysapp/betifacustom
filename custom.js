@@ -56,113 +56,112 @@ function isCasinoGamePage() {
     return url.includes('/casino/games/');
 }
 
-    function getPopularGames(langPrefix) {
-        const games = [
-            {
-                name: "Fury and Fortune",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/QaZs1lzHE94a4Zm6yai9AguiBfthudpTuzWUXZBc.png",
-                url: `${langPrefix}/casino/games/hacksaw-fury-and-fortune`
-            },
-            {
-                name: "Burning Hot",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/C7hr8yQqA2aYG5cQ0SaRRrnLACABWT2cQr1E5Qdd.png",
-                url: `${langPrefix}/casino/games/EGTInteractive-burning-hot`
-            },
-            {
-                name: "Gates of Olympus",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/u4I5cMm6zbu1qESyB92CirlVuCLc2OJXwgkQw5ao.png",
-                url: `${langPrefix}/casino/games/pragmaticplay-gates-of-olympus`
-            },
-            {
-                name: "Sugar Rush 1000",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/E1T0nBXudYAn2gL2NnVb5xRCW4CrjoBEaOdoLyhY.png",
-                url: `${langPrefix}/casino/games/pragmaticplay-sugar-rush-1000`
-            },
-            {
-                name: "Sweet Bonanza 1000",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/a3rF588ISUTN7mxmyG7dX7wa6DbdsiDtN2wBs933.png",
-                url: `${langPrefix}/casino/games/pragmaticplay-sweet-bonanza-1000`
-            },
-            {
-                name: "Big Bass Splash",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/ou4WgdAPJ31lxYFRTXSNGcQuCGGQhv90Ms3w5zfI.png",
-                url: `${langPrefix}/casino/games/pragmaticplay-big-bass-splash`
-            },
-            {
-                name: "Flaming Hot",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/GmSrDBXPGCM13RMQwHkjWHNMddVb1mbf39xlDdKM.png",
-                url: `${langPrefix}/casino/games/EGTInteractive-flaming-hot`
-            },
-            {
-                name: "The Dog House Megaways",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/s2hTx8LFGsbE3jLaSVkkKz8nah0Sei6JYV077HNT.png",
-                url: `${langPrefix}/casino/games/pragmaticplay-the-dog-house-megaways`
-            },
-            {
-                name: "Sweet Baklava",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/j1fRB8YJzgXt0ayV1zPOd0fnQhZRK7CXFy3m8B2z.png",
-                url: `${langPrefix}/casino/games/pragmaticplay-sweet-baklava`
-            },
-            {
-                name: "Sweet Bonanza",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/zrBmN6uNnX2bQzDVZvbxIvK4s66AwhqdHbPDATSq.png",
-                url: `${langPrefix}/casino/games/pragmaticplay-sweet-bonanza`
-            },
-            {
-                name: "Sugar Rush",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/DOQjMOaeW7lxtnx71236s3pi837rxicjU4S7FUp5.png",
-                url: `${langPrefix}/casino/games/pragmaticplay-sugar-rush`
-            },
-            {
-                name: "Gates of Olympus 1000",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/VtCqWeoBzoUWS80XOX1yfdHGUC7DJuKfrsaUjDRJ.png",
-                url: `${langPrefix}/casino/games/pragmaticplay-gates-of-olympus-1000`
-            },
-            {
-                name: "Big Bass Mission Fishin'",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/NtQeNzDe8uyunG15rT5k3H6TKHG6hmTAkqJpwRM9.jpg",
-                url: `${langPrefix}/casino/games/pragmaticplay-big-bass-mission-fishin`
-            },
-            {
-                name: "Buffalo King Megaways",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/FFfRWIF1Liwb9gCUcMCqXBpUPu1wRoESgEbo5DB3.avif",
-                url: `${langPrefix}/casino/games/pragmaticplay-buffalo-king-megaways`
-            },
-            {
-                name: "Bigger Bass Bonanza",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/KayYal8Y5gtJ1HM6FDeLyFtCUniZQI9ALUDpwSyH.avif",
-                url: `${langPrefix}/casino/games/pragmaticplay-bigger-bass-bonanza`
-            },
-            {
-                name: "Power of Thor Megaways",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/1JriPTQ04m3nsbTakirKBBeXnq4y5tFwQtxS63r4.avif",
-                url: `${langPrefix}/casino/games/pragmaticplay-power-of-thor-megaways`
-            },
-            {
-                name: "Big Bass Bonanza Megaways",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/m6wr8HLhZIna3aJnA3zrslEDWQST31EKDCx55kCO.avif",
-                url: `${langPrefix}/casino/games/pragmaticplay-big-bass-bonanza-megaways`
-            },
-            {
-                name: "5 Lions Megaways",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/2Izea5fJK3uevSlURmRv67Cn7zphram7cytGvjGq.avif",
-                url: `${langPrefix}/casino/games/pragmaticplay-5-lions-megaways`
-            },
-            {
-                name: "Cash Bonanza",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/omoxnXh4d85vBFwsY9RDqqw2yAxcz0TK4DvAczul.avif",
-                url: `${langPrefix}/casino/games/pragmaticplay-cash-bonanza`
-            },
-            {
-                name: "Mustang Gold Megaways",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/EqigmGLZZ6SJRkbMa4vz0JbL4dWPRm9fP8CbTXuV.avif",
-                url: `${langPrefix}/casino/games/pragmaticplay-mustang-gold-megaways`
-            }
-        ];
+function getPopularGames(langPrefix) {
+    const games = [
+        {
+            name: "Flaming Hot Bell Link VIP",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/AuvpREGg667TaTO3Uj1n8gZRywuE053k4ivHnNTu.jpg",
+            url: `${langPrefix}/casino/games/EGTInteractive-flaming-hot-bell-link`
+        },
+        {
+            name: "Shining Crown",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/28WH1FojCt2N3ThBWM7E2tW0xM4KCGst8uOdrg1A.jpg",
+            url: `${langPrefix}/casino/games/EGTInteractive-shining-crown`
+        },
+        {
+            name: "Sweet Bonanza 1000",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/SMmpn02RWtkQTsmqQQfQrr4p5tjg6ZobKjSgQuUH.jpg",
+            url: `${langPrefix}/casino/games/pragmaticplay-sweet-bonanza-1000`
+        },
+        {
+            name: "Aviator",
+            image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/dsux8pQe8IaeWVxRPLje03mmnbdDVYQ8BXr4s3SO.png",
+            url: `${langPrefix}/casino/games/spribe-aviator`
+        },
+        {
+            name: "Crazy Time",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/CN9RJrn0WpiLtdS4ymnVz4fbsM1nTiefQpsb70ko.jpg",
+            url: `${langPrefix}/casino/games/evolution-crazy-time`
+        },
+        {
+            name: "Lightning Roulette",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/ZjDE9jIRlXtdnkH4lHL3Y94VjXljIaZEzmFmIfjm.jpg",
+            url: `${langPrefix}/casino/games/evolution-lightning-roulette`
+        },
+        {
+            name: "Gates of Olympus",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/OYYVoo2WtvkKnjThuaYCx32Q4HoZaMvYkSHJzlUt.jpg",
+            url: `${langPrefix}/casino/games/pragmaticplay-gates-of-olympus`
+        },
+        {
+            name: "Starburst",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/2ILiuY4LIHKx0h2Dc7Ii4sqoP0bTSEGFc9YxbCzZ.jpg",
+            url: `${langPrefix}/casino/games/netent-starburst`
+        },
+        {
+            name: "40 Burnin Hot Bell Link",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/TbL7jWqLOHzlwhqqxwIaipxXlTgdJqr1nEk3LOYD.jpg",
+            url: `${langPrefix}/casino/games/EGTInteractive-40-burning-hot-bell-link`
+        },
+        {
+            name: "Big Bass Bonanza",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/1Rn0lMAJvhEcVsdMbZTPM8jbbarbjU7RAXT9u7op.jpg",
+            url: `${langPrefix}/casino/games/pragmaticplay-big-bass-bonanza`
+        },
+        {
+            name: "Monopoly Live",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/YQQsHnJakwQefWaZCdRBMvgkXimS8k5aTFxyFQ6E.jpg",
+            url: `${langPrefix}/casino/games/netent-starburst`
+        },
+        {
+            name: "Dead or Alive 2",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/81gO39t9YxXJfkr3Kt8KwJuaz3T3fukoIXMIA9BR.jpg",
+            url: `${langPrefix}/casino/games/netent-dead-or-alive-2`
+        },
+        {
+            name: "The Catfather",
+            image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/5LybSSyTU8yJbNvNWajyA33Igg0xlBfFI4jQhuiQ.avif",
+            url: `${langPrefix}/casino/games/pragmaticplay-the-catfather`
+        },
+        {
+            name: "Million 777 Coins",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/fGnHGjXmFRXNNXAnKlqyRXymVQNvkHhc0hwwAI7y.avif",
+            url: `${langPrefix}/casino/games/redrake-million-777-coins`
+        },
+        {
+            name: "Chaos Crew 3",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/8bGIcag9zJA3AUtseYRlONIDPvPxXyq4nZ9vGLmw.avif",
+            url: `${langPrefix}/casino/games/hacksaw-chaos-crew-3`
+        },
+        {
+            name: "Blood Suckers",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/An32yDuprbtyGlgQilo8iAcHQRWgHpaz5P2TgvIb.avif",
+            url: `${langPrefix}/casino/games/netent-blood-suckers`
+        },
+        {
+            name: "Wolf Gold",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/SjO0Ln3VjqJubFD87UN9YAxVPS7ONo5wNFGPsLkR.avif",
+            url: `${langPrefix}/casino/games/pragmaticplay-wolf-gold`
+        },
+        {
+            name: "Royal Joker Hold and Spin",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/3ZgPlXjhzWw6MxqMKKbfhKo9gZmQEot8qTsk49Zh.avif",
+            url: `${langPrefix}/casino/games/playson-royal-joker-hold-and-win`
+        },
+        {
+            name: "Book of Ra",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/48fCpHIv1zlEkWdOSZrXYFqjfryECOAoQRRd01pl.avif",
+            url: `${langPrefix}/casino/games/novomatic-book-of-ra`
+        },
+        {
+            name: "Thunder Crown",
+            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Kc5KkQWMVLVSaHRVYeFXxsRQzZub97lqzILDKwGY.avif",
+            url: `${langPrefix}/casino/games/endorphina-thunder-crown`
+        }
+    ];
 
-        return games;
-    }
-
+    return games;
+}
 
     function getLiveCasinoGames(langPrefix) {
         const games = [
