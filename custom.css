@@ -1179,15 +1179,15 @@ ease;
     }
 }
 
+.profile-menu-wrapper, 
+.sb-category-page, 
+.sb-ctournament-page, 
+.sb-sports-page {
+    --app-tabs-background: #192132 !important;
+}
+
 .sb-tabs {
-    display: flex
-;
-    justify-content: flex-start;
     background: #192132 !important;
-    margin: var(--app-tabs-margins);
-    border-radius: var(--app-tabs-border-radius);
-    box-shadow: var(--app-tabs-box-shadow);
-    padding: var(--app-tabs-paddings);
 }
 
 .profile-menu-wrapper .sb-tabs, .sb-category-page .sb-tabs, .sb-ctournament-page .sb-tabs, .sb-sports-page .sb-tabs {
@@ -1350,22 +1350,4 @@ ease;
     animation: fadeInSlideUp 0.3s 
 ease;
     z-index: 9;
-}
-
-.profile-menu-wrapper, .sb-category-page, .sb-ctournament-page, .sb-sports-page {
-    --app-tabs-margins: 1px 0 15px 0;
-    --app-tabs-paddings: 11px;
-    --app-tabs-background: #192132 !important;
-    --app-tabs-item-font-style: normal;
-    --app-tabs-item-font-weight: 500;
-    --app-tabs-item-font-size: 1.4rem;
-    --app-tabs-item-line-height: 1.8rem;
-    --app-tabs-item-border-radius: 14px;
-    --app-tabs_simple-item-color: var(--app-second-color);
-    --app-tabs_simple-item-active-color: #fff;
-    --app-tabs_simple-item-active-background: var(--app-main-gradient);
-    --app-tabs_simple-item-active-border-bottom-color: none;
-    --app-tabs_simple-item-hover-color: var(--app-tabs_simple-item-active-color);
-    --app-tabs_simple-item-hover-background: var(--app-tabs_simple-item-active-background);
-    --app-tabs_simple-item-hover-border-bottom-color: none;
 }
