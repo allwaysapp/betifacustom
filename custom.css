@@ -807,8 +807,8 @@ display: none !important;
     }
 }
 
-.chat__user {
-    display: none !important;
+.kush__winner .chat__user {
+    display:none !important ;
 }
 
 /* Provider Carousel Stilleri */
