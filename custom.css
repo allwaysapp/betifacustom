@@ -1308,3 +1308,15 @@ ease;
         margin-bottom: 40px;
         padding: 0px !important;
     }
+
+.chat__message {
+    position: relative;
+    flex-direction: column !important;
+    display: flex !important
+;
+    margin-top: 10px;
+    width: 100%;
+    background-color: var(--tf-bg2);
+    border-radius: 8px;
+    padding: 0.5rem !important;
+}
