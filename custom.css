@@ -1320,3 +1320,11 @@ ease;
     border-radius: 8px;
     padding: 0.5rem !important;
 }
+
+.chat__time {
+    position: absolute;
+    top: 5px !important;
+    right: 5px !important;
+    font-size: 13px;
+    color: var(--tf-tc2);
+}
