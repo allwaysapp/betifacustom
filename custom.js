@@ -1,9 +1,4 @@
 (function () {
-
-    if (window.location.href.includes('?modal=register') || 
-        window.location.href.includes('?modal=login')) {
-        return;
-    }
     
     let isNavigating = false;
 
