@@ -257,6 +257,20 @@ img {
 }
 
 @media (max-width: 768px) {
+
+    .left-first h2 {
+    font-size: clamp(1rem, 4vw, 1rem);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    color: var(--tf-tc) !important;
+}
+
+    .left-first p {
+    font-size: clamp(0.5rem, 2.5vw, 1.25rem);
+    color: #f21f51;
+    margin: 0;
+}
+    
     .custom-section {
         display: flex;
         flex-direction: column;
