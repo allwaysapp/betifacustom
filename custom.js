@@ -330,8 +330,8 @@ function getPopularGames(langPrefix) {
                 <div class="left-content">
                     <div class="left-first">
                         <div class="left-tittle">
-                            <h2>BETIFA İLE <br> KESİNTİSİZ ERİŞİM !</h2>
-                            <p>Hemen Takip Et !</p>
+                            <h2>GLOBAL GAMING EXCELLENCE -<br> BETIFA İLE GÜVENİN GÜCÜNÜ KEŞFET</h2>
+                            <p>Güvenli Erişim İçin Takip Et !</p>
                         </div>
                         <div class="social-buttons">
                             <a class="social-btn" href="https://telegram.me/betifaresmi"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/telegram-icon.png" alt="Telegram"></a>
