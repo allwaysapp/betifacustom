@@ -1311,7 +1311,7 @@ ease;
 }
 
 .tabs-nav__btn.active {
-    color: var(--tf-tc);
+    color: var(--tf-tc) !important;
     background: #f31f51 !important;
     border-color: var(--tf-border);
 }
