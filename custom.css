@@ -1365,3 +1365,7 @@ ease;
 ease;
     z-index: 9;
 }
+
+.bet__by ~ .chat__user {
+    display: none !important;
+}
