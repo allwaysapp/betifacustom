@@ -359,9 +359,9 @@ function getPopularGames(langPrefix) {
                     <div class="dice-game">
                         <a href="${langPrefix}/casino/games/spribe-aviator"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/aviator-product.jpg" alt=""></a>
                     </div>
-                    <div class="plinko-game">
-                        <a href="${langPrefix}#"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/canli-tv-product.jpg" alt=""></a>
-                    </div>
+                   <div class="plinko-game">
+    <a href="${langPrefix}?modal=bonus-request"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/bonus-talep.jpg" alt=""></a>
+</div>
                     <div class="coinflip-game">
                         <a href="${langPrefix}/promotions"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/gunun-firsatlari.jpg" alt=""></a>
                     </div>
