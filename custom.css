@@ -1370,6 +1370,6 @@ ease;
     display: none !important;
 }
 
-.xtable--wheel .wheel-prizes .chat__user.wheel-text img.rank-icon {
+table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-text img.rank-icon {
     display: none !important;
 }
