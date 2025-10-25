@@ -1369,3 +1369,7 @@ ease;
 .bet__by ~ .chat__user {
     display: none !important;
 }
+
+.xtable--wheel .wheel-prizes .chat__user.wheel-text img.rank-icon {
+    display: none !important;
+}
