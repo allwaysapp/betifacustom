@@ -1373,3 +1373,12 @@ ease;
 table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-text img.rank-icon {
     display: none !important;
 }
+
+.modal__scrollable {
+    height: auto;
+    max-height: 1080px !important;
+    overflow-y: auto;
+    position: relative;
+    z-index: 2;
+    margin-top: 30px;
+}
