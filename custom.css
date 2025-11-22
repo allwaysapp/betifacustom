@@ -1382,3 +1382,14 @@ table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-
     z-index: 2;
     margin-top: 30px;
 }
+
+.modal .modal-content {
+    margin: 0 auto;
+    max-width: 636px;
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    display: flex !important;
+    flex-direction: column-reverse !important;
+}
+
