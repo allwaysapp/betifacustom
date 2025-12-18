@@ -1374,5 +1374,8 @@ table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-
     display: none !important;
 }
 
+#canli-destek-label {
+    display: none !important;
+}
 
 
