@@ -26,7 +26,13 @@
     create: hideSectionLastOnHomePage,
     remove: showSectionLast,
     selector: '.betifa-section-last-hidden'
-}
+},
+        socialLinks: {
+            condition: () => true,
+            create: addSocialLinksToSidebar,
+            remove: removeSocialLinksFromSidebar,
+            selector: '.betifa-social-links'
+        }
     };
 
 
@@ -509,6 +515,88 @@ function showSectionLast() {
         sectionLast.style.display = '';
         sectionLast.classList.remove('betifa-section-last-hidden');
         console.log('section--last gösterildi');
+    }
+}
+
+// Sidebar'a Sosyal Medya Linklerini Ekle
+function addSocialLinksToSidebar() {
+    // Zaten eklenmişse tekrar ekleme
+    if (document.querySelector('.betifa-social-links')) return;
+
+    // "Ek Bilgi" menüsünü bul
+    const additionalInfoMenu = Array.from(document.querySelectorAll('.sidebar__menu'))
+        .find(menu => {
+            const title = menu.querySelector('.sidebar__title');
+            return title && title.textContent.trim() === 'Ek bilgi';
+        });
+
+    if (!additionalInfoMenu) {
+        console.log('Ek bilgi menüsü bulunamadı, bekleniyor...');
+        setTimeout(addSocialLinksToSidebar, 500);
+        return;
+    }
+
+    // Yeni "Linkler" bölümünü oluştur
+    const socialLinksSection = document.createElement('div');
+    socialLinksSection.className = 'sidebar__menu betifa-social-links';
+    socialLinksSection.innerHTML = `
+        <span class="sidebar__title">Linkler</span>
+        <ul class="sidebar__nav">
+            <li>
+                <a href="https://www.facebook.com/profile.php?id=61579993843473" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-facebook-f" style="width: 20px; display: inline-block; text-align: center;"></i>
+                    Facebook
+                </a>
+            </li>
+            <li>
+                <a href="https://x.com/betifatr" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-x-twitter" style="width: 20px; display: inline-block; text-align: center;"></i>
+                    X (Twitter)
+                </a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/betifatr/" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-instagram" style="width: 20px; display: inline-block; text-align: center;"></i>
+                    Instagram
+                </a>
+            </li>
+            <li>
+                <a href="https://www.tiktok.com/@betifa8?_t=ZN-8zQ1KBTM5iQ&_r=1" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-tiktok" style="width: 20px; display: inline-block; text-align: center;"></i>
+                    TikTok
+                </a>
+            </li>
+            <li>
+                <a href="https://t.me/betifatr" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-telegram" style="width: 20px; display: inline-block; text-align: center;"></i>
+                    Telegram
+                </a>
+            </li>
+            <li>
+                <a href="https://wa.me/447512821201" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp" style="width: 20px; display: inline-block; text-align: center;"></i>
+                    WhatsApp
+                </a>
+            </li>
+            <li>
+                <a href="https://teams.live.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Finvite%2FXXXXXX&type=invite&deeplinkId=5aea8d51-3804-4123-9892-cd6e7688adc0&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-microsoft" style="width: 20px; display: inline-block; text-align: center;"></i>
+                    Microsoft Teams
+                </a>
+            </li>
+        </ul>
+    `;
+
+    // "Ek Bilgi" menüsünden sonra ekle
+    additionalInfoMenu.insertAdjacentElement('afterend', socialLinksSection);
+    console.log('Betifa sosyal medya linkleri sidebar\'a eklendi');
+}
+
+function removeSocialLinksFromSidebar() {
+    const element = document.querySelector('.betifa-social-links');
+    if (element && element.parentNode) {
+        element.parentNode.removeChild(element);
+        console.log('Betifa sosyal medya linkleri kaldırıldı');
     }
 }
 
