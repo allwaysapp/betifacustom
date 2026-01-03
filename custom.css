@@ -1169,10 +1169,6 @@ ease;
     align-items: center;
     width: 100%;
     margin-bottom: 10px;
-    position: absolute !important;
-    z-index: 10;
-    top: 35px;
-    right: 8px;
 }
 
 .modal .modal-content {
