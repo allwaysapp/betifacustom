@@ -369,7 +369,7 @@ function getPopularGames(langPrefix) {
     <a href="${langPrefix}?modal=bonus-request"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/bonus-talep.jpg" alt=""></a>
 </div>
                     <div class="coinflip-game">
-                        <a href="${langPrefix}/promotions"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/gunun-firsatlari.jpg" alt=""></a>
+                        <a href="#"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/gunun-firsatlari.jpg" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -606,9 +606,11 @@ function setupDynamicBannerLinks() {
     function updateBannerLinks() {
         const depositBanner = document.querySelector('.crash-game a');
         const withdrawBanner = document.querySelector('.lucky-wheel a');
+        const chatifaBanner = document.querySelector('.coinflip-game a');
         
         const isLoggedIn = isUserLoggedIn();
         
+        // Yatırım Butonu
         if (depositBanner) {
             if (isLoggedIn) {
                 depositBanner.href = getCurrentLanguagePrefix() + '/payments/deposit';
@@ -623,6 +625,7 @@ function setupDynamicBannerLinks() {
             }
         }
         
+        // Çekim Butonu
         if (withdrawBanner) {
             if (isLoggedIn) {
                 withdrawBanner.href = getCurrentLanguagePrefix() + '/payments/withdrawal';
@@ -630,6 +633,31 @@ function setupDynamicBannerLinks() {
             } else {
                 withdrawBanner.href = '#';
                 withdrawBanner.onclick = function(e) {
+                    e.preventDefault();
+                    window.history.pushState({}, '', '?modal=login');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                };
+            }
+        }
+        
+        // Chatifa Butonu (Günün Fırsatları)
+        if (chatifaBanner) {
+            chatifaBanner.href = '#';
+            if (isLoggedIn) {
+                // Giriş yapılmışsa - Chatifa sidebar'ını aç
+                chatifaBanner.onclick = function(e) {
+                    e.preventDefault();
+                    const chatSidebarBtn = document.getElementById('chatSidebar');
+                    if (chatSidebarBtn) {
+                        chatSidebarBtn.click();
+                        console.log('Chatifa sidebar açıldı');
+                    } else {
+                        console.log('chatSidebar butonu bulunamadı');
+                    }
+                };
+            } else {
+                // Giriş yapılmamışsa - Login modal aç
+                chatifaBanner.onclick = function(e) {
                     e.preventDefault();
                     window.history.pushState({}, '', '?modal=login');
                     window.dispatchEvent(new PopStateEvent('popstate'));
