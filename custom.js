@@ -369,7 +369,7 @@ function getPopularGames(langPrefix) {
     <a href="${langPrefix}?modal=bonus-request"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/bonus-talep.jpg" alt=""></a>
 </div>
                     <div class="coinflip-game">
-                        <a href="#"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/gunun-firsatlari.jpg" alt=""></a>
+                        <a href="#"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/chatifa.jpg" alt=""></a>
                     </div>
                 </div>
             </div>
