@@ -536,16 +536,16 @@ function addSocialLinksToSidebar() {
         return;
     }
 
-    // Yeni "Linkler" bölümünü oluştur
+// Yeni "Linkler" bölümünü oluştur
     const socialLinksSection = document.createElement('div');
     socialLinksSection.className = 'sidebar__menu betifa-social-links';
     socialLinksSection.innerHTML = `
         <span class="sidebar__title">Linkler</span>
         <ul class="sidebar__nav">
             <li>
-                <a href="https://www.facebook.com/profile.php?id=61579993843473" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-facebook-f" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    Facebook
+                <a href="https://www.instagram.com/betifaturkiye" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-instagram" style="width: 20px; display: inline-block; text-align: center;"></i>
+                    Instagram
                 </a>
             </li>
             <li>
@@ -555,33 +555,21 @@ function addSocialLinksToSidebar() {
                 </a>
             </li>
             <li>
-                <a href="https://www.instagram.com/betifatr/" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-instagram" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    Instagram
-                </a>
-            </li>
-            <li>
-                <a href="https://www.tiktok.com/@betifa8?_t=ZN-8zQ1KBTM5iQ&_r=1" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-tiktok" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    TikTok
-                </a>
-            </li>
-            <li>
-                <a href="https://t.me/betifatr" target="_blank" rel="noopener noreferrer">
+                <a href="https://t.me/betifaresmi" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-telegram" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    Telegram
+                    Telegram Kanalı
+                </a>
+            </li>
+            <li>
+                <a href="https://t.me/betifadestek" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-telegram" style="width: 20px; display: inline-block; text-align: center;"></i>
+                    Telegram Support
                 </a>
             </li>
             <li>
                 <a href="https://wa.me/447512821201" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-whatsapp" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    WhatsApp
-                </a>
-            </li>
-            <li>
-                <a href="https://teams.live.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Finvite%2FXXXXXX&type=invite&deeplinkId=5aea8d51-3804-4123-9892-cd6e7688adc0&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-microsoft" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    Microsoft Teams
+                    Whatsapp Destek
                 </a>
             </li>
         </ul>
