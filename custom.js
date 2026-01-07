@@ -543,7 +543,7 @@ function addSocialLinksToSidebar() {
         <span class="sidebar__title">Linkler</span>
         <ul class="sidebar__nav">
             <li>
-                <a href="https://www.instagram.com/betifaturkiye" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.instagram.com/betifa.trsosyal" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-instagram" style="width: 20px; display: inline-block; text-align: center;"></i>
                     Instagram
                 </a>
