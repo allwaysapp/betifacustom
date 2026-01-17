@@ -567,7 +567,7 @@ function addSocialLinksToSidebar() {
                 </a>
             </li>
             <li>
-                <a href="https://wa.me/447512821201" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/38971634037" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-whatsapp" style="width: 20px; display: inline-block; text-align: center;"></i>
                     Whatsapp Destek
                 </a>
