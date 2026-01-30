@@ -1387,4 +1387,9 @@ table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-
     display: none !important;
 }
 
+.footer-app-banner {
+    margin-top:15px;;
+}
+
+
 
