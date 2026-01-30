@@ -456,6 +456,11 @@ setTimeout(() => {
         awardsSection.className = 'row betifa-footer-awards';
         awardsSection.innerHTML = `
             <div class="col-12">
+                <div class="footer-app-banner" style="margin-bottom: 15px;">
+                    <a href="https://www.mediafire.com/file/aa871wnckhq5drc/BET%C4%B0FAPP.apk/file" target="_blank" rel="noopener noreferrer">
+                        <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/mobil-app.gif" alt="Betifa Mobil App" style="width: 100%; height: auto; display: block;">
+                    </a>
+                </div>
                 <div class="footer-awards-container" style="display: flex; justify-content: center; align-items: center; gap: 20px; padding: 20px 0;">
                     <img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/qADFxttxrDUm1nvMsr1JTkBiWw4pXptrkfwjkjOy.png" alt="Award 1" style="height: 60px; width: auto;">
                     <img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/Vybopxz1lksdu65Pjg7lbSQsWDYkQJd392IyVD88.png" alt="Award 3" style="height: 60px; width: auto;">
