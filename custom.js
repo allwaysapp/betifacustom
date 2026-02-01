@@ -20,18 +20,24 @@
             create: updateJackpotImages,
             remove: () => {},
             selector: '.jackpot__logo'
-    },
-    hideSectionLast: {
-    condition: () => isHomePage() || isCasinoGamePage(),
-    create: hideSectionLastOnHomePage,
-    remove: showSectionLast,
-    selector: '.betifa-section-last-hidden'
-},
+        },
+        hideSectionLast: {
+            condition: () => isHomePage() || isCasinoGamePage(),
+            create: hideSectionLastOnHomePage,
+            remove: showSectionLast,
+            selector: '.betifa-section-last-hidden'
+        },
         socialLinks: {
             condition: () => true,
             create: addSocialLinksToSidebar,
             remove: removeSocialLinksFromSidebar,
             selector: '.betifa-social-links'
+        },
+        footerSocialLinks: {
+            condition: () => true,
+            create: updateFooterSocialLinks,
+            remove: restoreFooterSocialLinks,
+            selector: '.betifa-footer-social-updated'
         }
     };
 
@@ -50,125 +56,125 @@
         const path = window.location.pathname;
         if (path.startsWith('/tr')) return '/tr';
         if (path.startsWith('/en')) return '/en';
-        return ''; // Ana domain için
+        return '';
     }
 
 
     function isUserLoggedIn() {
-    return document.querySelector('.header__wallet') !== null;
-}
+        return document.querySelector('.header__wallet') !== null;
+    }
 
-function isCasinoGamePage() {
-    const url = window.location.pathname;
-    return url.includes('/casino/games/');
-}
+    function isCasinoGamePage() {
+        const url = window.location.pathname;
+        return url.includes('/casino/games/');
+    }
 
-function getPopularGames(langPrefix) {
-    const games = [
-        {
-            name: "Flaming Hot Bell Link VIP",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/AuvpREGg667TaTO3Uj1n8gZRywuE053k4ivHnNTu.jpg",
-            url: `${langPrefix}/casino/games/EGTInteractive-flaming-hot-bell-link`
-        },
-        {
-            name: "Shining Crown",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/28WH1FojCt2N3ThBWM7E2tW0xM4KCGst8uOdrg1A.jpg",
-            url: `${langPrefix}/casino/games/EGTInteractive-shining-crown`
-        },
-        {
-            name: "Sweet Bonanza 1000",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/SMmpn02RWtkQTsmqQQfQrr4p5tjg6ZobKjSgQuUH.jpg",
-            url: `${langPrefix}/casino/games/pragmaticplay-sweet-bonanza-1000`
-        },
-        {
-            name: "Aviator",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/kIZYLOqf1oTay1LVUcZuVn89bl4E9oG3jAD26Zfb.avif",
-            url: `${langPrefix}/casino/games/spribe-aviator`
-        },
-        {
-            name: "Crazy Time",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/CN9RJrn0WpiLtdS4ymnVz4fbsM1nTiefQpsb70ko.jpg",
-            url: `${langPrefix}/casino/games/evolution-crazy-time`
-        },
-        {
-            name: "Lightning Roulette",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/ZjDE9jIRlXtdnkH4lHL3Y94VjXljIaZEzmFmIfjm.jpg",
-            url: `${langPrefix}/casino/games/evolution-lightning-roulette`
-        },
-        {
-            name: "Gates of Olympus",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/OYYVoo2WtvkKnjThuaYCx32Q4HoZaMvYkSHJzlUt.jpg",
-            url: `${langPrefix}/casino/games/pragmaticplay-gates-of-olympus`
-        },
-        {
-            name: "Starburst",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/2ILiuY4LIHKx0h2Dc7Ii4sqoP0bTSEGFc9YxbCzZ.jpg",
-            url: `${langPrefix}/casino/games/netent-starburst`
-        },
-        {
-            name: "40 Burnin Hot Bell Link",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/TbL7jWqLOHzlwhqqxwIaipxXlTgdJqr1nEk3LOYD.jpg",
-            url: `${langPrefix}/casino/games/EGTInteractive-40-burning-hot-bell-link`
-        },
-        {
-            name: "Big Bass Bonanza",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/1Rn0lMAJvhEcVsdMbZTPM8jbbarbjU7RAXT9u7op.jpg",
-            url: `${langPrefix}/casino/games/pragmaticplay-big-bass-bonanza`
-        },
-        {
-            name: "Monopoly Live",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/YQQsHnJakwQefWaZCdRBMvgkXimS8k5aTFxyFQ6E.jpg",
-            url: `${langPrefix}/casino/games/netent-starburst`
-        },
-        {
-            name: "Dead or Alive 2",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/81gO39t9YxXJfkr3Kt8KwJuaz3T3fukoIXMIA9BR.jpg",
-            url: `${langPrefix}/casino/games/netent-dead-or-alive-2`
-        },
-        {
-            name: "The Catfather",
-            image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/5LybSSyTU8yJbNvNWajyA33Igg0xlBfFI4jQhuiQ.avif",
-            url: `${langPrefix}/casino/games/pragmaticplay-the-catfather`
-        },
-        {
-            name: "Million 777 Coins",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/fGnHGjXmFRXNNXAnKlqyRXymVQNvkHhc0hwwAI7y.avif",
-            url: `${langPrefix}/casino/games/redrake-million-777-coins`
-        },
-        {
-            name: "Chaos Crew 3",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/8bGIcag9zJA3AUtseYRlONIDPvPxXyq4nZ9vGLmw.avif",
-            url: `${langPrefix}/casino/games/hacksaw-chaos-crew-3`
-        },
-        {
-            name: "Blood Suckers",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/An32yDuprbtyGlgQilo8iAcHQRWgHpaz5P2TgvIb.avif",
-            url: `${langPrefix}/casino/games/netent-blood-suckers`
-        },
-        {
-            name: "Wolf Gold",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/SjO0Ln3VjqJubFD87UN9YAxVPS7ONo5wNFGPsLkR.avif",
-            url: `${langPrefix}/casino/games/pragmaticplay-wolf-gold`
-        },
-        {
-            name: "Royal Joker Hold and Spin",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/3ZgPlXjhzWw6MxqMKKbfhKo9gZmQEot8qTsk49Zh.avif",
-            url: `${langPrefix}/casino/games/playson-royal-joker-hold-and-win`
-        },
-        {
-            name: "Book of Ra",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/48fCpHIv1zlEkWdOSZrXYFqjfryECOAoQRRd01pl.avif",
-            url: `${langPrefix}/casino/games/novomatic-book-of-ra`
-        },
-        {
-            name: "Thunder Crown",
-            image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Kc5KkQWMVLVSaHRVYeFXxsRQzZub97lqzILDKwGY.avif",
-            url: `${langPrefix}/casino/games/endorphina-thunder-crown`
-        }
-    ];
+    function getPopularGames(langPrefix) {
+        const games = [
+            {
+                name: "Flaming Hot Bell Link VIP",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/AuvpREGg667TaTO3Uj1n8gZRywuE053k4ivHnNTu.jpg",
+                url: `${langPrefix}/casino/games/EGTInteractive-flaming-hot-bell-link`
+            },
+            {
+                name: "Shining Crown",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/28WH1FojCt2N3ThBWM7E2tW0xM4KCGst8uOdrg1A.jpg",
+                url: `${langPrefix}/casino/games/EGTInteractive-shining-crown`
+            },
+            {
+                name: "Sweet Bonanza 1000",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/SMmpn02RWtkQTsmqQQfQrr4p5tjg6ZobKjSgQuUH.jpg",
+                url: `${langPrefix}/casino/games/pragmaticplay-sweet-bonanza-1000`
+            },
+            {
+                name: "Aviator",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/kIZYLOqf1oTay1LVUcZuVn89bl4E9oG3jAD26Zfb.avif",
+                url: `${langPrefix}/casino/games/spribe-aviator`
+            },
+            {
+                name: "Crazy Time",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/CN9RJrn0WpiLtdS4ymnVz4fbsM1nTiefQpsb70ko.jpg",
+                url: `${langPrefix}/casino/games/evolution-crazy-time`
+            },
+            {
+                name: "Lightning Roulette",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/ZjDE9jIRlXtdnkH4lHL3Y94VjXljIaZEzmFmIfjm.jpg",
+                url: `${langPrefix}/casino/games/evolution-lightning-roulette`
+            },
+            {
+                name: "Gates of Olympus",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/OYYVoo2WtvkKnjThuaYCx32Q4HoZaMvYkSHJzlUt.jpg",
+                url: `${langPrefix}/casino/games/pragmaticplay-gates-of-olympus`
+            },
+            {
+                name: "Starburst",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/2ILiuY4LIHKx0h2Dc7Ii4sqoP0bTSEGFc9YxbCzZ.jpg",
+                url: `${langPrefix}/casino/games/netent-starburst`
+            },
+            {
+                name: "40 Burnin Hot Bell Link",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/TbL7jWqLOHzlwhqqxwIaipxXlTgdJqr1nEk3LOYD.jpg",
+                url: `${langPrefix}/casino/games/EGTInteractive-40-burning-hot-bell-link`
+            },
+            {
+                name: "Big Bass Bonanza",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/1Rn0lMAJvhEcVsdMbZTPM8jbbarbjU7RAXT9u7op.jpg",
+                url: `${langPrefix}/casino/games/pragmaticplay-big-bass-bonanza`
+            },
+            {
+                name: "Monopoly Live",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/YQQsHnJakwQefWaZCdRBMvgkXimS8k5aTFxyFQ6E.jpg",
+                url: `${langPrefix}/casino/games/netent-starburst`
+            },
+            {
+                name: "Dead or Alive 2",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/81gO39t9YxXJfkr3Kt8KwJuaz3T3fukoIXMIA9BR.jpg",
+                url: `${langPrefix}/casino/games/netent-dead-or-alive-2`
+            },
+            {
+                name: "The Catfather",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/5LybSSyTU8yJbNvNWajyA33Igg0xlBfFI4jQhuiQ.avif",
+                url: `${langPrefix}/casino/games/pragmaticplay-the-catfather`
+            },
+            {
+                name: "Million 777 Coins",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/fGnHGjXmFRXNNXAnKlqyRXymVQNvkHhc0hwwAI7y.avif",
+                url: `${langPrefix}/casino/games/redrake-million-777-coins`
+            },
+            {
+                name: "Chaos Crew 3",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/8bGIcag9zJA3AUtseYRlONIDPvPxXyq4nZ9vGLmw.avif",
+                url: `${langPrefix}/casino/games/hacksaw-chaos-crew-3`
+            },
+            {
+                name: "Blood Suckers",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/An32yDuprbtyGlgQilo8iAcHQRWgHpaz5P2TgvIb.avif",
+                url: `${langPrefix}/casino/games/netent-blood-suckers`
+            },
+            {
+                name: "Wolf Gold",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/SjO0Ln3VjqJubFD87UN9YAxVPS7ONo5wNFGPsLkR.avif",
+                url: `${langPrefix}/casino/games/pragmaticplay-wolf-gold`
+            },
+            {
+                name: "Royal Joker Hold and Spin",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/3ZgPlXjhzWw6MxqMKKbfhKo9gZmQEot8qTsk49Zh.avif",
+                url: `${langPrefix}/casino/games/playson-royal-joker-hold-and-win`
+            },
+            {
+                name: "Book of Ra",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/48fCpHIv1zlEkWdOSZrXYFqjfryECOAoQRRd01pl.avif",
+                url: `${langPrefix}/casino/games/novomatic-book-of-ra`
+            },
+            {
+                name: "Thunder Crown",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Kc5KkQWMVLVSaHRVYeFXxsRQzZub97lqzILDKwGY.avif",
+                url: `${langPrefix}/casino/games/endorphina-thunder-crown`
+            }
+        ];
 
-    return games;
-}
+        return games;
+    }
 
     function getLiveCasinoGames(langPrefix) {
         const games = [
@@ -366,8 +372,8 @@ function getPopularGames(langPrefix) {
                         <a href="${langPrefix}/casino/games/spribe-aviator"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/aviator-product.jpg" alt=""></a>
                     </div>
                    <div class="plinko-game">
-    <a href="${langPrefix}?modal=bonus-request"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/bonus-talep.jpg" alt=""></a>
-</div>
+                        <a href="${langPrefix}?modal=bonus-request"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/bonus-talep.jpg" alt=""></a>
+                    </div>
                     <div class="coinflip-game">
                         <a href="#"><img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/chatifa.jpg" alt=""></a>
                     </div>
@@ -388,26 +394,26 @@ function getPopularGames(langPrefix) {
             </div>
             
            <div class="custom-section2">
-    <div class="game-showcase">
-        <div class="game-showcase-tittle">
-            <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="">
-        </div>
-        <div class="game-showcase-content">
-            <div class="game-item">
-                <a href="${langPrefix}/casino/games/amatic-book-of-aztec"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/NcfKK4W5Q883lMpcQ0buVTOch5IAynibVGkKG0RA.jpg" alt=""></a>
+                <div class="game-showcase">
+                    <div class="game-showcase-tittle">
+                        <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="">
+                    </div>
+                    <div class="game-showcase-content">
+                        <div class="game-item">
+                            <a href="${langPrefix}/casino/games/amatic-book-of-aztec"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/NcfKK4W5Q883lMpcQ0buVTOch5IAynibVGkKG0RA.jpg" alt=""></a>
+                        </div>
+                        <div class="game-item">
+                            <a href="${langPrefix}/casino/games/egt-interactive-clover-islands"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Je1FwYPpVn3xv1X3BrKhSgon2ysfoxTYNV9a87q4.jpg" alt=""></a>
+                        </div>
+                        <div class="game-item">
+                            <a href="${langPrefix}/casino/games/EGTInteractive-flaming-hot-vip-bell-link"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/mzj4Ewrkn3SyKOguBIjAE4lqPieU7rwB5OpR0Fgd.jpg" alt=""></a>
+                        </div>
+                        <div class="game-item">
+                            <a href="${langPrefix}/casino/games/onlyplay-lady-lemon-fruits"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/lWtqQt0z9JzNn9fnLGptZqc9FRKwD5OHZ7XUXa61.jpg" alt=""></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="game-item">
-                <a href="${langPrefix}/casino/games/egt-interactive-clover-islands"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Je1FwYPpVn3xv1X3BrKhSgon2ysfoxTYNV9a87q4.jpg" alt=""></a>
-            </div>
-            <div class="game-item">
-                <a href="${langPrefix}/casino/games/EGTInteractive-flaming-hot-vip-bell-link"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/mzj4Ewrkn3SyKOguBIjAE4lqPieU7rwB5OpR0Fgd.jpg" alt=""></a>
-            </div>
-            <div class="game-item">
-                <a href="${langPrefix}/casino/games/onlyplay-lady-lemon-fruits"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/lWtqQt0z9JzNn9fnLGptZqc9FRKwD5OHZ7XUXa61.jpg" alt=""></a>
-            </div>
-        </div>
-    </div>
-</div>
 
             <div class="custom-section3">
                 <div class="game-header">
@@ -424,18 +430,18 @@ function getPopularGames(langPrefix) {
         `;
         
         if (mainSlider.nextSibling) {
-    mainSlider.parentNode.insertBefore(customSection, mainSlider.nextSibling);
-} else {
-    mainSlider.parentNode.appendChild(customSection);
-}
+            mainSlider.parentNode.insertBefore(customSection, mainSlider.nextSibling);
+        } else {
+            mainSlider.parentNode.appendChild(customSection);
+        }
 
-console.log('Betifa custom section eklendi');
+        console.log('Betifa custom section eklendi');
 
-setTimeout(() => {
-    if (typeof setupDynamicBannerLinks === 'function') {
-        setupDynamicBannerLinks();
-    }
-}, 100);
+        setTimeout(() => {
+            if (typeof setupDynamicBannerLinks === 'function') {
+                setupDynamicBannerLinks();
+            }
+        }, 100);
     }
 
     function removeCustomSection() {
@@ -483,201 +489,278 @@ setTimeout(() => {
         }
     }
 
-function updateJackpotImages() {
-    // Önce mevcut elementleri kontrol et
-    const tryImg = document.querySelector('img.jackpot__logo.try');
-    const usdImg = document.querySelector('img.jackpot__logo.usd');
-    const btcImg = document.querySelector('img.jackpot__logo.btc');
+    function updateJackpotImages() {
+        const tryImg = document.querySelector('img.jackpot__logo.try');
+        const usdImg = document.querySelector('img.jackpot__logo.usd');
+        const btcImg = document.querySelector('img.jackpot__logo.btc');
 
-    if (tryImg && usdImg && btcImg) {
-        // Hepsi mevcut, güncelle
-        tryImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/vl4k5b75jyTx5jREitJf1ACDTMdRJD0lx3dftYAo.png';
-        usdImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/FMhxFRKcmA9F6uj64aTBNMj01Fkthz3GAQ0qrlYK.png';
-        btcImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/d7vPkTXRsNo5fFefMdKHrAWW0BkgeZEDZ8TTasSm.png';
-        console.log('Jackpot görselleri güncellendi');
-    } else {
-        // Henüz yüklenmemiş, bekle ve tekrar dene
-        console.log('Jackpot elementleri henüz yüklenmemiş, bekleniyor...');
-        setTimeout(updateJackpotImages, 500); // 500ms sonra tekrar dene
-    }
-}
-
-function hideSectionLastOnHomePage() {
-    const sectionLast = document.querySelector('.section.section--last');
-    if (sectionLast) {
-        sectionLast.style.display = 'none';
-        sectionLast.classList.add('betifa-section-last-hidden');
-        console.log('section--last anasayfada gizlendi');
-    } else {
-        console.log('section--last henüz yüklenmemiş, bekleniyor...');
-        setTimeout(hideSectionLastOnHomePage, 500);
-    }
-}
-
-function showSectionLast() {
-    const sectionLast = document.querySelector('.section.section--last');
-    if (sectionLast) {
-        sectionLast.style.display = '';
-        sectionLast.classList.remove('betifa-section-last-hidden');
-        console.log('section--last gösterildi');
-    }
-}
-
-// Sidebar'a Sosyal Medya Linklerini Ekle
-function addSocialLinksToSidebar() {
-    // Zaten eklenmişse tekrar ekleme
-    if (document.querySelector('.betifa-social-links')) return;
-
-    // "Ek Bilgi" menüsünü bul
-    const additionalInfoMenu = Array.from(document.querySelectorAll('.sidebar__menu'))
-        .find(menu => {
-            const title = menu.querySelector('.sidebar__title');
-            return title && title.textContent.trim() === 'Ek bilgi';
-        });
-
-    if (!additionalInfoMenu) {
-        console.log('Ek bilgi menüsü bulunamadı, bekleniyor...');
-        setTimeout(addSocialLinksToSidebar, 500);
-        return;
+        if (tryImg && usdImg && btcImg) {
+            tryImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/vl4k5b75jyTx5jREitJf1ACDTMdRJD0lx3dftYAo.png';
+            usdImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/FMhxFRKcmA9F6uj64aTBNMj01Fkthz3GAQ0qrlYK.png';
+            btcImg.src = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/d7vPkTXRsNo5fFefMdKHrAWW0BkgeZEDZ8TTasSm.png';
+            console.log('Jackpot görselleri güncellendi');
+        } else {
+            console.log('Jackpot elementleri henüz yüklenmemiş, bekleniyor...');
+            setTimeout(updateJackpotImages, 500);
+        }
     }
 
-// Yeni "Linkler" bölümünü oluştur
-    const socialLinksSection = document.createElement('div');
-    socialLinksSection.className = 'sidebar__menu betifa-social-links';
-    socialLinksSection.innerHTML = `
-        <span class="sidebar__title">Linkler</span>
-        <ul class="sidebar__nav">
+    function hideSectionLastOnHomePage() {
+        const sectionLast = document.querySelector('.section.section--last');
+        if (sectionLast) {
+            sectionLast.style.display = 'none';
+            sectionLast.classList.add('betifa-section-last-hidden');
+            console.log('section--last anasayfada gizlendi');
+        } else {
+            console.log('section--last henüz yüklenmemiş, bekleniyor...');
+            setTimeout(hideSectionLastOnHomePage, 500);
+        }
+    }
+
+    function showSectionLast() {
+        const sectionLast = document.querySelector('.section.section--last');
+        if (sectionLast) {
+            sectionLast.style.display = '';
+            sectionLast.classList.remove('betifa-section-last-hidden');
+            console.log('section--last gösterildi');
+        }
+    }
+
+    // Sidebar'a Sosyal Medya Linklerini Ekle
+    function addSocialLinksToSidebar() {
+        if (document.querySelector('.betifa-social-links')) return;
+
+        const additionalInfoMenu = Array.from(document.querySelectorAll('.sidebar__menu'))
+            .find(menu => {
+                const title = menu.querySelector('.sidebar__title');
+                return title && title.textContent.trim() === 'Ek bilgi';
+            });
+
+        if (!additionalInfoMenu) {
+            console.log('Ek bilgi menüsü bulunamadı, bekleniyor...');
+            setTimeout(addSocialLinksToSidebar, 500);
+            return;
+        }
+
+        const socialLinksSection = document.createElement('div');
+        socialLinksSection.className = 'sidebar__menu betifa-social-links';
+        socialLinksSection.innerHTML = `
+            <span class="sidebar__title">Linkler</span>
+            <ul class="sidebar__nav">
+                <li>
+                    <a href="https://www.instagram.com/betifa.trsosyal" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-instagram" style="width: 20px; display: inline-block; text-align: center;"></i>
+                        Instagram
+                    </a>
+                </li>
+                <li>
+                    <a href="https://x.com/betifatr" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-x-twitter" style="width: 20px; display: inline-block; text-align: center;"></i>
+                        X (Twitter)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://t.me/betifaresmi" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-telegram" style="width: 20px; display: inline-block; text-align: center;"></i>
+                        Telegram Kanalı
+                    </a>
+                </li>
+                <li>
+                    <a href="https://t.me/betifadestek" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-telegram" style="width: 20px; display: inline-block; text-align: center;"></i>
+                        Telegram Support
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wa.me/38971634037" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" style="width: 20px; display: inline-block; text-align: center;"></i>
+                        Whatsapp Destek
+                    </a>
+                </li>
+            </ul>
+        `;
+
+        additionalInfoMenu.insertAdjacentElement('afterend', socialLinksSection);
+        console.log('Betifa sosyal medya linkleri sidebar\'a eklendi');
+    }
+
+    function removeSocialLinksFromSidebar() {
+        const element = document.querySelector('.betifa-social-links');
+        if (element && element.parentNode) {
+            element.parentNode.removeChild(element);
+            console.log('Betifa sosyal medya linkleri kaldırıldı');
+        }
+    }
+
+    // Footer Sosyal Medya Linklerini Güncelle
+    function updateFooterSocialLinks() {
+        const footerSocial = document.querySelector('ul.footer__social');
+        if (!footerSocial) {
+            console.log('Footer social bulunamadı, bekleniyor...');
+            setTimeout(updateFooterSocialLinks, 500);
+            return;
+        }
+
+        // Zaten güncellenmiş mi kontrol et
+        if (footerSocial.classList.contains('betifa-footer-social-updated')) return;
+
+        // Mevcut ikonların SVG sprite yolunu al
+        const existingSvg = footerSocial.querySelector('svg use');
+        const spriteUrl = existingSvg ? existingSvg.getAttribute('href')?.split('#')[0] : '/static/media/sprite.416275c004a2977bb04b6579ccb104a4.svg';
+
+        // Yeni sosyal medya linkleri
+        footerSocial.innerHTML = `
             <li>
-                <a href="https://www.instagram.com/betifa.trsosyal" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-instagram" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    Instagram
+                <a href="https://www.instagram.com/betifa.trsosyal" target="_blank">
+                    <svg class="svg-icon">
+                        <use href="${spriteUrl}#instagram" xlink:href="${spriteUrl}#instagram"></use>
+                    </svg>
                 </a>
             </li>
             <li>
-                <a href="https://x.com/betifatr" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-x-twitter" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    X (Twitter)
+                <a href="https://x.com/betifatr" target="_blank">
+                    <svg class="svg-icon">
+                        <use href="${spriteUrl}#twitter" xlink:href="${spriteUrl}#twitter"></use>
+                    </svg>
                 </a>
             </li>
             <li>
-                <a href="https://t.me/betifaresmi" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-telegram" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    Telegram Kanalı
+                <a href="https://t.me/betifaresmi" target="_blank">
+                    <svg viewBox="0 0 240 240" class="svg-icon" style="width: 24px; height: 24px;">
+                        <defs>
+                            <linearGradient id="tg-gradient-1" x1="120" y1="240" x2="120" gradientUnits="userSpaceOnUse">
+                                <stop offset="0" stop-color="#1d93d2"></stop>
+                                <stop offset="1" stop-color="#38b0e3"></stop>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="120" cy="120" r="120" fill="url(#tg-gradient-1)"></circle>
+                        <path d="M81.229,128.772l14.237,39.406s1.78,3.687,3.686,3.687,30.255-29.492,30.255-29.492l31.525-60.89L81.737,118.6Z" fill="#c8daea"></path>
+                        <path d="M100.106,138.878l-2.733,29.046s-1.144,8.9,7.754,0,17.415-15.763,17.415-15.763" fill="#a9c6d8"></path>
+                        <path d="M81.486,130.178,52.2,120.636s-3.5-1.42-2.373-4.64c.232-.664.7-1.229,2.1-2.2,6.489-4.523,120.106-45.36,120.106-45.36s3.208-1.081,5.1-.362a2.766,2.766,0,0,1,1.885,2.055,9.357,9.357,0,0,1,.254,2.585c-.009.752-.1,1.449-.169,2.542-.692,11.165-21.4,94.493-21.4,94.493s-1.239,4.876-5.678,5.043A8.13,8.13,0,0,1,146.1,172.5c-8.711-7.493-38.819-27.727-45.472-32.177a1.27,1.27,0,0,1-.546-.9c-.093-.469.417-1.05.417-1.05s52.426-46.6,53.821-51.492c.108-.379-.3-.566-.848-.4-3.482,1.281-63.844,39.4-70.506,43.607A3.21,3.21,0,0,1,81.486,130.178Z" fill="#fff"></path>
+                    </svg>
                 </a>
             </li>
             <li>
-                <a href="https://t.me/betifadestek" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-telegram" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    Telegram Support
+                <a href="https://t.me/betifadestek" target="_blank">
+                    <svg viewBox="0 0 240 240" class="svg-icon" style="width: 24px; height: 24px;">
+                        <defs>
+                            <linearGradient id="tg-gradient-2" x1="120" y1="240" x2="120" gradientUnits="userSpaceOnUse">
+                                <stop offset="0" stop-color="#1d93d2"></stop>
+                                <stop offset="1" stop-color="#38b0e3"></stop>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="120" cy="120" r="120" fill="url(#tg-gradient-2)"></circle>
+                        <path d="M81.229,128.772l14.237,39.406s1.78,3.687,3.686,3.687,30.255-29.492,30.255-29.492l31.525-60.89L81.737,118.6Z" fill="#c8daea"></path>
+                        <path d="M100.106,138.878l-2.733,29.046s-1.144,8.9,7.754,0,17.415-15.763,17.415-15.763" fill="#a9c6d8"></path>
+                        <path d="M81.486,130.178,52.2,120.636s-3.5-1.42-2.373-4.64c.232-.664.7-1.229,2.1-2.2,6.489-4.523,120.106-45.36,120.106-45.36s3.208-1.081,5.1-.362a2.766,2.766,0,0,1,1.885,2.055,9.357,9.357,0,0,1,.254,2.585c-.009.752-.1,1.449-.169,2.542-.692,11.165-21.4,94.493-21.4,94.493s-1.239,4.876-5.678,5.043A8.13,8.13,0,0,1,146.1,172.5c-8.711-7.493-38.819-27.727-45.472-32.177a1.27,1.27,0,0,1-.546-.9c-.093-.469.417-1.05.417-1.05s52.426-46.6,53.821-51.492c.108-.379-.3-.566-.848-.4-3.482,1.281-63.844,39.4-70.506,43.607A3.21,3.21,0,0,1,81.486,130.178Z" fill="#fff"></path>
+                    </svg>
                 </a>
             </li>
             <li>
-                <a href="https://wa.me/38971634037" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" style="width: 20px; display: inline-block; text-align: center;"></i>
-                    Whatsapp Destek
+                <a href="https://wa.me/38971634037" target="_blank">
+                    <svg viewBox="0 0 24 24" class="svg-icon" style="width: 24px; height: 24px;" fill="#25D366">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
                 </a>
             </li>
-        </ul>
-    `;
+        `;
 
-    // "Ek Bilgi" menüsünden sonra ekle
-    additionalInfoMenu.insertAdjacentElement('afterend', socialLinksSection);
-    console.log('Betifa sosyal medya linkleri sidebar\'a eklendi');
-}
-
-function removeSocialLinksFromSidebar() {
-    const element = document.querySelector('.betifa-social-links');
-    if (element && element.parentNode) {
-        element.parentNode.removeChild(element);
-        console.log('Betifa sosyal medya linkleri kaldırıldı');
+        // Güncellendiğini işaretle
+        footerSocial.classList.add('betifa-footer-social-updated');
+        console.log('Footer sosyal medya linkleri güncellendi');
     }
-}
+
+    function restoreFooterSocialLinks() {
+        const footerSocial = document.querySelector('ul.footer__social.betifa-footer-social-updated');
+        if (footerSocial) {
+            footerSocial.classList.remove('betifa-footer-social-updated');
+            console.log('Footer sosyal medya linkleri restore edilebilir');
+        }
+    }
 
 
-function setupDynamicBannerLinks() {
-    
-    function updateBannerLinks() {
-        const depositBanner = document.querySelector('.crash-game a');
-        const withdrawBanner = document.querySelector('.lucky-wheel a');
-        const chatifaBanner = document.querySelector('.coinflip-game a');
+    function setupDynamicBannerLinks() {
         
-        const isLoggedIn = isUserLoggedIn();
-        
-        // Yatırım Butonu
-        if (depositBanner) {
-            if (isLoggedIn) {
-                depositBanner.href = getCurrentLanguagePrefix() + '/payments/deposit';
-                depositBanner.onclick = null;
-            } else {
-                depositBanner.href = '#';
-                depositBanner.onclick = function(e) {
-                    e.preventDefault();
-                    window.history.pushState({}, '', '?modal=login');
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-                };
+        function updateBannerLinks() {
+            const depositBanner = document.querySelector('.crash-game a');
+            const withdrawBanner = document.querySelector('.lucky-wheel a');
+            const chatifaBanner = document.querySelector('.coinflip-game a');
+            
+            const isLoggedIn = isUserLoggedIn();
+            
+            // Yatırım Butonu
+            if (depositBanner) {
+                if (isLoggedIn) {
+                    depositBanner.href = getCurrentLanguagePrefix() + '/payments/deposit';
+                    depositBanner.onclick = null;
+                } else {
+                    depositBanner.href = '#';
+                    depositBanner.onclick = function(e) {
+                        e.preventDefault();
+                        window.history.pushState({}, '', '?modal=login');
+                        window.dispatchEvent(new PopStateEvent('popstate'));
+                    };
+                }
             }
+            
+            // Çekim Butonu
+            if (withdrawBanner) {
+                if (isLoggedIn) {
+                    withdrawBanner.href = getCurrentLanguagePrefix() + '/payments/withdrawal';
+                    withdrawBanner.onclick = null;
+                } else {
+                    withdrawBanner.href = '#';
+                    withdrawBanner.onclick = function(e) {
+                        e.preventDefault();
+                        window.history.pushState({}, '', '?modal=login');
+                        window.dispatchEvent(new PopStateEvent('popstate'));
+                    };
+                }
+            }
+            
+            // Chatifa Butonu (Günün Fırsatları)
+            if (chatifaBanner) {
+                chatifaBanner.href = '#';
+                if (isLoggedIn) {
+                    chatifaBanner.onclick = function(e) {
+                        e.preventDefault();
+                        const chatSidebarBtn = document.getElementById('chatSidebar');
+                        if (chatSidebarBtn) {
+                            chatSidebarBtn.click();
+                            console.log('Chatifa sidebar açıldı');
+                        } else {
+                            console.log('chatSidebar butonu bulunamadı');
+                        }
+                    };
+                } else {
+                    chatifaBanner.onclick = function(e) {
+                        e.preventDefault();
+                        window.history.pushState({}, '', '?modal=login');
+                        window.dispatchEvent(new PopStateEvent('popstate'));
+                    };
+                }
+            }
+            
+            console.log('Banner linkleri güncellendi. Login:', isLoggedIn);
         }
         
-        // Çekim Butonu
-        if (withdrawBanner) {
-            if (isLoggedIn) {
-                withdrawBanner.href = getCurrentLanguagePrefix() + '/payments/withdrawal';
-                withdrawBanner.onclick = null;
-            } else {
-                withdrawBanner.href = '#';
-                withdrawBanner.onclick = function(e) {
-                    e.preventDefault();
-                    window.history.pushState({}, '', '?modal=login');
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-                };
-            }
-        }
-        
-        // Chatifa Butonu (Günün Fırsatları)
-        if (chatifaBanner) {
-            chatifaBanner.href = '#';
-            if (isLoggedIn) {
-                // Giriş yapılmışsa - Chatifa sidebar'ını aç
-                chatifaBanner.onclick = function(e) {
-                    e.preventDefault();
-                    const chatSidebarBtn = document.getElementById('chatSidebar');
-                    if (chatSidebarBtn) {
-                        chatSidebarBtn.click();
-                        console.log('Chatifa sidebar açıldı');
-                    } else {
-                        console.log('chatSidebar butonu bulunamadı');
-                    }
-                };
-            } else {
-                // Giriş yapılmamışsa - Login modal aç
-                chatifaBanner.onclick = function(e) {
-                    e.preventDefault();
-                    window.history.pushState({}, '', '?modal=login');
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-                };
-            }
-        }
-        
-        console.log('Banner linkleri güncellendi. Login:', isLoggedIn);
-    }
-    
 
-    updateBannerLinks();
-    
+        updateBannerLinks();
+        
 
-    const header = document.querySelector('header') || document.querySelector('.header');
-    
-    if (header) {
-        const observer = new MutationObserver(updateBannerLinks);
+        const header = document.querySelector('header') || document.querySelector('.header');
         
-        observer.observe(header, {
-            childList: true,
-            subtree: true
-        });
-        
-        console.log('Header izleme başlatıldı');
+        if (header) {
+            const observer = new MutationObserver(updateBannerLinks);
+            
+            observer.observe(header, {
+                childList: true,
+                subtree: true
+            });
+            
+            console.log('Header izleme başlatıldı');
+        }
     }
-}
     
 
 
