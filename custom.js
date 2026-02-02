@@ -463,7 +463,7 @@
         awardsSection.innerHTML = `
             <div class="col-12">
                 <div class="footer-app-banner" style="margin-bottom: 15px;">
-                    <a href="https://www.mediafire.com/file/aa871wnckhq5drc/BET%C4%B0FAPP.apk/file" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.mediafire.com/file/md64h0zsli2l03p/BetifaApp.apk/file" target="_blank" rel="noopener noreferrer">
                         <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/mobil-app.gif" alt="Betifa Mobil App" style="width: 100%; height: auto; display: block;">
                     </a>
                 </div>
