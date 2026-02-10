@@ -1391,5 +1391,9 @@ table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-
     margin-top:15px;;
 }
 
-
+@media (min-width: 768px) {
+    .header__signin {
+        margin-left: 0px !important;
+    }
+}
 
