@@ -1405,7 +1405,7 @@ table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-
     justify-content: center;
     width: 100%;
     max-width: 1440px;
-    margin: 0 auto 16px auto;
+    margin: 16px auto 2px auto;
     padding: 12px 24px;
     background: #24182f;
     border-radius: 12px;
