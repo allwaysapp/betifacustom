@@ -1405,7 +1405,7 @@ table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-
     justify-content: center;
     width: 100%;
     max-width: 1440px;
-    margin: 0 auto 0px auto;
+    margin: 0 auto 16px auto;
     padding: 12px 24px;
     background: #24182f;
     border-radius: 12px;
@@ -1415,7 +1415,6 @@ table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-
     transition: all 0.3s ease;
     border: 1px solid rgba(243, 31, 81, 0.2);
     box-sizing: border-box;
-    padding: 2rem;
 }
 
 .betifa-mobile-app-bar:hover {
@@ -1522,7 +1521,7 @@ table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-
 @media (max-width: 768px) {
     .betifa-mobile-app-bar {
         padding: 10px 16px;
-        margin: 0 10px 12px 10px;
+        margin: 0 10px 0px 10px;
         width: calc(100% - 20px);
         border-radius: 10px;
     }
