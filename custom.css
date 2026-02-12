@@ -1415,6 +1415,7 @@ table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-
     transition: all 0.3s ease;
     border: 1px solid rgba(243, 31, 81, 0.2);
     box-sizing: border-box;
+    padding: 2rem;
 }
 
 .betifa-mobile-app-bar:hover {
