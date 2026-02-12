@@ -1397,3 +1397,273 @@ table.xtable--wheel tbody.wheel-prizes tr td:nth-child(2) span.chat__user.wheel-
     }
 }
 
+
+/* ========== MOBILE APP BAR STYLES ========== */
+.betifa-mobile-app-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 16px;
+    background: #24182f;
+    border-radius: 12px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(243, 31, 81, 0.2);
+}
+
+.betifa-mobile-app-bar:hover {
+    transform: translateY(-2px);
+    border-color: rgba(243, 31, 81, 0.5);
+    box-shadow: 0 8px 25px rgba(243, 31, 81, 0.2);
+}
+
+/* Köşe Glow Efektleri */
+.app-bar-glow {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(243, 31, 81, 0.4) 0%, transparent 70%);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.app-bar-glow-left {
+    top: -75px;
+    left: -75px;
+}
+
+.app-bar-glow-right {
+    bottom: -75px;
+    right: -75px;
+}
+
+.betifa-mobile-app-bar:hover .app-bar-glow {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+/* İçerik Container */
+.app-bar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* İkon */
+.app-bar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, rgba(243, 31, 81, 0.2), rgba(243, 31, 81, 0.1));
+    border-radius: 12px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.app-bar-icon svg {
+    color: #f31f51;
+    transition: transform 0.3s ease;
+}
+
+.betifa-mobile-app-bar:hover .app-bar-icon {
+    background: linear-gradient(135deg, rgba(243, 31, 81, 0.3), rgba(243, 31, 81, 0.15));
+}
+
+.betifa-mobile-app-bar:hover .app-bar-icon svg {
+    transform: scale(1.1);
+}
+
+/* Metin Alanı */
+.app-bar-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.app-bar-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    letter-spacing: 0.3px;
+}
+
+.app-bar-desc {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.3;
+}
+
+/* İndir Butonu */
+.app-bar-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #f31f51 0%, #e01b4a 50%, #c9173f 100%);
+    border-radius: 8px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(243, 31, 81, 0.3);
+}
+
+.app-bar-btn-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.app-bar-button svg {
+    color: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.betifa-mobile-app-bar:hover .app-bar-button {
+    background: linear-gradient(135deg, #ff4d7a 0%, #f31f51 50%, #e01b4a 100%);
+    box-shadow: 0 6px 20px rgba(243, 31, 81, 0.4);
+    transform: scale(1.02);
+}
+
+.betifa-mobile-app-bar:hover .app-bar-button svg {
+    transform: translateY(2px);
+    animation: downloadBounce 0.6s ease infinite;
+}
+
+@keyframes downloadBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+}
+
+/* Shine Effect */
+.betifa-mobile-app-bar::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.8s ease;
+    z-index: 1;
+}
+
+.betifa-mobile-app-bar:hover::after {
+    left: 150%;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .betifa-mobile-app-bar {
+        padding: 10px 15px;
+        border-radius: 10px;
+    }
+    
+    .app-bar-content {
+        gap: 12px;
+    }
+    
+    .app-bar-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+    }
+    
+    .app-bar-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .app-bar-title {
+        font-size: 14px;
+    }
+    
+    .app-bar-desc {
+        font-size: 11px;
+    }
+    
+    .app-bar-button {
+        padding: 8px 14px;
+    }
+    
+    .app-bar-btn-text {
+        font-size: 12px;
+    }
+    
+    .app-bar-button svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .app-bar-glow {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .app-bar-glow-left {
+        top: -50px;
+        left: -50px;
+    }
+    
+    .app-bar-glow-right {
+        bottom: -50px;
+        right: -50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .betifa-mobile-app-bar {
+        padding: 10px 12px;
+    }
+    
+    .app-bar-content {
+        gap: 10px;
+    }
+    
+    .app-bar-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .app-bar-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .app-bar-title {
+        font-size: 13px;
+    }
+    
+    .app-bar-desc {
+        font-size: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .app-bar-button {
+        padding: 8px 12px;
+    }
+    
+    .app-bar-btn-text {
+        font-size: 11px;
+    }
+}
