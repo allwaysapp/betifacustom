@@ -3,6 +3,12 @@
     let isNavigating = false;
 
     const COMPONENTS = {
+        mobileAppBar: {
+            condition: () => isHomePage(),
+            create: createMobileAppBar,
+            remove: removeMobileAppBar,
+            selector: '.betifa-mobile-app-bar'
+        },
         customSection: {
             condition: () => isHomePage(),
             create: createCustomSection,
@@ -67,6 +73,57 @@
     function isCasinoGamePage() {
         const url = window.location.pathname;
         return url.includes('/casino/games/');
+    }
+
+    // ========== MOBİL UYGULAMA TANITIM BARI ==========
+    function createMobileAppBar() {
+        if (isNavigating || !isHomePage()) return;
+
+        const mainSlider = document.getElementById('main-slider');
+        if (!mainSlider || document.querySelector('.betifa-mobile-app-bar')) return;
+
+        const isEnglish = window.location.href.includes('/en');
+        
+        const appBar = document.createElement('a');
+        appBar.className = 'betifa-mobile-app-bar';
+        appBar.href = 'https://www.mediafire.com/file/md64h0zsli2l03p/BetifaApp.apk/file';
+        appBar.target = '_blank';
+        appBar.rel = 'noopener noreferrer';
+        
+        appBar.innerHTML = `
+            <div class="app-bar-content">
+                <div class="app-bar-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                        <path d="M17.523 2.047a.5.5 0 0 0-.382-.047l-9 2.5a.5.5 0 0 0-.141.053V4.5c0 .067.013.13.037.187L3.053 6.053A.5.5 0 0 0 3 6.5v14a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-6h4v6a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-14a.5.5 0 0 0-.053-.447l-3.424-4.006zM16 4.5v2.25l-3.5.972V5.5L16 4.5zM8 7.75l3.5-.972v2.472L8 10.222V7.75zm-4 0L7 6.778v3.444l-3 .833V7.75zM4 20v-8.028l3-.833V14.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-3.361l3-.833V20h-5v-6a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0-.5.5v6H4zm16-8.028V20h-5v-5h5v-.028-.001z"/>
+                        <path d="M7 17h2v3H7zM15 17h2v3h-2z"/>
+                    </svg>
+                </div>
+                <div class="app-bar-text">
+                    <span class="app-bar-title">${isEnglish ? 'Betifa Mobile App' : 'Betifa Mobil Uygulama'}</span>
+                    <span class="app-bar-desc">${isEnglish ? 'Download our mobile app for fast and secure betting' : 'Hızlı ve Güvenli Bahis için mobil uygulamamızı indirin'}</span>
+                </div>
+                <div class="app-bar-button">
+                    <span class="app-bar-btn-text">${isEnglish ? 'Download' : 'İndir'}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M12 16l-6-6h4V4h4v6h4l-6 6z"/>
+                        <path d="M20 18H4v2h16v-2z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="app-bar-glow app-bar-glow-left"></div>
+            <div class="app-bar-glow app-bar-glow-right"></div>
+        `;
+
+        mainSlider.parentNode.insertBefore(appBar, mainSlider);
+        console.log('Betifa mobile app bar eklendi');
+    }
+
+    function removeMobileAppBar() {
+        const element = document.querySelector('.betifa-mobile-app-bar');
+        if (element && element.parentNode) {
+            element.parentNode.removeChild(element);
+            console.log('Betifa mobile app bar kaldırıldı');
+        }
     }
 
     function getPopularGames(langPrefix) {
