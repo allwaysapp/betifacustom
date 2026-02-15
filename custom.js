@@ -86,7 +86,7 @@
         
         const appBar = document.createElement('a');
         appBar.className = 'betifa-mobile-app-bar';
-        appBar.href = 'https://www.mediafire.com/file/md64h0zsli2l03p/BetifaApp.apk/file';
+        appBar.href = 'https://betifa.live/betifa_ios_live.html';
         appBar.target = '_blank';
         appBar.rel = 'noopener noreferrer';
         
@@ -520,7 +520,7 @@
         awardsSection.innerHTML = `
             <div class="col-12">
                 <div class="footer-app-banner" style="margin-bottom: 15px;">
-                    <a href="https://www.mediafire.com/file/md64h0zsli2l03p/BetifaApp.apk/file" target="_blank" rel="noopener noreferrer">
+                    <a href="https://betifa.live/betifa_ios_live.html" target="_blank" rel="noopener noreferrer">
                         <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/mobil-app.gif" alt="Betifa Mobil App" style="width: 100%; height: auto; display: block;">
                     </a>
                 </div>
