@@ -457,16 +457,16 @@
                     </div>
                     <div class="game-showcase-content">
                         <div class="game-item">
-                            <a href="${langPrefix}/casino/games/amatic-book-of-aztec"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/NcfKK4W5Q883lMpcQ0buVTOch5IAynibVGkKG0RA.jpg" alt=""></a>
+                            <a href="${langPrefix}/casino/games/pragmaticplay-aztec-blaze"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/8bHIPq496x6wmpIg9QSlXxqDGnZAkmO73jF8Dkpa.avif" alt=""></a>
                         </div>
                         <div class="game-item">
-                            <a href="${langPrefix}/casino/games/egt-interactive-clover-islands"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Je1FwYPpVn3xv1X3BrKhSgon2ysfoxTYNV9a87q4.jpg" alt=""></a>
+                            <a href="${langPrefix}/casino/games/EGTInteractive-40-burning-hot-vip-bell-link"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/LMRalEYBlNtg9SRhTV5edgA1e6nP97Iu2wlfQ4jY.jpg" alt=""></a>
                         </div>
                         <div class="game-item">
-                            <a href="${langPrefix}/casino/games/EGTInteractive-flaming-hot-vip-bell-link"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/mzj4Ewrkn3SyKOguBIjAE4lqPieU7rwB5OpR0Fgd.jpg" alt=""></a>
+                            <a href="${langPrefix}/casino/games/pragmaticplay-emerald-king-wheel-of-wealth"><img src="https://d3psi4rj7mv4u4.cloudfront.net/games/pragmaticplay/emerald_king_wheel_of_wealth.jpg" alt=""></a>
                         </div>
                         <div class="game-item">
-                            <a href="${langPrefix}/casino/games/onlyplay-lady-lemon-fruits"><img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/lWtqQt0z9JzNn9fnLGptZqc9FRKwD5OHZ7XUXa61.jpg" alt=""></a>
+                            <a href="${langPrefix}/casino/games/pragmaticplay-bow-of-artemis"><img src="https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/DUbFurGJ9nhhTIxUnxKX8JuqH36i6fuwIuDCTAzC.avif" alt=""></a>
                         </div>
                     </div>
                 </div>
