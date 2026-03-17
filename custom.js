@@ -236,84 +236,54 @@
     function getLiveCasinoGames(langPrefix) {
         const games = [
             {
-                name: "Blackjack 94",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/amn1QOpFHNXZa6vcc6NksiE5c92R67SIkxYU1dGj.png",
-                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-94`
+                name: "Mega Ball",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/mega_ball.jpg",
+                url: `${langPrefix}/casino/games/evolution-mega-ball`
             },
             {
-                name: "Blackjack 7",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/Iv9O3jeGFBWNOuadqoM8kpNtbY8YzjC9D5S2aN7f.png",
-                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-7`
+                name: "First Person Dream Catcher",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/rng_dream_catcher.jpg",
+                url: `${langPrefix}/casino/games/evolution-first-person-dream-catcher`
             },
             {
-                name: "Blackjack 6",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/JrlyLfowLdHVfxszhMcKKYiWTTO8WlIXm7Fut8Or.png",
-                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-6`
+                name: "Funky Time",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/funky_time.jpg",
+                url: `${langPrefix}/casino/games/evolution-funky-time`
             },
             {
-                name: "Blackjack 3",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/FG5Irtzoy5DvBAUgBhiZURiCUWU6bUzfn3GIMJrX.png",
-                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-3`
+                name: "Crazy Time A",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/PKEd4FQpdnMHa9K2NDsN8CvMngUoDCekIdNFtitm.jpg",
+                url: `${langPrefix}/casino/games/evolution-crazy-time-a`
             },
             {
-                name: "Blackjack 33",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/YwYAZeD6mjC1yv6vawUjvapTcgGlGHT5pF4P2FsL.png",
-                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-33`
+                name: "Red Door Roulette",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/red_door_roulette.jpg",
+                url: `${langPrefix}/casino/games/evolution-red-door-roulette`
             },
             {
-                name: "Blackjack D",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/iCryXakTB2YWDBjt9bbF0qha6p2rEjmBxrxiFLvS.png",
-                url: `${langPrefix}/casino/games/sagaming-blackjack-d`
+                name: "Fireball Roulette",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/fireball_roulette.jpg",
+                url: `${langPrefix}/casino/games/evolution-fireball-roulette`
             },
             {
-                name: "Multihand Blackjack",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/game-images/multihand_blackjack.jpg",
-                url: `${langPrefix}/casino/games/pragmaticplay-multihand-blackjack`
+                name: "Infinite Bet Stacker Blackjack",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/infinite_bet_stacker_blackjack.jpg",
+                url: `${langPrefix}/casino/games/evolution-infinite-bet-stacker-blackjack`
             },
             {
-                name: "Blackjack",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/game-images/blackjack.jpg",
-                url: `${langPrefix}/casino/games/evolution-blackjack`
+                name: "First Person American Roulette",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/first_person_american_roulette.jpg",
+                url: `${langPrefix}/casino/games/evolution-first-person-american-roulette`
             },
             {
-                name: "American Blackjack",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/UD7LIvF7JFrXcXSFT4lZnLGPwivYVLRe2zZ8007r.avif",
-                url: `${langPrefix}/casino/games/betsoft-american-blackjack`
+                name: "Free Bet VIP Blackjack A",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/classic_free_bet_blackjack.jpg",
+                url: `${langPrefix}/casino/games/evolution-free-bet-vip-blackjack-a`
             },
             {
-                name: "Unlimited Blackjack",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/Afo1oDXTPlc0O9fUf2ffP8fp7x9U2j1PNGPcSfmp.png",
-                url: `${langPrefix}/casino/games/ezugi-unlimited-blackjack`
-            },
-            {
-                name: "Mega Roulette",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/hOdx7dHhYXCTSAaXBZvKV9ooqhF5q8bcfI7NowQn.png",
-                url: `${langPrefix}/casino/games/pragmaticlive-mega-roulette`
-            },
-            {
-                name: "Auto Mega Roulette",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/ruMnftBIG1GhmdheZgXIh3o4LvxOrTpCEnawWC75.png",
-                url: `${langPrefix}/casino/games/pragmaticlive-auto-mega-roulette`
-            },
-            {
-                name: "Speed Roulette 1",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/s7Z7cPEWMVR73epTGlvLwAP0Ta6imtgC3eCgN3z0.png",
-                url: `${langPrefix}/casino/games/pragmaticlive-speed-roulette-1`
-            },
-            {
-                name: "VIP Auto Roulette",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/mbiPBwKFqAVibhEWvuLT5nTiiccpiO58Y6p4WxnI.png",
-                url: `${langPrefix}/casino/games/pragmaticlive-vip-auto-roulette`
-            },
-            {
-                name: "Roulette 1",
-                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/TngoMrnAhG5Zb0y8rAaVJexrfVgixB7VPDpN9L20.png",
-                url: `${langPrefix}/casino/games/pragmaticlive-roulette-1`
-            },
-            {
-                name: "Virtual Roulette",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/mFBwCglhuWfTMUBsM3tuKrYThEaWe6JwXztfw2V0.png",
-                url: `${langPrefix}/casino/games/egt-interactive-virtual-roulette`
+                name: "VIP Bet Stacker Blackjack 8",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/classic_bet_stacker_blackjack.jpg",
+                url: `${langPrefix}/casino/games/evolution-vip-bet-stacker-blackjack-8`
             },
             {
                 name: "Virtual Monaco Roulette",
@@ -321,9 +291,29 @@
                 url: `${langPrefix}/casino/games/egt-interactive-virtual-monaco-roulette`
             },
             {
-                name: "Live Speed Roulette",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/Jx93pMUM4p20l1aNnO4USoXPzmXxvx52lFxBezKh.png",
-                url: `${langPrefix}/casino/games/egt-interactive-live-speed-roulette`
+                name: "American Roulette 3D",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/EsIaNiEFwh1wIkkjpwCrFyaRH9F9yC4AEokumiBv.png",
+                url: `${langPrefix}/casino/games/evoplay-american-roulette-3d`
+            },
+            {
+                name: "Roulette Macao",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/PRoR0ucOwea5CsrMYJHOihNdY0K77NiaZGdoqz1Y.png",
+                url: `${langPrefix}/casino/games/pragmaticlive-roulette-macao`
+            },
+            {
+                name: "Blackjack 120",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/pragmaticplaylive/blackjack_120.jpg",
+                url: `${langPrefix}/casino/games/pragmaticlive-blackjack-120`
+            },
+            {
+                name: "Mega Roulette 3000",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/pragmaticplaylive/mega_roulette_3000.jpg",
+                url: `${langPrefix}/casino/games/pragmaticlive-mega-roulette-3000`
+            },
+            {
+                name: "Turkish Roulette",
+                image: "https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/JHpsg9Yz2D0H9w2vBReI76rVxpsMluQJHllZrSkg.png",
+                url: `${langPrefix}/casino/games/livegames-turkish-roulette`
             },
             {
                 name: "Vegas Roulette 500x",
@@ -331,9 +321,19 @@
                 url: `${langPrefix}/casino/games/egt-interactive-vegas-roulette-500x`
             },
             {
-                name: "Live European Roulette",
-                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/fCJL6ZWLyvoDzj3sb6JqMDxBY6lujNDs9NrYVWKx.png",
-                url: `${langPrefix}/casino/games/egt-interactive-live-european-roulette`
+                name: "Crazy Balls",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/crazy_balls.jpg",
+                url: `${langPrefix}/casino/games/evolution-crazy-balls`
+            },
+            {
+                name: "Monopoly Big Baller",
+                image: "https://d3psi4rj7mv4u4.cloudfront.net/games/evosw/monopoly_big_baller.jpg",
+                url: `${langPrefix}/casino/games/evolution-monopoly-big-baller`
+            },
+            {
+                name: "Live Altın Rulet",
+                image: "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/LZ804HDmPYKUpRSTj9OCosZx0HXonWyeRO04Ucrt.png",
+                url: `${langPrefix}/casino/games/egt-interactive-live-altin-rulet`
             }
         ];
 
