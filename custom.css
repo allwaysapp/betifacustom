@@ -1610,3 +1610,9 @@ a[href="https://safeonlinecasino.com/"] {
     width: 100%;
     height: 100% !important;
 }
+
+.lazy-load-image-background.blur.lazy-load-image-loaded>img {
+    opacity: 1;
+    transition: opacity .3s;
+    object-fit: cover !important;
+}
