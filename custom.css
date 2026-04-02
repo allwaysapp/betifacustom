@@ -1615,4 +1615,5 @@ a[href="https://safeonlinecasino.com/"] {
     opacity: 1;
     transition: opacity .3s;
     object-fit: cover !important;
+    aspect-ratio: 3/4 !important;
 }
