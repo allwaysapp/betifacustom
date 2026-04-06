@@ -605,7 +605,7 @@
             <span class="sidebar__title">Linkler</span>
             <ul class="sidebar__nav">
                 <li>
-                    <a href="https://www.instagram.com/betifa.trsosyal" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.instagram.com/betifaeuropa" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-instagram" style="width: 20px; display: inline-block; text-align: center;"></i>
                         Instagram
                     </a>
@@ -623,7 +623,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="https://t.me/betifadestek" target="_blank" rel="noopener noreferrer">
+                    <a href="https://t.me/betifa_resmi_bot" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-telegram" style="width: 20px; display: inline-block; text-align: center;"></i>
                         Telegram Support
                     </a>
