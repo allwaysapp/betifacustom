@@ -668,7 +668,7 @@
         // Yeni sosyal medya linkleri
         footerSocial.innerHTML = `
             <li>
-                <a href="https://www.instagram.com/betifa.trsosyal" target="_blank">
+                <a href=" https://www.instagram.com/betifaeuropa" target="_blank">
                     <svg class="svg-icon">
                         <use href="${spriteUrl}#instagram" xlink:href="${spriteUrl}#instagram"></use>
                     </svg>
@@ -698,7 +698,7 @@
                 </a>
             </li>
             <li>
-                <a href="https://t.me/betifadestek" target="_blank">
+                <a href="https://t.me/betifa_resmi_bot" target="_blank">
                     <svg viewBox="0 0 240 240" class="svg-icon" style="width: 24px; height: 24px;">
                         <defs>
                             <linearGradient id="tg-gradient-2" x1="120" y1="240" x2="120" gradientUnits="userSpaceOnUse">
