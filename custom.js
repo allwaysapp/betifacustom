@@ -405,7 +405,7 @@
                         <div class="social-buttons">
                             <a class="social-btn" href="https://t.me/betifaresmi"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/telegram-icon.png" alt="Telegram"></a>
                             <a class="social-btn" href="https://www.instagram.com/betifaeuropa"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/instagram-icon.png" alt="Instagram"></a>
-                            <a class="social-btn" href="https://x.com/betifatr"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/twitter-icon.png" alt="X"></a>
+                            <a class="social-btn" href="https://x.com/betifagloball"><img class="social-icon-2" src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/twitter-icon.png" alt="X"></a>
                             <a class="social-btn" href="https://wa.me/38970642325" target="_blank" rel="noopener"><img class="social-icon-2" src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/ZfI3560mQtcDrZG9U8fpug53aJxCW9JFnAUw7iWA.png" alt="WhatsApp"></a>
                         </div>
                     </div>
@@ -611,7 +611,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="https://x.com/betifatr" target="_blank" rel="noopener noreferrer">
+                    <a href="https://x.com/betifagloball" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-x-twitter" style="width: 20px; display: inline-block; text-align: center;"></i>
                         X (Twitter)
                     </a>
@@ -675,7 +675,7 @@
                 </a>
             </li>
             <li>
-                <a href="https://x.com/betifatr" target="_blank">
+                <a href="https://x.com/betifagloball" target="_blank">
                     <svg class="svg-icon">
                         <use href="${spriteUrl}#twitter" xlink:href="${spriteUrl}#twitter"></use>
                     </svg>
