@@ -1621,3 +1621,8 @@ a[href="https://safeonlinecasino.com/"] {
 li:has(a[href="/tr/safe-online-casino"]) {
   display: none;
 }
+
+.modal__sign-img .lazy-load-image-background.blur.lazy-load-image-loaded > img {
+  object-fit: contain !important;
+  aspect-ratio: unset !important;
+}
