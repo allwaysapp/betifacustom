@@ -199,3 +199,145 @@
     init();
   }
 })();
+
+
+
+// ==========================================
+// FEATURE: Mobile App Bar
+// Anasayfada welcome-content'in altına mobil app indirme banner'ı ekler
+// Hedef: .welcome-content elementinin altı
+// Kapsam: Sadece anasayfa (/, /tr, /en)
+// ==========================================
+(function() {
+  const FEATURE_ID = 'betifa-mobile-app-bar';
+  const APP_DOWNLOAD_URL = 'https://betifa.live/betifa_ios_live.html';
+
+  function isHomePage() {
+    const path = window.location.pathname;
+    return path === '/' ||
+           path === '/tr' || path === '/tr/' ||
+           path === '/en' || path === '/en/';
+  }
+
+  function isEnglish() {
+    return window.location.pathname.startsWith('/en');
+  }
+
+  function getTexts() {
+    if (isEnglish()) {
+      return {
+        title: 'Betifa Mobile App',
+        desc: 'Download our mobile app for fast and secure betting',
+        button: 'Download'
+      };
+    }
+    return {
+      title: 'Betifa Mobil Uygulama',
+      desc: 'Hızlı ve Güvenli Bahis için mobil uygulamamızı indirin',
+      button: 'İndir'
+    };
+  }
+
+  function isAlreadyInserted() {
+    return document.getElementById(FEATURE_ID) !== null;
+  }
+
+  function removeElement() {
+    const el = document.getElementById(FEATURE_ID);
+    if (el && el.parentNode) {
+      el.parentNode.removeChild(el);
+    }
+  }
+
+  function createElement() {
+    const texts = getTexts();
+    const a = document.createElement('a');
+    a.id = FEATURE_ID;
+    a.className = 'betifa-mobile-app-bar';
+    a.href = APP_DOWNLOAD_URL;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.innerHTML = `
+      <div class="betifa-app-bar-content">
+        <div class="betifa-app-bar-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M17.523 2.047a.5.5 0 0 0-.382-.047l-9 2.5a.5.5 0 0 0-.141.053V4.5c0 .067.013.13.037.187L3.053 6.053A.5.5 0 0 0 3 6.5v14a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-6h4v6a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-14a.5.5 0 0 0-.053-.447l-3.424-4.006zM16 4.5v2.25l-3.5.972V5.5L16 4.5zM8 7.75l3.5-.972v2.472L8 10.222V7.75zm-4 0L7 6.778v3.444l-3 .833V7.75zM4 20v-8.028l3-.833V14.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-3.361l3-.833V20h-5v-6a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0-.5.5v6H4zm16-8.028V20h-5v-5h5v-.028-.001z"/>
+            <path d="M7 17h2v3H7zM15 17h2v3h-2z"/>
+          </svg>
+        </div>
+        <div class="betifa-app-bar-text">
+          <span class="betifa-app-bar-title">${texts.title}</span>
+          <span class="betifa-app-bar-desc">${texts.desc}</span>
+        </div>
+        <div class="betifa-app-bar-button">
+          <span class="betifa-app-bar-btn-text">${texts.button}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M12 16l-6-6h4V4h4v6h4l-6 6z"/>
+            <path d="M20 18H4v2h16v-2z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="betifa-app-bar-glow betifa-app-bar-glow-left"></div>
+      <div class="betifa-app-bar-glow betifa-app-bar-glow-right"></div>
+    `;
+    return a;
+  }
+
+  function insertElement() {
+    if (!isHomePage()) {
+      removeElement();
+      return;
+    }
+
+    if (isAlreadyInserted()) return;
+
+    const welcomeContent = document.querySelector('.welcome-content');
+    if (!welcomeContent) return;
+
+    const el = createElement();
+    welcomeContent.parentNode.insertBefore(el, welcomeContent.nextSibling);
+
+    console.log('✅ Betifa mobile app bar eklendi');
+  }
+
+  function init() {
+    setTimeout(insertElement, 300);
+
+    const observer = new MutationObserver(() => {
+      if (isHomePage()) {
+        if (!isAlreadyInserted() && document.querySelector('.welcome-content')) {
+          insertElement();
+        }
+      } else {
+        if (isAlreadyInserted()) {
+          removeElement();
+        }
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    let lastUrl = location.href;
+    new MutationObserver(() => {
+      if (location.href !== lastUrl) {
+        lastUrl = location.href;
+        setTimeout(() => {
+          if (isHomePage()) {
+            insertElement();
+          } else {
+            removeElement();
+          }
+        }, 300);
+      }
+    }).observe(document, { subtree: true, childList: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
