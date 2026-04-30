@@ -363,7 +363,7 @@
 }
 
 .betifa-banner-title p {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-size: clamp(1rem, 2.5vw, 1rem);
   color: var(--accent);
   margin: 0;
 }
