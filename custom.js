@@ -205,7 +205,7 @@
 // ==========================================
 // FEATURE: Mobile App Bar
 // Anasayfada welcome-content'in altına mobil app indirme banner'ı ekler
-// Hedef: .welcome-content elementinin altı
+// Hedef: .welcome-content elementinin altı (container > row > col-12 grid uyumlu)
 // Kapsam: Sadece anasayfa (/, /tr, /en)
 // ==========================================
 (function() {
@@ -251,36 +251,40 @@
 
   function createElement() {
     const texts = getTexts();
-    const a = document.createElement('a');
-    a.id = FEATURE_ID;
-    a.className = 'betifa-mobile-app-bar';
-    a.href = APP_DOWNLOAD_URL;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    a.innerHTML = `
-      <div class="betifa-app-bar-content">
-        <div class="betifa-app-bar-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
-            <path d="M17.523 2.047a.5.5 0 0 0-.382-.047l-9 2.5a.5.5 0 0 0-.141.053V4.5c0 .067.013.13.037.187L3.053 6.053A.5.5 0 0 0 3 6.5v14a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-6h4v6a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-14a.5.5 0 0 0-.053-.447l-3.424-4.006zM16 4.5v2.25l-3.5.972V5.5L16 4.5zM8 7.75l3.5-.972v2.472L8 10.222V7.75zm-4 0L7 6.778v3.444l-3 .833V7.75zM4 20v-8.028l3-.833V14.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-3.361l3-.833V20h-5v-6a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0-.5.5v6H4zm16-8.028V20h-5v-5h5v-.028-.001z"/>
-            <path d="M7 17h2v3H7zM15 17h2v3h-2z"/>
-          </svg>
-        </div>
-        <div class="betifa-app-bar-text">
-          <span class="betifa-app-bar-title">${texts.title}</span>
-          <span class="betifa-app-bar-desc">${texts.desc}</span>
-        </div>
-        <div class="betifa-app-bar-button">
-          <span class="betifa-app-bar-btn-text">${texts.button}</span>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-            <path d="M12 16l-6-6h4V4h4v6h4l-6 6z"/>
-            <path d="M20 18H4v2h16v-2z"/>
-          </svg>
+
+    const wrapper = document.createElement('div');
+    wrapper.id = FEATURE_ID;
+    wrapper.className = 'container betifa-mobile-app-bar-wrapper';
+    wrapper.innerHTML = `
+      <div class="row">
+        <div class="col-12">
+          <a class="betifa-mobile-app-bar" href="${APP_DOWNLOAD_URL}" target="_blank" rel="noopener noreferrer">
+            <div class="betifa-app-bar-content">
+              <div class="betifa-app-bar-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                  <path d="M17.523 2.047a.5.5 0 0 0-.382-.047l-9 2.5a.5.5 0 0 0-.141.053V4.5c0 .067.013.13.037.187L3.053 6.053A.5.5 0 0 0 3 6.5v14a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-6h4v6a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-14a.5.5 0 0 0-.053-.447l-3.424-4.006zM16 4.5v2.25l-3.5.972V5.5L16 4.5zM8 7.75l3.5-.972v2.472L8 10.222V7.75zm-4 0L7 6.778v3.444l-3 .833V7.75zM4 20v-8.028l3-.833V14.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-3.361l3-.833V20h-5v-6a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0-.5.5v6H4zm16-8.028V20h-5v-5h5v-.028-.001z"/>
+                  <path d="M7 17h2v3H7zM15 17h2v3h-2z"/>
+                </svg>
+              </div>
+              <div class="betifa-app-bar-text">
+                <span class="betifa-app-bar-title">${texts.title}</span>
+                <span class="betifa-app-bar-desc">${texts.desc}</span>
+              </div>
+              <div class="betifa-app-bar-button">
+                <span class="betifa-app-bar-btn-text">${texts.button}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M12 16l-6-6h4V4h4v6h4l-6 6z"/>
+                  <path d="M20 18H4v2h16v-2z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="betifa-app-bar-glow betifa-app-bar-glow-left"></div>
+            <div class="betifa-app-bar-glow betifa-app-bar-glow-right"></div>
+          </a>
         </div>
       </div>
-      <div class="betifa-app-bar-glow betifa-app-bar-glow-left"></div>
-      <div class="betifa-app-bar-glow betifa-app-bar-glow-right"></div>
     `;
-    return a;
+    return wrapper;
   }
 
   function insertElement() {
