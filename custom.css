@@ -101,12 +101,16 @@
 
 
 /* ========== MOBILE APP BAR ========== */
+.betifa-mobile-app-bar-wrapper {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
 .betifa-mobile-app-bar {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 16px 0 8px 0;
   padding: 1.5rem 2rem;
   background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
   border: 1px solid var(--surface-border-soft);
@@ -223,9 +227,13 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .betifa-mobile-app-bar-wrapper {
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
   .betifa-mobile-app-bar {
     padding: 12px 16px;
-    margin: 12px 0 4px 0;
     border-radius: var(--radius-sm);
   }
 
@@ -300,4 +308,3 @@
     font-size: 10px;
   }
 }
-
