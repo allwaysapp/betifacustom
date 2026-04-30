@@ -350,7 +350,8 @@
 
 // ==========================================
 // FEATURE: Custom Section - Bölüm A (Banner Section)
-// Anasayfada Mobile App Bar'ın altına banner alanı ekler
+// Desktop: Mobile App Bar'ın altına
+// Mobile: .hp-mobile-slider.d-lg-none altına
 // Sol: başlık + sosyal butonlar + spor/casino product
 // Sağ: 5 banner (yatırım, çekim, aviator, bonus, chatifa)
 // Login durumuna göre dinamik linkler
@@ -358,6 +359,7 @@
 // ==========================================
 (function() {
   const FEATURE_ID = 'betifa-section-banner';
+  const MOBILE_BREAKPOINT = 992;
 
   function isHomePage() {
     const path = window.location.pathname;
@@ -399,6 +401,15 @@
     if (el && el.parentNode) {
       el.parentNode.removeChild(el);
     }
+  }
+
+  function getTarget() {
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+    if (isMobile) {
+      const mobileSlider = document.querySelector('.hp-mobile-slider.d-lg-none');
+      if (mobileSlider) return mobileSlider;
+    }
+    return document.getElementById('betifa-mobile-app-bar');
   }
 
   function createElement() {
@@ -466,7 +477,6 @@
   }
 
   function attachEventHandlers(root) {
-    // Internal linkler — SPA navigation
     root.querySelectorAll('[data-internal-link]').forEach(el => {
       el.addEventListener('click', function(e) {
         e.preventDefault();
@@ -475,7 +485,6 @@
       });
     });
 
-    // Yatırım butonu
     const depositBtn = root.querySelector('[data-banner-action="deposit"]');
     if (depositBtn) {
       depositBtn.addEventListener('click', function(e) {
@@ -489,7 +498,6 @@
       });
     }
 
-    // Çekim butonu
     const withdrawBtn = root.querySelector('[data-banner-action="withdraw"]');
     if (withdrawBtn) {
       withdrawBtn.addEventListener('click', function(e) {
@@ -503,7 +511,6 @@
       });
     }
 
-    // Bonus Talep butonu
     const bonusBtn = root.querySelector('[data-banner-action="bonus"]');
     if (bonusBtn) {
       bonusBtn.addEventListener('click', function(e) {
@@ -513,7 +520,6 @@
       });
     }
 
-    // Chatifa butonu
     const chatifaBtn = root.querySelector('[data-banner-action="chatifa"]');
     if (chatifaBtn) {
       chatifaBtn.addEventListener('click', function(e) {
@@ -540,14 +546,30 @@
 
     if (isAlreadyInserted()) return;
 
-    const appBar = document.getElementById('betifa-mobile-app-bar');
-    if (!appBar) return;
+    const target = getTarget();
+    if (!target) return;
 
     const el = createElement();
-    appBar.parentNode.insertBefore(el, appBar.nextSibling);
+    target.parentNode.insertBefore(el, target.nextSibling);
     attachEventHandlers(el);
 
-    console.log('✅ Betifa banner section eklendi');
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+    console.log('✅ Betifa banner section eklendi (' + (isMobile ? 'mobile - slider altı' : 'desktop - app bar altı') + ')');
+  }
+
+  function repositionIfNeeded() {
+    if (!isHomePage()) return;
+
+    const el = document.getElementById(FEATURE_ID);
+    if (!el) return;
+
+    const expectedTarget = getTarget();
+    if (!expectedTarget) return;
+
+    if (el.previousElementSibling !== expectedTarget) {
+      el.parentNode.removeChild(el);
+      expectedTarget.parentNode.insertBefore(el, expectedTarget.nextSibling);
+    }
   }
 
   function init() {
@@ -555,7 +577,7 @@
 
     const observer = new MutationObserver(() => {
       if (isHomePage()) {
-        if (!isAlreadyInserted() && document.getElementById('betifa-mobile-app-bar')) {
+        if (!isAlreadyInserted() && getTarget()) {
           insertElement();
         }
       } else {
@@ -583,6 +605,12 @@
         }, 400);
       }
     }).observe(document, { subtree: true, childList: true });
+
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(repositionIfNeeded, 200);
+    });
   }
 
   if (document.readyState === 'loading') {
