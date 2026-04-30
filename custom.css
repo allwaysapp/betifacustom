@@ -308,3 +308,280 @@
     font-size: 10px;
   }
 }
+
+
+
+
+/* ========== BANNER SECTION (Bölüm A) ========== */
+.betifa-section-banner-wrapper {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.betifa-banner-section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  gap: 2rem;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+/* ===== Sol Taraf ===== */
+.betifa-banner-left {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  height: auto;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.betifa-banner-left-first {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  width: 100%;
+  height: auto;
+  flex: 2;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.betifa-banner-title {
+  width: 100%;
+  height: auto;
+}
+
+.betifa-banner-title h2 {
+  font-size: clamp(1.25rem, 4vw, 1rem);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.betifa-banner-title p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--accent);
+  margin: 0;
+}
+
+/* Sosyal Butonlar */
+.betifa-banner-social-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.betifa-banner-social-btn {
+  background: var(--surface-1);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  height: 25px;
+  width: 25px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.betifa-banner-social-btn:hover {
+  transform: translateY(-2px) scale(1.1);
+  box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.3);
+  background: linear-gradient(135deg, var(--surface-1), var(--surface-2));
+}
+
+.betifa-banner-social-btn img {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Sol alttaki product banner'ları */
+.betifa-banner-left-second {
+  display: flex;
+  width: 100%;
+  height: auto;
+  gap: 8px;
+  flex: 3;
+}
+
+.betifa-banner-product-sport,
+.betifa-banner-product-casino {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.betifa-banner-product-sport {
+  animation: betifa-banner-floatUp 4s ease-in-out infinite;
+}
+
+.betifa-banner-product-casino {
+  animation: betifa-banner-floatDown 4s ease-in-out infinite;
+}
+
+.betifa-banner-product-sport:hover,
+.betifa-banner-product-casino:hover {
+  transform: translateY(-8px) scale(1.05);
+  filter: brightness(1.1);
+}
+
+.betifa-banner-product-sport img,
+.betifa-banner-product-casino img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@keyframes betifa-banner-floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-6px); }
+}
+
+@keyframes betifa-banner-floatDown {
+  0%, 100% { transform: translateY(-6px); }
+  50%      { transform: translateY(0px); }
+}
+
+/* ===== Sağ Taraf (5 Banner) ===== */
+.betifa-banner-right {
+  width: 100%;
+  height: auto;
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.betifa-banner-right a {
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.betifa-banner-right a:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1) saturate(1.1);
+}
+
+.betifa-banner-right a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(var(--accent-rgb), 0.1), rgba(255, 255, 255, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.betifa-banner-right a:hover::before {
+  opacity: 1;
+}
+
+.betifa-banner-right img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.betifa-banner-right a:hover img {
+  transform: scale(1.05);
+}
+
+/* Grid yerleşimi */
+.betifa-banner-deposit {
+  grid-column: span 6 / span 6;
+  grid-row: span 2 / span 2;
+}
+
+.betifa-banner-withdraw {
+  grid-column: span 6 / span 6;
+  grid-row: span 2 / span 2;
+  grid-column-start: 7;
+}
+
+.betifa-banner-aviator {
+  grid-column: span 4 / span 4;
+  grid-row: span 2 / span 2;
+  grid-row-start: 3;
+}
+
+.betifa-banner-bonus {
+  grid-column: span 4 / span 4;
+  grid-row: span 2 / span 2;
+  grid-column-start: 5;
+  grid-row-start: 3;
+}
+
+.betifa-banner-chatifa {
+  grid-column: span 4 / span 4;
+  grid-row: span 2 / span 2;
+  grid-column-start: 9;
+  grid-row-start: 3;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .betifa-banner-section {
+    flex-direction: column;
+  }
+
+  .betifa-banner-product-sport,
+  .betifa-banner-product-casino {
+    animation-duration: 6s;
+  }
+
+  @keyframes betifa-banner-floatUp {
+    0%, 100% { transform: translateY(0px); }
+    50%      { transform: translateY(-3px); }
+  }
+
+  @keyframes betifa-banner-floatDown {
+    0%, 100% { transform: translateY(-3px); }
+    50%      { transform: translateY(0px); }
+  }
+}
+
+@media (max-width: 768px) {
+  .betifa-banner-title h2 {
+    font-size: clamp(1rem, 4vw, 1rem);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .betifa-banner-title p {
+    font-size: clamp(0.5rem, 2.5vw, 1.25rem);
+    margin: 0;
+  }
+
+  .betifa-banner-section {
+    gap: 0.5rem;
+  }
+
+  .betifa-banner-product-sport:hover,
+  .betifa-banner-product-casino:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .betifa-banner-right a:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
