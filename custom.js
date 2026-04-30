@@ -17,7 +17,7 @@
     wrapper.className = 'betifa-footer-awards';
     wrapper.innerHTML = `
       <a class="betifa-footer-app-banner" href="https://betifa.live/betifa_ios_live.html" target="_blank" rel="noopener noreferrer">
-        <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/mobil-app.gif" alt="Betifa Mobil App">
+        <img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/REpD3Mkx2hunSZTTFJsp8dd4tYrj0f3YSVKK6mj6.gif" alt="Betifa Mobil App">
       </a>
       <div class="betifa-footer-awards-container">
         <img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/qADFxttxrDUm1nvMsr1JTkBiWw4pXptrkfwjkjOy.png" alt="Award 1">
