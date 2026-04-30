@@ -141,14 +141,19 @@
     wrapper.id = FEATURE_ID;
     wrapper.className = 'betifa-sidebar-social-section';
 
-    const divider = document.createElement('div');
-    divider.className = 'sidebar-section-title';
-    divider.innerHTML = '<span class="sidebar-section-title__line"></span>';
-    wrapper.appendChild(divider);
+    const dividerTop = document.createElement('div');
+    dividerTop.className = 'sidebar-section-title';
+    dividerTop.innerHTML = '<span class="sidebar-section-title__line"></span>';
+    wrapper.appendChild(dividerTop);
 
     socialLinks.forEach(link => {
       wrapper.appendChild(createSocialLinkButton(link));
     });
+
+    const dividerBottom = document.createElement('div');
+    dividerBottom.className = 'sidebar-section-title';
+    dividerBottom.innerHTML = '<span class="sidebar-section-title__line"></span>';
+    wrapper.appendChild(dividerBottom);
 
     return wrapper;
   }
