@@ -620,3 +620,177 @@
     init();
   }
 })();
+
+
+// ==========================================
+// FEATURE: Custom Section - Bölüm C (Originals Showcase)
+// Anasayfada Banner Section'ın altına Originals oyun showcase ekler
+// Sol: ORIGINALS logo (background slot game görseli)
+// Sağ: 4 öne çıkan oyun
+// Kapsam: Sadece anasayfa (/, /tr, /en)
+// ==========================================
+(function() {
+  const FEATURE_ID = 'betifa-section-originals';
+
+  function isHomePage() {
+    const path = window.location.pathname;
+    return path === '/' ||
+           path === '/tr' || path === '/tr/' ||
+           path === '/en' || path === '/en/';
+  }
+
+  function getCurrentLanguagePrefix() {
+    const path = window.location.pathname;
+    const match = path.match(/^\/([a-z]{2})(\/|$)/);
+    return match ? '/' + match[1] : '/tr';
+  }
+
+  function navigateTo(url) {
+    if (window.next && window.next.router && typeof window.next.router.push === 'function') {
+      window.next.router.push(url);
+    } else {
+      window.history.pushState({}, '', url);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  }
+
+  function isAlreadyInserted() {
+    return document.getElementById(FEATURE_ID) !== null;
+  }
+
+  function removeElement() {
+    const el = document.getElementById(FEATURE_ID);
+    if (el && el.parentNode) {
+      el.parentNode.removeChild(el);
+    }
+  }
+
+  const games = [
+    {
+      name: 'Aztec Blaze',
+      image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/8bHIPq496x6wmpIg9QSlXxqDGnZAkmO73jF8Dkpa.avif',
+      slug: 'pragmaticplay-aztec-blaze'
+    },
+    {
+      name: '40 Burning Hot VIP Bell Link',
+      image: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/LMRalEYBlNtg9SRhTV5edgA1e6nP97Iu2wlfQ4jY.jpg',
+      slug: 'EGTInteractive-40-burning-hot-vip-bell-link'
+    },
+    {
+      name: 'Emerald King Wheel of Wealth',
+      image: 'https://d3psi4rj7mv4u4.cloudfront.net/games/pragmaticplay/emerald_king_wheel_of_wealth.jpg',
+      slug: 'pragmaticplay-emerald-king-wheel-of-wealth'
+    },
+    {
+      name: 'Bow of Artemis',
+      image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/DUbFurGJ9nhhTIxUnxKX8JuqH36i6fuwIuDCTAzC.avif',
+      slug: 'pragmaticplay-bow-of-artemis'
+    }
+  ];
+
+  function createElement() {
+    const langPrefix = getCurrentLanguagePrefix();
+
+    const wrapper = document.createElement('div');
+    wrapper.id = FEATURE_ID;
+    wrapper.className = 'container betifa-section-originals-wrapper';
+
+    const gamesHTML = games.map(game => {
+      const url = `${langPrefix}/casino/games/${game.slug}`;
+      return `
+        <a class="betifa-originals-game-item" data-internal-link="${url}" href="${url}">
+          <img src="${game.image}" alt="${game.name}" loading="lazy">
+        </a>
+      `;
+    }).join('');
+
+    wrapper.innerHTML = `
+      <div class="row">
+        <div class="col-12">
+          <div class="betifa-originals-showcase">
+            <div class="betifa-originals-title">
+              <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="Originals">
+            </div>
+            <div class="betifa-originals-content">
+              ${gamesHTML}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    return wrapper;
+  }
+
+  function attachEventHandlers(root) {
+    root.querySelectorAll('[data-internal-link]').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        const url = this.getAttribute('data-internal-link');
+        navigateTo(url);
+      });
+    });
+  }
+
+  function getTarget() {
+    return document.getElementById('betifa-section-banner');
+  }
+
+  function insertElement() {
+    if (!isHomePage()) {
+      removeElement();
+      return;
+    }
+
+    if (isAlreadyInserted()) return;
+
+    const target = getTarget();
+    if (!target) return;
+
+    const el = createElement();
+    target.parentNode.insertBefore(el, target.nextSibling);
+    attachEventHandlers(el);
+
+    console.log('✅ Betifa originals showcase eklendi');
+  }
+
+  function init() {
+    setTimeout(insertElement, 500);
+
+    const observer = new MutationObserver(() => {
+      if (isHomePage()) {
+        if (!isAlreadyInserted() && getTarget()) {
+          insertElement();
+        }
+      } else {
+        if (isAlreadyInserted()) {
+          removeElement();
+        }
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    let lastUrl = location.href;
+    new MutationObserver(() => {
+      if (location.href !== lastUrl) {
+        lastUrl = location.href;
+        setTimeout(() => {
+          if (isHomePage()) {
+            insertElement();
+          } else {
+            removeElement();
+          }
+        }, 500);
+      }
+    }).observe(document, { subtree: true, childList: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
