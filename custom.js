@@ -632,7 +632,7 @@
 (function() {
   const FEATURE_ID = 'betifa-section-originals';
   const VISIBLE_DESKTOP = 4;
-  const VISIBLE_MOBILE = 2;
+  const VISIBLE_MOBILE = 4;
   const MOBILE_BREAKPOINT = 768;
 
   function isHomePage() {
