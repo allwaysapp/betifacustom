@@ -39,7 +39,7 @@
     const el = createElement();
     currencies.parentNode.insertBefore(el, currencies);
 
-    console.log('✅ Betifa footer awards eklendi');
+   
   }
 
   function init() {
@@ -167,7 +167,7 @@
     const el = createElement();
     supportBtn.parentNode.insertBefore(el, supportBtn.nextSibling);
 
-    console.log('✅ Betifa sidebar social links eklendi');
+    
   }
 
   function init() {
@@ -301,7 +301,7 @@
     const el = createElement();
     welcomeContent.parentNode.insertBefore(el, welcomeContent.nextSibling);
 
-    console.log('✅ Betifa mobile app bar eklendi');
+    
   }
 
   function init() {
@@ -878,7 +878,7 @@
     target.parentNode.insertBefore(el, target.nextSibling);
     attachEventHandlers(el);
 
-    console.log('✅ Betifa originals showcase eklendi');
+    
   }
 
   function init() {
@@ -1003,7 +1003,7 @@
     const el = createElement();
     depositBtn.parentNode.insertBefore(el, depositBtn.nextSibling);
 
-    console.log('✅ Betifa sidebar promotions button eklendi');
+    
   }
 
   function init() {
