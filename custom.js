@@ -1134,3 +1134,116 @@
     init();
   }
 })();
+
+// ==========================================
+// FEATURE: Sidebar Bonus Request Button
+// Promosyonlar butonunun altına altın renkli bonus talep butonu ekler
+// Hedef: .betifa-sidebar-promotions-btn altı
+// Tıklayınca ?modal=bonus-request query parametresi ile modal açılır
+// Kapsam: Tüm sayfalar (sidebar her sayfada var)
+// ==========================================
+(function() {
+  const FEATURE_ID = 'betifa-sidebar-bonus-btn';
+
+  function getCurrentLanguagePrefix() {
+    const path = window.location.pathname;
+    const match = path.match(/^\/([a-z]{2})(\/|$)/);
+    return match ? '/' + match[1] : '/tr';
+  }
+
+  function navigateTo(url) {
+    if (window.next && window.next.router && typeof window.next.router.push === 'function') {
+      window.next.router.push(url);
+    } else {
+      window.history.pushState({}, '', url);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  }
+
+  function getBonusText() {
+    const lang = document.documentElement.lang ? document.documentElement.lang.substring(0, 2) : 'tr';
+    const texts = {
+      tr: 'Bonus Talep',
+      en: 'Request Bonus',
+      fr: 'Demande Bonus',
+      de: 'Bonus Anfordern',
+      es: 'Solicitar Bono',
+      ru: 'Запрос Бонуса',
+      jp: 'ボーナス申請',
+      it: 'Richiedi Bonus',
+      pt: 'Pedir Bônus',
+      nl: 'Bonus Aanvragen'
+    };
+    return texts[lang] || texts['tr'];
+  }
+
+  function isAlreadyInserted() {
+    return document.getElementById(FEATURE_ID) !== null;
+  }
+
+  function createElement() {
+    const a = document.createElement('a');
+    a.className = 'betifa-sidebar-bonus-btn';
+    a.id = FEATURE_ID;
+    a.setAttribute('aria-label', getBonusText());
+
+    const langPrefix = getCurrentLanguagePrefix();
+    const targetUrl = langPrefix + '?modal=bonus-request';
+    a.href = targetUrl;
+
+    a.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" class="bonus-icon" aria-hidden="true">
+        <path d="M19 7h-3.18A3 3 0 0 0 13 3a3 3 0 0 0-3 3 3 3 0 0 0-3-3 3 3 0 0 0-3 3H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-3zm-6 0V6a1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1h-1zM7 5a1 1 0 0 1 1 1 1 1 0 0 1-1 1H6a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 0zM2 9h7v2H2V9zm3 4h6v7H5v-7zm8 7v-7h6v7h-6zm9-9h-7V9h7v2z"/>
+      </svg>
+      <span class="betifa-sidebar-bonus-text">${getBonusText()}</span>
+    `;
+
+    a.onclick = function(e) {
+      e.preventDefault();
+      navigateTo(targetUrl);
+    };
+
+    return a;
+  }
+
+  function insertElement() {
+    if (isAlreadyInserted()) return;
+
+    const promotionsBtn = document.getElementById('betifa-sidebar-promotions-btn');
+    if (!promotionsBtn) return;
+
+    const el = createElement();
+    promotionsBtn.parentNode.insertBefore(el, promotionsBtn.nextSibling);
+
+    console.log('✅ Betifa sidebar bonus button eklendi');
+  }
+
+  function init() {
+    setTimeout(insertElement, 500);
+
+    const observer = new MutationObserver(() => {
+      if (!isAlreadyInserted() && document.getElementById('betifa-sidebar-promotions-btn')) {
+        insertElement();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    let lastUrl = location.href;
+    new MutationObserver(() => {
+      if (location.href !== lastUrl) {
+        lastUrl = location.href;
+        setTimeout(insertElement, 500);
+      }
+    }).observe(document, { subtree: true, childList: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
