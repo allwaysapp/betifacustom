@@ -1235,3 +1235,109 @@
     height: 18px;
   }
 }
+
+/* ========== SIDEBAR BONUS REQUEST BUTTON ========== */
+.betifa-sidebar-bonus-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  padding: 0 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  background: linear-gradient(
+    270deg,
+    #1d1d25 0%,
+    #f5b800 25%,
+    #1d1d25 50%,
+    #f5b800 75%,
+    #1d1d25 100%
+  );
+  background-size: 400% 400%;
+  animation: betifa-bonus-flow 6s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(245, 184, 0, 0.25);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(245, 184, 0, 0.4);
+  box-sizing: border-box;
+}
+
+@keyframes betifa-bonus-flow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.betifa-sidebar-bonus-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.betifa-sidebar-bonus-btn .bonus-icon {
+  fill: #ffffff;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+  position: relative;
+  z-index: 2;
+}
+
+.betifa-sidebar-bonus-btn .betifa-sidebar-bonus-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+}
+
+.betifa-sidebar-bonus-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.6s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.betifa-sidebar-bonus-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(245, 184, 0, 0.6);
+  border-color: rgba(245, 184, 0, 0.8);
+  animation-duration: 3s;
+}
+
+.betifa-sidebar-bonus-btn:hover::before { opacity: 1; }
+.betifa-sidebar-bonus-btn:hover::after { left: 150%; }
+.betifa-sidebar-bonus-btn:hover .bonus-icon {
+  transform: scale(1.15) rotate(8deg);
+}
+
+.betifa-sidebar-bonus-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(245, 184, 0, 0.4);
+}
