@@ -627,6 +627,8 @@
 // Anasayfada Banner Section'ın altına Originals oyun slider showcase ekler
 // Sol: ORIGINALS logo (background slot game görseli)
 // Sağ: 4 öne çıkan oyun (slider olarak, sağ-sol oklarla kayıyor)
+// Mobilde: 4 oyun + oklar logo'nun sağ üstünde
+// Desktop: 4 oyun + oklar yanlarda
 // Kapsam: Sadece anasayfa (/, /tr, /en)
 // ==========================================
 (function() {
@@ -688,16 +690,6 @@
       name: 'Bow of Artemis',
       image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/DUbFurGJ9nhhTIxUnxKX8JuqH36i6fuwIuDCTAzC.avif',
       slug: 'pragmaticplay-bow-of-artemis'
-    },
-     {
-      name: 'Bow of Artemis',
-      image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/DUbFurGJ9nhhTIxUnxKX8JuqH36i6fuwIuDCTAzC.avif',
-      slug: 'pragmaticplay-bow-of-artemis'
-    },
-     {
-      name: 'Bow of Artemis',
-      image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/DUbFurGJ9nhhTIxUnxKX8JuqH36i6fuwIuDCTAzC.avif',
-      slug: 'pragmaticplay-bow-of-artemis'
     }
   ];
 
@@ -717,28 +709,42 @@
       `;
     }).join('');
 
+    const arrowPrevSvg = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+      </svg>
+    `;
+
+    const arrowNextSvg = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+      </svg>
+    `;
+
     wrapper.innerHTML = `
       <div class="row">
         <div class="col-12">
           <div class="betifa-originals-showcase">
             <div class="betifa-originals-title">
               <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="Originals">
+              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-prev" aria-label="Önceki" data-mobile-only>
+                ${arrowPrevSvg}
+              </button>
+              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-next" aria-label="Sonraki" data-mobile-only>
+                ${arrowNextSvg}
+              </button>
             </div>
             <div class="betifa-originals-slider">
-              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-prev" aria-label="Önceki">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                  <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
-                </svg>
+              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-prev" aria-label="Önceki" data-desktop-only>
+                ${arrowPrevSvg}
               </button>
               <div class="betifa-originals-viewport">
                 <div class="betifa-originals-track">
                   ${gamesHTML}
                 </div>
               </div>
-              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-next" aria-label="Sonraki">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                  <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                </svg>
+              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-next" aria-label="Sonraki" data-desktop-only>
+                ${arrowNextSvg}
               </button>
             </div>
           </div>
@@ -751,8 +757,8 @@
   function setupSlider(root) {
     const track = root.querySelector('.betifa-originals-track');
     const items = track.querySelectorAll('.betifa-originals-game-item');
-    const prevBtn = root.querySelector('.betifa-originals-arrow-prev');
-    const nextBtn = root.querySelector('.betifa-originals-arrow-next');
+    const prevBtns = root.querySelectorAll('.betifa-originals-arrow-prev');
+    const nextBtns = root.querySelectorAll('.betifa-originals-arrow-next');
 
     if (!track || items.length === 0) return;
 
@@ -798,16 +804,20 @@
       updateSlider();
     }
 
-    prevBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      prev();
+    prevBtns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        prev();
+      });
     });
 
-    nextBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      next();
+    nextBtns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        next();
+      });
     });
 
     // Touch swipe (mobile)
