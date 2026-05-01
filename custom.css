@@ -622,22 +622,37 @@
   object-fit: contain;
 }
 
-.betifa-originals-content {
+/* ===== Slider Yapısı ===== */
+.betifa-originals-slider {
   display: flex;
+  align-items: center;
   width: 100%;
-  height: auto;
-  gap: 1rem;
   flex: 1;
+  gap: 8px;
+  position: relative;
+}
+
+.betifa-originals-viewport {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.betifa-originals-track {
+  display: flex;
+  gap: 16px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 .betifa-originals-game-item {
   display: block;
-  flex: 1;
+  flex-shrink: 0;
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
               rgba(0, 0, 0, 0.9) 0px 30px 60px -30px;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
@@ -659,6 +674,42 @@
   filter: brightness(1.1) saturate(1.1);
 }
 
+/* ===== Ok Butonları ===== */
+.betifa-originals-arrow {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0;
+  z-index: 2;
+}
+
+.betifa-originals-arrow:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.4);
+}
+
+.betifa-originals-arrow:active {
+  transform: scale(0.95);
+}
+
+.betifa-originals-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .betifa-originals-showcase {
@@ -672,7 +723,21 @@
     max-width: 200px;
   }
 
-  .betifa-originals-content {
-    gap: 0.5rem;
+  .betifa-originals-slider {
+    gap: 4px;
+  }
+
+  .betifa-originals-arrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  .betifa-originals-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .betifa-originals-track {
+    gap: 8px;
   }
 }
