@@ -1122,3 +1122,13 @@
     display: flex;
     overflow: hidden;
 }
+
+.promotion-detail-shell {
+    background: #1d1d25;
+    border: none !important;
+    border-radius: 12px;
+    margin-top: 12px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: none !important;
+}
