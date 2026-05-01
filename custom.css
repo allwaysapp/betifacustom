@@ -792,24 +792,47 @@
   padding: 0 20px;
   border-radius: 10px;
   text-decoration: none;
-  background: linear-gradient(135deg, #a855f7 0%, #d946ef 50%, #ec4899 100%);
-  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.35);
+  background: linear-gradient(
+    270deg,
+    #1d1d25 0%,
+    #f31f51 25%,
+    #1d1d25 50%,
+    #f31f51 75%,
+    #1d1d25 100%
+  );
+  background-size: 400% 400%;
+  animation: betifa-promotions-flow 6s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(243, 31, 81, 0.25);
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(243, 31, 81, 0.35);
   box-sizing: border-box;
+}
+
+@keyframes betifa-promotions-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .betifa-sidebar-promotions-btn::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 10px;
+  pointer-events: none;
 }
 
 .betifa-sidebar-promotions-btn .promotions-icon {
@@ -817,8 +840,10 @@
   width: 22px;
   height: 22px;
   flex-shrink: 0;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  position: relative;
+  z-index: 2;
 }
 
 .betifa-sidebar-promotions-btn .betifa-sidebar-promotions-text {
@@ -828,9 +853,10 @@
   letter-spacing: 0.5px;
   line-height: 1;
   white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .betifa-sidebar-promotions-btn::after {
@@ -840,15 +866,18 @@
   left: -100%;
   width: 60%;
   height: 200%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   transform: skewX(-25deg);
   transition: left 0.6s ease;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .betifa-sidebar-promotions-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(217, 70, 239, 0.55);
-  background: linear-gradient(135deg, #b366f8 0%, #e455f1 50%, #f15ba6 100%);
+  box-shadow: 0 6px 22px rgba(243, 31, 81, 0.55);
+  border-color: rgba(243, 31, 81, 0.7);
+  animation-duration: 3s;
 }
 
 .betifa-sidebar-promotions-btn:hover::before { opacity: 1; }
@@ -859,22 +888,5 @@
 
 .betifa-sidebar-promotions-btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(168, 85, 247, 0.3);
-}
-
-@keyframes betifa-sidebar-promotions-pulse {
-  0%, 100% {
-    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.35);
-  }
-  50% {
-    box-shadow: 0 4px 25px rgba(217, 70, 239, 0.55);
-  }
-}
-
-.betifa-sidebar-promotions-btn {
-  animation: betifa-sidebar-promotions-pulse 2.4s ease-in-out infinite;
-}
-
-.betifa-sidebar-promotions-btn:hover {
-  animation: none;
+  box-shadow: 0 2px 10px rgba(243, 31, 81, 0.4);
 }
