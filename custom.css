@@ -717,44 +717,56 @@
     padding: 1rem;
     border-radius: var(--radius-md);
     gap: 1rem;
-    position: relative;
   }
 
   .betifa-originals-title {
     justify-content: flex-start;
-    padding-right: 80px;
     position: relative;
+    padding-right: 90px;
+    width: 100%;
   }
 
   .betifa-originals-title img {
     max-width: 200px;
   }
 
-  /* Slider yapısı: oklar gizleniyor, viewport tam genişlik */
+  /* Slider yapısı: yan oklar gizleniyor, viewport tam genişlik */
   .betifa-originals-slider {
     gap: 0;
+    width: 100%;
   }
 
   .betifa-originals-track {
     gap: 6px;
   }
 
-  /* Ok butonları sağ üst köşeye taşınıyor */
-  .betifa-originals-arrow {
+  /* Yan oklar mobilde gizleniyor, üst köşedeki yenileri title içine konumlanıyor */
+  .betifa-originals-slider > .betifa-originals-arrow {
+    display: none;
+  }
+
+  /* Title'ın sağ üst köşesine ok butonları */
+  .betifa-originals-title::before,
+  .betifa-originals-title::after {
+    content: '';
+  }
+
+  .betifa-originals-title .betifa-originals-arrow {
+    display: flex;
     position: absolute;
-    top: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
     width: 32px;
     height: 32px;
     z-index: 5;
   }
 
-  .betifa-originals-arrow-prev {
-    right: 48px;
-    left: auto;
+  .betifa-originals-title .betifa-originals-arrow-prev {
+    right: 44px;
   }
 
-  .betifa-originals-arrow-next {
-    right: 8px;
+  .betifa-originals-title .betifa-originals-arrow-next {
+    right: 4px;
   }
 
   .betifa-originals-arrow svg {
