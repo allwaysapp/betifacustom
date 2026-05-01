@@ -624,13 +624,16 @@
 
 // ==========================================
 // FEATURE: Custom Section - Bölüm C (Originals Showcase)
-// Anasayfada Banner Section'ın altına Originals oyun showcase ekler
+// Anasayfada Banner Section'ın altına Originals oyun slider showcase ekler
 // Sol: ORIGINALS logo (background slot game görseli)
-// Sağ: 4 öne çıkan oyun
+// Sağ: 4 öne çıkan oyun (slider olarak, sağ-sol oklarla kayıyor)
 // Kapsam: Sadece anasayfa (/, /tr, /en)
 // ==========================================
 (function() {
   const FEATURE_ID = 'betifa-section-originals';
+  const VISIBLE_DESKTOP = 4;
+  const VISIBLE_MOBILE = 2;
+  const MOBILE_BREAKPOINT = 768;
 
   function isHomePage() {
     const path = window.location.pathname;
@@ -711,14 +714,117 @@
             <div class="betifa-originals-title">
               <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="Originals">
             </div>
-            <div class="betifa-originals-content">
-              ${gamesHTML}
+            <div class="betifa-originals-slider">
+              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-prev" aria-label="Önceki">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+                </svg>
+              </button>
+              <div class="betifa-originals-viewport">
+                <div class="betifa-originals-track">
+                  ${gamesHTML}
+                </div>
+              </div>
+              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-next" aria-label="Sonraki">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
       </div>
     `;
     return wrapper;
+  }
+
+  function setupSlider(root) {
+    const track = root.querySelector('.betifa-originals-track');
+    const items = track.querySelectorAll('.betifa-originals-game-item');
+    const prevBtn = root.querySelector('.betifa-originals-arrow-prev');
+    const nextBtn = root.querySelector('.betifa-originals-arrow-next');
+
+    if (!track || items.length === 0) return;
+
+    let currentIndex = 0;
+
+    function getVisibleCount() {
+      return window.innerWidth < MOBILE_BREAKPOINT ? VISIBLE_MOBILE : VISIBLE_DESKTOP;
+    }
+
+    function updateSlider() {
+      const visibleCount = getVisibleCount();
+      const itemWidth = 100 / visibleCount;
+
+      items.forEach(item => {
+        item.style.flex = `0 0 calc(${itemWidth}% - ${(visibleCount - 1) * 16 / visibleCount}px)`;
+      });
+
+      const offset = -(currentIndex * (100 / visibleCount));
+      track.style.transform = `translateX(${offset}%)`;
+    }
+
+    function next() {
+      const visibleCount = getVisibleCount();
+      const maxIndex = Math.max(0, items.length - visibleCount);
+
+      if (currentIndex >= maxIndex) {
+        currentIndex = 0;
+      } else {
+        currentIndex++;
+      }
+      updateSlider();
+    }
+
+    function prev() {
+      const visibleCount = getVisibleCount();
+      const maxIndex = Math.max(0, items.length - visibleCount);
+
+      if (currentIndex <= 0) {
+        currentIndex = maxIndex;
+      } else {
+        currentIndex--;
+      }
+      updateSlider();
+    }
+
+    prevBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      prev();
+    });
+
+    nextBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      next();
+    });
+
+    // Touch swipe (mobile)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) next(); else prev();
+      }
+    }, { passive: true });
+
+    // Resize handler
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateSlider, 200);
+    });
+
+    // İlk render
+    updateSlider();
   }
 
   function attachEventHandlers(root) {
@@ -729,6 +835,8 @@
         navigateTo(url);
       });
     });
+
+    setupSlider(root);
   }
 
   function getTarget() {
