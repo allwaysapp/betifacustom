@@ -688,6 +688,16 @@
       name: 'Bow of Artemis',
       image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/DUbFurGJ9nhhTIxUnxKX8JuqH36i6fuwIuDCTAzC.avif',
       slug: 'pragmaticplay-bow-of-artemis'
+    },
+     {
+      name: 'Bow of Artemis',
+      image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/DUbFurGJ9nhhTIxUnxKX8JuqH36i6fuwIuDCTAzC.avif',
+      slug: 'pragmaticplay-bow-of-artemis'
+    },
+     {
+      name: 'Bow of Artemis',
+      image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/DUbFurGJ9nhhTIxUnxKX8JuqH36i6fuwIuDCTAzC.avif',
+      slug: 'pragmaticplay-bow-of-artemis'
     }
   ];
 
