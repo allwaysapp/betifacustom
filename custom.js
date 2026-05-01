@@ -520,23 +520,23 @@
       });
     }
 
-    const chatifaBtn = root.querySelector('[data-banner-action="chatifa"]');
-    if (chatifaBtn) {
-      chatifaBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (isUserLoggedIn()) {
-          const chatBtn = document.getElementById('chat-area');
-          if (chatBtn) {
-            chatBtn.click();
-          } else {
-            console.warn('chat-area butonu bulunamadı');
-          }
-        } else {
-          openLoginModal();
-        }
-      });
+  const chatifaBtn = root.querySelector('[data-banner-action="chatifa"]');
+if (chatifaBtn) {
+  chatifaBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (isUserLoggedIn()) {
+      const chatBtn = document.querySelector('button.chat-button[aria-label="Open chat"]')
+                   || document.querySelector('button.chat-button');
+      if (chatBtn) {
+        chatBtn.click();
+      } else {
+        console.warn('Chat button bulunamadı');
+      }
+    } else {
+      openLoginModal();
     }
-  }
+  });
+}
 
   function insertElement() {
     if (!isHomePage()) {
