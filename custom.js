@@ -1035,3 +1035,102 @@
     init();
   }
 })();
+
+// ==========================================
+// FEATURE: Header Chat Button
+// Header'a notification butonundan sonra brand renkli chat butonu ekler
+// Tıklayınca sayfadaki asıl chat butonunu tetikler (drawer açar)
+// Hedef: .header-minified-buttons > .notifications-box sonrası
+// Kapsam: Tüm sayfalar
+// ==========================================
+(function() {
+  const FEATURE_ID = 'betifa-header-chat-btn';
+
+  function isAlreadyInserted() {
+    return document.getElementById(FEATURE_ID) !== null;
+  }
+
+  function findRealChatButton() {
+    return document.querySelector('button.chat-button[aria-label="Open chat"]')
+        || document.querySelector('button.chat-button');
+  }
+
+  function createElement() {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.id = FEATURE_ID;
+    btn.className = 'betifa-header-chat-btn';
+    btn.setAttribute('aria-label', 'Canlı Destek');
+    btn.setAttribute('data-sb-tooltip', 'Canlı Destek');
+
+    btn.innerHTML = `
+      <span class="icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17" fill="none" width="20" height="20">
+          <path d="M12.9791 0.835327H4.25184C2.24675 0.835327 0.615479 2.4666 0.615479 4.47169V10.2899C0.615479 12.0455 1.86711 13.5146 3.52457 13.8528V16.1081C3.52457 16.3764 3.67221 16.623 3.90857 16.7495C4.01621 16.807 4.13402 16.8353 4.25184 16.8353C4.39293 16.8353 4.5333 16.7939 4.65548 16.7131L8.83584 13.9262H12.9791C14.9842 13.9262 16.6155 12.295 16.6155 10.2899V4.47169C16.6155 2.4666 14.9842 0.835327 12.9791 0.835327ZM8.21184 12.5939L4.97912 14.7488V13.199C4.97912 12.7975 4.6533 12.4717 4.25184 12.4717C3.04893 12.4717 2.07002 11.4928 2.07002 10.2899V4.47169C2.07002 3.26878 3.04893 2.28987 4.25184 2.28987H12.9791C14.182 2.28987 15.1609 3.26878 15.1609 4.47169V10.2899C15.1609 11.4928 14.182 12.4717 12.9791 12.4717H8.61548C8.56457 12.471 8.49184 12.4761 8.40893 12.5008C8.32166 12.5262 8.25548 12.5641 8.21184 12.5939Z" fill="currentColor"/>
+          <path d="M12.9792 5.19885H4.25193C3.85048 5.19885 3.52466 5.52467 3.52466 5.92613C3.52466 6.32758 3.85048 6.6534 4.25193 6.6534H12.9792C13.3807 6.6534 13.7065 6.32758 13.7065 5.92613C13.7065 5.52467 13.3807 5.19885 12.9792 5.19885Z" fill="currentColor"/>
+          <path d="M11.5247 8.10791H5.70652C5.30507 8.10791 4.97925 8.43373 4.97925 8.83518C4.97925 9.23664 5.30507 9.56246 5.70652 9.56246H11.5247C11.9262 9.56246 12.252 9.23664 12.252 8.83518C12.252 8.43373 11.9262 8.10791 11.5247 8.10791Z" fill="currentColor"/>
+        </svg>
+      </span>
+    `;
+
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const realChatBtn = findRealChatButton();
+      if (realChatBtn) {
+        realChatBtn.click();
+      } else {
+        console.warn('Chat button bulunamadı');
+      }
+    });
+
+    return btn;
+  }
+
+  function insertElement() {
+    if (isAlreadyInserted()) return;
+
+    const minifiedButtons = document.querySelector('.header-minified-buttons');
+    if (!minifiedButtons) return;
+
+    const notificationsBox = minifiedButtons.querySelector('.notifications-box');
+    const el = createElement();
+
+    if (notificationsBox) {
+      notificationsBox.parentNode.insertBefore(el, notificationsBox.nextSibling);
+    } else {
+      minifiedButtons.appendChild(el);
+    }
+
+    console.log('✅ Betifa header chat button eklendi');
+  }
+
+  function init() {
+    setTimeout(insertElement, 400);
+
+    const observer = new MutationObserver(() => {
+      if (!isAlreadyInserted() && document.querySelector('.header-minified-buttons')) {
+        insertElement();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    let lastUrl = location.href;
+    new MutationObserver(() => {
+      if (location.href !== lastUrl) {
+        lastUrl = location.href;
+        setTimeout(insertElement, 400);
+      }
+    }).observe(document, { subtree: true, childList: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
