@@ -717,27 +717,48 @@
     padding: 1rem;
     border-radius: var(--radius-md);
     gap: 1rem;
+    position: relative;
+  }
+
+  .betifa-originals-title {
+    justify-content: flex-start;
+    padding-right: 80px;
+    position: relative;
   }
 
   .betifa-originals-title img {
     max-width: 200px;
   }
 
+  /* Slider yapısı: oklar gizleniyor, viewport tam genişlik */
   .betifa-originals-slider {
-    gap: 4px;
+    gap: 0;
   }
 
+  .betifa-originals-track {
+    gap: 6px;
+  }
+
+  /* Ok butonları sağ üst köşeye taşınıyor */
   .betifa-originals-arrow {
-    width: 30px;
-    height: 30px;
+    position: absolute;
+    top: 1rem;
+    width: 32px;
+    height: 32px;
+    z-index: 5;
+  }
+
+  .betifa-originals-arrow-prev {
+    right: 48px;
+    left: auto;
+  }
+
+  .betifa-originals-arrow-next {
+    right: 8px;
   }
 
   .betifa-originals-arrow svg {
     width: 16px;
     height: 16px;
-  }
-
-  .betifa-originals-track {
-    gap: 8px;
   }
 }
