@@ -89,15 +89,34 @@
   margin-bottom: 4px;
 }
 
+/* Default — fallback */
 .betifa-social-link-item .icon svg {
-  color: var(--text-secondary);
-  transition: color 0.16s ease;
+  transition: color 0.16s ease, transform 0.16s ease, filter 0.16s ease;
 }
 
+/* Marka renkleri (aria-label ile match) */
+.betifa-social-link-item[aria-label="Instagram"] .icon svg {
+  color: #e1306c;
+}
+
+.betifa-social-link-item[aria-label="X (Twitter)"] .icon svg {
+  color: #ffffff;
+}
+
+.betifa-social-link-item[aria-label="Telegram Kanalı"] .icon svg,
+.betifa-social-link-item[aria-label="Telegram Support"] .icon svg {
+  color: #229ed9;
+}
+
+.betifa-social-link-item[aria-label="WhatsApp Destek"] .icon svg {
+  color: #25d366;
+}
+
+/* Hover'da hafif scale + parlama */
 .betifa-social-link-item:hover .icon svg {
-  color: var(--accent);
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 6px currentColor);
 }
-
 
 /* ========== MOBILE APP BAR ========== */
 .betifa-mobile-app-bar-wrapper {
