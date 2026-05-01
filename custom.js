@@ -701,7 +701,7 @@
     wrapper.className = 'container betifa-section-originals-wrapper';
 
     const gamesHTML = games.map(game => {
-      const url = `${langPrefix}/casino/games/${game.slug}`;
+      const url = `${langPrefix}/games/${game.slug}`;
       return `
         <a class="betifa-originals-game-item" data-internal-link="${url}" href="${url}">
           <img src="${game.image}" alt="${game.name}" loading="lazy">
