@@ -1487,3 +1487,41 @@
         background: radial-gradient(circle at 86% 88%, #f31f5129, #0000 20%), linear-gradient(#050a1500, #050a1552 30%, #050a157a) !important;
     }
 }
+
+/* ========== SIDEBAR COLLAPSED STATE — DEPOSIT / PROMOTIONS / BONUS BUTTONS ========== */
+/* Sidebar kapalıyken (active-menu yokken) 3 custom butonu icon-only moda al */
+
+#responsive-menu:not(.active-menu) .betifa-sidebar-deposit-btn,
+#responsive-menu:not(.active-menu) .betifa-sidebar-promotions-btn,
+#responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn {
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  border-radius: 10px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  justify-content: center !important;
+}
+
+/* Text'leri gizle */
+#responsive-menu:not(.active-menu) .betifa-sidebar-deposit-btn .betifa-sidebar-deposit-text,
+#responsive-menu:not(.active-menu) .betifa-sidebar-promotions-btn .betifa-sidebar-promotions-text,
+#responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn .betifa-sidebar-bonus-text {
+  display: none !important;
+}
+
+/* İkonları biraz büyüt ki ortada güzel dursun */
+#responsive-menu:not(.active-menu) .betifa-sidebar-deposit-btn .deposit-icon,
+#responsive-menu:not(.active-menu) .betifa-sidebar-promotions-btn .promotions-icon,
+#responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn .bonus-icon {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Shimmer (::after) efektini collapsed modda kapat — kare alanda taşma yapıyor */
+#responsive-menu:not(.active-menu) .betifa-sidebar-deposit-btn::after,
+#responsive-menu:not(.active-menu) .betifa-sidebar-promotions-btn::after,
+#responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn::after {
+  display: none !important;
+}
