@@ -1341,3 +1341,149 @@
   transform: translateY(0);
   box-shadow: 0 2px 10px rgba(245, 184, 0, 0.4);
 }
+
+/* ========== BETIFA THEME OVERRIDES — STICKY MENU & FAB ========== */
+
+.lowbar-fab__backdrop {
+    background: radial-gradient(circle at 82% 88%, #f31f512e, #0000 22%), linear-gradient(#050a1500, #050a1594 24%, #050a15d1) !important;
+}
+
+.lowbar-fab__action {
+    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
+    border: 1px solid #f31f512e !important;
+    box-shadow: 0 14px 32px #04091466 !important;
+}
+
+.lowbar-fab__action:before {
+    background: linear-gradient(#ffffff14, #fff0 36%), radial-gradient(240px 80px at 0 0, #f31f5124, #0000 58%) !important;
+}
+
+.lowbar-fab__action.is-support .icon {
+    background: linear-gradient(#f31f5157, #7a0f2842) !important;
+    border-color: #f31f513d !important;
+    box-shadow: 0 8px 16px #f31f5138, inset 0 1px #ffffff14 !important;
+}
+
+.lowbar-fab__action.is-home .icon {
+    background: linear-gradient(#f31f5157, #6b0a213d) !important;
+    border-color: #ff5b7d38 !important;
+    box-shadow: 0 8px 16px #f31f512e, inset 0 1px #ffffff14 !important;
+}
+
+.lowbar-fab__action.is-chat .icon {
+    background: linear-gradient(#9333ea52, #4b1a763d) !important;
+    border-color: #c084fc3d !important;
+    box-shadow: 0 8px 16px #7c2dc733, inset 0 1px #ffffff14 !important;
+}
+
+.lowbar-fab__action.is-deposit .icon {
+    background: linear-gradient(#00d26a57, #006b353d) !important;
+    border-color: #5cd6b138 !important;
+    box-shadow: 0 8px 16px #00a8542e, inset 0 1px #ffffff14 !important;
+}
+
+.lowbar-fab__action.is-bonus .icon {
+    background: linear-gradient(#f5b8004d, #7a5c003d) !important;
+    border-color: #ffd54f38 !important;
+    box-shadow: 0 8px 16px #c4920a2e, inset 0 1px #ffffff14 !important;
+}
+
+.lowbar-fab__action.is-wallet .icon {
+    background: linear-gradient(#f31f5157, #6b0a213d) !important;
+    border-color: #ff759138 !important;
+    box-shadow: 0 8px 16px #f31f512e, inset 0 1px #ffffff14 !important;
+}
+
+.lowbar-fab__action.is-support {
+    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
+}
+
+.lowbar-fab__action.is-home {
+    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
+}
+
+.lowbar-fab__action.is-chat {
+    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
+}
+
+.lowbar-fab__action.is-deposit {
+    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
+}
+
+.lowbar-fab__action.is-bonus {
+    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
+}
+
+.lowbar-fab__action.is-wallet {
+    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
+}
+
+.lowbar-fab__action.is-login {
+    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
+}
+
+.lowbar-fab__action.is-register {
+    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
+}
+
+.lowbar-fab__action.is-login .icon {
+    background: linear-gradient(#f31f5157, #6b0a213d) !important;
+    border-color: #ff759138 !important;
+    box-shadow: 0 8px 16px #f31f512e, inset 0 1px #ffffff14 !important;
+}
+
+.lowbar-fab__action.is-register .icon {
+    background: linear-gradient(#f31f5157, #6b0a213d) !important;
+    border-color: #ff5b7d38 !important;
+    box-shadow: 0 8px 16px #f31f512e, inset 0 1px #ffffff14 !important;
+}
+
+.lowbar-fab__trigger-rings {
+    background: radial-gradient(circle at 24% 24%, #f31f516b, #0000 40%), radial-gradient(circle at 76% 76%, #f31f512e, #0000 46%), linear-gradient(#1a1a24a8, #0e0e168f) !important;
+    border: 1px solid #f31f5147 !important;
+    box-shadow: 0 18px 42px #04091866, inset 0 0 0 1px #ffffff0a, 0 0 0 8px #f31f510f !important;
+}
+
+.lowbar-fab__trigger-rings:before {
+    background: linear-gradient(#2a1a24fa, #14101afa) !important;
+    border: 1px solid #ffffff14 !important;
+    box-shadow: inset 0 10px 18px #ffffff0a, inset 0 -10px 14px #02071457 !important;
+}
+
+.lowbar-fab__trigger-rings:after {
+    background: radial-gradient(circle, #f31f5138, #f31f5100 68%) !important;
+}
+
+.lowbar-fab__trigger-glyph--menu {
+    filter: drop-shadow(0 2px 10px #f31f513d) !important;
+}
+
+.lowbar-fab__trigger-caret {
+    background: linear-gradient(#f31f51fa, #7a0f28fa) !important;
+    border: 1px solid #ff5b7d3d !important;
+    box-shadow: 0 8px 18px #f31f5152 !important;
+}
+
+.sticky-menu .menu-item.active .text {
+    color: #f31f51 !important;
+}
+
+.sticky-menu .menu-item.active .icon img {
+    filter: invert(31%) sepia(99%) saturate(4762%) hue-rotate(335deg) brightness(95%) contrast(104%) !important;
+}
+
+.sticky-menu .menu-item.wallet .guest-home-icon {
+    background: radial-gradient(circle at 30% 30%, #f31f5157, #0000 42%), linear-gradient(#1a1a24fa, #0e0e16fa) !important;
+    border: 1px solid #f31f5138 !important;
+    box-shadow: 0 10px 18px #00000059, inset 0 1px #ffffff2e !important;
+}
+
+.sticky-menu .menu-item.wallet.active .logo img {
+    box-shadow: 0 14px 22px #0000006b, 0 0 0 2px #f31f5138, inset 0 1px #ffffff2e !important;
+}
+
+@media (min-width: 992px) {
+    .lowbar-fab__backdrop {
+        background: radial-gradient(circle at 86% 88%, #f31f5129, #0000 20%), linear-gradient(#050a1500, #050a1552 30%, #050a157a) !important;
+    }
+}
