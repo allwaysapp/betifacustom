@@ -1525,3 +1525,7 @@
 #responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn::after {
   display: none !important;
 }
+
+.sb-top-btn[aria-label="SafeOnlineCasino"] {
+  display: none !important;
+}
