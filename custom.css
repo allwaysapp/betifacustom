@@ -1532,3 +1532,14 @@
 #comm100-float-button-6de539a1-5c25-424b-a80e-55dfb62b47f2-2 {
 display:none !important;
 }
+
+.lowbar-fab__stack {
+    pointer-events: none;
+    flex-direction: column;
+    align-items: normal !important;
+    gap: 8px;
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+}
