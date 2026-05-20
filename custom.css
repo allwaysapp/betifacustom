@@ -89,12 +89,10 @@
   margin-bottom: 4px;
 }
 
-/* Default — fallback */
 .betifa-social-link-item .icon svg {
   transition: color 0.16s ease, transform 0.16s ease, filter 0.16s ease;
 }
 
-/* Marka renkleri (aria-label ile match) */
 .betifa-social-link-item[aria-label="Instagram"] .icon svg {
   color: #e1306c;
 }
@@ -112,11 +110,11 @@
   color: #25d366;
 }
 
-/* Hover'da hafif scale + parlama */
 .betifa-social-link-item:hover .icon svg {
   transform: scale(1.1);
   filter: drop-shadow(0 0 6px currentColor);
 }
+
 
 /* ========== MOBILE APP BAR ========== */
 .betifa-mobile-app-bar-wrapper {
@@ -248,82 +246,29 @@
     margin-top: 12px;
     margin-bottom: 4px;
   }
-
   .betifa-mobile-app-bar {
     padding: 12px 16px;
     border-radius: var(--radius-sm);
   }
-
-  .betifa-app-bar-content {
-    gap: 12px;
-  }
-
-  .betifa-app-bar-icon {
-    width: 36px;
-    height: 36px;
-  }
-
-  .betifa-app-bar-icon svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .betifa-app-bar-title {
-    font-size: 13px;
-  }
-
-  .betifa-app-bar-desc {
-    font-size: 10px;
-  }
-
-  .betifa-app-bar-button {
-    padding: 8px 14px;
-  }
-
-  .betifa-app-bar-btn-text {
-    font-size: 11px;
-  }
-
-  .betifa-app-bar-button svg {
-    width: 14px;
-    height: 14px;
-  }
+  .betifa-app-bar-content { gap: 12px; }
+  .betifa-app-bar-icon { width: 36px; height: 36px; }
+  .betifa-app-bar-icon svg { width: 20px; height: 20px; }
+  .betifa-app-bar-title { font-size: 13px; }
+  .betifa-app-bar-desc { font-size: 10px; }
+  .betifa-app-bar-button { padding: 8px 14px; }
+  .betifa-app-bar-btn-text { font-size: 11px; }
+  .betifa-app-bar-button svg { width: 14px; height: 14px; }
 }
 
 @media (max-width: 480px) {
-  .betifa-mobile-app-bar {
-    padding: 10px 12px;
-  }
-
-  .betifa-app-bar-content {
-    gap: 10px;
-  }
-
-  .betifa-app-bar-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .betifa-app-bar-icon svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .betifa-app-bar-title {
-    font-size: 12px;
-  }
-
-  .betifa-app-bar-desc {
-    font-size: 9px;
-  }
-
-  .betifa-app-bar-button {
-    padding: 8px 12px;
-  }
-
-  .betifa-app-bar-btn-text {
-    font-size: 10px;
-  }
+  .betifa-mobile-app-bar { padding: 10px 12px; }
+  .betifa-app-bar-content { gap: 10px; }
+  .betifa-app-bar-icon { width: 32px; height: 32px; }
+  .betifa-app-bar-icon svg { width: 18px; height: 18px; }
+  .betifa-app-bar-title { font-size: 12px; }
+  .betifa-app-bar-desc { font-size: 9px; }
+  .betifa-app-bar-button { padding: 8px 12px; }
+  .betifa-app-bar-btn-text { font-size: 10px; }
 }
 
 
@@ -552,17 +497,14 @@
   .betifa-banner-section {
     flex-direction: column;
   }
-
   .betifa-banner-product-sport,
   .betifa-banner-product-casino {
     animation-duration: 6s;
   }
-
   @keyframes betifa-banner-floatUp {
     0%, 100% { transform: translateY(0px); }
     50%      { transform: translateY(-3px); }
   }
-
   @keyframes betifa-banner-floatDown {
     0%, 100% { transform: translateY(-3px); }
     50%      { transform: translateY(0px); }
@@ -575,21 +517,17 @@
     line-height: 1.2;
     margin-bottom: 0.5rem;
   }
-
   .betifa-banner-title p {
     font-size: clamp(0.5rem, 2.5vw, 1.25rem);
     margin: 0;
   }
-
   .betifa-banner-section {
     gap: 0.5rem;
   }
-
   .betifa-banner-product-sport:hover,
   .betifa-banner-product-casino:hover {
     transform: translateY(-4px) scale(1.02);
   }
-
   .betifa-banner-right a:hover {
     transform: translateY(-2px) scale(1.01);
   }
@@ -737,7 +675,6 @@
     border-radius: var(--radius-md);
     gap: 1rem;
   }
-
   .betifa-originals-title {
     justify-content: flex-start;
     position: relative;
@@ -745,11 +682,9 @@
     width: 100%;
     align-items: center;
   }
-
   .betifa-originals-title img {
     max-width: 200px;
   }
-
   .betifa-originals-title .betifa-originals-arrow {
     position: absolute;
     top: 50%;
@@ -758,24 +693,19 @@
     height: 32px;
     z-index: 5;
   }
-
   .betifa-originals-title .betifa-originals-arrow-prev {
     right: 44px;
   }
-
   .betifa-originals-title .betifa-originals-arrow-next {
     right: 4px;
   }
-
   .betifa-originals-slider {
     gap: 0;
     width: 100%;
   }
-
   .betifa-originals-track {
     gap: 6px;
   }
-
   .betifa-originals-arrow svg {
     width: 16px;
     height: 16px;
@@ -888,219 +818,123 @@
 }
 
 
-/* ========== SIDEBAR DEPOSIT BUTTON ========== */
-.betifa-sidebar-deposit-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+/* ==========================================
+   SIDEBAR GIF BUTTONS — DEPOSIT / PROMOTIONS / BONUS / WHEEL
+   GIF arkaplanlı, içerik yok, hover yok
+   ========================================== */
+
+/* Ortak buton tabanı */
+.betifa-sidebar-deposit-btn,
+.betifa-sidebar-promotions-btn,
+.betifa-sidebar-bonus-btn,
+.betifa-sidebar-wheel-btn {
+  display: block;
   width: 100%;
   height: 48px;
+  padding: 0;
+  border-radius: 10px;
+  text-decoration: none;
+  background-color: #1d1d25;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: none;
+  overflow: hidden;
+  /* İçerikleri gizle (eski text/icon span'leri varsa) */
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+}
+
+/* Eski içerikleri (text + icon span'leri) tamamen gizle */
+.betifa-sidebar-deposit-btn *,
+.betifa-sidebar-promotions-btn *,
+.betifa-sidebar-bonus-btn *,
+.betifa-sidebar-wheel-btn * {
+  display: none !important;
+}
+
+/* Pseudo-element shimmer'ları kaldır */
+.betifa-sidebar-deposit-btn::before,
+.betifa-sidebar-deposit-btn::after,
+.betifa-sidebar-promotions-btn::before,
+.betifa-sidebar-promotions-btn::after,
+.betifa-sidebar-bonus-btn::before,
+.betifa-sidebar-bonus-btn::after,
+.betifa-sidebar-wheel-btn::before,
+.betifa-sidebar-wheel-btn::after {
+  content: none !important;
+}
+
+/* Hover/active efektlerini kaldır */
+.betifa-sidebar-deposit-btn:hover,
+.betifa-sidebar-promotions-btn:hover,
+.betifa-sidebar-bonus-btn:hover,
+.betifa-sidebar-wheel-btn:hover,
+.betifa-sidebar-deposit-btn:active,
+.betifa-sidebar-promotions-btn:active,
+.betifa-sidebar-bonus-btn:active,
+.betifa-sidebar-wheel-btn:active {
+  transform: none;
+  box-shadow: none;
+  filter: none;
+  animation: none;
+}
+
+/* Eski animation tanımlarını override et */
+.betifa-sidebar-deposit-btn,
+.betifa-sidebar-promotions-btn,
+.betifa-sidebar-bonus-btn,
+.betifa-sidebar-wheel-btn {
+  animation: none !important;
+  box-shadow: none;
+}
+
+/* Buton görselleri (her butonun kendi GIF'i) */
+.betifa-sidebar-deposit-btn {
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/para-yatir.gif');
   margin-top: 12px;
   margin-bottom: 4px;
-  padding: 0 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  background: linear-gradient(
-    270deg,
-    #1d1d25 0%,
-    #00d26a 25%,
-    #1d1d25 50%,
-    #00d26a 75%,
-    #1d1d25 100%
-  );
-  background-size: 400% 400%;
-  animation: betifa-sidebar-deposit-flow 6s ease-in-out infinite;
-  box-shadow: 0 4px 15px rgba(0, 210, 106, 0.25);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(0, 210, 106, 0.35);
-  box-sizing: border-box;
 }
 
-@keyframes betifa-sidebar-deposit-flow {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.betifa-sidebar-deposit-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 10px;
-  pointer-events: none;
-}
-
-.betifa-sidebar-deposit-btn .deposit-icon {
-  fill: #ffffff;
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-  position: relative;
-  z-index: 2;
-}
-
-.betifa-sidebar-deposit-btn .betifa-sidebar-deposit-text {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  line-height: 1;
-  white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-  text-transform: uppercase;
-  position: relative;
-  z-index: 2;
-}
-
-.betifa-sidebar-deposit-btn::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -100%;
-  width: 60%;
-  height: 200%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transform: skewX(-25deg);
-  transition: left 0.6s ease;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.betifa-sidebar-deposit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(0, 210, 106, 0.55);
-  border-color: rgba(0, 210, 106, 0.7);
-  animation-duration: 3s;
-}
-
-.betifa-sidebar-deposit-btn:hover::before { opacity: 1; }
-.betifa-sidebar-deposit-btn:hover::after { left: 150%; }
-.betifa-sidebar-deposit-btn:hover .deposit-icon { transform: scale(1.1); }
-
-.betifa-sidebar-deposit-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(0, 210, 106, 0.4);
-}
-
-
-/* ========== SIDEBAR PROMOTIONS BUTTON ========== */
 .betifa-sidebar-promotions-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  height: 48px;
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/promosyonlar.gif');
   margin-top: 8px;
   margin-bottom: 4px;
-  padding: 0 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  background: linear-gradient(
-    270deg,
-    #1d1d25 0%,
-    #f31f51 25%,
-    #1d1d25 50%,
-    #f31f51 75%,
-    #1d1d25 100%
-  );
-  background-size: 400% 400%;
-  animation: betifa-promotions-flow 6s ease-in-out infinite;
-  box-shadow: 0 4px 15px rgba(243, 31, 81, 0.25);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(243, 31, 81, 0.35);
-  box-sizing: border-box;
 }
 
-@keyframes betifa-promotions-flow {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.betifa-sidebar-bonus-btn {
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/bonus-talep.gif');
 }
 
-.betifa-sidebar-promotions-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 10px;
-  pointer-events: none;
+.betifa-sidebar-wheel-btn {
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cark-cevir.gif');
 }
 
-.betifa-sidebar-promotions-btn .promotions-icon {
-  fill: #ffffff;
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-  position: relative;
-  z-index: 2;
+/* ==========================================
+   SIDEBAR BONUS + WHEEL ROW — yan yana layout
+   ========================================== */
+.betifa-sidebar-row {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 4px;
 }
 
-.betifa-sidebar-promotions-btn .betifa-sidebar-promotions-text {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  line-height: 1;
-  white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-  text-transform: uppercase;
-  position: relative;
-  z-index: 2;
+.betifa-sidebar-row .betifa-sidebar-bonus-btn,
+.betifa-sidebar-row .betifa-sidebar-wheel-btn {
+  flex: 1;
+  min-width: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-.betifa-sidebar-promotions-btn::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -100%;
-  width: 60%;
-  height: 200%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transform: skewX(-25deg);
-  transition: left 0.6s ease;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.betifa-sidebar-promotions-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(243, 31, 81, 0.55);
-  border-color: rgba(243, 31, 81, 0.7);
-  animation-duration: 3s;
-}
-
-.betifa-sidebar-promotions-btn:hover::before { opacity: 1; }
-.betifa-sidebar-promotions-btn:hover::after { left: 150%; }
-.betifa-sidebar-promotions-btn:hover .promotions-icon {
-  transform: scale(1.15) rotate(-8deg);
-}
-
-.betifa-sidebar-promotions-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(243, 31, 81, 0.4);
-}
 
 /* ========== extras ========== */
-
 .bonus-request-imageWrap {
     height: auto !important;
     overflow: hidden;
@@ -1202,7 +1036,6 @@
   box-shadow: 0 2px 6px rgba(243, 31, 81, 0.3);
 }
 
-/* Pulse glow — sürekli dikkat çek */
 @keyframes betifa-header-chat-pulse {
   0%, 100% {
     box-shadow: 0 2px 8px rgba(243, 31, 81, 0.2),
@@ -1222,315 +1055,156 @@
   animation: none;
 }
 
-/* Mobile: biraz daha küçük */
 @media (max-width: 768px) {
   .betifa-header-chat-btn {
     width: 32px;
     height: 32px;
     margin: 0 2px;
   }
-
   .betifa-header-chat-btn .icon {
     width: 18px;
     height: 18px;
   }
 }
 
-/* ========== SIDEBAR BONUS REQUEST BUTTON ========== */
-.betifa-sidebar-bonus-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  height: 48px;
-  margin-top: 8px;
-  margin-bottom: 4px;
-  padding: 0 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  background: linear-gradient(
-    270deg,
-    #1d1d25 0%,
-    #f5b800 25%,
-    #1d1d25 50%,
-    #f5b800 75%,
-    #1d1d25 100%
-  );
-  background-size: 400% 400%;
-  animation: betifa-bonus-flow 6s ease-in-out infinite;
-  box-shadow: 0 4px 15px rgba(245, 184, 0, 0.25);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(245, 184, 0, 0.4);
-  box-sizing: border-box;
-}
-
-@keyframes betifa-bonus-flow {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.betifa-sidebar-bonus-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 10px;
-  pointer-events: none;
-}
-
-.betifa-sidebar-bonus-btn .bonus-icon {
-  fill: #ffffff;
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-  position: relative;
-  z-index: 2;
-}
-
-.betifa-sidebar-bonus-btn .betifa-sidebar-bonus-text {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  line-height: 1;
-  white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
-  text-transform: uppercase;
-  position: relative;
-  z-index: 2;
-}
-
-.betifa-sidebar-bonus-btn::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -100%;
-  width: 60%;
-  height: 200%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
-  transform: skewX(-25deg);
-  transition: left 0.6s ease;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.betifa-sidebar-bonus-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(245, 184, 0, 0.6);
-  border-color: rgba(245, 184, 0, 0.8);
-  animation-duration: 3s;
-}
-
-.betifa-sidebar-bonus-btn:hover::before { opacity: 1; }
-.betifa-sidebar-bonus-btn:hover::after { left: 150%; }
-.betifa-sidebar-bonus-btn:hover .bonus-icon {
-  transform: scale(1.15) rotate(8deg);
-}
-
-.betifa-sidebar-bonus-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(245, 184, 0, 0.4);
-}
 
 /* ========== BETIFA THEME OVERRIDES — STICKY MENU & FAB ========== */
-
 .lowbar-fab__backdrop {
     background: radial-gradient(circle at 82% 88%, #f31f512e, #0000 22%), linear-gradient(#050a1500, #050a1594 24%, #050a15d1) !important;
 }
-
 .lowbar-fab__action {
     background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
     border: 1px solid #f31f512e !important;
     box-shadow: 0 14px 32px #04091466 !important;
 }
-
 .lowbar-fab__action:before {
     background: linear-gradient(#ffffff14, #fff0 36%), radial-gradient(240px 80px at 0 0, #f31f5124, #0000 58%) !important;
 }
-
 .lowbar-fab__action.is-support .icon {
     background: linear-gradient(#f31f5157, #7a0f2842) !important;
     border-color: #f31f513d !important;
     box-shadow: 0 8px 16px #f31f5138, inset 0 1px #ffffff14 !important;
 }
-
 .lowbar-fab__action.is-home .icon {
     background: linear-gradient(#f31f5157, #6b0a213d) !important;
     border-color: #ff5b7d38 !important;
     box-shadow: 0 8px 16px #f31f512e, inset 0 1px #ffffff14 !important;
 }
-
 .lowbar-fab__action.is-chat .icon {
     background: linear-gradient(#9333ea52, #4b1a763d) !important;
     border-color: #c084fc3d !important;
     box-shadow: 0 8px 16px #7c2dc733, inset 0 1px #ffffff14 !important;
 }
-
 .lowbar-fab__action.is-deposit .icon {
     background: linear-gradient(#00d26a57, #006b353d) !important;
     border-color: #5cd6b138 !important;
     box-shadow: 0 8px 16px #00a8542e, inset 0 1px #ffffff14 !important;
 }
-
 .lowbar-fab__action.is-bonus .icon {
     background: linear-gradient(#f5b8004d, #7a5c003d) !important;
     border-color: #ffd54f38 !important;
     box-shadow: 0 8px 16px #c4920a2e, inset 0 1px #ffffff14 !important;
 }
-
 .lowbar-fab__action.is-wallet .icon {
     background: linear-gradient(#f31f5157, #6b0a213d) !important;
     border-color: #ff759138 !important;
     box-shadow: 0 8px 16px #f31f512e, inset 0 1px #ffffff14 !important;
 }
-
-.lowbar-fab__action.is-support {
-    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
-}
-
-.lowbar-fab__action.is-home {
-    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
-}
-
-.lowbar-fab__action.is-chat {
-    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
-}
-
-.lowbar-fab__action.is-deposit {
-    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
-}
-
-.lowbar-fab__action.is-bonus {
-    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
-}
-
-.lowbar-fab__action.is-wallet {
-    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
-}
-
-.lowbar-fab__action.is-login {
-    background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
-}
-
+.lowbar-fab__action.is-support,
+.lowbar-fab__action.is-home,
+.lowbar-fab__action.is-chat,
+.lowbar-fab__action.is-deposit,
+.lowbar-fab__action.is-bonus,
+.lowbar-fab__action.is-wallet,
+.lowbar-fab__action.is-login,
 .lowbar-fab__action.is-register {
     background: linear-gradient(#1a1a24fa, #0e0e16fa) !important;
 }
-
 .lowbar-fab__action.is-login .icon {
     background: linear-gradient(#f31f5157, #6b0a213d) !important;
     border-color: #ff759138 !important;
     box-shadow: 0 8px 16px #f31f512e, inset 0 1px #ffffff14 !important;
 }
-
 .lowbar-fab__action.is-register .icon {
     background: linear-gradient(#f31f5157, #6b0a213d) !important;
     border-color: #ff5b7d38 !important;
     box-shadow: 0 8px 16px #f31f512e, inset 0 1px #ffffff14 !important;
 }
-
 .lowbar-fab__trigger-rings {
     background: radial-gradient(circle at 24% 24%, #f31f516b, #0000 40%), radial-gradient(circle at 76% 76%, #f31f512e, #0000 46%), linear-gradient(#1a1a24a8, #0e0e168f) !important;
     border: 1px solid #f31f5147 !important;
     box-shadow: 0 18px 42px #04091866, inset 0 0 0 1px #ffffff0a, 0 0 0 8px #f31f510f !important;
 }
-
 .lowbar-fab__trigger-rings:before {
     background: linear-gradient(#2a1a24fa, #14101afa) !important;
     border: 1px solid #ffffff14 !important;
     box-shadow: inset 0 10px 18px #ffffff0a, inset 0 -10px 14px #02071457 !important;
 }
-
 .lowbar-fab__trigger-rings:after {
     background: radial-gradient(circle, #f31f5138, #f31f5100 68%) !important;
 }
-
 .lowbar-fab__trigger-glyph--menu {
     filter: drop-shadow(0 2px 10px #f31f513d) !important;
 }
-
 .lowbar-fab__trigger-caret {
     background: linear-gradient(#f31f51fa, #7a0f28fa) !important;
     border: 1px solid #ff5b7d3d !important;
     box-shadow: 0 8px 18px #f31f5152 !important;
 }
-
 .sticky-menu .menu-item.active .text {
     color: #f31f51 !important;
 }
-
 .sticky-menu .menu-item.active .icon img {
     filter: invert(31%) sepia(99%) saturate(4762%) hue-rotate(335deg) brightness(95%) contrast(104%) !important;
 }
-
 .sticky-menu .menu-item.wallet .guest-home-icon {
     background: radial-gradient(circle at 30% 30%, #f31f5157, #0000 42%), linear-gradient(#1a1a24fa, #0e0e16fa) !important;
     border: 1px solid #f31f5138 !important;
     box-shadow: 0 10px 18px #00000059, inset 0 1px #ffffff2e !important;
 }
-
 .sticky-menu .menu-item.wallet.active .logo img {
     box-shadow: 0 14px 22px #0000006b, 0 0 0 2px #f31f5138, inset 0 1px #ffffff2e !important;
 }
-
 @media (min-width: 992px) {
     .lowbar-fab__backdrop {
         background: radial-gradient(circle at 86% 88%, #f31f5129, #0000 20%), linear-gradient(#050a1500, #050a1552 30%, #050a157a) !important;
     }
 }
 
-/* ========== SIDEBAR COLLAPSED STATE — DEPOSIT / PROMOTIONS / BONUS BUTTONS ========== */
-/* Sidebar kapalıyken (active-menu yokken) 3 custom butonu icon-only moda al */
 
+/* ==========================================
+   SIDEBAR COLLAPSED STATE
+   Collapsed modda 4 GIF buton da alt alta, tek tek 44px kare
+   Bonus + Wheel row'u alt alta düşer
+   ========================================== */
+
+/* Row collapsed modda flex-column'a düş */
+#responsive-menu:not(.active-menu) .betifa-sidebar-row {
+  flex-direction: column !important;
+  gap: 6px !important;
+  align-items: center !important;
+}
+
+/* Tüm 4 GIF butonu collapsed modda 44px kare */
 #responsive-menu:not(.active-menu) .betifa-sidebar-deposit-btn,
 #responsive-menu:not(.active-menu) .betifa-sidebar-promotions-btn,
-#responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn {
+#responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn,
+#responsive-menu:not(.active-menu) .betifa-sidebar-wheel-btn {
   width: 44px !important;
   height: 44px !important;
   padding: 0 !important;
-  gap: 0 !important;
   border-radius: 10px !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  justify-content: center !important;
+  flex: 0 0 44px !important;
 }
 
-/* Text'leri gizle */
-#responsive-menu:not(.active-menu) .betifa-sidebar-deposit-btn .betifa-sidebar-deposit-text,
-#responsive-menu:not(.active-menu) .betifa-sidebar-promotions-btn .betifa-sidebar-promotions-text,
-#responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn .betifa-sidebar-bonus-text {
-  display: none !important;
-}
-
-/* İkonları biraz büyüt ki ortada güzel dursun */
-#responsive-menu:not(.active-menu) .betifa-sidebar-deposit-btn .deposit-icon,
-#responsive-menu:not(.active-menu) .betifa-sidebar-promotions-btn .promotions-icon,
-#responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn .bonus-icon {
-  width: 22px !important;
-  height: 22px !important;
-}
-
-/* Shimmer (::after) efektini collapsed modda kapat — kare alanda taşma yapıyor */
-#responsive-menu:not(.active-menu) .betifa-sidebar-deposit-btn::after,
-#responsive-menu:not(.active-menu) .betifa-sidebar-promotions-btn::after,
-#responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn::after {
-  display: none !important;
-}
 
 .sb-top-btn[aria-label="SafeOnlineCasino"] {
   display: none !important;
 }
 #comm100-float-button-6de539a1-5c25-424b-a80e-55dfb62b47f2-2 {
-display:none !important;
+  display: none !important;
 }
 
 .lowbar-fab__stack {
