@@ -38,8 +38,6 @@
 
     const el = createElement();
     currencies.parentNode.insertBefore(el, currencies);
-
-   
   }
 
   function init() {
@@ -166,8 +164,6 @@
 
     const el = createElement();
     supportBtn.parentNode.insertBefore(el, supportBtn.nextSibling);
-
-    
   }
 
   function init() {
@@ -300,8 +296,6 @@
 
     const el = createElement();
     welcomeContent.parentNode.insertBefore(el, welcomeContent.nextSibling);
-
-    
   }
 
   function init() {
@@ -350,12 +344,6 @@
 
 // ==========================================
 // FEATURE: Custom Section - Bölüm A (Banner Section)
-// Desktop: Mobile App Bar'ın altına
-// Mobile: .hp-mobile-slider.d-lg-none altına
-// Sol: başlık + sosyal butonlar + spor/casino product
-// Sağ: 5 banner (yatırım, çekim, aviator, bonus, chatifa)
-// Login durumuna göre dinamik linkler
-// Kapsam: Sadece anasayfa (/, /tr, /en)
 // ==========================================
 (function() {
   const FEATURE_ID = 'betifa-section-banner';
@@ -624,12 +612,6 @@
 
 // ==========================================
 // FEATURE: Custom Section - Bölüm C (Originals Showcase)
-// Anasayfada Banner Section'ın altına Originals oyun slider showcase ekler
-// Sol: ORIGINALS logo (background slot game görseli)
-// Sağ: 4 öne çıkan oyun (slider olarak, sağ-sol oklarla kayıyor)
-// Mobilde: 4 oyun + oklar logo'nun sağ üstünde
-// Desktop: 4 oyun + oklar yanlarda
-// Kapsam: Sadece anasayfa (/, /tr, /en)
 // ==========================================
 (function() {
   const FEATURE_ID = 'betifa-section-originals';
@@ -820,7 +802,6 @@
       });
     });
 
-    // Touch swipe (mobile)
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -836,14 +817,12 @@
       }
     }, { passive: true });
 
-    // Resize handler
     let resizeTimer;
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(updateSlider, 200);
     });
 
-    // İlk render
     updateSlider();
   }
 
@@ -877,8 +856,6 @@
     const el = createElement();
     target.parentNode.insertBefore(el, target.nextSibling);
     attachEventHandlers(el);
-
-    
   }
 
   function init() {
@@ -926,9 +903,9 @@
 
 // ==========================================
 // FEATURE: Sidebar Promotions Button
-// Deposit butonunun altına full-width animasyonlu promosyonlar butonu ekler
-// Hedef: .betifa-sidebar-deposit-btn altı (deposit sidebar buton)
-// Kapsam: Tüm sayfalar (sidebar her sayfada var)
+// Deposit butonunun altına full-width promosyonlar butonu ekler (GIF background)
+// Hedef: .betifa-sidebar-deposit-btn altı
+// Kapsam: Tüm sayfalar
 // ==========================================
 (function() {
   const FEATURE_ID = 'betifa-sidebar-promotions-btn';
@@ -951,16 +928,9 @@
   function getPromotionsText() {
     const lang = document.documentElement.lang ? document.documentElement.lang.substring(0, 2) : 'tr';
     const texts = {
-      tr: 'Promosyonlar',
-      en: 'Promotions',
-      fr: 'Promotions',
-      de: 'Aktionen',
-      es: 'Promociones',
-      ru: 'Акции',
-      jp: 'プロモーション',
-      it: 'Promozioni',
-      pt: 'Promoções',
-      nl: 'Promoties'
+      tr: 'Promosyonlar', en: 'Promotions', fr: 'Promotions',
+      de: 'Aktionen', es: 'Promociones', ru: 'Акции',
+      jp: 'プロモーション', it: 'Promozioni', pt: 'Promoções', nl: 'Promoties'
     };
     return texts[lang] || texts['tr'];
   }
@@ -979,13 +949,6 @@
     const targetUrl = langPrefix + '/promotions/active';
     a.href = targetUrl;
 
-    a.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" class="promotions-icon" aria-hidden="true">
-        <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zM15 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/>
-      </svg>
-      <span class="betifa-sidebar-promotions-text">${getPromotionsText()}</span>
-    `;
-
     a.onclick = function(e) {
       e.preventDefault();
       navigateTo(targetUrl);
@@ -1002,8 +965,6 @@
 
     const el = createElement();
     depositBtn.parentNode.insertBefore(el, depositBtn.nextSibling);
-
-    
   }
 
   function init() {
@@ -1036,12 +997,9 @@
   }
 })();
 
+
 // ==========================================
 // FEATURE: Header Chat Button
-// Header'a notification butonundan sonra brand renkli chat butonu ekler
-// Tıklayınca sayfadaki asıl chat butonunu tetikler (drawer açar)
-// Hedef: .header-minified-buttons > .notifications-box sonrası
-// Kapsam: Tüm sayfalar
 // ==========================================
 (function() {
   const FEATURE_ID = 'betifa-header-chat-btn';
@@ -1135,12 +1093,12 @@
   }
 })();
 
+
 // ==========================================
 // FEATURE: Sidebar Bonus Request Button
-// Promosyonlar butonunun altına altın renkli bonus talep butonu ekler
+// Promosyonlar butonunun altına bonus talep butonu ekler (GIF background)
 // Hedef: .betifa-sidebar-promotions-btn altı
-// Tıklayınca ?modal=bonus-request query parametresi ile modal açılır
-// Kapsam: Tüm sayfalar (sidebar her sayfada var)
+// Kapsam: Tüm sayfalar
 // ==========================================
 (function() {
   const FEATURE_ID = 'betifa-sidebar-bonus-btn';
@@ -1163,16 +1121,9 @@
   function getBonusText() {
     const lang = document.documentElement.lang ? document.documentElement.lang.substring(0, 2) : 'tr';
     const texts = {
-      tr: 'Bonus Talep',
-      en: 'Request Bonus',
-      fr: 'Demande Bonus',
-      de: 'Bonus Anfordern',
-      es: 'Solicitar Bono',
-      ru: 'Запрос Бонуса',
-      jp: 'ボーナス申請',
-      it: 'Richiedi Bonus',
-      pt: 'Pedir Bônus',
-      nl: 'Bonus Aanvragen'
+      tr: 'Bonus Talep', en: 'Request Bonus', fr: 'Demande Bonus',
+      de: 'Bonus Anfordern', es: 'Solicitar Bono', ru: 'Запрос Бонуса',
+      jp: 'ボーナス申請', it: 'Richiedi Bonus', pt: 'Pedir Bônus', nl: 'Bonus Aanvragen'
     };
     return texts[lang] || texts['tr'];
   }
@@ -1190,13 +1141,6 @@
     const langPrefix = getCurrentLanguagePrefix();
     const targetUrl = langPrefix + '?modal=bonus-request';
     a.href = targetUrl;
-
-    a.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" class="bonus-icon" aria-hidden="true">
-        <path d="M19 7h-3.18A3 3 0 0 0 13 3a3 3 0 0 0-3 3 3 3 0 0 0-3-3 3 3 0 0 0-3 3H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-3zm-6 0V6a1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1h-1zM7 5a1 1 0 0 1 1 1 1 1 0 0 1-1 1H6a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 0zM2 9h7v2H2V9zm3 4h6v7H5v-7zm8 7v-7h6v7h-6zm9-9h-7V9h7v2z"/>
-      </svg>
-      <span class="betifa-sidebar-bonus-text">${getBonusText()}</span>
-    `;
 
     a.onclick = function(e) {
       e.preventDefault();
@@ -1237,6 +1181,131 @@
       if (location.href !== lastUrl) {
         lastUrl = location.href;
         setTimeout(insertElement, 500);
+      }
+    }).observe(document, { subtree: true, childList: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+
+// ==========================================
+// FEATURE: Sidebar Wheel Button + Row Grouper
+// 1. Bonus Talep butonunun yanına Çark Çevir butonu ekler
+// 2. İki butonu bir row wrapper içine alıp yan yana gösterir
+// Hedef: .betifa-sidebar-bonus-btn'in yanı
+// Kapsam: Tüm sayfalar
+// ==========================================
+(function() {
+  const FEATURE_ID = 'betifa-sidebar-wheel-btn';
+  const ROW_ID = 'betifa-sidebar-bonus-wheel-row';
+
+  function getCurrentLanguagePrefix() {
+    const path = window.location.pathname;
+    const match = path.match(/^\/([a-z]{2})(\/|$)/);
+    return match ? '/' + match[1] : '/tr';
+  }
+
+  function navigateTo(url) {
+    if (window.next && window.next.router && typeof window.next.router.push === 'function') {
+      window.next.router.push(url);
+    } else {
+      window.history.pushState({}, '', url);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  }
+
+  function getWheelText() {
+    const lang = document.documentElement.lang ? document.documentElement.lang.substring(0, 2) : 'tr';
+    const texts = {
+      tr: 'Çark Çevir', en: 'Spin Wheel', fr: 'Tourner Roue',
+      de: 'Rad Drehen', es: 'Girar Ruleta', ru: 'Крутить Колесо',
+      jp: 'ホイールを回す', it: 'Gira Ruota', pt: 'Girar Roda', nl: 'Wiel Draaien'
+    };
+    return texts[lang] || texts['tr'];
+  }
+
+  function isWheelInserted() {
+    return document.getElementById(FEATURE_ID) !== null;
+  }
+
+  function isRowCreated() {
+    return document.getElementById(ROW_ID) !== null;
+  }
+
+  function createWheelButton() {
+    const a = document.createElement('a');
+    a.className = 'betifa-sidebar-wheel-btn';
+    a.id = FEATURE_ID;
+    a.setAttribute('aria-label', getWheelText());
+
+    const langPrefix = getCurrentLanguagePrefix();
+    const targetUrl = langPrefix + '/wheel';
+    a.href = targetUrl;
+
+    a.onclick = function(e) {
+      e.preventDefault();
+      navigateTo(targetUrl);
+    };
+
+    return a;
+  }
+
+  function createRowWrapper() {
+    const div = document.createElement('div');
+    div.id = ROW_ID;
+    div.className = 'betifa-sidebar-row';
+    return div;
+  }
+
+  function arrangeButtons() {
+    const bonusBtn = document.getElementById('betifa-sidebar-bonus-btn');
+    if (!bonusBtn) return;
+
+    // Eğer row yoksa oluştur, bonus butonu içine taşı
+    if (!isRowCreated()) {
+      const row = createRowWrapper();
+      // Bonus butonun yerine row'u koy
+      bonusBtn.parentNode.insertBefore(row, bonusBtn);
+      // Bonus butonunu row'un içine taşı
+      row.appendChild(bonusBtn);
+    }
+
+    const row = document.getElementById(ROW_ID);
+    if (!row) return;
+
+    // Wheel butonu row içinde yoksa ekle
+    if (!isWheelInserted()) {
+      const wheelBtn = createWheelButton();
+      row.appendChild(wheelBtn);
+      console.log('✅ Betifa sidebar wheel button eklendi (bonus ile yan yana)');
+    }
+  }
+
+  function init() {
+    setTimeout(arrangeButtons, 600);
+
+    const observer = new MutationObserver(() => {
+      const bonusBtn = document.getElementById('betifa-sidebar-bonus-btn');
+      if (bonusBtn && (!isWheelInserted() || !isRowCreated())) {
+        arrangeButtons();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    let lastUrl = location.href;
+    new MutationObserver(() => {
+      if (location.href !== lastUrl) {
+        lastUrl = location.href;
+        setTimeout(arrangeButtons, 600);
       }
     }).observe(document, { subtree: true, childList: true });
   }
