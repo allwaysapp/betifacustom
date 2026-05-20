@@ -91,7 +91,7 @@
     },
     {
       name: 'X (Twitter)',
-      url: 'https://x.com/betifagloball',
+      url: 'https://x.com/betifaglobalof',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>'
     },
     {
@@ -424,7 +424,7 @@
                   <a class="betifa-banner-social-btn" href="https://www.instagram.com/betifaeuropa" target="_blank" rel="noopener noreferrer">
                     <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/instagram-icon.png" alt="Instagram">
                   </a>
-                  <a class="betifa-banner-social-btn" href="https://x.com/betifagloball" target="_blank" rel="noopener noreferrer">
+                  <a class="betifa-banner-social-btn" href="https://x.com/betifaglobalof" target="_blank" rel="noopener noreferrer">
                     <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/d9743ed38236d3fe43eeff17742aee81c64f18b8/img/twitter-icon.png" alt="X">
                   </a>
                   <a class="betifa-banner-social-btn" href="https://wa.me/38977695639" target="_blank" rel="noopener noreferrer">
