@@ -820,10 +820,8 @@
 
 /* ==========================================
    SIDEBAR GIF BUTTONS — DEPOSIT / PROMOTIONS / BONUS / WHEEL
-   GIF arkaplanlı, içerik yok, hover yok
    ========================================== */
 
-/* Ortak buton tabanı */
 .betifa-sidebar-deposit-btn,
 .betifa-sidebar-promotions-btn,
 .betifa-sidebar-bonus-btn,
@@ -842,13 +840,13 @@
   box-sizing: border-box;
   border: none;
   overflow: hidden;
-  /* İçerikleri gizle (eski text/icon span'leri varsa) */
   font-size: 0;
   line-height: 0;
   color: transparent;
+  animation: none !important;
+  box-shadow: none;
 }
 
-/* Eski içerikleri (text + icon span'leri) tamamen gizle */
 .betifa-sidebar-deposit-btn *,
 .betifa-sidebar-promotions-btn *,
 .betifa-sidebar-bonus-btn *,
@@ -856,7 +854,6 @@
   display: none !important;
 }
 
-/* Pseudo-element shimmer'ları kaldır */
 .betifa-sidebar-deposit-btn::before,
 .betifa-sidebar-deposit-btn::after,
 .betifa-sidebar-promotions-btn::before,
@@ -868,7 +865,6 @@
   content: none !important;
 }
 
-/* Hover/active efektlerini kaldır */
 .betifa-sidebar-deposit-btn:hover,
 .betifa-sidebar-promotions-btn:hover,
 .betifa-sidebar-bonus-btn:hover,
@@ -876,23 +872,19 @@
 .betifa-sidebar-deposit-btn:active,
 .betifa-sidebar-promotions-btn:active,
 .betifa-sidebar-bonus-btn:active,
-.betifa-sidebar-wheel-btn:active {
-  transform: none;
-  box-shadow: none;
-  filter: none;
-  animation: none;
-}
-
-/* Eski animation tanımlarını override et */
-.betifa-sidebar-deposit-btn,
-.betifa-sidebar-promotions-btn,
-.betifa-sidebar-bonus-btn,
-.betifa-sidebar-wheel-btn {
+.betifa-sidebar-wheel-btn:active,
+.betifa-sidebar-deposit-btn:focus,
+.betifa-sidebar-promotions-btn:focus,
+.betifa-sidebar-bonus-btn:focus,
+.betifa-sidebar-wheel-btn:focus {
+  transform: none !important;
+  box-shadow: none !important;
+  filter: none !important;
   animation: none !important;
-  box-shadow: none;
+  background-color: #1d1d25 !important;
+  border-color: transparent !important;
 }
 
-/* Buton görselleri (her butonun kendi GIF'i) */
 .betifa-sidebar-deposit-btn {
   background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/para-yatir.gif');
   margin-top: 12px;
@@ -913,8 +905,39 @@
   background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cark-cevir.gif');
 }
 
+.betifa-sidebar-deposit-btn:hover {
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/para-yatir.gif') !important;
+}
+
+.betifa-sidebar-promotions-btn:hover {
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/promosyonlar.gif') !important;
+}
+
+.betifa-sidebar-bonus-btn:hover {
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/bonus-talep.gif') !important;
+}
+
+.betifa-sidebar-wheel-btn:hover {
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cark-cevir.gif') !important;
+}
+
+.betifa-sidebar-deposit-btn:hover::before,
+.betifa-sidebar-deposit-btn:hover::after,
+.betifa-sidebar-promotions-btn:hover::before,
+.betifa-sidebar-promotions-btn:hover::after,
+.betifa-sidebar-bonus-btn:hover::before,
+.betifa-sidebar-bonus-btn:hover::after,
+.betifa-sidebar-wheel-btn:hover::before,
+.betifa-sidebar-wheel-btn:hover::after {
+  content: none !important;
+  opacity: 0 !important;
+  background: transparent !important;
+  display: none !important;
+}
+
+
 /* ==========================================
-   SIDEBAR BONUS + WHEEL ROW — yan yana layout
+   SIDEBAR BONUS + WHEEL ROW
    ========================================== */
 .betifa-sidebar-row {
   display: flex;
@@ -1174,18 +1197,13 @@
 
 /* ==========================================
    SIDEBAR COLLAPSED STATE
-   Collapsed modda 4 GIF buton da alt alta, tek tek 44px kare
-   Bonus + Wheel row'u alt alta düşer
    ========================================== */
-
-/* Row collapsed modda flex-column'a düş */
 #responsive-menu:not(.active-menu) .betifa-sidebar-row {
   flex-direction: column !important;
   gap: 6px !important;
   align-items: center !important;
 }
 
-/* Tüm 4 GIF butonu collapsed modda 44px kare */
 #responsive-menu:not(.active-menu) .betifa-sidebar-deposit-btn,
 #responsive-menu:not(.active-menu) .betifa-sidebar-promotions-btn,
 #responsive-menu:not(.active-menu) .betifa-sidebar-bonus-btn,
