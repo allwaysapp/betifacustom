@@ -1,10 +1,169 @@
+// ============================================================
+// BETIFA CUSTOM.JS — REFACTORED CORE
+// Tüm feature'lar tek bir paylaşımlı observer + history hook +
+// resize hub altyapısı üzerinden çalışır. Davranış aynıdır.
+// ============================================================
+(function() {
+  if (window.__BetifaCore) return; // çift yükleme koruması
 
-// ==========================================
+  const FEATURES = [];
+  const URL_LISTENERS = [];
+  const RESIZE_LISTENERS = [];
+  const MOBILE_BREAKPOINT_DEFAULT = 992;
+
+  // --- Helpers ---------------------------------------------------
+  function getLangPrefix() {
+    const m = window.location.pathname.match(/^\/([a-z]{2})(\/|$)/);
+    return m ? '/' + m[1] : '/tr';
+  }
+
+  function getLangCode() {
+    return getLangPrefix().slice(1); // "tr" | "en" | ...
+  }
+
+  function isHomePage() {
+    const p = window.location.pathname;
+    return p === '/' || p === '/tr' || p === '/tr/' || p === '/en' || p === '/en/';
+  }
+
+  function isUserLoggedIn() {
+    return document.querySelector('.login-buttons') === null;
+  }
+
+  function navigateTo(url) {
+    if (window.next && window.next.router && typeof window.next.router.push === 'function') {
+      window.next.router.push(url);
+    } else {
+      window.history.pushState({}, '', url);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  }
+
+  function openLoginModal() {
+    navigateTo(getLangPrefix() + '?modal=auth&tab=login');
+  }
+
+  function findRealChatButton() {
+    return document.querySelector('button.chat-button[aria-label="Open chat"]')
+        || document.querySelector('button.chat-button');
+  }
+
+  // --- Feature registration --------------------------------------
+  function register(feature) {
+    // feature: { id, run(): void }
+    FEATURES.push(feature);
+  }
+
+  function onUrlChange(fn) { URL_LISTENERS.push(fn); }
+  function onResize(fn)    { RESIZE_LISTENERS.push(fn); }
+
+  // --- Single body observer (debounced) --------------------------
+  let scheduled = false;
+  function scheduleRun() {
+    if (scheduled) return;
+    scheduled = true;
+    // rAF ile bir frame'e topla; mutation fırtınasında tek çalıştırma
+    requestAnimationFrame(() => {
+      scheduled = false;
+      runAll();
+    });
+  }
+
+  function runAll() {
+    for (let i = 0; i < FEATURES.length; i++) {
+      const f = FEATURES[i];
+      try {
+        f.run();
+      } catch (e) {
+        // Bir feature patlasa diğerleri devam etsin
+        // Üretimde sessiz; debug istenirse buraya log eklenebilir
+      }
+    }
+  }
+
+  // --- Single history hook (URL change) --------------------------
+  function installHistoryHook() {
+    const origPush = history.pushState;
+    const origReplace = history.replaceState;
+
+    function fire() {
+      // Önce feature'ları tekrar koştur
+      scheduleRun();
+      // Sonra URL dinleyicilerini bilgilendir
+      for (let i = 0; i < URL_LISTENERS.length; i++) {
+        try { URL_LISTENERS[i](); } catch (e) {}
+      }
+    }
+
+    history.pushState = function() {
+      const r = origPush.apply(this, arguments);
+      fire();
+      return r;
+    };
+    history.replaceState = function() {
+      const r = origReplace.apply(this, arguments);
+      fire();
+      return r;
+    };
+    window.addEventListener('popstate', fire);
+    window.addEventListener('hashchange', fire);
+  }
+
+  // --- Single resize hub (debounced) -----------------------------
+  function installResizeHub() {
+    let t;
+    window.addEventListener('resize', function() {
+      clearTimeout(t);
+      t = setTimeout(function() {
+        for (let i = 0; i < RESIZE_LISTENERS.length; i++) {
+          try { RESIZE_LISTENERS[i](); } catch (e) {}
+        }
+      }, 200);
+    });
+  }
+
+  // --- Boot ------------------------------------------------------
+  function boot() {
+    installHistoryHook();
+    installResizeHub();
+
+    // İlk çalıştırma — bazı feature'lar geç render olan elementlere bağlı
+    setTimeout(scheduleRun, 300);
+    setTimeout(scheduleRun, 800);
+
+    // Tek body observer — tüm feature'lar bunu paylaşır
+    const mo = new MutationObserver(scheduleRun);
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+
+  window.__BetifaCore = {
+    register: register,
+    onUrlChange: onUrlChange,
+    onResize: onResize,
+    helpers: {
+      getLangPrefix: getLangPrefix,
+      getLangCode: getLangCode,
+      isHomePage: isHomePage,
+      isUserLoggedIn: isUserLoggedIn,
+      navigateTo: navigateTo,
+      openLoginModal: openLoginModal,
+      findRealChatButton: findRealChatButton,
+      MOBILE_BREAKPOINT_DEFAULT: MOBILE_BREAKPOINT_DEFAULT
+    },
+    boot: boot
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+
+
+// ============================================================
 // FEATURE: Footer Awards
-// Footer'a mobil app GIF banner + 5 ödül logosu ekler
-// Hedef: .footer-currencies'in üstüne
-// Kapsam: Tüm sayfalar
-// ==========================================
+// ============================================================
 (function() {
   const FEATURE_ID = 'betifa-footer-awards';
 
@@ -31,55 +190,20 @@
     return wrapper;
   }
 
-  function insertElement() {
+  function run() {
     if (isAlreadyInserted()) return;
-
     const currencies = document.querySelector('.footer-currencies');
     if (!currencies) return;
-
-    const el = createElement();
-    currencies.parentNode.insertBefore(el, currencies);
+    currencies.parentNode.insertBefore(createElement(), currencies);
   }
 
-  function init() {
-    setTimeout(insertElement, 300);
-
-    const observer = new MutationObserver(() => {
-      if (!isAlreadyInserted() && document.querySelector('.footer-currencies')) {
-        insertElement();
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-      if (location.href !== lastUrl) {
-        lastUrl = location.href;
-        setTimeout(insertElement, 300);
-      }
-    }).observe(document, { subtree: true, childList: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.__BetifaCore.register({ id: FEATURE_ID, run: run });
 })();
 
 
-
-
-// ==========================================
+// ============================================================
 // FEATURE: Sidebar Social Links
-// Canlı Destek butonunun altına sosyal medya linkleri ekler
-// Hedef: .sb-top-btn.supportbtn (Canlı Destek) altı
-// Kapsam: Tüm sayfalar
-// ==========================================
+// ============================================================
 (function() {
   const FEATURE_ID = 'betifa-sidebar-social-links';
 
@@ -145,9 +269,7 @@
     dividerTop.innerHTML = '<span class="sidebar-section-title__line"></span>';
     wrapper.appendChild(dividerTop);
 
-    socialLinks.forEach(link => {
-      wrapper.appendChild(createSocialLinkButton(link));
-    });
+    socialLinks.forEach(link => wrapper.appendChild(createSocialLinkButton(link)));
 
     const dividerBottom = document.createElement('div');
     dividerBottom.className = 'sidebar-section-title';
@@ -157,98 +279,41 @@
     return wrapper;
   }
 
-  function insertElement() {
+  function run() {
     if (isAlreadyInserted()) return;
-
     const supportBtn = document.querySelector('.sb-top-btn.supportbtn');
     if (!supportBtn) return;
-
-    const el = createElement();
-    supportBtn.parentNode.insertBefore(el, supportBtn.nextSibling);
+    supportBtn.parentNode.insertBefore(createElement(), supportBtn.nextSibling);
   }
 
-  function init() {
-    setTimeout(insertElement, 300);
-
-    const observer = new MutationObserver(() => {
-      if (!isAlreadyInserted() && document.querySelector('.sb-top-btn.supportbtn')) {
-        insertElement();
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-      if (location.href !== lastUrl) {
-        lastUrl = location.href;
-        setTimeout(insertElement, 300);
-      }
-    }).observe(document, { subtree: true, childList: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.__BetifaCore.register({ id: FEATURE_ID, run: run });
 })();
 
 
-
-// ==========================================
-// FEATURE: Mobile App Bar
-// Anasayfada welcome-content'in altına mobil app indirme banner'ı ekler
-// Hedef: .welcome-content elementinin altı (container > row > col-12 grid uyumlu)
-// Kapsam: Sadece anasayfa (/, /tr, /en)
-// ==========================================
+// ============================================================
+// FEATURE: Mobile App Bar (sadece homepage)
+// ============================================================
 (function() {
   const FEATURE_ID = 'betifa-mobile-app-bar';
   const APP_DOWNLOAD_URL = 'https://betifa.live/betifa_ios_live.html';
-
-  function isHomePage() {
-    const path = window.location.pathname;
-    return path === '/' ||
-           path === '/tr' || path === '/tr/' ||
-           path === '/en' || path === '/en/';
-  }
-
-  function isEnglish() {
-    return window.location.pathname.startsWith('/en');
-  }
+  const H = window.__BetifaCore.helpers;
 
   function getTexts() {
-    if (isEnglish()) {
-      return {
-        title: 'Betifa Mobile App',
-        desc: 'Download our mobile app for fast and secure betting',
-        button: 'Download'
-      };
+    if (H.getLangCode() === 'en') {
+      return { title: 'Betifa Mobile App', desc: 'Download our mobile app for fast and secure betting', button: 'Download' };
     }
-    return {
-      title: 'Betifa Mobil Uygulama',
-      desc: 'Hızlı ve Güvenli Bahis için mobil uygulamamızı indirin',
-      button: 'İndir'
-    };
+    return { title: 'Betifa Mobil Uygulama', desc: 'Hızlı ve Güvenli Bahis için mobil uygulamamızı indirin', button: 'İndir' };
   }
 
-  function isAlreadyInserted() {
-    return document.getElementById(FEATURE_ID) !== null;
-  }
+  function isAlreadyInserted() { return document.getElementById(FEATURE_ID) !== null; }
 
   function removeElement() {
     const el = document.getElementById(FEATURE_ID);
-    if (el && el.parentNode) {
-      el.parentNode.removeChild(el);
-    }
+    if (el && el.parentNode) el.parentNode.removeChild(el);
   }
 
   function createElement() {
     const texts = getTexts();
-
     const wrapper = document.createElement('div');
     wrapper.id = FEATURE_ID;
     wrapper.className = 'container betifa-mobile-app-bar-wrapper';
@@ -284,112 +349,31 @@
     return wrapper;
   }
 
-  function insertElement() {
-    if (!isHomePage()) {
-      removeElement();
-      return;
-    }
-
+  function run() {
+    if (!H.isHomePage()) { removeElement(); return; }
     if (isAlreadyInserted()) return;
-
-    const welcomeContent = document.querySelector('.welcome-content');
-    if (!welcomeContent) return;
-
-    const el = createElement();
-    welcomeContent.parentNode.insertBefore(el, welcomeContent.nextSibling);
+    const welcome = document.querySelector('.welcome-content');
+    if (!welcome) return;
+    welcome.parentNode.insertBefore(createElement(), welcome.nextSibling);
   }
 
-  function init() {
-    setTimeout(insertElement, 300);
-
-    const observer = new MutationObserver(() => {
-      if (isHomePage()) {
-        if (!isAlreadyInserted() && document.querySelector('.welcome-content')) {
-          insertElement();
-        }
-      } else {
-        if (isAlreadyInserted()) {
-          removeElement();
-        }
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-      if (location.href !== lastUrl) {
-        lastUrl = location.href;
-        setTimeout(() => {
-          if (isHomePage()) {
-            insertElement();
-          } else {
-            removeElement();
-          }
-        }, 300);
-      }
-    }).observe(document, { subtree: true, childList: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.__BetifaCore.register({ id: FEATURE_ID, run: run });
 })();
 
 
-
-// ==========================================
-// FEATURE: Custom Section - Bölüm A (Banner Section)
-// ==========================================
+// ============================================================
+// FEATURE: Banner Section (Bölüm A) — sadece homepage
+// ============================================================
 (function() {
   const FEATURE_ID = 'betifa-section-banner';
   const MOBILE_BREAKPOINT = 992;
+  const H = window.__BetifaCore.helpers;
 
-  function isHomePage() {
-    const path = window.location.pathname;
-    return path === '/' ||
-           path === '/tr' || path === '/tr/' ||
-           path === '/en' || path === '/en/';
-  }
-
-  function getCurrentLanguagePrefix() {
-    const path = window.location.pathname;
-    const match = path.match(/^\/([a-z]{2})(\/|$)/);
-    return match ? '/' + match[1] : '/tr';
-  }
-
-  function isUserLoggedIn() {
-    return document.querySelector('.login-buttons') === null;
-  }
-
-  function navigateTo(url) {
-    if (window.next && window.next.router && typeof window.next.router.push === 'function') {
-      window.next.router.push(url);
-    } else {
-      window.history.pushState({}, '', url);
-      window.dispatchEvent(new PopStateEvent('popstate'));
-    }
-  }
-
-  function openLoginModal() {
-    const langPrefix = getCurrentLanguagePrefix();
-    navigateTo(langPrefix + '?modal=auth&tab=login');
-  }
-
-  function isAlreadyInserted() {
-    return document.getElementById(FEATURE_ID) !== null;
-  }
+  function isAlreadyInserted() { return document.getElementById(FEATURE_ID) !== null; }
 
   function removeElement() {
     const el = document.getElementById(FEATURE_ID);
-    if (el && el.parentNode) {
-      el.parentNode.removeChild(el);
-    }
+    if (el && el.parentNode) el.parentNode.removeChild(el);
   }
 
   function getTarget() {
@@ -402,8 +386,7 @@
   }
 
   function createElement() {
-    const langPrefix = getCurrentLanguagePrefix();
-
+    const langPrefix = H.getLangPrefix();
     const wrapper = document.createElement('div');
     wrapper.id = FEATURE_ID;
     wrapper.className = 'container betifa-section-banner-wrapper';
@@ -469,216 +452,101 @@
     root.querySelectorAll('[data-internal-link]').forEach(el => {
       el.addEventListener('click', function(e) {
         e.preventDefault();
-        const url = this.getAttribute('data-internal-link');
-        navigateTo(url);
+        H.navigateTo(this.getAttribute('data-internal-link'));
       });
     });
 
-    const depositBtn = root.querySelector('[data-banner-action="deposit"]');
-    if (depositBtn) {
-      depositBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const langPrefix = getCurrentLanguagePrefix();
-        if (isUserLoggedIn()) {
-          navigateTo(langPrefix + '/wallet/fiat/deposit');
-        } else {
-          openLoginModal();
-        }
-      });
-    }
+    const dep = root.querySelector('[data-banner-action="deposit"]');
+    if (dep) dep.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (H.isUserLoggedIn()) H.navigateTo(H.getLangPrefix() + '/wallet/fiat/deposit');
+      else H.openLoginModal();
+    });
 
-    const withdrawBtn = root.querySelector('[data-banner-action="withdraw"]');
-    if (withdrawBtn) {
-      withdrawBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const langPrefix = getCurrentLanguagePrefix();
-        if (isUserLoggedIn()) {
-          navigateTo(langPrefix + '/wallet/fiat/withdraw');
-        } else {
-          openLoginModal();
-        }
-      });
-    }
+    const wd = root.querySelector('[data-banner-action="withdraw"]');
+    if (wd) wd.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (H.isUserLoggedIn()) H.navigateTo(H.getLangPrefix() + '/wallet/fiat/withdraw');
+      else H.openLoginModal();
+    });
 
-    const bonusBtn = root.querySelector('[data-banner-action="bonus"]');
-    if (bonusBtn) {
-      bonusBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const langPrefix = getCurrentLanguagePrefix();
-        navigateTo(langPrefix + '?modal=bonus-request');
-      });
-    }
+    const bn = root.querySelector('[data-banner-action="bonus"]');
+    if (bn) bn.addEventListener('click', function(e) {
+      e.preventDefault();
+      H.navigateTo(H.getLangPrefix() + '?modal=bonus-request');
+    });
 
-    const chatifaBtn = root.querySelector('[data-banner-action="chatifa"]');
-    if (chatifaBtn) {
-      chatifaBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (isUserLoggedIn()) {
-          const chatBtn = document.querySelector('button.chat-button[aria-label="Open chat"]')
-                       || document.querySelector('button.chat-button');
-          if (chatBtn) {
-            chatBtn.click();
-          } else {
-            console.warn('Chat button bulunamadı');
-          }
-        } else {
-          openLoginModal();
-        }
-      });
-    }
-  }
-
-  function insertElement() {
-    if (!isHomePage()) {
-      removeElement();
-      return;
-    }
-
-    if (isAlreadyInserted()) return;
-
-    const target = getTarget();
-    if (!target) return;
-
-    const el = createElement();
-    target.parentNode.insertBefore(el, target.nextSibling);
-    attachEventHandlers(el);
-
-    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-    console.log('✅ Betifa banner section eklendi (' + (isMobile ? 'mobile - slider altı' : 'desktop - app bar altı') + ')');
+    const ch = root.querySelector('[data-banner-action="chatifa"]');
+    if (ch) ch.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (H.isUserLoggedIn()) {
+        const realChat = H.findRealChatButton();
+        if (realChat) realChat.click();
+      } else {
+        H.openLoginModal();
+      }
+    });
   }
 
   function repositionIfNeeded() {
-    if (!isHomePage()) return;
-
+    if (!H.isHomePage()) return;
     const el = document.getElementById(FEATURE_ID);
     if (!el) return;
-
-    const expectedTarget = getTarget();
-    if (!expectedTarget) return;
-
-    if (el.previousElementSibling !== expectedTarget) {
+    const expected = getTarget();
+    if (!expected) return;
+    if (el.previousElementSibling !== expected) {
       el.parentNode.removeChild(el);
-      expectedTarget.parentNode.insertBefore(el, expectedTarget.nextSibling);
+      expected.parentNode.insertBefore(el, expected.nextSibling);
     }
   }
 
-  function init() {
-    setTimeout(insertElement, 400);
-
-    const observer = new MutationObserver(() => {
-      if (isHomePage()) {
-        if (!isAlreadyInserted() && getTarget()) {
-          insertElement();
-        }
-      } else {
-        if (isAlreadyInserted()) {
-          removeElement();
-        }
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-      if (location.href !== lastUrl) {
-        lastUrl = location.href;
-        setTimeout(() => {
-          if (isHomePage()) {
-            insertElement();
-          } else {
-            removeElement();
-          }
-        }, 400);
-      }
-    }).observe(document, { subtree: true, childList: true });
-
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(repositionIfNeeded, 200);
-    });
+  function run() {
+    if (!H.isHomePage()) { removeElement(); return; }
+    if (isAlreadyInserted()) {
+      repositionIfNeeded();
+      return;
+    }
+    const target = getTarget();
+    if (!target) return;
+    const el = createElement();
+    target.parentNode.insertBefore(el, target.nextSibling);
+    attachEventHandlers(el);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.__BetifaCore.register({ id: FEATURE_ID, run: run });
+  window.__BetifaCore.onResize(repositionIfNeeded);
 })();
 
 
-// ==========================================
-// FEATURE: Custom Section - Bölüm C (Originals Showcase)
-// ==========================================
+// ============================================================
+// FEATURE: Originals Showcase (Bölüm C) — sadece homepage
+// ============================================================
 (function() {
   const FEATURE_ID = 'betifa-section-originals';
   const VISIBLE_DESKTOP = 4;
   const VISIBLE_MOBILE = 4;
   const MOBILE_BREAKPOINT = 768;
+  const H = window.__BetifaCore.helpers;
 
-  function isHomePage() {
-    const path = window.location.pathname;
-    return path === '/' ||
-           path === '/tr' || path === '/tr/' ||
-           path === '/en' || path === '/en/';
-  }
+  // Slider state — feature scope'unda; her insert sonrası sıfırlanır
+  let sliderState = null;
 
-  function getCurrentLanguagePrefix() {
-    const path = window.location.pathname;
-    const match = path.match(/^\/([a-z]{2})(\/|$)/);
-    return match ? '/' + match[1] : '/tr';
-  }
-
-  function navigateTo(url) {
-    if (window.next && window.next.router && typeof window.next.router.push === 'function') {
-      window.next.router.push(url);
-    } else {
-      window.history.pushState({}, '', url);
-      window.dispatchEvent(new PopStateEvent('popstate'));
-    }
-  }
-
-  function isAlreadyInserted() {
-    return document.getElementById(FEATURE_ID) !== null;
-  }
-
+  function isAlreadyInserted() { return document.getElementById(FEATURE_ID) !== null; }
   function removeElement() {
     const el = document.getElementById(FEATURE_ID);
-    if (el && el.parentNode) {
-      el.parentNode.removeChild(el);
-    }
+    if (el && el.parentNode) el.parentNode.removeChild(el);
+    sliderState = null;
   }
 
   const games = [
-    {
-      name: 'Aztec Blaze',
-      image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/8bHIPq496x6wmpIg9QSlXxqDGnZAkmO73jF8Dkpa.avif',
-      slug: 'pragmaticplay-aztec-blaze'
-    },
-    {
-      name: '40 Burning Hot VIP Bell Link',
-      image: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/LMRalEYBlNtg9SRhTV5edgA1e6nP97Iu2wlfQ4jY.jpg',
-      slug: 'EGTInteractive-40-burning-hot-vip-bell-link'
-    },
-    {
-      name: 'Emerald King Wheel of Wealth',
-      image: 'https://d3psi4rj7mv4u4.cloudfront.net/games/pragmaticplay/emerald_king_wheel_of_wealth.jpg',
-      slug: 'pragmaticplay-emerald-king-wheel-of-wealth'
-    },
-    {
-      name: 'Bow of Artemis',
-      image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/DUbFurGJ9nhhTIxUnxKX8JuqH36i6fuwIuDCTAzC.avif',
-      slug: 'pragmaticplay-bow-of-artemis'
-    }
+    { name: 'Aztec Blaze', image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/8bHIPq496x6wmpIg9QSlXxqDGnZAkmO73jF8Dkpa.avif', slug: 'pragmaticplay-aztec-blaze' },
+    { name: '40 Burning Hot VIP Bell Link', image: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/LMRalEYBlNtg9SRhTV5edgA1e6nP97Iu2wlfQ4jY.jpg', slug: 'EGTInteractive-40-burning-hot-vip-bell-link' },
+    { name: 'Emerald King Wheel of Wealth', image: 'https://d3psi4rj7mv4u4.cloudfront.net/games/pragmaticplay/emerald_king_wheel_of_wealth.jpg', slug: 'pragmaticplay-emerald-king-wheel-of-wealth' },
+    { name: 'Bow of Artemis', image: 'https://vendor-provider.fra1.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/DUbFurGJ9nhhTIxUnxKX8JuqH36i6fuwIuDCTAzC.avif', slug: 'pragmaticplay-bow-of-artemis' }
   ];
 
   function createElement() {
-    const langPrefix = getCurrentLanguagePrefix();
-
+    const langPrefix = H.getLangPrefix();
     const wrapper = document.createElement('div');
     wrapper.id = FEATURE_ID;
     wrapper.className = 'container betifa-section-originals-wrapper';
@@ -692,17 +560,8 @@
       `;
     }).join('');
 
-    const arrowPrevSvg = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
-      </svg>
-    `;
-
-    const arrowNextSvg = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-      </svg>
-    `;
+    const arrowPrevSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>`;
+    const arrowNextSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>`;
 
     wrapper.innerHTML = `
       <div class="row">
@@ -710,25 +569,15 @@
           <div class="betifa-originals-showcase">
             <div class="betifa-originals-title">
               <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/originals-text.png" alt="Originals">
-              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-prev" aria-label="Önceki" data-mobile-only>
-                ${arrowPrevSvg}
-              </button>
-              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-next" aria-label="Sonraki" data-mobile-only>
-                ${arrowNextSvg}
-              </button>
+              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-prev" aria-label="Önceki" data-mobile-only>${arrowPrevSvg}</button>
+              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-next" aria-label="Sonraki" data-mobile-only>${arrowNextSvg}</button>
             </div>
             <div class="betifa-originals-slider">
-              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-prev" aria-label="Önceki" data-desktop-only>
-                ${arrowPrevSvg}
-              </button>
+              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-prev" aria-label="Önceki" data-desktop-only>${arrowPrevSvg}</button>
               <div class="betifa-originals-viewport">
-                <div class="betifa-originals-track">
-                  ${gamesHTML}
-                </div>
+                <div class="betifa-originals-track">${gamesHTML}</div>
               </div>
-              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-next" aria-label="Sonraki" data-desktop-only>
-                ${arrowNextSvg}
-              </button>
+              <button type="button" class="betifa-originals-arrow betifa-originals-arrow-next" aria-label="Sonraki" data-desktop-only>${arrowNextSvg}</button>
             </div>
           </div>
         </div>
@@ -739,11 +588,11 @@
 
   function setupSlider(root) {
     const track = root.querySelector('.betifa-originals-track');
+    if (!track) return;
     const items = track.querySelectorAll('.betifa-originals-game-item');
     const prevBtns = root.querySelectorAll('.betifa-originals-arrow-prev');
     const nextBtns = root.querySelectorAll('.betifa-originals-arrow-next');
-
-    if (!track || items.length === 0) return;
+    if (items.length === 0) return;
 
     let currentIndex = 0;
 
@@ -754,11 +603,9 @@
     function updateSlider() {
       const visibleCount = getVisibleCount();
       const itemWidth = 100 / visibleCount;
-
       items.forEach(item => {
         item.style.flex = `0 0 calc(${itemWidth}% - ${(visibleCount - 1) * 16 / visibleCount}px)`;
       });
-
       const offset = -(currentIndex * (100 / visibleCount));
       track.style.transform = `translateX(${offset}%)`;
     }
@@ -766,76 +613,41 @@
     function next() {
       const visibleCount = getVisibleCount();
       const maxIndex = Math.max(0, items.length - visibleCount);
-
-      if (currentIndex >= maxIndex) {
-        currentIndex = 0;
-      } else {
-        currentIndex++;
-      }
+      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
       updateSlider();
     }
 
     function prev() {
       const visibleCount = getVisibleCount();
       const maxIndex = Math.max(0, items.length - visibleCount);
-
-      if (currentIndex <= 0) {
-        currentIndex = maxIndex;
-      } else {
-        currentIndex--;
-      }
+      currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
       updateSlider();
     }
 
-    prevBtns.forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        prev();
-      });
-    });
-
-    nextBtns.forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        next();
-      });
-    });
+    prevBtns.forEach(btn => btn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); prev(); }));
+    nextBtns.forEach(btn => btn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); next(); }));
 
     let touchStartX = 0;
     let touchEndX = 0;
-
-    track.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
+    track.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
     track.addEventListener('touchend', function(e) {
       touchEndX = e.changedTouches[0].screenX;
       const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) next(); else prev();
-      }
+      if (Math.abs(diff) > 50) { if (diff > 0) next(); else prev(); }
     }, { passive: true });
 
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(updateSlider, 200);
-    });
-
     updateSlider();
+
+    sliderState = { update: updateSlider };
   }
 
   function attachEventHandlers(root) {
     root.querySelectorAll('[data-internal-link]').forEach(el => {
       el.addEventListener('click', function(e) {
         e.preventDefault();
-        const url = this.getAttribute('data-internal-link');
-        navigateTo(url);
+        H.navigateTo(this.getAttribute('data-internal-link'));
       });
     });
-
     setupSlider(root);
   }
 
@@ -843,91 +655,30 @@
     return document.getElementById('betifa-section-banner');
   }
 
-  function insertElement() {
-    if (!isHomePage()) {
-      removeElement();
-      return;
-    }
-
+  function run() {
+    if (!H.isHomePage()) { removeElement(); return; }
     if (isAlreadyInserted()) return;
-
     const target = getTarget();
     if (!target) return;
-
     const el = createElement();
     target.parentNode.insertBefore(el, target.nextSibling);
     attachEventHandlers(el);
   }
 
-  function init() {
-    setTimeout(insertElement, 500);
-
-    const observer = new MutationObserver(() => {
-      if (isHomePage()) {
-        if (!isAlreadyInserted() && getTarget()) {
-          insertElement();
-        }
-      } else {
-        if (isAlreadyInserted()) {
-          removeElement();
-        }
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-      if (location.href !== lastUrl) {
-        lastUrl = location.href;
-        setTimeout(() => {
-          if (isHomePage()) {
-            insertElement();
-          } else {
-            removeElement();
-          }
-        }, 500);
-      }
-    }).observe(document, { subtree: true, childList: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.__BetifaCore.register({ id: FEATURE_ID, run: run });
+  window.__BetifaCore.onResize(function() { if (sliderState) sliderState.update(); });
 })();
 
 
-// ==========================================
+// ============================================================
 // FEATURE: Sidebar Promotions Button
-// Deposit butonunun altına full-width promosyonlar butonu ekler (GIF background)
-// Hedef: .betifa-sidebar-deposit-btn altı
-// Kapsam: Tüm sayfalar
-// ==========================================
+// ============================================================
 (function() {
   const FEATURE_ID = 'betifa-sidebar-promotions-btn';
-
-  function getCurrentLanguagePrefix() {
-    const path = window.location.pathname;
-    const match = path.match(/^\/([a-z]{2})(\/|$)/);
-    return match ? '/' + match[1] : '/tr';
-  }
-
-  function navigateTo(url) {
-    if (window.next && window.next.router && typeof window.next.router.push === 'function') {
-      window.next.router.push(url);
-    } else {
-      window.history.pushState({}, '', url);
-      window.dispatchEvent(new PopStateEvent('popstate'));
-    }
-  }
+  const H = window.__BetifaCore.helpers;
 
   function getPromotionsText() {
-    const lang = document.documentElement.lang ? document.documentElement.lang.substring(0, 2) : 'tr';
+    const lang = H.getLangCode();
     const texts = {
       tr: 'Promosyonlar', en: 'Promotions', fr: 'Promotions',
       de: 'Aktionen', es: 'Promociones', ru: 'Акции',
@@ -936,83 +687,38 @@
     return texts[lang] || texts['tr'];
   }
 
-  function isAlreadyInserted() {
-    return document.getElementById(FEATURE_ID) !== null;
-  }
+  function isAlreadyInserted() { return document.getElementById(FEATURE_ID) !== null; }
 
   function createElement() {
     const a = document.createElement('a');
     a.className = 'betifa-sidebar-promotions-btn';
     a.id = FEATURE_ID;
     a.setAttribute('aria-label', getPromotionsText());
-
-    const langPrefix = getCurrentLanguagePrefix();
-    const targetUrl = langPrefix + '/promotions/active';
+    const targetUrl = H.getLangPrefix() + '/promotions/active';
     a.href = targetUrl;
-
-    a.onclick = function(e) {
-      e.preventDefault();
-      navigateTo(targetUrl);
-    };
-
+    a.onclick = function(e) { e.preventDefault(); H.navigateTo(targetUrl); };
     return a;
   }
 
-  function insertElement() {
+  function run() {
     if (isAlreadyInserted()) return;
-
     const depositBtn = document.getElementById('betifa-sidebar-deposit-btn');
     if (!depositBtn) return;
-
-    const el = createElement();
-    depositBtn.parentNode.insertBefore(el, depositBtn.nextSibling);
+    depositBtn.parentNode.insertBefore(createElement(), depositBtn.nextSibling);
   }
 
-  function init() {
-    setTimeout(insertElement, 400);
-
-    const observer = new MutationObserver(() => {
-      if (!isAlreadyInserted() && document.getElementById('betifa-sidebar-deposit-btn')) {
-        insertElement();
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-      if (location.href !== lastUrl) {
-        lastUrl = location.href;
-        setTimeout(insertElement, 400);
-      }
-    }).observe(document, { subtree: true, childList: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.__BetifaCore.register({ id: FEATURE_ID, run: run });
 })();
 
 
-// ==========================================
+// ============================================================
 // FEATURE: Header Chat Button
-// ==========================================
+// ============================================================
 (function() {
   const FEATURE_ID = 'betifa-header-chat-btn';
+  const H = window.__BetifaCore.helpers;
 
-  function isAlreadyInserted() {
-    return document.getElementById(FEATURE_ID) !== null;
-  }
-
-  function findRealChatButton() {
-    return document.querySelector('button.chat-button[aria-label="Open chat"]')
-        || document.querySelector('button.chat-button');
-  }
+  function isAlreadyInserted() { return document.getElementById(FEATURE_ID) !== null; }
 
   function createElement() {
     const btn = document.createElement('button');
@@ -1021,7 +727,6 @@
     btn.className = 'betifa-header-chat-btn';
     btn.setAttribute('aria-label', 'Canlı Destek');
     btn.setAttribute('data-sb-tooltip', 'Canlı Destek');
-
     btn.innerHTML = `
       <span class="icon" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17" fill="none" width="20" height="20">
@@ -1031,96 +736,40 @@
         </svg>
       </span>
     `;
-
     btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const realChatBtn = findRealChatButton();
-      if (realChatBtn) {
-        realChatBtn.click();
-      } else {
-        console.warn('Chat button bulunamadı');
-      }
+      e.preventDefault(); e.stopPropagation();
+      const realChat = H.findRealChatButton();
+      if (realChat) realChat.click();
     });
-
     return btn;
   }
 
-  function insertElement() {
+  function run() {
     if (isAlreadyInserted()) return;
-
     const minifiedButtons = document.querySelector('.header-minified-buttons');
     if (!minifiedButtons) return;
-
     const notificationsBox = minifiedButtons.querySelector('.notifications-box');
     const el = createElement();
-
     if (notificationsBox) {
       notificationsBox.parentNode.insertBefore(el, notificationsBox.nextSibling);
     } else {
       minifiedButtons.appendChild(el);
     }
-
-    console.log('✅ Betifa header chat button eklendi');
   }
 
-  function init() {
-    setTimeout(insertElement, 400);
-
-    const observer = new MutationObserver(() => {
-      if (!isAlreadyInserted() && document.querySelector('.header-minified-buttons')) {
-        insertElement();
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-      if (location.href !== lastUrl) {
-        lastUrl = location.href;
-        setTimeout(insertElement, 400);
-      }
-    }).observe(document, { subtree: true, childList: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.__BetifaCore.register({ id: FEATURE_ID, run: run });
 })();
 
 
-// ==========================================
+// ============================================================
 // FEATURE: Sidebar Bonus Request Button
-// Promosyonlar butonunun altına bonus talep butonu ekler (GIF background)
-// Hedef: .betifa-sidebar-promotions-btn altı
-// Kapsam: Tüm sayfalar
-// ==========================================
+// ============================================================
 (function() {
   const FEATURE_ID = 'betifa-sidebar-bonus-btn';
-
-  function getCurrentLanguagePrefix() {
-    const path = window.location.pathname;
-    const match = path.match(/^\/([a-z]{2})(\/|$)/);
-    return match ? '/' + match[1] : '/tr';
-  }
-
-  function navigateTo(url) {
-    if (window.next && window.next.router && typeof window.next.router.push === 'function') {
-      window.next.router.push(url);
-    } else {
-      window.history.pushState({}, '', url);
-      window.dispatchEvent(new PopStateEvent('popstate'));
-    }
-  }
+  const H = window.__BetifaCore.helpers;
 
   function getBonusText() {
-    const lang = document.documentElement.lang ? document.documentElement.lang.substring(0, 2) : 'tr';
+    const lang = H.getLangCode();
     const texts = {
       tr: 'Bonus Talep', en: 'Request Bonus', fr: 'Demande Bonus',
       de: 'Bonus Anfordern', es: 'Solicitar Bono', ru: 'Запрос Бонуса',
@@ -1129,99 +778,40 @@
     return texts[lang] || texts['tr'];
   }
 
-  function isAlreadyInserted() {
-    return document.getElementById(FEATURE_ID) !== null;
-  }
+  function isAlreadyInserted() { return document.getElementById(FEATURE_ID) !== null; }
 
   function createElement() {
     const a = document.createElement('a');
     a.className = 'betifa-sidebar-bonus-btn';
     a.id = FEATURE_ID;
     a.setAttribute('aria-label', getBonusText());
-
-    const langPrefix = getCurrentLanguagePrefix();
-    const targetUrl = langPrefix + '?modal=bonus-request';
+    const targetUrl = H.getLangPrefix() + '?modal=bonus-request';
     a.href = targetUrl;
-
-    a.onclick = function(e) {
-      e.preventDefault();
-      navigateTo(targetUrl);
-    };
-
+    a.onclick = function(e) { e.preventDefault(); H.navigateTo(targetUrl); };
     return a;
   }
 
-  function insertElement() {
+  function run() {
     if (isAlreadyInserted()) return;
-
     const promotionsBtn = document.getElementById('betifa-sidebar-promotions-btn');
     if (!promotionsBtn) return;
-
-    const el = createElement();
-    promotionsBtn.parentNode.insertBefore(el, promotionsBtn.nextSibling);
-
-    console.log('✅ Betifa sidebar bonus button eklendi');
+    promotionsBtn.parentNode.insertBefore(createElement(), promotionsBtn.nextSibling);
   }
 
-  function init() {
-    setTimeout(insertElement, 500);
-
-    const observer = new MutationObserver(() => {
-      if (!isAlreadyInserted() && document.getElementById('betifa-sidebar-promotions-btn')) {
-        insertElement();
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-      if (location.href !== lastUrl) {
-        lastUrl = location.href;
-        setTimeout(insertElement, 500);
-      }
-    }).observe(document, { subtree: true, childList: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.__BetifaCore.register({ id: FEATURE_ID, run: run });
 })();
 
 
-// ==========================================
+// ============================================================
 // FEATURE: Sidebar Wheel Button + Row Grouper
-// 1. Bonus Talep butonunun yanına Çark Çevir butonu ekler
-// 2. İki butonu bir row wrapper içine alıp yan yana gösterir
-// Hedef: .betifa-sidebar-bonus-btn'in yanı
-// Kapsam: Tüm sayfalar
-// ==========================================
+// ============================================================
 (function() {
   const FEATURE_ID = 'betifa-sidebar-wheel-btn';
   const ROW_ID = 'betifa-sidebar-bonus-wheel-row';
-
-  function getCurrentLanguagePrefix() {
-    const path = window.location.pathname;
-    const match = path.match(/^\/([a-z]{2})(\/|$)/);
-    return match ? '/' + match[1] : '/tr';
-  }
-
-  function navigateTo(url) {
-    if (window.next && window.next.router && typeof window.next.router.push === 'function') {
-      window.next.router.push(url);
-    } else {
-      window.history.pushState({}, '', url);
-      window.dispatchEvent(new PopStateEvent('popstate'));
-    }
-  }
+  const H = window.__BetifaCore.helpers;
 
   function getWheelText() {
-    const lang = document.documentElement.lang ? document.documentElement.lang.substring(0, 2) : 'tr';
+    const lang = H.getLangCode();
     const texts = {
       tr: 'Çark Çevir', en: 'Spin Wheel', fr: 'Tourner Roue',
       de: 'Rad Drehen', es: 'Girar Ruleta', ru: 'Крутить Колесо',
@@ -1230,29 +820,17 @@
     return texts[lang] || texts['tr'];
   }
 
-  function isWheelInserted() {
-    return document.getElementById(FEATURE_ID) !== null;
-  }
-
-  function isRowCreated() {
-    return document.getElementById(ROW_ID) !== null;
-  }
+  function isWheelInserted() { return document.getElementById(FEATURE_ID) !== null; }
+  function isRowCreated()    { return document.getElementById(ROW_ID) !== null; }
 
   function createWheelButton() {
     const a = document.createElement('a');
     a.className = 'betifa-sidebar-wheel-btn';
     a.id = FEATURE_ID;
     a.setAttribute('aria-label', getWheelText());
-
-    const langPrefix = getCurrentLanguagePrefix();
-    const targetUrl = langPrefix + '/wheel';
+    const targetUrl = H.getLangPrefix() + '/wheel';
     a.href = targetUrl;
-
-    a.onclick = function(e) {
-      e.preventDefault();
-      navigateTo(targetUrl);
-    };
-
+    a.onclick = function(e) { e.preventDefault(); H.navigateTo(targetUrl); };
     return a;
   }
 
@@ -1263,57 +841,22 @@
     return div;
   }
 
-  function arrangeButtons() {
+  function run() {
     const bonusBtn = document.getElementById('betifa-sidebar-bonus-btn');
     if (!bonusBtn) return;
 
-    // Eğer row yoksa oluştur, bonus butonu içine taşı
     if (!isRowCreated()) {
       const row = createRowWrapper();
-      // Bonus butonun yerine row'u koy
       bonusBtn.parentNode.insertBefore(row, bonusBtn);
-      // Bonus butonunu row'un içine taşı
       row.appendChild(bonusBtn);
     }
-
     const row = document.getElementById(ROW_ID);
     if (!row) return;
 
-    // Wheel butonu row içinde yoksa ekle
     if (!isWheelInserted()) {
-      const wheelBtn = createWheelButton();
-      row.appendChild(wheelBtn);
-      console.log('✅ Betifa sidebar wheel button eklendi (bonus ile yan yana)');
+      row.appendChild(createWheelButton());
     }
   }
 
-  function init() {
-    setTimeout(arrangeButtons, 600);
-
-    const observer = new MutationObserver(() => {
-      const bonusBtn = document.getElementById('betifa-sidebar-bonus-btn');
-      if (bonusBtn && (!isWheelInserted() || !isRowCreated())) {
-        arrangeButtons();
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-      if (location.href !== lastUrl) {
-        lastUrl = location.href;
-        setTimeout(arrangeButtons, 600);
-      }
-    }).observe(document, { subtree: true, childList: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.__BetifaCore.register({ id: FEATURE_ID, run: run });
 })();
