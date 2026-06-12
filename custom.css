@@ -819,7 +819,7 @@
 
 
 /* ==========================================
-   SIDEBAR GIF BUTTONS — DEPOSIT / PROMOTIONS / BONUS / WHEEL
+   SIDEBAR IMAGE BUTTONS — DEPOSIT / PROMOTIONS / BONUS / WHEEL
    ========================================== */
 
 .betifa-sidebar-deposit-btn,
@@ -886,39 +886,39 @@
 }
 
 .betifa-sidebar-deposit-btn {
-  background-image: url('https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/2vi9X0BSwfjWyfTe1IRPHiyTYLJClQn16swwXwYK.gif');
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/para-yatir-sidebar.jpg');
   margin-top: 12px;
   margin-bottom: 4px;
 }
 
 .betifa-sidebar-promotions-btn {
-  background-image: url('https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/06UGqahIzexhBwYGFpz29IChP0gAq7DfTeJAZ3mu.gif');
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/promosyonlar-sidebar.jpg');
   margin-top: 8px;
   margin-bottom: 4px;
 }
 
 .betifa-sidebar-bonus-btn {
-  background-image: url('https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/R0Kg3YCOuzI3XtPpHj90YU7aOgoHGcC8q7zoKCPm.gif');
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/bonus-talep-sidebar.jpg');
 }
 
 .betifa-sidebar-wheel-btn {
-  background-image: url('https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/l4M1lfkH7ASYkMTYvc32O00NKAc2TIDQq7FU8ucO.gif');
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cark-cevir-sidebar.jpg');
 }
 
 .betifa-sidebar-deposit-btn:hover {
-  background-image: url('https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/2vi9X0BSwfjWyfTe1IRPHiyTYLJClQn16swwXwYK.gif') !important;
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/para-yatir-sidebar.jpg') !important;
 }
 
 .betifa-sidebar-promotions-btn:hover {
-  background-image: url('https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/06UGqahIzexhBwYGFpz29IChP0gAq7DfTeJAZ3mu.gif') !important;
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/promosyonlar-sidebar.jpg') !important;
 }
 
 .betifa-sidebar-bonus-btn:hover {
-  background-image: url('https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/R0Kg3YCOuzI3XtPpHj90YU7aOgoHGcC8q7zoKCPm.gif') !important;
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/bonus-talep-sidebar.jpg') !important;
 }
 
 .betifa-sidebar-wheel-btn:hover {
-  background-image: url('https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/l4M1lfkH7ASYkMTYvc32O00NKAc2TIDQq7FU8ucO.gif') !important;
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cark-cevir-sidebar.jpg') !important;
 }
 
 .betifa-sidebar-deposit-btn:hover::before,
@@ -1303,3 +1303,4 @@ div[id*="comm100-float-button"] img {
 	div[id*="comm100-float-button"] > div {
 		display: none !important;
   }
+}
