@@ -726,3 +726,28 @@
 
   window.__BetifaCore.register({ id: FEATURE_ID, run: run });
 })();
+
+
+// ============================================================
+// FEATURE: Hero Box Title Override
+// "Hemen Oynamaya Başla ve topluluğa katıl." metnini değiştirir.
+// SPA re-render'da geri gelirse paylaşımlı observer tekrar uygular.
+// ============================================================
+(function() {
+  const FEATURE_ID = 'betifa-hero-title-override';
+
+  // Hedef metin (loop kontrolü textContent üzerinden yapılır)
+  const TARGET_TEXT = 'Betifa Global En İyi Premium Casino & Bahis Deneyimi';
+  // Vurgulu "Betifa Global" kısmı <span> içinde — mevcut accent stili korunur.
+  const NEW_TITLE_HTML = '<span>Betifa Global</span> En İyi Premium Casino &amp; Bahis Deneyimi';
+
+  function run() {
+    const title = document.querySelector('.hero-box .box-title');
+    if (!title) return;
+    // Zaten güncellenmişse tekrar yazma (mutation loop önlenir)
+    if (title.textContent.trim() === TARGET_TEXT) return;
+    title.innerHTML = NEW_TITLE_HTML;
+  }
+
+  window.__BetifaCore.register({ id: FEATURE_ID, run: run });
+})();
