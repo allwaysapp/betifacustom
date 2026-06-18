@@ -740,13 +740,21 @@
   const TARGET_TEXT = 'Betifa Global En İyi Premium Casino & Bahis Deneyimi';
   // Vurgulu "Betifa Global" kısmı <span> içinde — mevcut accent stili korunur.
   const NEW_TITLE_HTML = '<span>Betifa Global</span> En İyi Premium Casino &amp; Bahis Deneyimi';
+  // Sadece eski hero CTA metnini taşıyan box-title'lar güncellenir;
+  // sayfadaki başka .box-title'lara dokunulmaz.
+  const OLD_MATCH = 'Hemen Oynamaya Başla';
 
   function run() {
-    const title = document.querySelector('.hero-box .box-title');
-    if (!title) return;
-    // Zaten güncellenmişse tekrar yazma (mutation loop önlenir)
-    if (title.textContent.trim() === TARGET_TEXT) return;
-    title.innerHTML = NEW_TITLE_HTML;
+    // Sayfada birden fazla .box-title olabilir (ör. desktop + mobil kopya).
+    // Tekil querySelector sadece ilkini bulur; o yüzden hepsini geziyoruz.
+    const titles = document.querySelectorAll('.box-title');
+    for (let i = 0; i < titles.length; i++) {
+      const title = titles[i];
+      const txt = title.textContent.trim();
+      if (txt === TARGET_TEXT) continue;        // zaten güncel — atla (loop önlenir)
+      if (txt.indexOf(OLD_MATCH) === -1) continue; // bizim hedefimiz değil — dokunma
+      title.innerHTML = NEW_TITLE_HTML;
+    }
   }
 
   window.__BetifaCore.register({ id: FEATURE_ID, run: run });
