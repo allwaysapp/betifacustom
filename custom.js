@@ -443,7 +443,7 @@
                 <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/aviator-product.jpg" alt="Aviator">
               </a>
               <a class="betifa-banner-bonus" data-banner-action="bonus" href="#">
-                <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/bonus-talep.jpg" alt="Bonus Talep">
+                <img src="https://i.ibb.co/rKSS1hsT/bonus-talep.jpg" alt="Bonus Talep">
               </a>
               <a class="betifa-banner-chatifa" data-banner-action="chatifa" href="#">
                 <img src="https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/chatifa.jpg" alt="Chatifa">
