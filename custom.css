@@ -1304,3 +1304,8 @@ div[id*="comm100-float-button"] img {
 		display: none !important;
   }
 }
+
+div.provider-carousel {
+    margin-bottom: 1rem !important;
+    margin-top: 1rem !important;
+}
