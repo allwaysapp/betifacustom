@@ -381,8 +381,11 @@
 // ============================================================
 // FEATURE: Provider Carousel'ı "Oyun Ara" (main-search) üstüne taşı
 // Sadece homepage. Sıralama: hero → provider → search → devamı.
-// Platform tarafından render edilen .provider-carousel'ı kendi
-// .container'ından alıp .main-search'ün hemen öncesine yerleştirir.
+// ÖNEMLİ: .container WRAPPER KULLANILMAZ. main-search / latestWins /
+// game-carousel zaten genişliği veren üst sarmalayıcının altında
+// çıplak kardeşler; ekstra bir .container daralma + yan padding yaratır.
+// Bu yüzden .provider-carousel doğrudan (bare) search'ün önüne taşınır,
+// böylece diğer bölümlerle birebir aynı genişlikte olur.
 // ============================================================
 (function() {
   const FEATURE_ID = 'betifa-provider-reorder';
@@ -394,27 +397,21 @@
     const mainSearch = document.querySelector('.main-search');
     if (!mainSearch) return; // search henüz render olmadı
 
-    let host = document.getElementById(FEATURE_ID);
-
-    // Zaten doğru konumda (search'ün hemen öncesinde) ve dolu ise çık.
-    // Bu guard paylaşımlı observer'ın sonsuz döngüye girmesini engeller.
-    if (host && host.nextElementSibling === mainSearch && host.firstElementChild) return;
-
     const provider = document.querySelector('.provider-carousel');
     if (!provider) return; // provider henüz render olmadı
 
-    // Host .container yoksa oluştur — orijinaldeki gibi genişlik/padding korunur.
-    if (!host) {
-      host = document.createElement('div');
-      host.id = FEATURE_ID;
-      host.className = 'container betifa-provider-reorder';
-    }
+    // Zaten search'ün hemen öncesindeyse çık (paylaşımlı observer döngüsü önlenir).
+    if (provider.nextElementSibling === mainSearch) return;
 
-    // Provider'ı host'a, host'u da search'ün hemen önüne taşı.
-    if (provider.parentNode !== host) host.appendChild(provider);
-    if (host.nextElementSibling !== mainSearch) {
-      mainSearch.parentNode.insertBefore(host, mainSearch);
-    }
+    // Provider'ı WRAPPER'SIZ, doğrudan search'ün önüne taşı.
+    // Aynı parent + aynı seviye => game-carousel ile aynı genişlik.
+    mainSearch.parentNode.insertBefore(provider, mainSearch);
+
+    // Next.js anasayfayı yeniden render edip eski konumda ikinci bir
+    // .provider-carousel üretirse, taşıdığımız dışındaki kopyaları temizle.
+    document.querySelectorAll('.provider-carousel').forEach(function(el) {
+      if (el !== provider) el.remove();
+    });
   }
 
   window.__BetifaCore.register({ id: FEATURE_ID, run: run });
