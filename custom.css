@@ -1309,3 +1309,12 @@ div.provider-carousel {
     margin-bottom: 1rem !important;
     margin-top: 1rem !important;
 }
+
+.section-title {
+    background: linear-gradient(90deg, #272731, #1d1d25);
+    border-left: 3px solid #f31f51;
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem 1rem !important;
+    border-radius: .5rem !important;
+}
