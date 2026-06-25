@@ -921,6 +921,16 @@
   background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/cark-cevir-sidebar.jpg') !important;
 }
 
+/* ---- EN: Sidebar deposit görseli (dil <html lang> üzerinden) ---- */
+/* lang "en" veya "en-US" olsa da yakalar; deposit butonunun okuduğu
+   kaynakla (document.documentElement.lang) birebir uyumlu.
+   :hover satırı da dahil çünkü yukarıdaki TR hover kuralı !important ile
+   aynı görseli tekrar set ediyor — onu ezmek için EN hover'ı da gerekli. */
+html[lang^="en"] .betifa-sidebar-deposit-btn,
+html[lang^="en"] .betifa-sidebar-deposit-btn:hover {
+  background-image: url('https://raw.githubusercontent.com/allwaysapp/betifacustom/refs/heads/main/img/deposit-eng.jpg') !important;
+}
+
 .betifa-sidebar-deposit-btn:hover::before,
 .betifa-sidebar-deposit-btn:hover::after,
 .betifa-sidebar-promotions-btn:hover::before,
