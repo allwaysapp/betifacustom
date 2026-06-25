@@ -202,79 +202,85 @@
 
 
 // ============================================================
-// FEATURE: Sidebar Social Links
+// FEATURE: Sidebar Social Links (dil duyarlı)
+// Etiketler (tooltip / aria-label / görünen başlık) TR ve EN için
+// ayrı tutulur. Dil SPA içinde değişirse bölüm yeniden kurulur.
 // ============================================================
 (function() {
   const FEATURE_ID = 'betifa-sidebar-social-links';
+  const H = window.__BetifaCore.helpers;
 
+  // name: { tr, en } — görünen başlık + tooltip + aria-label için.
   const socialLinks = [
     {
-      name: 'Instagram Sosyal',
+      name: { tr: 'Instagram Sosyal', en: 'Instagram Social' },
       url: 'https://www.instagram.com/betifa.sosyal?igsh=MTZqc3g4dmRiODluYg%3D%3D&utm_source=qr',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>'
     },
     {
-      name: 'Instagram Spor',
+      name: { tr: 'Instagram Spor', en: 'Instagram Sports' },
       url: 'https://www.instagram.com/betifaspor?igsh=MWZ0c24xdXkyNDZlYQ%3D%3D&utm_source=qr',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>'
     },
     {
-      name: 'X (Twitter)',
+      name: { tr: 'X (Twitter)', en: 'X (Twitter)' },
       url: 'https://x.com/betifaglobalof',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>'
     },
     {
-      name: 'Telegram Kanalı',
+      name: { tr: 'Telegram Kanalı', en: 'Telegram Channel' },
       url: 'https://t.me/betifaresmi',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>'
     },
     {
-      name: 'Telegram Support',
+      name: { tr: 'Telegram Support', en: 'Telegram Support' },
       url: 'https://t.me/betifa_resmi_bot',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>'
     },
     {
-      name: 'WhatsApp Destek',
+      name: { tr: 'WhatsApp Destek', en: 'WhatsApp Support' },
       url: 'https://wa.me/38977695639',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>'
     }
   ];
 
-  function isAlreadyInserted() {
-    return document.getElementById(FEATURE_ID) !== null;
+  function labelFor(link, lang) {
+    return (link.name && (link.name[lang] || link.name.tr)) || '';
   }
 
-  function createSocialLinkButton(link) {
+  function createSocialLinkButton(link, lang) {
+    const label = labelFor(link, lang);
     const a = document.createElement('a');
     a.className = 'sb-top-btn betifa-social-link-item';
     a.href = link.url;
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
-    a.setAttribute('data-sb-tooltip', link.name);
-    a.setAttribute('aria-label', link.name);
+    a.setAttribute('data-sb-tooltip', label);
+    a.setAttribute('aria-label', label);
     a.innerHTML = `
       <span class="icon" aria-hidden="true">
         <span style="display: inline-flex; width: 20px; height: 20px; line-height: 0;">
           ${link.icon}
         </span>
       </span>
-      <span class="sb-top-title">${link.name}</span>
+      <span class="sb-top-title">${label}</span>
       <span class="sb-top-arrow" aria-hidden="true">›</span>
     `;
     return a;
   }
 
-  function createElement() {
+  function createElement(lang) {
     const wrapper = document.createElement('div');
     wrapper.id = FEATURE_ID;
     wrapper.className = 'betifa-sidebar-social-section';
+    wrapper.setAttribute('data-rendered-lang', lang); // dil değişimi tespiti için
 
     const dividerTop = document.createElement('div');
     dividerTop.className = 'sidebar-section-title';
     dividerTop.innerHTML = '<span class="sidebar-section-title__line"></span>';
     wrapper.appendChild(dividerTop);
 
-    socialLinks.forEach(link => wrapper.appendChild(createSocialLinkButton(link)));
+    socialLinks.forEach(link => wrapper.appendChild(createSocialLinkButton(link, lang)));
 
     const dividerBottom = document.createElement('div');
     dividerBottom.className = 'sidebar-section-title';
@@ -285,10 +291,19 @@
   }
 
   function run() {
-    if (isAlreadyInserted()) return;
+    const lang = H.getLangCode();
+    const existing = document.getElementById(FEATURE_ID);
+
+    if (existing) {
+      // Aynı dilde zaten kuruluysa dokunma (paylaşımlı observer döngüsü önlenir).
+      if (existing.getAttribute('data-rendered-lang') === lang) return;
+      // Dil değişmiş — eski bölümü kaldır, doğru dilde yeniden kur.
+      existing.remove();
+    }
+
     const supportBtn = document.querySelector('.sb-top-btn.supportbtn');
     if (!supportBtn) return;
-    supportBtn.parentNode.insertBefore(createElement(), supportBtn.nextSibling);
+    supportBtn.parentNode.insertBefore(createElement(lang), supportBtn.nextSibling);
   }
 
   window.__BetifaCore.register({ id: FEATURE_ID, run: run });
@@ -346,31 +361,48 @@
 
 
 // ============================================================
-// FEATURE: Hero Box Title Override
-// "Hemen Oynamaya Başla ve topluluğa katıl." metnini değiştirir.
+// FEATURE: Hero Box Title Override (dil duyarlı)
+// TR ve EN sayfalarda hero başlığını ilgili dilde günceller.
 // SPA re-render'da geri gelirse paylaşımlı observer tekrar uygular.
 // ============================================================
 (function() {
   const FEATURE_ID = 'betifa-hero-title-override';
+  const H = window.__BetifaCore.helpers;
 
-  // Hedef metin (loop kontrolü textContent üzerinden yapılır)
-  const TARGET_TEXT = 'Betifa Global En İyi Premium Casino & Bahis Deneyimi';
-  // Vurgulu "Betifa Global" kısmı <span> içinde — mevcut accent stili korunur.
-  const NEW_TITLE_HTML = '<span>Betifa Global</span> En İyi Premium Casino &amp; Bahis Deneyimi';
-  // Sadece eski hero CTA metnini taşıyan box-title'lar güncellenir;
-  // sayfadaki başka .box-title'lara dokunulmaz.
-  const OLD_MATCH = 'Hemen Oynamaya Başla';
+  // Dil bazlı yapılandırma:
+  //   target : son hedef metin (loop guard — textContent zaten buysa atlanır)
+  //   html   : enjekte edilecek innerHTML ("Betifa Global" span ile vurgulu;
+  //            mevcut accent stili korunur)
+  //   match  : platformun ORİJİNAL hero CTA metninden ayırt edici parça.
+  //            Yalnızca bunu içeren .box-title güncellenir; diğerlerine dokunulmaz.
+  const CONFIG = {
+    tr: {
+      target: 'Betifa Global En İyi Premium Casino & Bahis Deneyimi',
+      html: '<span>Betifa Global</span> En İyi Premium Casino &amp; Bahis Deneyimi',
+      match: 'Hemen Oynamaya Başla'
+    },
+    en: {
+      target: 'Betifa Global The Best Premium Casino & Betting Experience',
+      html: '<span>Betifa Global</span> The Best Premium Casino &amp; Betting Experience',
+      // ⚠️ DOĞRULA: EN anasayfadaki orijinal hero CTA metninden ayırt edici parça.
+      // TR karşılığı "Hemen Oynamaya Başla ve topluluğa katıl." idi; EN'de büyük
+      // ihtimalle "Start Playing Now ...". Eşleşme tutmazsa başlık değişmez —
+      // o yüzden EN sayfada gerçek metni kontrol edip burayı güncelle.
+      match: 'Start Playing Now'
+    }
+  };
 
   function run() {
+    const cfg = CONFIG[H.getLangCode()] || CONFIG.tr;
+
     // Sayfada birden fazla .box-title olabilir (ör. desktop + mobil kopya).
-    // Tekil querySelector sadece ilkini bulur; o yüzden hepsini geziyoruz.
     const titles = document.querySelectorAll('.box-title');
     for (let i = 0; i < titles.length; i++) {
       const title = titles[i];
       const txt = title.textContent.trim();
-      if (txt === TARGET_TEXT) continue;        // zaten güncel — atla (loop önlenir)
-      if (txt.indexOf(OLD_MATCH) === -1) continue; // bizim hedefimiz değil — dokunma
-      title.innerHTML = NEW_TITLE_HTML;
+      if (txt === cfg.target) continue;            // zaten güncel — atla (loop önlenir)
+      if (txt.indexOf(cfg.match) === -1) continue;  // bizim hedefimiz değil — dokunma
+      title.innerHTML = cfg.html;
     }
   }
 
