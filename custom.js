@@ -18,7 +18,12 @@
   }
 
   function getLangCode() {
-    return getLangPrefix().slice(1); // "tr" | "en" | ...
+    // ÖNEMLİ: Bu platformda görünen dil <html lang> üzerinden belli olur
+    // (EN sayfada URL'de /en prefix'i oluşmayabiliyor). Çalışan deposit
+    // butonuyla aynı yöntem: önce documentElement.lang, sonra URL fallback.
+    const htmlLang = document.documentElement.lang;
+    if (htmlLang) return htmlLang.substring(0, 2).toLowerCase(); // "tr" | "en" | ...
+    return getLangPrefix().slice(1); // fallback: URL prefix
   }
 
   function isHomePage() {
