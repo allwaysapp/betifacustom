@@ -167,22 +167,35 @@
 
 
 // ============================================================
-// FEATURE: Footer Awards
+// FEATURE: Footer Awards (app banner dile duyarlı)
+// TR: mevcut görsel · EN: download-app.jpg
+// Dil SPA içinde değişirse data-rendered-lang ile yeniden kurulur.
 // ============================================================
 (function() {
   const FEATURE_ID = 'betifa-footer-awards';
+  const H = window.__BetifaCore.helpers;
 
-  function isAlreadyInserted() {
-    return document.getElementById(FEATURE_ID) !== null;
-  }
+  // App banner görseli dile göre değişir.
+  const APP_BANNER = {
+    tr: {
+      img: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/IBDG36JUrLDgpw2dRqVEMmVVgiNh5s3OvSy3gsJo.jpg',
+      alt: 'Betifa Mobil App'
+    },
+    en: {
+      img: 'https://i.ibb.co/fz5c2fNM/download-app.jpg',
+      alt: 'Betifa Mobile App'
+    }
+  };
 
-  function createElement() {
+  function createElement(lang) {
+    const banner = APP_BANNER[lang] || APP_BANNER.tr;
     const wrapper = document.createElement('div');
     wrapper.id = FEATURE_ID;
     wrapper.className = 'betifa-footer-awards';
+    wrapper.setAttribute('data-rendered-lang', lang); // dil değişimi tespiti için
     wrapper.innerHTML = `
       <a class="betifa-footer-app-banner" href="https://betifa.live/betifa_ios_live.html" target="_blank" rel="noopener noreferrer">
-        <img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/IBDG36JUrLDgpw2dRqVEMmVVgiNh5s3OvSy3gsJo.jpg" alt="Betifa Mobil App">
+        <img src="${banner.img}" alt="${banner.alt}">
       </a>
       <div class="betifa-footer-awards-container">
         <img src="https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/qADFxttxrDUm1nvMsr1JTkBiWw4pXptrkfwjkjOy.png" alt="Award 1">
@@ -196,10 +209,19 @@
   }
 
   function run() {
-    if (isAlreadyInserted()) return;
+    const lang = H.getLangCode();
+    const existing = document.getElementById(FEATURE_ID);
+
+    if (existing) {
+      // Aynı dilde zaten kuruluysa dokunma (paylaşımlı observer döngüsü önlenir).
+      if (existing.getAttribute('data-rendered-lang') === lang) return;
+      // Dil değişmiş — eski bölümü kaldır, doğru görselle yeniden kur.
+      existing.remove();
+    }
+
     const currencies = document.querySelector('.footer-currencies');
     if (!currencies) return;
-    currencies.parentNode.insertBefore(createElement(), currencies);
+    currencies.parentNode.insertBefore(createElement(lang), currencies);
   }
 
   window.__BetifaCore.register({ id: FEATURE_ID, run: run });
