@@ -241,12 +241,12 @@
   const socialLinks = [
     {
       name: { tr: 'Instagram Sosyal', en: 'Instagram Social' },
-      url: 'https://www.instagram.com/betifa.sosyal?igsh=MTZqc3g4dmRiODluYg%3D%3D&utm_source=qr',
+      url: 'https://www.instagram.com/betifa.sosyall',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>'
     },
     {
       name: { tr: 'Instagram Spor', en: 'Instagram Sports' },
-      url: 'https://www.instagram.com/betifaspor?igsh=MWZ0c24xdXkyNDZlYQ%3D%3D&utm_source=qr',
+      url: 'https://www.instagram.com/betifaspor',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>'
     },
     {
