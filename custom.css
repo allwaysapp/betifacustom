@@ -1328,3 +1328,11 @@ div.provider-carousel {
     padding: 1.5rem 1rem !important;
     border-radius: .5rem !important;
 }
+
+.fiat-method__limit strong {
+    color: var(--text-secondary);
+    white-space: nowrap;
+    text-align: right;
+    font-family: Rubik SemiBold, sans-serif;
+    font-size: 10px !important;
+}
