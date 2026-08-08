@@ -1336,3 +1336,11 @@ div.provider-carousel {
     font-family: Rubik SemiBold, sans-serif;
     font-size: 10px !important;
 }
+
+
+html.sportsbook-widget-document, html.sportsbook-widget-document body.sportsbook-widget-body, body.sportsbook-widget-body > main.top-picks-widget, body.sportsbook-widget-body > main.top-picks-widget > section.section {
+    background: #1d1d25 !important;
+    background-color: #1d1d25 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
