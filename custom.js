@@ -356,6 +356,18 @@
     }
   }
 
+  function isOurs(node) {
+    while (node) {
+      if (node.nodeType === 1) {
+        var id = node.id || '';
+        if (id.indexOf('bf-') === 0) return true;
+        if (node.classList && node.classList.contains('bf-mod')) return true;
+      }
+      node = node.parentNode;
+    }
+    return false;
+  }
+
   function boot() {
     if (booted) return;
     booted = true;
@@ -367,9 +379,17 @@
     };
 
     if (typeof MutationObserver !== 'undefined') {
-      var mo = new MutationObserver(schedule);
-      mo.observe(document.documentElement, { childList: true, subtree: true });
-      mo.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+      var mo = new MutationObserver(function (records) {
+        for (var i = 0; i < records.length; i++) {
+          if (!isOurs(records[i].target)) { schedule(); return; }
+        }
+      });
+      mo.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['lang']
+      });
     } else {
       setInterval(runAll, 1000);
     }
