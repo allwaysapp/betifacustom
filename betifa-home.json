@@ -2,34 +2,32 @@
   "version": 1,
   "updatedAt": "2026-08-10T00:00:00Z",
   "serverNow": null,
-
   "stats": {
     "enabled": true,
     "activePlayers": {
       "mode": "wave",
-      "min": 42000,
-      "max": 61000,
+      "min": 10000,
+      "max": 16400,
       "peakHour": 21,
-      "jitter": 60
+      "jitter": 40
     },
     "registeredPlayers": {
       "mode": "grow",
-      "base": 100000,
-      "startAt": "2026-08-01T00:00:00Z",
-      "stepSeconds": 120,
+      "base": 300000,
+      "startAt": "2026-08-10T00:00:00Z",
+      "stepSeconds": 180,
       "stepAmount": 1,
-      "cap": 140000
+      "cap": 400000
     },
     "totalPaid": {
       "mode": "grow",
-      "base": 32500000000,
-      "startAt": "2026-08-01T00:00:00Z",
-      "stepSeconds": 4,
-      "stepAmount": 1450,
-      "cap": 40000000000
+      "base": 500000000,
+      "startAt": "2026-08-10T00:00:00Z",
+      "stepSeconds": 2,
+      "stepAmount": 12,
+      "cap": 750000000
     }
   },
-
   "jackpot": {
     "enabled": true,
     "ctaUrl": "/casino/group/egt-bell-link",
@@ -42,58 +40,215 @@
       "cap": 60000000
     },
     "games": [
-      { "id": "jp-01", "title": "Black 7 Bell Link",        "image": "https://d3psi4rj7mv4u4.cloudfront.net/games/egtdigital/black_7_bell_link.jpg", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-02", "title": "40 Burning Hot Bell Link", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/2AuifBvNgY2yWvY9dWlBXCmdYsSYfgvA376OZzey.jpg", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-03", "title": "Shining Crown Bell Link",  "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/iYFngAzSS1I7rTRgNUvvrDyIeF4JHNBUrE9NvWY8.jpg", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-04", "title": "Dice & Roll Bell Link",    "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/VRpA6QNJzsRnWbyavVL5pWAPlsRMherpa9yMnfAM.jpg", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-05", "title": "20 Super Hot Bell Link",   "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/2cI5E2AdPghMqp2ageVahGibAnCKDqcfDe3bWPpP.png", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-06", "title": "Versailles Gold Bell Link","image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/dT5cUEOu6aDRiJQ4TierAPNw3jEYkvArW3KVXvel.jpg", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-07", "title": "Rise of Ra Bell Link",     "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/cgQc9Nlza5SGHsMMOvRSJZYeCHeenJsR0nQgKh7u.jpg", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-08", "title": "Flaming Hot Bell Link",    "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/idAlS5v1g4T84cMBPMg75qKqWqrTZl5QZ0ZJ1j0n.jpg", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-09", "title": "Supreme Hot Bell Link",    "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/ztMwTvEzeRdw3uIASbs0mcYMza2t2VVFfPOT1vpa.jpg", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-10", "title": "Witches Charm Bell Link",  "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Vw5KT9OHvg2U5rzX17tHJtIpYv3UGJ45F9TtSUqw.jpg", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-11", "title": "Zodiac Wheel Bell Link",   "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/csunquZB3gSy3Y53w0SFBXVrv3ehvCmoIxlbLT3S.jpg", "url": "/casino/group/egt-bell-link" },
-      { "id": "jp-12", "title": "Amazons Battle Bell Link", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/5D8fOnBkMavgxIsdWgZttdifTDn2yjVDKm1up3tR.jpg", "url": "/casino/group/egt-bell-link" }
+      {
+        "id": "jp-01",
+        "title": "Black 7 Bell Link",
+        "image": "https://d3psi4rj7mv4u4.cloudfront.net/games/egtdigital/black_7_bell_link.jpg",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-02",
+        "title": "40 Burning Hot Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/2AuifBvNgY2yWvY9dWlBXCmdYsSYfgvA376OZzey.jpg",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-03",
+        "title": "Shining Crown Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/iYFngAzSS1I7rTRgNUvvrDyIeF4JHNBUrE9NvWY8.jpg",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-04",
+        "title": "Dice & Roll Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/VRpA6QNJzsRnWbyavVL5pWAPlsRMherpa9yMnfAM.jpg",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-05",
+        "title": "20 Super Hot Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/2cI5E2AdPghMqp2ageVahGibAnCKDqcfDe3bWPpP.png",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-06",
+        "title": "Versailles Gold Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/dT5cUEOu6aDRiJQ4TierAPNw3jEYkvArW3KVXvel.jpg",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-07",
+        "title": "Rise of Ra Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/cgQc9Nlza5SGHsMMOvRSJZYeCHeenJsR0nQgKh7u.jpg",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-08",
+        "title": "Flaming Hot Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/idAlS5v1g4T84cMBPMg75qKqWqrTZl5QZ0ZJ1j0n.jpg",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-09",
+        "title": "Supreme Hot Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/ztMwTvEzeRdw3uIASbs0mcYMza2t2VVFfPOT1vpa.jpg",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-10",
+        "title": "Witches Charm Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Vw5KT9OHvg2U5rzX17tHJtIpYv3UGJ45F9TtSUqw.jpg",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-11",
+        "title": "Zodiac Wheel Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/csunquZB3gSy3Y53w0SFBXVrv3ehvCmoIxlbLT3S.jpg",
+        "url": "/casino/group/egt-bell-link"
+      },
+      {
+        "id": "jp-12",
+        "title": "Amazons Battle Bell Link",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/5D8fOnBkMavgxIsdWgZttdifTDn2yjVDKm1up3tR.jpg",
+        "url": "/casino/group/egt-bell-link"
+      }
     ]
   },
-
   "slots": {
     "enabled": true,
     "hot": [
-      { "id": "hs-01", "name": "Sweet Bonanza 1000",       "rtp": "98.42", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/2AuifBvNgY2yWvY9dWlBXCmdYsSYfgvA376OZzey.jpg", "url": "/casino/slots/lobby" },
-      { "id": "hs-02", "name": "Gates of Olympus 1000",    "rtp": "97.15", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/iYFngAzSS1I7rTRgNUvvrDyIeF4JHNBUrE9NvWY8.jpg", "url": "/casino/slots/lobby" },
-      { "id": "hs-03", "name": "Sugar Rush 1000",          "rtp": "96.08", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/VRpA6QNJzsRnWbyavVL5pWAPlsRMherpa9yMnfAM.jpg", "url": "/casino/slots/lobby" },
-      { "id": "hs-04", "name": "Big Bass Bonanza",         "rtp": "95.33", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/2cI5E2AdPghMqp2ageVahGibAnCKDqcfDe3bWPpP.png", "url": "/casino/slots/lobby" },
-      { "id": "hs-05", "name": "Wanted Dead or a Wild",    "rtp": "94.27", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/dT5cUEOu6aDRiJQ4TierAPNw3jEYkvArW3KVXvel.jpg", "url": "/casino/slots/lobby" },
-      { "id": "hs-06", "name": "The Dog House Megaways",   "rtp": "93.61", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/cgQc9Nlza5SGHsMMOvRSJZYeCHeenJsR0nQgKh7u.jpg", "url": "/casino/slots/lobby" }
+      {
+        "id": "hs-01",
+        "name": "Sweet Bonanza 1000",
+        "rtp": "98.42",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/2AuifBvNgY2yWvY9dWlBXCmdYsSYfgvA376OZzey.jpg",
+        "url": "/casino/slots/lobby"
+      },
+      {
+        "id": "hs-02",
+        "name": "Gates of Olympus 1000",
+        "rtp": "97.15",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/iYFngAzSS1I7rTRgNUvvrDyIeF4JHNBUrE9NvWY8.jpg",
+        "url": "/casino/slots/lobby"
+      },
+      {
+        "id": "hs-03",
+        "name": "Sugar Rush 1000",
+        "rtp": "96.08",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/VRpA6QNJzsRnWbyavVL5pWAPlsRMherpa9yMnfAM.jpg",
+        "url": "/casino/slots/lobby"
+      },
+      {
+        "id": "hs-04",
+        "name": "Big Bass Bonanza",
+        "rtp": "95.33",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/2cI5E2AdPghMqp2ageVahGibAnCKDqcfDe3bWPpP.png",
+        "url": "/casino/slots/lobby"
+      },
+      {
+        "id": "hs-05",
+        "name": "Wanted Dead or a Wild",
+        "rtp": "94.27",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/dT5cUEOu6aDRiJQ4TierAPNw3jEYkvArW3KVXvel.jpg",
+        "url": "/casino/slots/lobby"
+      },
+      {
+        "id": "hs-06",
+        "name": "The Dog House Megaways",
+        "rtp": "93.61",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/cgQc9Nlza5SGHsMMOvRSJZYeCHeenJsR0nQgKh7u.jpg",
+        "url": "/casino/slots/lobby"
+      }
     ],
     "cold": [
-      { "id": "cs-01", "name": "Book of Dead",             "rtp": "44.85", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/idAlS5v1g4T84cMBPMg75qKqWqrTZl5QZ0ZJ1j0n.jpg", "url": "/casino/slots/lobby" },
-      { "id": "cs-02", "name": "Wolf Gold",                "rtp": "41.30", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/ztMwTvEzeRdw3uIASbs0mcYMza2t2VVFfPOT1vpa.jpg", "url": "/casino/slots/lobby" },
-      { "id": "cs-03", "name": "Starburst XXXtreme",       "rtp": "38.72", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Vw5KT9OHvg2U5rzX17tHJtIpYv3UGJ45F9TtSUqw.jpg", "url": "/casino/slots/lobby" },
-      { "id": "cs-04", "name": "Fruit Party",              "rtp": "35.19", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/csunquZB3gSy3Y53w0SFBXVrv3ehvCmoIxlbLT3S.jpg", "url": "/casino/slots/lobby" },
-      { "id": "cs-05", "name": "Money Train 3",            "rtp": "32.46", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/5D8fOnBkMavgxIsdWgZttdifTDn2yjVDKm1up3tR.jpg", "url": "/casino/slots/lobby" },
-      { "id": "cs-06", "name": "Gonzos Quest Megaways",    "rtp": "29.04", "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/zCRAlWKchWNu2fiHXimg7GqjoywmZ3rxjjpT0LXX.png", "url": "/casino/slots/lobby" }
+      {
+        "id": "cs-01",
+        "name": "Book of Dead",
+        "rtp": "44.85",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/idAlS5v1g4T84cMBPMg75qKqWqrTZl5QZ0ZJ1j0n.jpg",
+        "url": "/casino/slots/lobby"
+      },
+      {
+        "id": "cs-02",
+        "name": "Wolf Gold",
+        "rtp": "41.30",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/ztMwTvEzeRdw3uIASbs0mcYMza2t2VVFfPOT1vpa.jpg",
+        "url": "/casino/slots/lobby"
+      },
+      {
+        "id": "cs-03",
+        "name": "Starburst XXXtreme",
+        "rtp": "38.72",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/Vw5KT9OHvg2U5rzX17tHJtIpYv3UGJ45F9TtSUqw.jpg",
+        "url": "/casino/slots/lobby"
+      },
+      {
+        "id": "cs-04",
+        "name": "Fruit Party",
+        "rtp": "35.19",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/csunquZB3gSy3Y53w0SFBXVrv3ehvCmoIxlbLT3S.jpg",
+        "url": "/casino/slots/lobby"
+      },
+      {
+        "id": "cs-05",
+        "name": "Money Train 3",
+        "rtp": "32.46",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/5D8fOnBkMavgxIsdWgZttdifTDn2yjVDKm1up3tR.jpg",
+        "url": "/casino/slots/lobby"
+      },
+      {
+        "id": "cs-06",
+        "name": "Gonzos Quest Megaways",
+        "rtp": "29.04",
+        "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/zCRAlWKchWNu2fiHXimg7GqjoywmZ3rxjjpT0LXX.png",
+        "url": "/casino/slots/lobby"
+      }
     ]
   },
-
   "social": {
     "enabled": true,
     "app": {
       "url": "https://betifa.live/betifa_ios_live.html"
     },
     "primary": [
-      { "key": "telegram",  "url": "https://t.me/betifa" },
-      { "key": "whatsapp",  "url": "https://wa.me/900000000000" },
-      { "key": "instagram", "url": "https://instagram.com/betifa" }
+      {
+        "key": "telegram",
+        "url": "https://t.me/betifa"
+      },
+      {
+        "key": "whatsapp",
+        "url": "https://wa.me/900000000000"
+      },
+      {
+        "key": "instagram",
+        "url": "https://instagram.com/betifa"
+      }
     ],
     "more": [
-      { "key": "facebook",  "url": "https://facebook.com/betifa" },
-      { "key": "pinterest", "url": "https://pinterest.com/betifa" },
-      { "key": "threads",   "url": "https://threads.net/@betifa" },
-      { "key": "discord",   "url": "https://discord.gg/betifa" },
-      { "key": "x",         "url": "https://x.com/betifa" },
-      { "key": "youtube",   "url": "https://youtube.com/@betifa" }
+      {
+        "key": "facebook",
+        "url": "https://facebook.com/betifa"
+      },
+      {
+        "key": "pinterest",
+        "url": "https://pinterest.com/betifa"
+      },
+      {
+        "key": "threads",
+        "url": "https://threads.net/@betifa"
+      },
+      {
+        "key": "discord",
+        "url": "https://discord.gg/betifa"
+      },
+      {
+        "key": "x",
+        "url": "https://x.com/betifa"
+      },
+      {
+        "key": "youtube",
+        "url": "https://youtube.com/@betifa"
+      }
     ]
   }
 }
