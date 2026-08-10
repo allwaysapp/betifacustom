@@ -213,7 +213,7 @@
     { key: 'bonus', action: 'bonus' },
     { key: 'tv', action: 'noop' },
     { key: 'wheel', url: '/wheel' },
-    { key: 'chat', action: 'noop' }
+    { key: 'chat', action: 'chat' }
   ];
 
   var PARTNERS = [
@@ -246,7 +246,7 @@
         title: 'Her ', titleHi: 'Yerde Seninle !',
         sub: 'Kayıp yaşamamak için hemen indir,<br>eğlenceyi cebine taşı !',
         cta: 'HEMEN İNDİR',
-        apple: 'Apple İçin<br>İndir', google: 'Android İçin<br>İndir',
+        apple: 'Apple İçin İndir', google: 'Android İçin İndir',
         f1: { t: 'Hızlı Giriş', d: 'Tek Tıkla Giriş Yap' },
         f2: { t: 'Güvenli', d: 'En Üst Seviye Güvenlik' },
         f3: { t: 'Anlık Bildirimler', d: 'Fırsatları Kaçırma !' }
@@ -290,7 +290,7 @@
         title: 'With You ', titleHi: 'Everywhere !',
         sub: 'Download now so you never miss out,<br>take the fun with you !',
         cta: 'DOWNLOAD NOW',
-        apple: 'Download<br>For Apple', google: 'Download<br>For Android',
+        apple: 'Download For Apple', google: 'Download For Android',
         f1: { t: 'Fast Login', d: 'Sign In With One Tap' },
         f2: { t: 'Secure', d: 'Top Level Security' },
         f3: { t: 'Instant Alerts', d: "Don't Miss A Chance !" }
@@ -334,13 +334,14 @@
     threads: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.3 21.5c-3.3 0-5.8-1.1-7.4-3.3C3.4 16.3 2.6 13.5 2.6 12s.8-4.3 2.3-6.2C6.5 3.6 9 2.5 12.3 2.5c2.5 0 4.6.7 6.1 2 1.3 1.1 2.2 2.6 2.7 4.5"/><path d="M16.8 10.4c-1-.2-2.1-.3-3.2-.2-2.5.2-4 1.5-4 3.4 0 1 .5 1.9 1.3 2.5.7.5 1.7.8 2.7.7 1.4-.1 2.4-.8 2.9-1.8.4-.8.5-1.7.4-2.6-.2-1.9-.7-3.2-1.5-4.1-.8-.8-1.9-1.2-3.2-1.2-1.5 0-2.7.6-3.6 1.7"/><path d="M16.8 10.4c1.6.6 2.7 1.7 3 3.2.4 2.3-.7 5.1-3.7 6.9-1.1.7-2.4 1-3.8 1"/></svg>',
     discord: '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A16.2 16.2 0 0 0 16.2 3.6l-.3.6a12 12 0 0 1 3.5 1.8 11.6 11.6 0 0 0-10.8 0 12 12 0 0 1 3.5-1.8l-.3-.6A16.2 16.2 0 0 0 7.7 4.9C4.5 9.6 3.7 13.6 4 17.2a16 16 0 0 0 5 2.5l.6-1a10.5 10.5 0 0 1-1.8-.9l.4-.3a11.6 11.6 0 0 0 9.6 0l.4.3a10.5 10.5 0 0 1-1.8.9l.6 1a16 16 0 0 0 5-2.5c.4-4.1-.6-8.1-2.7-12.3zM9.3 14.7c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm5.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg>',
     x: '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.8 2.5h3.2l-7 8 8.2 10.9h-6.4l-5-6.6-5.8 6.6H1.8l7.5-8.5L1.4 2.5h6.6l4.6 6 5.2-6zm-1.1 17h1.8L7 4.3H5.1z"/></svg>',
+    telegrambot: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.9 3.1c.2-1-.8-1.8-1.7-1.4L1.3 9.8c-1 .4-1 1.9.1 2.2l5.2 1.6 2 6.2c.3.9 1.4 1.1 2 .5l2.9-2.9 5.2 3.8c.8.6 2 .2 2.2-.9zM7.9 13l11.4-7-8.8 8.1-.1.1-.4 3.2-1.3-4z"/></svg>',
     youtube: '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 7.2a2.8 2.8 0 0 0-2-2C18.9 4.8 12 4.8 12 4.8s-6.9 0-8.5.4a2.8 2.8 0 0 0-2 2A29.6 29.6 0 0 0 1.1 12a29.6 29.6 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.6.4 8.5.4 8.5.4s6.9 0 8.5-.4a2.8 2.8 0 0 0 2-2 29.6 29.6 0 0 0 .4-4.8 29.6 29.6 0 0 0-.4-4.8zM9.8 15.1V8.9L15.4 12z"/></svg>'
   };
 
   var LABEL = {
     telegram: 'Telegram', whatsapp: 'Whatsapp', instagram: 'Instagram',
     facebook: 'Facebook', pinterest: 'Pinterest', threads: 'Threads',
-    discord: 'Discord', x: 'X', youtube: 'YouTube'
+    discord: 'Discord', x: 'X', youtube: 'YouTube', telegrambot: 'Telegram Bot'
   };
 
   function statText(key) {
@@ -424,7 +425,7 @@
       var mob = q('.hp-mobile-slider');
       if (mob) return mob;
     }
-    return q('.enterence-box') || q('.hp-mobile-slider');
+    return q('.enterence-box') || q('.welcome-content') || q('.hp-mobile-slider');
   }
 
   var TARGETS = {
@@ -581,9 +582,9 @@
               '<img src="' + esc(A.app.download) + '" alt="" decoding="async"></a>' +
             '<div class="bf-appcta__stores">' +
               '<a class="bf-store" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' +
-                '<img src="' + esc(A.app.apple) + '" alt="" decoding="async"><span>' + L.apple + '</span></a>' +
+                '<img src="' + esc(A.app.apple) + '" alt="" decoding="async"><span>' + esc(L.apple) + '</span></a>' +
               '<a class="bf-store" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' +
-                '<img src="' + esc(A.app.google) + '" alt="" decoding="async"><span>' + L.google + '</span></a>' +
+                '<img src="' + esc(A.app.google) + '" alt="" decoding="async"><span>' + esc(L.google) + '</span></a>' +
             '</div>' +
           '</div>' +
           '<img class="bf-appbar__qr" src="' + esc(A.app.qr) + '" alt="QR" loading="lazy" decoding="async">' +
