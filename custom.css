@@ -1261,3 +1261,52 @@
   .bf-pill { padding: 8px 11px; font-size: 12px; }
   .bf-navbtn { width: 32px; height: 32px; }
 }
+
+
+.sb-top-btn[aria-label="SafeOnlineCasino"] {
+  display: none !important;
+}
+
+
+.lowbar-fab__stack {
+    pointer-events: none;
+    flex-direction: column;
+    align-items: normal !important;
+    gap: 8px;
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+}
+
+/* Comm100 */
+div[id*="comm100-float-button"] img {
+  max-width: 100px;
+}
+@media screen and (max-width: 768px) {
+	div[id*="comm100-float-button"] > div {
+		display: none !important;
+  }
+}
+
+div.provider-carousel {
+    margin-bottom: 1rem !important;
+    margin-top: 1rem !important;
+}
+
+.section-title {
+    background: linear-gradient(90deg, #272731, #1d1d25);
+    border-left: 3px solid #f31f51;
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem 1rem !important;
+    border-radius: .5rem !important;
+}
+
+.fiat-method__limit strong {
+    color: var(--text-secondary);
+    white-space: nowrap;
+    text-align: right;
+    font-family: Rubik SemiBold, sans-serif;
+    font-size: 10px !important;
+}
