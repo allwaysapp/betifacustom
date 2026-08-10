@@ -43,7 +43,6 @@
       paid: CDN + 'hZ5Zhuhj5N2qGub1sT7ATHitLL010SoadIBk5azt.png'
     },
     app: {
-      bg: '',
       apple: CDN + 'VTBGmV4mAWdFcgJATAHhxrHkiXiYTGCxARswbPZh.svg',
       google: CDN + 'ZUd4Yo7BFq2q0x1RntruJ7pYD4iRXmVhglH4dyFa.svg',
       qr: CDN + 'kP2BrbbgCTaui50UQcs5hJ0uTSdggnHbkPiG3Byg.png',
@@ -605,11 +604,7 @@
              '<div><p class="bf-feature__title">' + esc(feats[i].c.t) + '</p>' +
              '<p class="bf-feature__desc">' + esc(feats[i].c.d) + '</p></div></div>';
       }
-      var bg = A.app.bg
-        ? '<img class="bf-appbar__bg" src="' + esc(A.app.bg) + '" alt="" loading="lazy" decoding="async">'
-        : '';
-      var style = A.app.bg ? '' : ' style="background:linear-gradient(100deg,var(--bf-s2) 0%,var(--bf-bg) 60%,rgba(203,224,49,.10) 100%)"';
-      var h = '<section class="bf-appbar"' + style + '>' + bg +
+      var h = '<section class="bf-appbar">' +
         '<div class="bf-appbar__text">' +
           '<p class="bf-appbar__kicker">' + esc(L.kicker) + '</p>' +
           '<p class="bf-appbar__title">' + esc(L.title) + '<span>' + esc(L.titleHi) + '</span></p>' +
@@ -662,7 +657,7 @@
       '</span>' +
       '<img class="bf-slotpanel__badge" src="' + esc(badge) + '" alt="" loading="lazy" decoding="async">' +
       '<p class="bf-slotpanel__title">' + esc(title) + '</p>' +
-      '<div class="bf-slotgrid">' + slotRows(list, kind) + '</div>' +
+      '<div class="bf-slotgrid bf-slotgrid--split">' + slotRows(list, kind) + '</div>' +
     '</div>';
   }
 
@@ -676,7 +671,7 @@
         (hot.length ? slotPanel('hot', L.hot, hot) : '') +
         (cold.length ? slotPanel('cold', L.cold, cold) : '') +
       '</div>';
-      return shell('bf-slots', h);
+      return shell('bf-slots', h, false);
     });
   });
 
@@ -694,7 +689,7 @@
       var h = '<section class="bf-jackpot" data-bf-rail>' +
         '<div class="bf-jackpot__info">' +
           '<div>' +
-            '<p class="bf-jackpot__label">' + esc(L.label) + '</p>' +
+            '<p class="bf-jackpot__label"><span class="bf-jackpot__dot"></span>' + esc(L.label) + '</p>' +
             '<p class="bf-jackpot__amount" data-bf-count="jackpot">&nbsp;</p>' +
           '</div>' +
           '<a class="bf-jackpot__btn" href="' + esc(href(jp.ctaUrl)) + '">' + esc(L.cta) + '</a>' +
@@ -705,7 +700,7 @@
           '<button type="button" class="bf-navbtn bf-jackpot__nav bf-jackpot__nav--next" data-bf-next aria-label="next">' + SVG.chevR + '</button>' +
         '</div>' +
       '</section>';
-      return shell('bf-jackpot', h);
+      return shell('bf-jackpot', h, false);
     });
     if (el) { wireRail(el); tickCounters(); }
   });
@@ -724,8 +719,10 @@
           '</div>' +
         '</div>';
       }
-      var h = rowHead(SVG.handshake, L.title, '') +
-              '<div class="bf-partners__grid">' + cards + '</div>';
+      var h = '<section class="bf-partners">' +
+        rowHead(SVG.handshake, L.title, '') +
+        '<div class="bf-partners__grid">' + cards + '</div>' +
+      '</section>';
       return shell('bf-partners', h);
     });
   });
