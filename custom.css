@@ -511,13 +511,44 @@
   gap: clamp(8px, .9vw, 12px);
 }
 
-.bf-store { display: flex; align-items: flex-start; gap: clamp(6px, .6vw, 8px); flex: 1 1 0; min-width: 0; }
+.bf-store {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, .6vw, 8px);
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .08);
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
 
-.bf-store img { width: clamp(24px, 2.2vw, 32px); height: clamp(24px, 2.2vw, 32px); flex: 0 0 auto; }
+.bf-store:hover {
+  background: rgba(255, 255, 255, .07);
+  border-color: rgba(var(--bf-ab), .35);
+  transform: translateY(-1px);
+}
 
-.bf-store span { font-size: clamp(10px, .85vw, 12px); font-weight: 400; line-height: 1.25; }
+.bf-store img { width: clamp(22px, 2vw, 28px); height: clamp(22px, 2vw, 28px); flex: 0 0 auto; }
 
-.bf-appbar__qr { width: clamp(80px, 7.5vw, 128px); height: auto; aspect-ratio: 1 / 1; flex: 0 0 auto; }
+.bf-store span {
+  font-size: clamp(10px, .85vw, 12px);
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: left;
+  min-width: 0;
+}
+
+.bf-appbar__qr {
+  width: clamp(88px, 7.5vw, 128px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  background: #fff;
+  padding: 6px;
+}
 
 .bf-slots {
   display: grid;
@@ -1113,8 +1144,9 @@
   .bf-jackpot { --bf-jp-card: 150px; }
   .bf-stats { grid-template-columns: 1fr; }
   .bf-stat { min-height: 120px; }
-  .bf-appbar { flex-wrap: wrap; }
+  .bf-appbar { flex-wrap: wrap; row-gap: 22px; }
   .bf-features { order: 3; width: 100%; justify-content: center; flex: 1 0 100%; }
+  .bf-appbar__qr { order: 2; }
 }
 
 @media (max-width: 900px) {
@@ -1141,9 +1173,36 @@
   .bf-jackpot__nav { display: none; }
   .bf-products { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .bf-slotgrid--split { grid-template-columns: 1fr; }
-  .bf-appbar { flex-direction: column; text-align: center; gap: 20px; }
-  .bf-appbar__qr { display: none; }
-  .bf-appbar__text { align-items: center; text-align: center; }
+  .bf-appbar {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    text-align: center;
+    gap: 18px;
+    min-height: 0;
+    padding: 24px 18px;
+  }
+  .bf-appbar__qr { display: none !important; }
+  .bf-appbar__text { align-items: center; text-align: center; width: 100%; }
+  .bf-appbar__kicker { font-size: 13px; }
+  .bf-appbar__title { font-size: 26px; }
+  .bf-appbar__sub { font-size: 13px; }
+  .bf-features {
+    order: 2;
+    width: 100%;
+    max-width: 420px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .bf-feature__badge { width: 42px; height: 42px; }
+  .bf-feature__badge img { width: 20px; height: 20px; }
+  .bf-feature__title { font-size: 12px; }
+  .bf-feature__desc { font-size: 10px; }
+  .bf-appcta { order: 3; width: 100%; max-width: 420px; gap: 12px; }
+  .bf-appcta__btn { padding: 15px 24px; font-size: 15px; }
+  .bf-appcta__stores { gap: 10px; }
+  .bf-store { padding: 10px; }
+  .bf-store span { font-size: 11px; }
   .bf-partners__grid { grid-template-columns: 1fr; }
   .bf-partner { min-height: 132px; }
   .bf-partner__photo { height: calc(100% + 32px); max-width: 220px; }
@@ -1170,9 +1229,19 @@
   .bf-slotpanel__badge { width: 54px; height: 51px; top: -13px; right: 10px; }
   .bf-slotrow__thumb { width: 60px; height: 60px; flex-basis: 60px; }
   .bf-slotrow__pct { font-size: 19px; }
-  .bf-appcta { width: 100%; max-width: 280px; }
-  .bf-appcta__btn { padding: 14px 24px; }
-  .bf-features { display: none; }
+  .bf-appbar { padding: 20px 14px; gap: 16px; }
+  .bf-appbar__title { font-size: 23px; }
+  .bf-appbar__sub { font-size: 12px; }
+  .bf-appcta { max-width: none; }
+  .bf-appcta__btn { padding: 14px 18px; font-size: 14px; }
+  .bf-features { max-width: none; gap: 8px; }
+  .bf-feature { gap: 6px; }
+  .bf-feature__badge { width: 38px; height: 38px; }
+  .bf-feature__badge img { width: 18px; height: 18px; }
+  .bf-feature__title { font-size: 11px; line-height: 1.2; }
+  .bf-feature__desc { display: none; }
+  .bf-store { flex-direction: column; align-items: center; gap: 6px; padding: 10px 8px; }
+  .bf-store span { text-align: center; font-size: 10.5px; }
   .bf-partners { margin-top: 20px; }
   .bf-partner { min-height: 118px; padding: 16px; gap: 14px; }
   .bf-partner__wordmark { font-size: 17px; max-width: 62%; }
@@ -1191,53 +1260,4 @@
   .bf-rowhead { gap: 8px; }
   .bf-pill { padding: 8px 11px; font-size: 12px; }
   .bf-navbtn { width: 32px; height: 32px; }
-}
-
-
-.sb-top-btn[aria-label="SafeOnlineCasino"] {
-  display: none !important;
-}
-
-
-.lowbar-fab__stack {
-    pointer-events: none;
-    flex-direction: column;
-    align-items: normal !important;
-    gap: 8px;
-    display: none;
-    position: absolute;
-    bottom: calc(100% + 10px);
-    right: 0;
-}
-
-/* Comm100 */
-div[id*="comm100-float-button"] img {
-  max-width: 100px;
-}
-@media screen and (max-width: 768px) {
-	div[id*="comm100-float-button"] > div {
-		display: none !important;
-  }
-}
-
-div.provider-carousel {
-    margin-bottom: 1rem !important;
-    margin-top: 1rem !important;
-}
-
-.section-title {
-    background: linear-gradient(90deg, #272731, #1d1d25);
-    border-left: 3px solid #f31f51;
-    position: relative;
-    overflow: hidden;
-    padding: 1.5rem 1rem !important;
-    border-radius: .5rem !important;
-}
-
-.fiat-method__limit strong {
-    color: var(--text-secondary);
-    white-space: nowrap;
-    text-align: right;
-    font-family: Rubik SemiBold, sans-serif;
-    font-size: 10px !important;
 }
