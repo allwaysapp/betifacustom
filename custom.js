@@ -1,4 +1,3 @@
-
 (function () {
   var DATA_URL = 'https://raw.githubusercontent.com/allwaysapp/betifacustom/main/betifa-home.json';
   var CSS_URL = 'https://raw.githubusercontent.com/allwaysapp/betifacustom/main/custom.css';
@@ -385,6 +384,9 @@
     history.pushState = function () { ps.apply(this, arguments); onNav(); };
     history.replaceState = function () { rs.apply(this, arguments); onNav(); };
 
+    window.addEventListener('resize', schedule, { passive: true });
+    window.addEventListener('orientationchange', schedule, { passive: true });
+
     setInterval(tickCounters, 1000);
     document.addEventListener('visibilitychange', tickCounters);
   }
@@ -402,24 +404,51 @@
 
   var ANCHORS = {
     'bf-subnav': [{ sel: '#header', at: 'after' }],
-    'bf-products': [{ sel: '.enterence-box', at: 'after' }],
-    'bf-stats': [{ sel: '#bf-products', at: 'after' }, { sel: '.enterence-box', at: 'after' }],
-    'bf-appbar': [{ sel: '#bf-stats', at: 'after' }, { sel: '#bf-products', at: 'after' }, { sel: '.enterence-box', at: 'after' }],
+    'bf-products': [
+      { sel: '.enterence-box', at: 'after' },
+      { sel: '.hp-mobile-slider', at: 'after' }
+    ],
+    'bf-stats': [
+      { sel: '#bf-products', at: 'after' },
+      { sel: '.enterence-box', at: 'after' },
+      { sel: '.hp-mobile-slider', at: 'after' }
+    ],
+    'bf-appbar': [
+      { sel: '#bf-stats', at: 'after' },
+      { sel: '#bf-products', at: 'after' },
+      { sel: '.enterence-box', at: 'after' },
+      { sel: '.hp-mobile-slider', at: 'after' }
+    ],
     'bf-slots': [{ sel: '.top-picks-widget', at: 'after' }],
     'bf-jackpot': [{ sel: '#bf-slots', at: 'after' }, { sel: '.top-picks-widget', at: 'after' }],
     'bf-partners': [{ sel: '#footer', at: 'before' }]
   };
 
-  function place(el, id) {
-    var list = ANCHORS[id] || [];
-    for (var i = 0; i < list.length; i++) {
-      var a = q(list[i].sel);
-      if (!a || !a.parentNode) continue;
-      if (list[i].at === 'before') a.parentNode.insertBefore(el, a);
-      else a.parentNode.insertBefore(el, a.nextSibling);
-      return true;
+  function visible(el) {
+    if (!el) return false;
+    return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+  }
+
+  function resolveAnchor(id) {
+    var list = ANCHORS[id] || [], i, a;
+    for (i = 0; i < list.length; i++) {
+      a = q(list[i].sel);
+      if (a && a.parentNode && visible(a)) return { node: a, at: list[i].at, sel: list[i].sel };
     }
-    return false;
+    for (i = 0; i < list.length; i++) {
+      a = q(list[i].sel);
+      if (a && a.parentNode) return { node: a, at: list[i].at, sel: list[i].sel };
+    }
+    return null;
+  }
+
+  function place(el, id) {
+    var target = resolveAnchor(id);
+    if (!target) return false;
+    if (target.at === 'before') target.node.parentNode.insertBefore(el, target.node);
+    else target.node.parentNode.insertBefore(el, target.node.nextSibling);
+    el.setAttribute('data-bf-anchor', target.sel);
+    return true;
   }
 
   function shell(id, inner, wrap) {
@@ -440,8 +469,11 @@
         if (!fresh) return null;
         fresh.setAttribute('data-bf-lang', sig);
         ex.parentNode.replaceChild(fresh, ex);
+        fresh.setAttribute('data-bf-anchor', ex.getAttribute('data-bf-anchor') || '');
         return fresh;
       }
+      var target = resolveAnchor(id);
+      if (target && ex.getAttribute('data-bf-anchor') !== target.sel) place(ex, id);
       return null;
     }
     var el = build();
