@@ -464,9 +464,18 @@
   function place(el, id) {
     var target = resolveAnchor(id);
     if (!target) return false;
-    if (target.at === 'before') target.node.parentNode.insertBefore(el, target.node);
-    else target.node.parentNode.insertBefore(el, target.node.nextSibling);
-    el.setAttribute('data-bf-anchor', target.sel);
+    if (target.at === 'before') {
+      if (target.node.previousElementSibling !== el) {
+        target.node.parentNode.insertBefore(el, target.node);
+      }
+    } else {
+      if (target.node.nextElementSibling !== el) {
+        target.node.parentNode.insertBefore(el, target.node.nextSibling);
+      }
+    }
+    if (el.getAttribute('data-bf-anchor') !== target.sel) {
+      el.setAttribute('data-bf-anchor', target.sel);
+    }
     return true;
   }
 
@@ -747,24 +756,41 @@
     });
   });
 
-  function socialHost() {
+  function socialAnchor() {
     var m = q('#responsive-menu');
     if (!m) return null;
-    return q('.sidebar-lang-footer', m) || q('.sidebar-content', m) || q('.sidebar-wrapper', m) || m;
+    var lf = q('.sidebar-lang-footer', m);
+    if (lf && lf.parentNode) return { node: lf, at: 'after' };
+    var host = q('.sidebar-content', m) || q('.sidebar-wrapper', m) || m;
+    return host ? { node: host, at: 'append' } : null;
+  }
+
+  function placeSocial(el, a) {
+    if (a.at === 'append') {
+      if (el.parentNode !== a.node) a.node.appendChild(el);
+    } else if (a.node.nextElementSibling !== el) {
+      a.node.parentNode.insertBefore(el, a.node.nextSibling);
+    }
   }
 
   register(function () {
     var ex = document.getElementById('bf-sb-social');
-    if (!DATA || !DATA.social || DATA.social.enabled === false) { if (ex) ex.remove(); return; }
-    var host = socialHost();
-    if (!host) return;
+    if (!DATA || !DATA.social || DATA.social.enabled === false) {
+      if (ex) ex.remove();
+      var dead = document.getElementById('bf-social-modal');
+      if (dead) dead.remove();
+      return;
+    }
 
-    var L = t().social;
+    var a = socialAnchor();
+    if (!a) return;
+
     if (ex) {
-      if (ex.getAttribute('data-bf-lang') === lang() && ex.parentNode === host) return;
+      if (ex.getAttribute('data-bf-lang') === lang()) { placeSocial(ex, a); return; }
       ex.remove();
     }
 
+    var L = t().social;
     var pri = DATA.social.primary || [];
     var appUrl = (DATA.social.app && DATA.social.app.url) || '#';
     var btns = '';
@@ -787,11 +813,7 @@
       '</a>' +
       '<div class="bf-sbsoc">' + btns + '</div>';
 
-    if (host.classList && host.classList.contains('sidebar-lang-footer')) {
-      host.parentNode.insertBefore(el, host.nextSibling);
-    } else {
-      host.appendChild(el);
-    }
+    placeSocial(el, a);
     buildModal();
   });
 
@@ -800,7 +822,13 @@
     if (!trigger || !DATA || !DATA.social) return;
 
     var old = document.getElementById('bf-social-modal');
-    if (old) old.remove();
+    if (old) {
+      if (old.getAttribute('data-bf-lang') === lang() && old.dataset.bfTrigger === trigger.dataset.bfId) return;
+      old.remove();
+    }
+
+    var tid = 'bf-t' + Date.now();
+    trigger.dataset.bfId = tid;
 
     var L = t().social;
     var all = (DATA.social.primary || []).concat(DATA.social.more || []);
@@ -816,6 +844,8 @@
     var wrap = document.createElement('div');
     wrap.className = 'bf-smodal';
     wrap.id = 'bf-social-modal';
+    wrap.setAttribute('data-bf-lang', lang());
+    wrap.dataset.bfTrigger = tid;
     wrap.hidden = true;
     wrap.innerHTML =
       '<div class="bf-smodal__backdrop" data-bf-close></div>' +
