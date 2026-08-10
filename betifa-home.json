@@ -1,43 +1,27 @@
 {
   "version": 1,
   "updatedAt": "2026-08-10T00:00:00Z",
-  "serverNow": null,
   "stats": {
     "enabled": true,
     "activePlayers": {
-      "mode": "wave",
-      "min": 10000,
-      "max": 16400,
-      "peakHour": 21,
-      "jitter": 40
+      "value": 13200,
+      "text": "13.200+"
     },
     "registeredPlayers": {
-      "mode": "grow",
-      "base": 300000,
-      "startAt": "2026-08-10T00:00:00Z",
-      "stepSeconds": 180,
-      "stepAmount": 1,
-      "cap": 400000
+      "value": 300000,
+      "text": "300K+"
     },
     "totalPaid": {
-      "mode": "grow",
-      "base": 500000000,
-      "startAt": "2026-08-10T00:00:00Z",
-      "stepSeconds": 2,
-      "stepAmount": 12,
-      "cap": 750000000
+      "value": 500000000,
+      "text": "$500M+"
     }
   },
   "jackpot": {
     "enabled": true,
     "ctaUrl": "/casino/group/egt-bell-link",
     "amount": {
-      "mode": "grow",
-      "base": 47600334,
-      "startAt": "2026-08-10T00:00:00Z",
-      "stepSeconds": 5,
-      "stepAmount": 11,
-      "cap": 60000000
+      "value": 47719134,
+      "text": "$47.719.134"
     },
     "games": [
       {
@@ -119,42 +103,42 @@
     "hot": [
       {
         "id": "hs-01",
-        "name": "40 Burning Hot",
+        "name": "Sweet Bonanza 1000",
         "rtp": "98.42",
         "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/2AuifBvNgY2yWvY9dWlBXCmdYsSYfgvA376OZzey.jpg",
         "url": "/casino/slots/lobby"
       },
       {
         "id": "hs-02",
-        "name": "Flaming Hot Extreme",
+        "name": "Gates of Olympus 1000",
         "rtp": "97.15",
         "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/iYFngAzSS1I7rTRgNUvvrDyIeF4JHNBUrE9NvWY8.jpg",
         "url": "/casino/slots/lobby"
       },
       {
         "id": "hs-03",
-        "name": "Flaming Hot",
+        "name": "Sugar Rush 1000",
         "rtp": "96.08",
         "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/VRpA6QNJzsRnWbyavVL5pWAPlsRMherpa9yMnfAM.jpg",
         "url": "/casino/slots/lobby"
       },
       {
         "id": "hs-04",
-        "name": "Book of Shining",
+        "name": "Big Bass Bonanza",
         "rtp": "95.33",
         "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/gXmqkthvbB1521K/games/2cI5E2AdPghMqp2ageVahGibAnCKDqcfDe3bWPpP.png",
         "url": "/casino/slots/lobby"
       },
       {
         "id": "hs-05",
-        "name": "40 Shining Crown",
+        "name": "Wanted Dead or a Wild",
         "rtp": "94.27",
         "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/dT5cUEOu6aDRiJQ4TierAPNw3jEYkvArW3KVXvel.jpg",
         "url": "/casino/slots/lobby"
       },
       {
         "id": "hs-06",
-        "name": "Shining Crown",
+        "name": "The Dog House Megaways",
         "rtp": "93.61",
         "image": "https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/games/cgQc9Nlza5SGHsMMOvRSJZYeCHeenJsR0nQgKh7u.jpg",
         "url": "/casino/slots/lobby"
