@@ -376,7 +376,7 @@
   min-height: 194px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   gap: clamp(12px, 1.6vw, 64px);
   padding: 24px clamp(16px, 1.8vw, 40px);
   flex-wrap: nowrap;
