@@ -3613,12 +3613,35 @@ footer#footer .footer-menus nav.footer-menu ul li a:hover {
 }
 
 footer#footer .bf-fsupport {
+    --bf-fsupport-photo: url("https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/eJAxA5vBPQUux8R52McJWwSc4mU8B4tHGYCNzxQf.png");
+    position: relative !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 10px !important;
-    padding: 20px !important;
+    justify-content: center !important;
+    gap: 9px !important;
+    min-height: 168px !important;
+    padding: 20px 38% 20px 20px !important;
     border-radius: 16px !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+}
+
+footer#footer .bf-fsupport::after {
+    content: "" !important;
+    position: absolute !important;
+    right: -6px !important;
+    bottom: 0 !important;
+    top: 0 !important;
+    left: auto !important;
+    width: 46% !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    background-image: var(--bf-fsupport-photo) !important;
+    background-repeat: no-repeat !important;
+    background-position: right bottom !important;
+    background-size: auto 104% !important;
+    filter: drop-shadow(-10px 8px 22px rgba(0, 0, 0, .45)) !important;
 }
 
 footer#footer .bf-fsupport__head {
@@ -3629,25 +3652,27 @@ footer#footer .bf-fsupport__head {
 
 footer#footer .bf-fsupport__title {
     font-family: var(--font-family-bold, "Rubik", sans-serif) !important;
-    font-size: 16px !important;
+    font-size: 17px !important;
     font-weight: 700 !important;
     color: #ffffff !important;
 }
 
 footer#footer .bf-fsupport__badge {
     padding: 3px 9px !important;
-    border-radius: 999px !important;
+    border-radius: 8px !important;
     background: rgba(var(--ft-accent-rgb), .16) !important;
     border: 1px solid rgba(var(--ft-accent-rgb), .38) !important;
     color: #ff7d9c !important;
     font-family: var(--font-family-semibold, "Rubik", sans-serif) !important;
-    font-size: 11px !important;
+    font-size: 12px !important;
     font-weight: 600 !important;
     letter-spacing: .3px !important;
+    white-space: nowrap !important;
 }
 
 footer#footer .bf-fsupport__desc {
     margin: 0 !important;
+    max-width: 190px !important;
     font-size: 13px !important;
     line-height: 1.45 !important;
     color: var(--ft-txt-mid) !important;
@@ -3660,7 +3685,7 @@ footer#footer .bf-fsupport__btn {
     gap: 9px !important;
     margin-top: 4px !important;
     padding: 11px 20px !important;
-    border-radius: 999px !important;
+    border-radius: 12px !important;
     border: 0 !important;
     background: linear-gradient(90deg, var(--ft-accent) 0%, #c2002e 100%) !important;
     color: #ffffff !important;
@@ -3669,6 +3694,7 @@ footer#footer .bf-fsupport__btn {
     font-weight: 600 !important;
     cursor: pointer !important;
     text-decoration: none !important;
+    white-space: nowrap !important;
     box-shadow: 0 8px 20px -8px rgba(var(--ft-accent-rgb), .9) !important;
     transition: transform .18s ease, filter .18s ease, box-shadow .18s ease !important;
 }
@@ -3682,6 +3708,7 @@ footer#footer .bf-fsupport__btn:hover {
 
 footer#footer .bf-fsupport__btn svg {
     flex: 0 0 auto !important;
+    fill: currentColor !important;
 }
 
 footer#footer .footer-contents {
@@ -3898,10 +3925,18 @@ footer#footer .footer-bottom .emails .mail:hover span {
         align-items: center !important;
         flex-wrap: wrap !important;
         gap: 14px 20px !important;
+        min-height: 132px !important;
+        padding: 18px 26% 18px 22px !important;
+    }
+
+    footer#footer .bf-fsupport::after {
+        width: 24% !important;
+        background-size: auto 118% !important;
     }
 
     footer#footer .bf-fsupport__desc {
         flex: 1 1 220px !important;
+        max-width: none !important;
     }
 
     footer#footer .bf-fsupport__btn {
@@ -3997,11 +4032,21 @@ footer#footer .footer-bottom .emails .mail:hover span {
     footer#footer .bf-fsupport {
         flex-direction: column !important;
         align-items: flex-start !important;
-        padding: 16px !important;
+        min-height: 0 !important;
+        padding: 16px 40% 16px 16px !important;
+    }
+
+    footer#footer .bf-fsupport::after {
+        width: 44% !important;
+        background-size: auto 100% !important;
+    }
+
+    footer#footer .bf-fsupport__desc {
+        max-width: none !important;
     }
 
     footer#footer .bf-fsupport__btn {
-        width: 100% !important;
+        width: auto !important;
     }
 
     footer#footer .footer-currencies .currency-listing {
