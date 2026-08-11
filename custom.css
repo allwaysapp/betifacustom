@@ -3293,6 +3293,7 @@ div.provider-carousel {
     display: block !important;
     margin: 0 !important;
     padding: 0 !important;
+    width: 100% !important;
 }
 
 .fiat-method__limits {
@@ -3487,4 +3488,13 @@ div.provider-carousel {
     .fiat-method__cta::after {
         display: none !important;
     }
+}
+
+
+.fiat-method__summary {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    padding: 0px !important;
+    display: grid;
 }
