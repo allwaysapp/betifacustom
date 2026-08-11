@@ -3485,3 +3485,544 @@ div.provider-carousel {
     padding: 0px !important;
     display: grid;
 }
+
+
+footer#footer {
+    --ft-bg: #0a0e19;
+    --ft-surface: #11151f;
+    --ft-stroke: rgba(255, 255, 255, .07);
+    --ft-stroke-2: rgba(255, 255, 255, .12);
+    --ft-accent: #f31f51;
+    --ft-accent-rgb: 243, 31, 81;
+    --ft-txt: #e8ebf2;
+    --ft-txt-mid: #9aa2b4;
+    --ft-txt-dim: #6f7788;
+
+    display: block !important;
+    width: 100% !important;
+    margin: 48px 0 0 !important;
+    padding: 0 !important;
+    border-top: 1px solid var(--ft-stroke) !important;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .012) 0%, rgba(0, 0, 0, .16) 100%) !important;
+    color: var(--ft-txt-mid) !important;
+    font-family: var(--font-family-regular, "Rubik", sans-serif) !important;
+}
+
+footer#footer > .container > .row {
+    margin: 0 !important;
+}
+
+footer#footer > .container > .row > .col-12 {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-areas:
+        "menus menus"
+        "notices notices"
+        "currencies currencies"
+        "brand seal"
+        "bottom bottom" !important;
+    gap: 0 24px !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+}
+
+footer#footer .footer-menus { grid-area: menus !important; }
+footer#footer .footer-contents { grid-area: notices !important; }
+footer#footer .footer-currencies { grid-area: currencies !important; }
+footer#footer .footer-logo { grid-area: brand !important; }
+footer#footer .safe-online-casino-seal { grid-area: seal !important; }
+footer#footer .footer-bottom { grid-area: bottom !important; }
+
+footer#footer .footer-menus {
+    padding: 40px 0 36px !important;
+    margin: 0 !important;
+}
+
+footer#footer .footer-menus .footer-bottoms {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.7fr) minmax(0, 1fr) minmax(240px, 300px) !important;
+    gap: 28px 32px !important;
+    margin: 0 !important;
+    justify-content: initial !important;
+}
+
+footer#footer .footer-menus .footer-bottoms > div {
+    flex: none !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: left !important;
+}
+
+footer#footer .footer-menus .footer-bottoms > div:nth-child(3) nav.footer-menu ul {
+    columns: 1 !important;
+    column-gap: 22px !important;
+}
+
+footer#footer nav.footer-menu {
+    display: block !important;
+    text-align: left !important;
+}
+
+footer#footer nav.footer-menu .title,
+footer#footer .footer-menus nav.footer-menu .title {
+    display: block !important;
+    margin: 0 0 16px !important;
+    padding: 0 !important;
+    font-family: var(--font-family-bold, "Rubik", sans-serif) !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    letter-spacing: -.1px !important;
+    color: #ffffff !important;
+    text-align: left !important;
+}
+
+footer#footer nav.footer-menu ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+footer#footer nav.footer-menu ul li {
+    margin: 0 0 11px !important;
+    padding: 0 !important;
+    break-inside: avoid !important;
+    text-align: left !important;
+}
+
+footer#footer .footer-menus nav.footer-menu ul li a,
+footer#footer .footer-menus nav.footer-menu ul li span {
+    display: inline-block !important;
+    font-size: 13.5px !important;
+    font-weight: 400 !important;
+    line-height: 1.35 !important;
+    color: var(--ft-txt-mid) !important;
+    text-decoration: none !important;
+    transition: color .18s ease, transform .18s ease !important;
+}
+
+footer#footer .footer-menus nav.footer-menu ul li:hover,
+footer#footer .footer-menus nav.footer-menu ul li:hover a {
+    color: #ffffff !important;
+}
+
+footer#footer .footer-menus nav.footer-menu ul li a:hover {
+    transform: translateX(2px) !important;
+}
+
+footer#footer .bf-fsupport {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding: 20px !important;
+    border-radius: 16px !important;
+}
+
+footer#footer .bf-fsupport__head {
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+}
+
+footer#footer .bf-fsupport__title {
+    font-family: var(--font-family-bold, "Rubik", sans-serif) !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+}
+
+footer#footer .bf-fsupport__badge {
+    padding: 3px 9px !important;
+    border-radius: 999px !important;
+    background: rgba(var(--ft-accent-rgb), .16) !important;
+    border: 1px solid rgba(var(--ft-accent-rgb), .38) !important;
+    color: #ff7d9c !important;
+    font-family: var(--font-family-semibold, "Rubik", sans-serif) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: .3px !important;
+}
+
+footer#footer .bf-fsupport__desc {
+    margin: 0 !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    color: var(--ft-txt-mid) !important;
+}
+
+footer#footer .bf-fsupport__btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 9px !important;
+    margin-top: 4px !important;
+    padding: 11px 20px !important;
+    border-radius: 999px !important;
+    border: 0 !important;
+    background: linear-gradient(90deg, var(--ft-accent) 0%, #c2002e 100%) !important;
+    color: #ffffff !important;
+    font-family: var(--font-family-semibold, "Rubik", sans-serif) !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    box-shadow: 0 8px 20px -8px rgba(var(--ft-accent-rgb), .9) !important;
+    transition: transform .18s ease, filter .18s ease, box-shadow .18s ease !important;
+}
+
+footer#footer .bf-fsupport__btn:hover {
+    transform: translateY(-2px) !important;
+    filter: brightness(1.07) !important;
+    color: #ffffff !important;
+    box-shadow: 0 12px 26px -8px rgba(var(--ft-accent-rgb), 1) !important;
+}
+
+footer#footer .bf-fsupport__btn svg {
+    flex: 0 0 auto !important;
+}
+
+footer#footer .footer-contents {
+    margin: 0 !important;
+    padding: 26px 0 !important;
+    border-top: 1px solid var(--ft-stroke) !important;
+}
+
+footer#footer .footer-contents .footer-contents-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    margin: 0 !important;
+    justify-content: initial !important;
+}
+
+footer#footer .footer-contents .footer-contents-col {
+    flex: none !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+footer#footer .content-block {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    height: 100% !important;
+    padding: 16px 18px !important;
+    border-radius: 14px !important;
+    border: 1px solid var(--ft-stroke) !important;
+    background: rgba(255, 255, 255, .022) !important;
+}
+
+footer#footer .content-block .icon {
+    flex: 0 0 34px !important;
+    width: 34px !important;
+    height: 34px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: .85 !important;
+}
+
+footer#footer .content-block .icon img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+}
+
+footer#footer .content-block .content {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    color: var(--ft-txt-dim) !important;
+}
+
+footer#footer .footer-currencies {
+    margin: 0 !important;
+    padding: 30px 0 !important;
+    border-top: 1px solid var(--ft-stroke) !important;
+    border-bottom: 1px solid var(--ft-stroke) !important;
+}
+
+footer#footer .footer-currencies .currency-listing {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+    align-items: center !important;
+    justify-items: center !important;
+    gap: 26px 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+footer#footer .footer-currencies .listing-block {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 190px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+footer#footer .footer-currencies .listing-block img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 62px !important;
+    object-fit: contain !important;
+    opacity: .42 !important;
+    filter: grayscale(1) !important;
+    transition: opacity .22s ease, filter .22s ease !important;
+}
+
+footer#footer .footer-currencies .listing-block:hover img {
+    opacity: .9 !important;
+    filter: grayscale(.2) !important;
+}
+
+footer#footer .footer-logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    margin: 0 !important;
+    padding: 22px 0 !important;
+    border-top: 0 !important;
+}
+
+footer#footer .footer-logo a {
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+footer#footer .footer-logo img {
+    width: auto !important;
+    max-width: 150px !important;
+    height: 44px !important;
+    object-fit: contain !important;
+}
+
+footer#footer .safe-online-casino-seal {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    margin: 0 !important;
+    padding: 22px 0 !important;
+    border-top: 0 !important;
+}
+
+footer#footer .safe-online-casino-seal img {
+    width: auto !important;
+    max-width: 230px !important;
+    height: auto !important;
+    border-radius: 8px !important;
+    opacity: .92 !important;
+    transition: opacity .2s ease !important;
+}
+
+footer#footer .safe-online-casino-seal:hover img {
+    opacity: 1 !important;
+}
+
+footer#footer .footer-bottom {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 14px 24px !important;
+    margin: 0 !important;
+    padding: 18px 0 30px !important;
+    border-top: 1px solid var(--ft-stroke) !important;
+}
+
+footer#footer .footer-bottom .about {
+    display: none !important;
+}
+
+footer#footer .footer-bottom .copyright {
+    order: 1 !important;
+    margin: 0 !important;
+    font-size: 12.5px !important;
+    color: var(--ft-txt-dim) !important;
+}
+
+footer#footer .footer-bottom .emails {
+    order: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+footer#footer .footer-bottom .emails .mail {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 7px 13px !important;
+    border-radius: 999px !important;
+    border: 1px solid var(--ft-stroke) !important;
+    background: rgba(255, 255, 255, .03) !important;
+    color: var(--ft-txt-dim) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    transition: border-color .18s ease, color .18s ease, background .18s ease !important;
+}
+
+footer#footer .footer-bottom .emails .mail:hover {
+    border-color: rgba(var(--ft-accent-rgb), .4) !important;
+    background: rgba(var(--ft-accent-rgb), .08) !important;
+    color: #ffffff !important;
+}
+
+footer#footer .footer-bottom .emails .mail span {
+    color: var(--ft-txt) !important;
+    font-weight: 500 !important;
+}
+
+footer#footer .footer-bottom .emails .mail:hover span {
+    color: #ffffff !important;
+}
+
+@media (max-width: 1200px) {
+    footer#footer .footer-menus .footer-bottoms {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+
+    footer#footer .bf-fsupport {
+        grid-column: 1 / -1 !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 14px 20px !important;
+    }
+
+    footer#footer .bf-fsupport__desc {
+        flex: 1 1 220px !important;
+    }
+
+    footer#footer .bf-fsupport__btn {
+        margin-top: 0 !important;
+    }
+}
+
+@media (max-width: 900px) {
+    footer#footer > .container > .row > .col-12 {
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-areas:
+            "menus"
+            "notices"
+            "currencies"
+            "brand"
+            "seal"
+            "bottom" !important;
+    }
+
+    footer#footer .footer-menus .footer-bottoms {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 26px 20px !important;
+    }
+
+    footer#footer .footer-menus .footer-bottoms > div:nth-child(3) nav.footer-menu ul {
+        columns: 1 !important;
+    }
+
+    footer#footer .footer-contents .footer-contents-row {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    footer#footer .footer-currencies .currency-listing {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+        gap: 20px 16px !important;
+    }
+
+    footer#footer .footer-currencies .listing-block img {
+        height: 50px !important;
+    }
+
+    footer#footer .footer-logo,
+    footer#footer .safe-online-casino-seal {
+        justify-content: center !important;
+        padding: 18px 0 !important;
+    }
+
+    footer#footer .safe-online-casino-seal {
+        border-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    footer#footer .footer-bottom {
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    footer#footer .footer-bottom .copyright {
+        order: 2 !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    footer#footer .footer-bottom .emails {
+        order: 1 !important;
+        justify-content: center !important;
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 560px) {
+    footer#footer {
+        margin-top: 32px !important;
+    }
+
+    footer#footer .footer-menus {
+        padding: 30px 0 26px !important;
+    }
+
+    footer#footer .footer-menus .footer-bottoms {
+        gap: 22px 16px !important;
+    }
+
+    footer#footer nav.footer-menu .title {
+        font-size: 14px !important;
+        margin-bottom: 12px !important;
+    }
+
+    footer#footer .footer-menus nav.footer-menu ul li a {
+        font-size: 12.5px !important;
+    }
+
+    footer#footer .bf-fsupport {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 16px !important;
+    }
+
+    footer#footer .bf-fsupport__btn {
+        width: 100% !important;
+    }
+
+    footer#footer .footer-currencies .currency-listing {
+        grid-template-columns: repeat(auto-fit, minmax(95px, 1fr)) !important;
+        gap: 16px 12px !important;
+    }
+
+    footer#footer .footer-currencies .listing-block img {
+        height: 40px !important;
+    }
+
+    footer#footer .footer-logo img {
+        height: 38px !important;
+    }
+
+    footer#footer .safe-online-casino-seal img {
+        max-width: 190px !important;
+    }
+
+    footer#footer .footer-bottom .emails .mail {
+        font-size: 11.5px !important;
+        padding: 6px 11px !important;
+    }
+}
