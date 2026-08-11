@@ -1261,11 +1261,9 @@
   .bf-navbtn { width: 32px; height: 32px; }
 }
 
-
 .sb-top-btn[aria-label="SafeOnlineCasino"] {
   display: none !important;
 }
-
 
 .lowbar-fab__stack {
     pointer-events: none;
@@ -2465,7 +2463,6 @@ div.provider-carousel {
     }
 }
 
-
 @media (max-width: 991px) {
   #responsive-menu.responsive-menu .sb-top-btn.supportbtn,
   #responsive-menu.responsive-menu.active-menu .sb-top-btn.supportbtn {
@@ -2485,7 +2482,6 @@ div.provider-carousel {
 .hero-area-slider.type-2 .hero-slide-media {
     aspect-ratio: 1200 / 661;
 }
-
 
 .sticky-menu {
     --lbx-bg: #0a0e19;
@@ -3477,7 +3473,6 @@ div.provider-carousel {
     }
 }
 
-
 .fiat-method__summary {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: center;
@@ -3485,7 +3480,6 @@ div.provider-carousel {
     padding: 0px !important;
     display: grid;
 }
-
 
 footer#footer {
     --ft-bg: #0a0e19;
@@ -3551,6 +3545,7 @@ footer#footer .footer-menus .footer-bottoms > div {
     flex: none !important;
     width: auto !important;
     max-width: none !important;
+    padding: 0 !important;
     margin: 0 !important;
     text-align: left !important;
 }
@@ -3624,8 +3619,6 @@ footer#footer .bf-fsupport {
     border-radius: 16px !important;
     overflow: hidden !important;
     isolation: isolate !important;
-    height: 185px !important;
-    background: #12151e;
 }
 
 footer#footer .bf-fsupport::after {
@@ -3922,26 +3915,6 @@ footer#footer .footer-bottom .emails .mail:hover span {
 
     footer#footer .bf-fsupport {
         grid-column: 1 / -1 !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        flex-wrap: wrap !important;
-        gap: 14px 20px !important;
-        min-height: 132px !important;
-        padding: 18px 26% 18px 22px !important;
-    }
-
-    footer#footer .bf-fsupport::after {
-        width: 24% !important;
-        background-size: auto 118% !important;
-    }
-
-    footer#footer .bf-fsupport__desc {
-        flex: 1 1 220px !important;
-        max-width: none !important;
-    }
-
-    footer#footer .bf-fsupport__btn {
-        margin-top: 0 !important;
     }
 }
 
@@ -3979,15 +3952,14 @@ footer#footer .footer-bottom .emails .mail:hover span {
         height: 50px !important;
     }
 
-    footer#footer .footer-logo,
-    footer#footer .safe-online-casino-seal {
+    footer#footer .footer-logo {
         justify-content: center !important;
-        padding: 18px 0 !important;
+        padding: 24px 0 10px !important;
     }
 
     footer#footer .safe-online-casino-seal {
-        border-top: 0 !important;
-        padding-top: 0 !important;
+        justify-content: center !important;
+        padding: 0 0 22px !important;
     }
 
     footer#footer .footer-bottom {
@@ -4031,23 +4003,12 @@ footer#footer .footer-bottom .emails .mail:hover span {
     }
 
     footer#footer .bf-fsupport {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        min-height: 0 !important;
-        padding: 16px 40% 16px 16px !important;
-    }
-
-    footer#footer .bf-fsupport::after {
-        width: 44% !important;
-        background-size: auto 100% !important;
+        min-height: 150px !important;
+        padding: 18px 40% 18px 18px !important;
     }
 
     footer#footer .bf-fsupport__desc {
         max-width: none !important;
-    }
-
-    footer#footer .bf-fsupport__btn {
-        width: auto !important;
     }
 
     footer#footer .footer-currencies .currency-listing {
