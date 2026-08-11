@@ -3625,6 +3625,8 @@ footer#footer .bf-fsupport {
     border-radius: 16px !important;
     overflow: hidden !important;
     isolation: isolate !important;
+    height: 185px !important;
+    background: #12151e;
 }
 
 footer#footer .bf-fsupport::after {
