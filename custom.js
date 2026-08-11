@@ -420,12 +420,28 @@
     return el;
   }
 
+  var HOME_ANCHORS = [
+    '.enterence-box',
+    '.welcome-content',
+    '.hp-hero--desktop',
+    '.hp-hero',
+    '.hero-box',
+    '.hero-area',
+    '.hero-area-slider',
+    '.hp-mobile-slider'
+  ];
+
   function homeAnchor(mode) {
+    var i, el;
     if (mode === 'm') {
-      var mob = q('.hp-mobile-slider');
-      if (mob) return mob;
+      el = q('.hp-mobile-slider');
+      if (el) return el;
     }
-    return q('.enterence-box') || q('.welcome-content') || q('.hp-mobile-slider');
+    for (i = 0; i < HOME_ANCHORS.length; i++) {
+      el = q(HOME_ANCHORS[i]);
+      if (el && el.parentNode) return el;
+    }
+    return null;
   }
 
   var TARGETS = {
