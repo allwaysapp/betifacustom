@@ -2494,3 +2494,7 @@ div.provider-carousel {
     background: none !important;
 }
 }
+
+.hero-area-slider.type-2 .hero-slide-media {
+    aspect-ratio: 1200 / 661;
+}
