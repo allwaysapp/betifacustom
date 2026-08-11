@@ -1543,19 +1543,6 @@ div.provider-carousel {
     text-align: left !important;
 }
 
-#responsive-menu.responsive-menu .to-search-modal::after {
-    content: "ctrl K";
-    flex: 0 0 auto;
-    background: var(--bfs-stroke);
-    color: #8a91a3;
-    font-size: 10px;
-    font-weight: 600;
-    padding: 3px 7px;
-    border-radius: 6px;
-    line-height: 1.4;
-    display: block;
-}
-
 #responsive-menu.responsive-menu .p2tabs--sidebar {
     --sw: var(--bfs-accent-rgb);
     position: relative !important;
