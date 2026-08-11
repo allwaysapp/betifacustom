@@ -1829,7 +1829,7 @@ div.provider-carousel {
     display: flex !important;
     flex-direction: column !important;
     gap: 2px !important;
-    margin: 2px 0 0 !important;
+    margin: 12px 0 0 !important;
     padding: 0 !important;
 }
 
