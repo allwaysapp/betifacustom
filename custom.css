@@ -4026,3 +4026,14 @@ footer#footer .footer-bottom .emails .mail:hover span {
         padding: 6px 11px !important;
     }
 }
+
+footer#footer .footer-contents-col .content-block {
+    /* text-align:left; */
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 100% !important;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex
+}
