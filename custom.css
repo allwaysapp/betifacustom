@@ -4045,3 +4045,11 @@ footer#footer .footer-contents-col .content-block {
     line-height: 24px;
     display: flex
 }
+
+.faq {
+    border-radius: 18px;
+    padding: 28px 16px;
+    position: relative;
+    overflow: hidden;
+    display: none !important;
+}
