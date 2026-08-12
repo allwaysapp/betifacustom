@@ -473,8 +473,10 @@
     'bf-appbar': function (mode) {
       return document.getElementById('bf-stats') || document.getElementById('bf-products') || homeAnchor(mode);
     },
-    'bf-slots': function () { return q('.top-picks-widget'); },
-    'bf-jackpot': function () { return document.getElementById('bf-slots') || q('.top-picks-widget'); },
+    // Sıralama: .top-picks-widget → bf-jackpot → bf-slots
+    // Jackpot bloğu Hot/Cold slot listelerinin üstünde durur.
+    'bf-jackpot': function () { return q('.top-picks-widget'); },
+    'bf-slots': function () { return document.getElementById('bf-jackpot') || q('.top-picks-widget'); },
     'bf-partners': function () { return q('#footer'); }
   };
 
