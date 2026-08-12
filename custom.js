@@ -1,7 +1,26 @@
 (function () {
   if (window.__BetifaHome) return;
 
-  var DATA_URL = 'https://raw.githubusercontent.com/allwaysapp/betifacustom/main/betifa-home.json';
+  // Yönetim panelinin adresi. Panel taşınırsa değişecek tek satır burasıdır.
+  var PANEL_URL = 'https://panel.betifagunceladres.com';
+
+  // Statik veri: sayfa açılışında bir kez çekilir (slot listeleri, jackpot
+  // oyunları, sosyal linkler, sabit istatistikler).
+  var DATA_URL = PANEL_URL + '/api/public/static';
+
+  // Canlı veri: yalnızca aktif oyuncu sayısı ve jackpot tutarı. Periyodik çekilir.
+  var LIVE_URL = PANEL_URL + '/api/public/live';
+
+  // Canlı sayaç akışı. LIVE_INTERVAL, sunucudaki `LIVE_TICK_MS` ile aynı
+  // olmalıdır — hesaplama adımları bu aralığa göre kurulur.
+  var LIVE_INTERVAL = 17000;
+
+  // Aktif oyuncu sayacı: çoğu zaman sabit durur, yeni değer geldiğinde bu
+  // sürede döner. Jackpot: aralığın çoğuna yayılarak akar, kalan ~2 saniye
+  // sabit kalır.
+  var TICK_ANIM = 800;
+  var FLOW_ANIM = 15000;
+
   var CSS_URL = 'https://raw.githubusercontent.com/allwaysapp/betifacustom/main/custom.css';
   var CDN = 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/';
 
@@ -81,6 +100,9 @@
     for (var i = 0; i < FEATURES.length; i++) {
       try { FEATURES[i].run(); } catch (e) {}
     }
+    // Yeni oluşturulan bölümler statik veriyle çizilir; elde daha güncel bir
+    // canlı değer varsa animasyonsuz olarak hemen üzerine yazılır.
+    try { paintLive(false); } catch (e) {}
   }
 
   function installHistoryHook() {
@@ -891,12 +913,413 @@
     onResize(function () { if (!wrap.hidden) position(); });
   }
 
+  /* ==================================================================== */
+  /* Canlı sayaçlar                                                        */
+  /*                                                                       */
+  /* Panelin canlı ucu 15–20 saniyede bir çekilir ve gelen değer yalnızca  */
+  /* ilgili DOM elemanının içeriğine yazılır. Sayfa yenilenmez, başka      */
+  /* hiçbir alan etkilenmez. API'ye ulaşılamazsa son bilinen değer ekranda */
+  /* kalır; bölüm gizlenmez, hata gösterilmez.                             */
+  /* ==================================================================== */
+
+  var LIVE = { players: null, jackpot: null };
+  var liveTimer = null;
+  var liveBusy = false;
+  var odoStyled = false;
+  var flowFrames = {};
+
+  var LIVE_TARGETS = [
+    { key: 'players', mode: 'tick', sel: '#bf-stats .bf-stat--players .bf-stat__value' },
+    { key: 'jackpot', mode: 'flow', sel: '#bf-jackpot .bf-jackpot__amount' }
+  ];
+
+  var REDUCED_MOTION = !!(window.matchMedia
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  // Şerit hücresinin yüksekliği (em). Yazı boyutundan bağımsız çalışsın diye
+  // em cinsinden; dönüş mesafeleri de aynı birimle hesaplanır.
+  var CELL_EM = 1.15;
+
+  /* ------------------------------------------------------------------ */
+  /* Odometre stilleri                                                   */
+  /* ------------------------------------------------------------------ */
+
+  function injectOdometerStyles() {
+    if (odoStyled || document.getElementById('bf-odo-styles')) return;
+    odoStyled = true;
+
+    var css =
+      '.bf-odo{display:inline-flex;align-items:flex-start;vertical-align:baseline;font-variant-numeric:tabular-nums}' +
+      '.bf-odo__s{display:block;height:' + CELL_EM + 'em;line-height:' + CELL_EM + 'em}' +
+      '.bf-odo__d{display:block;height:' + CELL_EM + 'em;overflow:hidden}' +
+      '.bf-odo__r{display:block;will-change:transform}' +
+      '.bf-odo__r>span{display:block;height:' + CELL_EM + 'em;line-height:' + CELL_EM + 'em}' +
+      // Tik modu geçişi CSS ile; akış modu her karede elle konumlandığı için
+      // geçişi olmamalı, yoksa iki animasyon birbiriyle yarışır.
+      '.bf-odo__r--tick{transition:transform ' + TICK_ANIM + 'ms cubic-bezier(.22,1,.36,1)}' +
+      '@media (prefers-reduced-motion:reduce){.bf-odo__r--tick{transition:none}}';
+
+    var style = document.createElement('style');
+    style.id = 'bf-odo-styles';
+    style.appendChild(document.createTextNode(css));
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function makeCell() {
+    var cell = document.createElement('span');
+    cell.className = 'bf-odo__d';
+    return cell;
+  }
+
+  function makeFlat(ch) {
+    var flat = document.createElement('span');
+    flat.className = 'bf-odo__s';
+    flat.textContent = ch;
+    return flat;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* TİK MODU — aktif oyuncu sayacı                                      */
+  /*                                                                     */
+  /* Sayı çoğu zaman sabit durur. Yeni değer geldiğinde her hane, eski   */
+  /* rakamdan yenisine aradaki tüm rakamların üzerinden geçerek döner:   */
+  /* 1'den 9'a çıkarken 2,3,4,5,6,7,8 görünür. Üst hane devrettiğinde    */
+  /* 9'dan 0'a geçilir, gerçek bir kilometre sayacı gibi.                */
+  /* ------------------------------------------------------------------ */
+
+  /** Eski rakamdan yenisine, seçilen yönde uğranacak rakamların listesi. */
+  function digitPath(from, to, direction) {
+    var a = from.charCodeAt(0) - 48;
+    var b = to.charCodeAt(0) - 48;
+
+    var path = [a];
+    var current = a;
+
+    // En fazla 10 adım — devretme dahil tüm rakamlar bir turda biter.
+    for (var guard = 0; current !== b && guard < 10; guard++) {
+      current = direction > 0 ? (current + 1) % 10 : (current + 9) % 10;
+      path.push(current);
+    }
+
+    return path;
+  }
+
+  function paintTick(el, text, direction) {
+    injectOdometerStyles();
+
+    var previous = el.getAttribute('data-bf-value');
+    var animate = direction !== 0
+      && previous !== null
+      && previous.length === text.length
+      && !REDUCED_MOTION;
+
+    var wrap = document.createElement('span');
+    wrap.className = 'bf-odo';
+
+    var reels = [];
+
+    for (var i = 0; i < text.length; i++) {
+      var ch = text.charAt(i);
+      var old = animate ? previous.charAt(i) : ch;
+
+      if (!animate || ch === old || ch < '0' || ch > '9') {
+        wrap.appendChild(makeFlat(ch));
+        continue;
+      }
+
+      var path = digitPath(old, ch, direction);
+      var cell = makeCell();
+
+      var reel = document.createElement('span');
+      reel.className = 'bf-odo__r bf-odo__r--tick';
+
+      // Artışta şerit yukarı kayar: eski rakam üstte, yeni en altta.
+      // Azalışta şerit aşağı kayar: sıra ters dizilir, baştaki konumdan 0'a gelinir.
+      var ordered = direction > 0 ? path : path.slice().reverse();
+      var span = (ordered.length - 1) * CELL_EM;
+
+      for (var d = 0; d < ordered.length; d++) {
+        var digit = document.createElement('span');
+        digit.textContent = String(ordered[d]);
+        reel.appendChild(digit);
+      }
+
+      reel.style.transform = direction > 0
+        ? 'translateY(0)'
+        : 'translateY(-' + span + 'em)';
+
+      reels.push({ reel: reel, to: direction > 0 ? 'translateY(-' + span + 'em)' : 'translateY(0)' });
+
+      cell.appendChild(reel);
+      wrap.appendChild(cell);
+    }
+
+    el.innerHTML = '';
+    el.appendChild(wrap);
+    el.setAttribute('data-bf-value', text);
+
+    if (!reels.length) return;
+
+    // Başlangıç konumu çizildikten sonra hedefe kaydır ki geçiş tetiklensin.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        for (var k = 0; k < reels.length; k++) {
+          reels[k].reel.style.transform = reels[k].to;
+        }
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* AKIŞ MODU — jackpot tutarı                                          */
+  /*                                                                     */
+  /* Jackpot sürekli ve tek yönlü arttığı için hiç durmaz: iki istek     */
+  /* arasındaki sürenin çoğuna yayılarak akar, son birkaç saniye sabit   */
+  /* kalır. Her hane kendi hızında döner — birler hanesi hızlı, onlar    */
+  /* on kat yavaş, yüzler yüz kat yavaş. Gerçek bir kilometre sayacının  */
+  /* dişli mantığı.                                                      */
+  /* ------------------------------------------------------------------ */
+
+  /**
+   * Bir hanenin o andaki makara konumu.
+   *
+   * Gerçek bir kilometre sayacının dişli mantığı: birler hanesi değerle
+   * birlikte sürekli döner, üst haneler yalnızca altlarındaki hanelerin
+   * tamamı 9 iken hareket eder. Böylece sayı tam bir değerdeyken bütün
+   * haneler net durur; makaralar sadece devretme anında araya girer.
+   */
+  function wheelPosition(value, place) {
+    var whole = Math.floor(value);
+    var fraction = value - whole;
+    var unit = Math.pow(10, place);
+
+    var digit = Math.floor(whole / unit) % 10;
+
+    // Bir hane yalnızca altındaki hanelerin tamamı 9 iken devreder.
+    // Birler hanesi ise değerle birlikte sürekli döner.
+    var carrying = place === 0 || (whole % unit) === unit - 1;
+
+    return digit + (carrying ? fraction : 0);
+  }
+
+  /** Metnin rakam olmayan iskeleti — yapı değişmediyse DOM yeniden kurulmaz. */
+  function signature(text) {
+    return text.replace(/\d/g, '#');
+  }
+
+  function buildFlow(el, text, decimals) {
+    var wrap = document.createElement('span');
+    wrap.className = 'bf-odo';
+
+    var digitCount = (text.match(/\d/g) || []).length;
+    var wheels = [];
+    var seen = 0;
+
+    for (var i = 0; i < text.length; i++) {
+      var ch = text.charAt(i);
+
+      if (ch < '0' || ch > '9') {
+        wrap.appendChild(makeFlat(ch));
+        continue;
+      }
+
+      var place = (digitCount - 1 - seen) - decimals;
+      seen++;
+
+      var cell = makeCell();
+      var reel = document.createElement('span');
+      reel.className = 'bf-odo__r bf-odo__r--flow';
+
+      // 0-9 ve devretme için bir tane daha 0.
+      for (var d = 0; d <= 10; d++) {
+        var digit = document.createElement('span');
+        digit.textContent = String(d % 10);
+        reel.appendChild(digit);
+      }
+
+      cell.appendChild(reel);
+      wrap.appendChild(cell);
+      wheels.push({ reel: reel, place: place });
+    }
+
+    el.innerHTML = '';
+    el.appendChild(wrap);
+
+    return { signature: signature(text), decimals: decimals, wheels: wheels };
+  }
+
+  function renderFlow(structure, value) {
+    for (var i = 0; i < structure.wheels.length; i++) {
+      var wheel = structure.wheels[i];
+      var position = wheelPosition(value, wheel.place);
+
+      // Konum değişmediyse dokunma: üst haneler zamanın çoğunda sabit durur,
+      // gereksiz stil yazımı her karede yeniden hesaplamaya yol açar.
+      if (wheel.last !== undefined && Math.abs(position - wheel.last) < 0.0005) continue;
+
+      wheel.last = position;
+      wheel.reel.style.transform = 'translateY(-' + (position * CELL_EM) + 'em)';
+    }
+  }
+
+  function paintFlow(el, key, state) {
+    injectOdometerStyles();
+
+    // Ondalık basamak sayısı: metindeki rakam adedi ile tam kısmın uzunluğu farkı.
+    var digitCount = (state.text.match(/\d/g) || []).length;
+    var decimals = Math.max(0, digitCount - String(Math.floor(Math.abs(state.value))).length);
+
+    var structure = el.__bfFlow;
+    if (!structure || structure.signature !== signature(state.text)) {
+      structure = buildFlow(el, state.text, decimals);
+      el.__bfFlow = structure;
+    }
+
+    el.setAttribute('data-bf-value', state.text);
+
+    if (flowFrames[key]) {
+      cancelAnimationFrame(flowFrames[key]);
+      flowFrames[key] = null;
+    }
+
+    var from = state.from;
+    var to = state.value;
+
+    if (from == null || from === to || REDUCED_MOTION) {
+      renderFlow(structure, to);
+      return;
+    }
+
+    var started = 0;
+
+    function step(now) {
+      if (!started) started = now;
+
+      // `isConnected` eski WebView sürümlerinde yok; `document.contains`
+      // her yerde var ve aynı sorunun cevabını verir.
+      if (!document.contains(el)) {
+        flowFrames[key] = null;
+        return;
+      }
+
+      // Doğrusal ilerleme — akış yavaşlamadan devam etsin.
+      var t = Math.min(1, (now - started) / FLOW_ANIM);
+      renderFlow(structure, from + (to - from) * t);
+
+      if (t < 1) {
+        flowFrames[key] = requestAnimationFrame(step);
+      } else {
+        // Kalan süre boyunca sabit kalır, sonraki veri akışı yeniden başlatır.
+        flowFrames[key] = null;
+      }
+    }
+
+    flowFrames[key] = requestAnimationFrame(step);
+  }
+
+  /* ------------------------------------------------------------------ */
+
+  function paintLive(animate) {
+    for (var i = 0; i < LIVE_TARGETS.length; i++) {
+      var target = LIVE_TARGETS[i];
+      var state = LIVE[target.key];
+      if (!state) continue;
+
+      var el = q(target.sel);
+      if (!el) continue;
+
+      var known = el.getAttribute('data-bf-value');
+
+      // Animasyonsuz çağrı yalnızca yeni oluşturulmuş elemanı doldurur;
+      // aksi halde her DOM değişikliğinde akışı baştan başlatırdı.
+      if (!animate) {
+        if (known !== null) continue;
+
+        if (target.mode === 'flow') {
+          paintFlow(el, target.key, { from: null, value: state.value, text: state.text });
+        } else {
+          paintTick(el, state.text, 0);
+        }
+        continue;
+      }
+
+      if (target.mode === 'flow') {
+        paintFlow(el, target.key, state);
+        continue;
+      }
+
+      var direction = 0;
+      if (known !== null && state.from != null) {
+        if (state.value > state.from) direction = 1;
+        else if (state.value < state.from) direction = -1;
+      }
+
+      paintTick(el, state.text, direction);
+    }
+  }
+
+  function fetchLive() {
+    // Sekme arka plandayken istek atılmaz.
+    if (liveBusy || document.hidden) return;
+    liveBusy = true;
+
+    fetch(LIVE_URL, { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        liveBusy = false;
+        if (!j) return;
+
+        applyLiveValue('players', j.activePlayers);
+        applyLiveValue('jackpot', j.jackpot);
+        paintLive(true);
+      })
+      .catch(function () {
+        // Hata yutulur: son bilinen değer ekranda kalır.
+        liveBusy = false;
+      });
+  }
+
+  function applyLiveValue(key, incoming) {
+    if (!incoming || incoming.value == null) return;
+
+    var previous = LIVE[key];
+    LIVE[key] = {
+      from: previous ? previous.value : seedValue(key),
+      value: Number(incoming.value),
+      text: String(incoming.text)
+    };
+  }
+
+  /** İlk animasyonun başlangıç noktası: statik yüklemedeki değer. */
+  function seedValue(key) {
+    if (!DATA) return null;
+
+    if (key === 'players') {
+      return DATA.stats && DATA.stats.activePlayers ? DATA.stats.activePlayers.value : null;
+    }
+
+    return DATA.jackpot && DATA.jackpot.amount ? DATA.jackpot.amount.value : null;
+  }
+
+  function startLive() {
+    if (liveTimer) return;
+
+    fetchLive();
+    liveTimer = setInterval(fetchLive, LIVE_INTERVAL);
+
+    // Sekmeye geri dönüldüğünde beklemeden tazele.
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) fetchLive();
+    });
+  }
+
   function boot() {
     VW = window.innerWidth;
     injectCss();
     loadData();
     installHistoryHook();
     installResizeHub();
+    startLive();
 
     scheduleRun();
     setTimeout(scheduleRun, 300);
