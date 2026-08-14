@@ -944,7 +944,7 @@
   var TRUST_TEXT = {
     tr: {
       age: { t: '18+ Yaş Sınırı', d: 'Yalnızca 18 yaş ve üzeri kullanıcılar için uygundur.' },
-      license: { t: 'Lisans & Denetimli', d: 'Anjouan eGaming tarafından lisanslanmış ve düzenlenmektedir.' },
+      license: { t: 'Lisanslı & Denetimli', d: 'Anjouan eGaming tarafından lisanslanmış ve düzenlenmektedir.' },
       secure: { t: 'Güvenli Ödeme', d: '256-bit SSL şifreleme ile verileriniz güvende.' },
       fast: { t: 'Hızlı Çekim', d: 'Çekim talepleriniz en kısa sürede işleme alınır.' },
       support: { t: '7/24 Canlı Destek', d: 'Destek ekibimize her an ulaşabilirsiniz.' },
@@ -1004,6 +1004,56 @@
       el.innerHTML = '<div class="bf-trust__grid">' + items + '</div>';
 
       notices.parentNode.insertBefore(el, notices.nextSibling);
+    }
+  });
+
+  var HEADER_BADGES = [
+    { key: 'btc',     img: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/YtDERdBF6vSfHXi1ykzuVZzNDRuRIVBrbEh5P1lY.svg', label: 'Bitcoin', action: 'deposit' },
+    { key: 'trust',   img: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/FlRpcfFtZbPeN8ttocVkcHQZ2kxmJU6SNadHDzgn.webp', label: 'Trust Wallet', action: 'deposit' },
+    { key: 'bank',    img: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/J0f61bkYEuOAm0InDaH2Vx2wsw88BbmmDhgqT7Yq.svg', label: 'Banka Havalesi', action: 'deposit' },
+    { key: 'ucl',     img: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/Lh8KrX3maicXJp9zK0Floo3QPlQupgjWS0cGLfXg.png', label: 'UEFA Şampiyonlar Ligi', url: '/sportsbook/soccer/uefa-champions-league' },
+    { key: 'license', img: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/VFiLnX06KBYZPvu8M1KRdGwdiQoMEEnEkhNZUed0.svg', label: 'Lisans', static: true }
+  ];
+
+  register({
+    id: 'bf-hbadges',
+    run: function () {
+      var host = q('.middle-header-container .categories');
+      if (!host || !host.parentNode) return;
+
+      var existing = document.getElementById('bf-hbadges');
+      if (existing) {
+        if (host.nextElementSibling !== existing) {
+          host.parentNode.insertBefore(existing, host.nextSibling);
+        }
+        return;
+      }
+
+      var html = '';
+      for (var i = 0; i < HEADER_BADGES.length; i++) {
+        var b = HEADER_BADGES[i];
+        var tag = b.static ? 'span' : 'a';
+        var attrs = '';
+        if (b.url) {
+          attrs = ' href="' + esc(getLangPrefix() + b.url) + '"' +
+                  ' data-bf-link="' + esc(getLangPrefix() + b.url) + '"';
+        } else if (b.action) {
+          attrs = ' href="#" data-bf-action="' + b.action + '"';
+        }
+        html +=
+          '<' + tag + ' class="bf-hbadge bf-hbadge--' + b.key + '"' + attrs +
+            ' title="' + esc(b.label) + '" aria-label="' + esc(b.label) + '">' +
+            '<img src="' + esc(b.img) + '" alt="' + esc(b.label) + '" loading="lazy" decoding="async">' +
+          '</' + tag + '>';
+      }
+
+      var el = document.createElement('div');
+      el.id = 'bf-hbadges';
+      el.className = 'bf-hbadges';
+      el.innerHTML = html;
+
+      host.parentNode.insertBefore(el, host.nextSibling);
+      attachActions(el);
     }
   });
 
