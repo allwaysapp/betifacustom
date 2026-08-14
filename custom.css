@@ -1345,8 +1345,17 @@ div.provider-carousel {
     display: flex !important;
     flex-direction: column !important;
     min-height: 100% !important;
+    max-height: 100% !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
     padding: 16px 14px 20px !important;
     gap: 0 !important;
+}
+
+#responsive-menu.responsive-menu .sidebar-content::-webkit-scrollbar {
+    display: none !important;
 }
 
 #responsive-menu.responsive-menu .menu-head,
@@ -1462,7 +1471,7 @@ div.provider-carousel {
 #responsive-menu.responsive-menu.active-menu .sidebar-wrapper {
     display: flex !important;
     flex-direction: column !important;
-    flex: 1 1 auto !important;
+    flex: 1 0 auto !important;
     min-height: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
