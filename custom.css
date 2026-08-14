@@ -3498,6 +3498,142 @@ div.provider-carousel {
     display: grid;
 }
 
+header#header .middle-header-container .categories {
+    display: none !important;
+}
+
+header#header .middle-header-container .bf-hbadges,
+.bf-hbadges {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+}
+
+.bf-hbadge {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    width: 52px !important;
+    height: 38px !important;
+    padding: 0 8px !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(255, 255, 255, .07) !important;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, .05) 0%, rgba(255, 255, 255, .012) 100%),
+        rgba(17, 21, 31, .7) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05) !important;
+    text-decoration: none !important;
+    overflow: hidden !important;
+    transition: transform .2s cubic-bezier(.22, 1, .36, 1), border-color .2s ease, background .2s ease, box-shadow .2s ease !important;
+}
+
+.bf-hbadge::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: inherit !important;
+    pointer-events: none !important;
+    background: radial-gradient(120% 160% at 50% 120%, rgba(var(--accent-rgb, 243, 31, 81), .22) 0%, rgba(0, 0, 0, 0) 62%) !important;
+    opacity: 0 !important;
+    transition: opacity .22s ease !important;
+}
+
+.bf-hbadge img {
+    position: relative !important;
+    z-index: 1 !important;
+    max-width: 100% !important;
+    max-height: 22px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    opacity: .78 !important;
+    transition: opacity .22s ease, transform .22s ease !important;
+}
+
+a.bf-hbadge {
+    cursor: pointer !important;
+}
+
+a.bf-hbadge:hover {
+    transform: translateY(-2px) !important;
+    border-color: rgba(var(--accent-rgb, 243, 31, 81), .34) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .08),
+        0 8px 20px -10px rgba(var(--accent-rgb, 243, 31, 81), .8) !important;
+}
+
+a.bf-hbadge:hover::before {
+    opacity: 1 !important;
+}
+
+a.bf-hbadge:hover img {
+    opacity: 1 !important;
+    transform: scale(1.04) !important;
+}
+
+a.bf-hbadge:active {
+    transform: translateY(0) !important;
+}
+
+span.bf-hbadge {
+    cursor: default !important;
+    pointer-events: none !important;
+}
+
+.bf-hbadge--license {
+    width: auto !important;
+    min-width: 52px !important;
+    padding: 0 10px !important;
+    border-color: rgba(255, 255, 255, .05) !important;
+    background: rgba(255, 255, 255, .028) !important;
+}
+
+.bf-hbadge--license img {
+    max-height: 26px !important;
+    opacity: .62 !important;
+}
+
+.bf-hbadge--ucl img {
+    max-height: 26px !important;
+}
+
+.bf-hbadge--trust img,
+.bf-hbadge--btc img,
+.bf-hbadge--bank img {
+    max-height: 20px !important;
+}
+
+@media (max-width: 1400px) {
+    .bf-hbadge {
+        width: 46px !important;
+        height: 36px !important;
+        padding: 0 6px !important;
+    }
+
+    .bf-hbadge img {
+        max-height: 19px !important;
+    }
+
+    .bf-hbadge--license img,
+    .bf-hbadge--ucl img {
+        max-height: 23px !important;
+    }
+
+    .bf-hbadges {
+        gap: 6px !important;
+    }
+}
+
+@media (max-width: 1201px) {
+    .bf-hbadges,
+    header#header .middle-header-container .bf-hbadges {
+        display: none !important;
+    }
+}
+
 footer#footer {
     --ft-bg: #0a0e19;
     --ft-surface: #11151f;
