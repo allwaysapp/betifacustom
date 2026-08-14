@@ -924,6 +924,89 @@
     }
   });
 
+  var TRUST_ICONS = {
+    age: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.2 5.9v6.2c0 4.4 3.2 8.1 7.8 9.3 4.6-1.2 7.8-4.9 7.8-9.3V5.9z"/><path d="M9 9.4h1.4v5.2"/><path d="M13.4 11.9h2.2"/><path d="M14.5 9.4a1.2 1.2 0 0 1 0 2.5 1.2 1.2 0 0 1 0 2.5"/></svg>',
+    license: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.2 5.9v6.2c0 4.4 3.2 8.1 7.8 9.3 4.6-1.2 7.8-4.9 7.8-9.3V5.9z"/><path d="m8.6 11.9 2.4 2.4 4.4-4.4"/></svg>',
+    secure: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.2" width="16" height="10.4" rx="2.6"/><path d="M7.8 10.2V7.6a4.2 4.2 0 0 1 8.4 0v2.6"/><circle cx="12" cy="15.4" r="1.5"/></svg>',
+    fast: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.8 2.6 5.2 13.4h5.4l-.8 8 7.6-10.8h-5.4z"/></svg>',
+    support: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.2 13.4v-1.2a7.8 7.8 0 0 1 15.6 0v1.2"/><rect x="2.4" y="13.1" width="4.2" height="6.2" rx="2.1"/><rect x="17.4" y="13.1" width="4.2" height="6.2" rx="2.1"/><path d="M19.5 19.3v.4a2.8 2.8 0 0 1-2.8 2.8h-3.2"/></svg>',
+    fair: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4v17.2"/><path d="M7.6 20.6h8.8"/><path d="M4.4 7.4h15.2"/><path d="M4.4 7.4 2 13.2a2.9 2.9 0 0 0 4.8 0z"/><path d="M19.6 7.4 17.2 13.2a2.9 2.9 0 0 0 4.8 0z"/><circle cx="12" cy="5.4" r="1.6"/></svg>'
+  };
+
+  var TRUST = [
+    { key: 'age', tc: '243, 31, 81' },
+    { key: 'license', tc: '19, 227, 152' },
+    { key: 'secure', tc: '68, 167, 255' },
+    { key: 'fast', tc: '239, 176, 37' },
+    { key: 'support', tc: '186, 122, 255' }
+  ];
+
+  var TRUST_TEXT = {
+    tr: {
+      age: { t: '18+ Yaş Sınırı', d: 'Yalnızca 18 yaş ve üzeri kullanıcılar için uygundur.' },
+      license: { t: 'Lisanslı & Denetimli', d: 'Anjouan eGaming tarafından lisanslanmış ve düzenlenmektedir.' },
+      secure: { t: 'Güvenli Ödeme', d: '256-bit SSL şifreleme ile verileriniz güvende.' },
+      fast: { t: 'Hızlı Çekim', d: 'Çekim talepleriniz en kısa sürede işleme alınır.' },
+      support: { t: '7/24 Canlı Destek', d: 'Destek ekibimize her an ulaşabilirsiniz.' },
+      fair: { t: 'Adil Oyun', d: 'Tüm oyunlar sertifikalı RNG ile çalışır.' }
+    },
+    en: {
+      age: { t: '18+ Age Limit', d: 'Suitable only for users aged 18 and over.' },
+      license: { t: 'Licensed & Regulated', d: 'Licensed and regulated by Anjouan eGaming.' },
+      secure: { t: 'Secure Payments', d: 'Your data is protected with 256-bit SSL encryption.' },
+      fast: { t: 'Fast Withdrawals', d: 'Your withdrawal requests are processed quickly.' },
+      support: { t: '24/7 Live Support', d: 'Our support team is always available.' },
+      fair: { t: 'Fair Play', d: 'All games run on certified RNG systems.' }
+    }
+  };
+
+  register({
+    id: 'bf-trust',
+    run: function () {
+      var footer = q('#footer') || q('footer#footer');
+      if (!footer) return;
+      var notices = q('.footer-contents', footer);
+      if (!notices || !notices.parentNode) return;
+
+      var lang = getLangCode();
+      var existing = document.getElementById('bf-trust');
+
+      if (existing) {
+        if (existing.getAttribute('data-bf-lang') === lang) {
+          if (notices.nextElementSibling !== existing) {
+            notices.parentNode.insertBefore(existing, notices.nextSibling);
+          }
+          return;
+        }
+        existing.remove();
+      }
+
+      var L = TRUST_TEXT[lang] || TRUST_TEXT.tr;
+      var items = '';
+      for (var i = 0; i < TRUST.length; i++) {
+        var it = TRUST[i], c = L[it.key];
+        if (!c) continue;
+        items +=
+          '<div class="bf-trust__item" style="--tc:' + it.tc + '">' +
+            '<span class="bf-trust__ico">' + TRUST_ICONS[it.key] + '</span>' +
+            '<span class="bf-trust__txt">' +
+              '<span class="bf-trust__title">' + esc(c.t) + '</span>' +
+              '<span class="bf-trust__desc">' + esc(c.d) + '</span>' +
+            '</span>' +
+          '</div>';
+      }
+      if (!items) return;
+
+      var el = document.createElement('div');
+      el.id = 'bf-trust';
+      el.className = 'bf-trust';
+      el.setAttribute('data-bf-lang', lang);
+      el.innerHTML = '<div class="bf-trust__grid">' + items + '</div>';
+
+      notices.parentNode.insertBefore(el, notices.nextSibling);
+    }
+  });
+
   function socialAnchor() {
     var m = q('#responsive-menu');
     if (!m) return null;
