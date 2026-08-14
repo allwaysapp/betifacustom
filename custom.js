@@ -387,6 +387,8 @@
   }
 
   function attachActions(root) {
+    if (root.getAttribute('data-bf-bound')) return;
+    root.setAttribute('data-bf-bound', '1');
     root.addEventListener('click', function (e) {
       var el = e.target && e.target.closest ? e.target.closest('[data-bf-link],[data-bf-action]') : null;
       if (!el || !root.contains(el)) return;
@@ -773,6 +775,152 @@
         '</section>';
         return shell('bf-partners', h);
       });
+    }
+  });
+
+  var SB_ICONS = {
+    home: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M3 11.5L12 4L21 11.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10.5V20H10V15H14V20H19V10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    casino: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 3h10.8l3.1 5.6-8.5 12.1L3 8.6z"/><path d="M3 8.6h18"/><path d="M9.5 3 12 8.6 14.5 3"/></svg>',
+    live: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="4"/><circle cx="9" cy="10.6" r="1.8"/><circle cx="15.4" cy="10.6" r="1.8"/><path d="M5.9 16.2a3.5 3.5 0 0 1 6.2 0"/><path d="M12.4 16.2a3.5 3.5 0 0 1 6.1 0"/></svg>',
+    sports: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.6 4 5.6 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.6-4-9s1.4-6.4 4-9z"/></svg>',
+    livebet: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="2.1"/><path d="M8 8.2a5.6 5.6 0 0 0 0 7.6"/><path d="M16 8.2a5.6 5.6 0 0 1 0 7.6"/><path d="M5.2 5.2a9.8 9.8 0 0 0 0 13.6"/><path d="M18.8 5.2a9.8 9.8 0 0 1 0 13.6"/></svg>',
+    deposit: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.4v9.4"/><path d="m8.2 9.1 3.8 3.7 3.8-3.7"/><path d="M4.2 14.6v3.1a2.6 2.6 0 0 0 2.6 2.6h10.4a2.6 2.6 0 0 0 2.6-2.6v-3.1"/></svg>',
+    withdraw: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12.8V3.4"/><path d="m8.2 7.1 3.8-3.7 3.8 3.7"/><path d="M4.2 14.6v3.1a2.6 2.6 0 0 0 2.6 2.6h10.4a2.6 2.6 0 0 0 2.6-2.6v-3.1"/></svg>'
+  };
+
+  var SB_LABELS = {
+    tr: {
+      home: 'Anasayfa', casino: 'Casino', live: 'Canlı Casino',
+      sports: 'Spor Bahisleri', livebet: 'Canlı Bahis',
+      deposit: 'Para Yatırma', withdraw: 'Para Çekme',
+      special: 'Özel', help: 'Yardım & Destek'
+    },
+    en: {
+      home: 'Home', casino: 'Casino', live: 'Live Casino',
+      sports: 'Sportsbook', livebet: 'Live Betting',
+      deposit: 'Deposit', withdraw: 'Withdraw',
+      special: 'Special', help: 'Help & Support'
+    }
+  };
+
+  var SB_NEW = [
+    { key: 'casino', url: '/casino/slots/lobby' },
+    { key: 'live', url: '/casino/live-casino/live-lobby' },
+    { key: 'sports', url: '/sportsbook' },
+    { key: 'livebet', url: '/sportsbook/live/soccer' },
+    { key: 'deposit', action: 'deposit' },
+    { key: 'withdraw', action: 'withdraw' }
+  ];
+
+  var SB_ORDER = {
+    main: ['Anasayfa', 'Casino', 'Canlı Casino', 'Spor Bahisleri', 'Canlı Bahis'],
+    special: ['Promosyonlar', 'VIP Kulübü', 'Çark Çevir', 'Meydan Okumalar', 'Turnuvalar'],
+    help: ['Para Yatırma', 'Para Çekme', 'Blog']
+  };
+
+  function sbLabels(lang) { return SB_LABELS[lang] || SB_LABELS.tr; }
+
+  function sbTitleOf(el) {
+    var t = q('.sb-top-title', el);
+    return t ? t.textContent.trim() : (el.getAttribute('aria-label') || '').trim();
+  }
+
+  function sbBuildItem(item, lang) {
+    var L = sbLabels(lang);
+    var label = L[item.key];
+    var a = document.createElement('a');
+    a.className = 'sb-top-btn';
+    a.setAttribute('data-sb-tooltip', label);
+    a.setAttribute('aria-label', label);
+    a.setAttribute('data-bf-sb', item.key);
+
+    if (item.action) {
+      a.href = '#';
+      a.setAttribute('data-bf-action', item.action);
+    } else {
+      a.href = getLangPrefix() + item.url;
+      a.setAttribute('data-bf-link', getLangPrefix() + item.url);
+    }
+
+    a.innerHTML =
+      '<span class="icon" aria-hidden="true">' +
+        '<span role="presentation" style="display:inline-flex;width:20px;height:20px;line-height:0;">' +
+          SB_ICONS[item.key] +
+        '</span>' +
+      '</span>' +
+      '<span class="sb-top-title">' + esc(label) + '</span>' +
+      '<span class="sb-top-arrow" aria-hidden="true">\u203a</span>';
+    return a;
+  }
+
+  function sbBuildHeading(text) {
+    var d = document.createElement('div');
+    d.className = 'bf-sb-heading';
+    d.setAttribute('data-bf-sb-heading', '1');
+    d.textContent = text;
+    return d;
+  }
+
+  function sbCleanup(host) {
+    var junk = host.querySelectorAll('[data-bf-sb],[data-bf-sb-heading]');
+    for (var i = 0; i < junk.length; i++) junk[i].remove();
+    host.removeAttribute('data-bf-sb-lang');
+  }
+
+  register({
+    id: 'bf-sb-menu',
+    run: function () {
+      var menu = q('#responsive-menu');
+      if (!menu) return;
+      var host = q('.categories .sb-top', menu) || q('.categories', menu);
+      if (!host) return;
+
+      if (!isHomePage()) { sbCleanup(host); return; }
+
+      var lang = getLangCode();
+      if (host.getAttribute('data-bf-sb-lang') === lang && q('[data-bf-sb]', host)) {
+        var first = host.firstElementChild;
+        if (first && sbTitleOf(first) === sbLabels(lang).home) return;
+      }
+
+      sbCleanup(host);
+
+      var L = sbLabels(lang);
+      var i, j;
+
+      for (i = 0; i < SB_NEW.length; i++) {
+        host.appendChild(sbBuildItem(SB_NEW[i], lang));
+      }
+
+      var items = host.querySelectorAll('.sb-top-btn');
+      var byTitle = {};
+      for (i = 0; i < items.length; i++) {
+        if (items[i].classList.contains('supportbtn')) continue;
+        byTitle[sbTitleOf(items[i])] = items[i];
+      }
+
+      var groups = [
+        { list: SB_ORDER.main, heading: null },
+        { list: SB_ORDER.special, heading: L.special },
+        { list: SB_ORDER.help, heading: L.help }
+      ];
+
+      var frag = document.createDocumentFragment();
+      for (i = 0; i < groups.length; i++) {
+        var placed = 0;
+        var pending = [];
+        for (j = 0; j < groups[i].list.length; j++) {
+          var el = byTitle[groups[i].list[j]];
+          if (el) { pending.push(el); placed++; }
+        }
+        if (!placed) continue;
+        if (groups[i].heading) frag.appendChild(sbBuildHeading(groups[i].heading));
+        for (j = 0; j < pending.length; j++) frag.appendChild(pending[j]);
+      }
+
+      host.insertBefore(frag, host.firstChild);
+      host.setAttribute('data-bf-sb-lang', lang);
+      attachActions(host);
     }
   });
 
