@@ -3529,6 +3529,7 @@ footer#footer > .container > .row > .col-12 {
     grid-template-areas:
         "menus menus"
         "notices notices"
+        "trust trust"
         "currencies currencies"
         "brand seal"
         "bottom bottom" !important;
@@ -3540,6 +3541,127 @@ footer#footer > .container > .row > .col-12 {
 
 footer#footer .footer-menus { grid-area: menus !important; }
 footer#footer .footer-contents { grid-area: notices !important; }
+footer#footer .bf-trust { grid-area: trust !important; }
+footer#footer .bf-trust {
+    position: relative !important;
+    margin: 0 !important;
+    padding: 26px 0 !important;
+    border-top: 1px solid var(--ft-stroke) !important;
+}
+
+footer#footer .bf-trust__grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 12px !important;
+    position: relative !important;
+    padding: 18px 16px !important;
+    border-radius: 18px !important;
+    border: 1px solid rgba(var(--ft-accent-rgb), .16) !important;
+    background:
+        radial-gradient(90% 160% at 0% 0%, rgba(var(--ft-accent-rgb), .10) 0%, rgba(var(--ft-accent-rgb), 0) 55%),
+        radial-gradient(90% 160% at 100% 100%, rgba(56, 104, 255, .08) 0%, rgba(56, 104, 255, 0) 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, .035) 0%, rgba(255, 255, 255, .008) 100%),
+        var(--ft-surface) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .06),
+        0 12px 30px rgba(0, 0, 0, .3) !important;
+    overflow: hidden !important;
+}
+
+footer#footer .bf-trust__grid::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 12% !important;
+    right: 12% !important;
+    top: -1px !important;
+    height: 1px !important;
+    pointer-events: none !important;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(var(--ft-accent-rgb), .5) 26%,
+        rgba(255, 255, 255, .45) 50%,
+        rgba(var(--ft-accent-rgb), .5) 74%,
+        transparent 100%) !important;
+    opacity: .6 !important;
+}
+
+footer#footer .bf-trust__item {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 13px !important;
+    min-width: 0 !important;
+    padding: 12px 14px !important;
+    border-radius: 13px !important;
+    border: 1px solid transparent !important;
+    background: transparent !important;
+    transition: background .22s ease, border-color .22s ease, transform .22s ease !important;
+}
+
+footer#footer .bf-trust__item:hover {
+    transform: translateY(-2px) !important;
+    border-color: rgba(var(--tc), .3) !important;
+    background: linear-gradient(180deg, rgba(var(--tc), .1) 0%, rgba(var(--tc), .02) 100%) !important;
+}
+
+footer#footer .bf-trust__ico {
+    position: relative !important;
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(var(--tc), .32) !important;
+    background: linear-gradient(180deg, rgba(var(--tc), .18) 0%, rgba(var(--tc), .05) 100%) !important;
+    color: rgb(var(--tc)) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .12),
+        0 6px 16px -8px rgba(var(--tc), .7) !important;
+    transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease !important;
+}
+
+footer#footer .bf-trust__item:hover .bf-trust__ico {
+    transform: scale(1.05) !important;
+    border-color: rgba(var(--tc), .55) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .18),
+        0 10px 22px -8px rgba(var(--tc), .9) !important;
+}
+
+footer#footer .bf-trust__ico svg {
+    width: 21px !important;
+    height: 21px !important;
+    display: block !important;
+}
+
+footer#footer .bf-trust__txt {
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+}
+
+footer#footer .bf-trust__title {
+    margin: 0 !important;
+    font-family: var(--font-family-bold, "Rubik", sans-serif) !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: .04em !important;
+    text-transform: uppercase !important;
+    color: #ffffff !important;
+    line-height: 1.25 !important;
+}
+
+footer#footer .bf-trust__desc {
+    margin: 0 !important;
+    font-size: 11.5px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    color: var(--ft-txt-dim) !important;
+}
+
 footer#footer .footer-currencies { grid-area: currencies !important; }
 footer#footer .footer-logo { grid-area: brand !important; }
 footer#footer .safe-online-casino-seal { grid-area: seal !important; }
@@ -3942,6 +4064,7 @@ footer#footer .footer-bottom .emails .mail:hover span {
         grid-template-areas:
             "menus"
             "notices"
+            "trust"
             "currencies"
             "brand"
             "seal"
@@ -3959,6 +4082,16 @@ footer#footer .footer-bottom .emails .mail:hover span {
 
     footer#footer .footer-contents .footer-contents-row {
         grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    footer#footer .bf-trust {
+        padding: 22px 0 !important;
+    }
+
+    footer#footer .bf-trust__grid {
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) !important;
+        padding: 14px 12px !important;
+        gap: 8px !important;
     }
 
     footer#footer .footer-currencies .currency-listing {
@@ -4049,6 +4182,42 @@ footer#footer .footer-bottom .emails .mail:hover span {
     footer#footer .footer-bottom .emails .mail {
         font-size: 11.5px !important;
         padding: 6px 11px !important;
+    }
+
+    footer#footer .bf-trust {
+        padding: 18px 0 !important;
+    }
+
+    footer#footer .bf-trust__grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        padding: 10px 8px !important;
+        gap: 4px !important;
+        border-radius: 16px !important;
+    }
+
+    footer#footer .bf-trust__item {
+        gap: 11px !important;
+        padding: 10px !important;
+    }
+
+    footer#footer .bf-trust__ico {
+        flex: 0 0 38px !important;
+        width: 38px !important;
+        height: 38px !important;
+        border-radius: 11px !important;
+    }
+
+    footer#footer .bf-trust__ico svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    footer#footer .bf-trust__title {
+        font-size: 12px !important;
+    }
+
+    footer#footer .bf-trust__desc {
+        font-size: 11px !important;
     }
 }
 
