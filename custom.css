@@ -1721,6 +1721,35 @@ div.provider-carousel {
     background: none !important;
 }
 
+#responsive-menu.responsive-menu .bf-sb-heading {
+    display: block !important;
+    margin: 16px 0 6px !important;
+    padding: 0 14px !important;
+    font-family: var(--font-family-semibold, "Rubik", sans-serif) !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: .12em !important;
+    text-transform: uppercase !important;
+    color: #5a6172 !important;
+    line-height: 1.4 !important;
+}
+
+#responsive-menu.responsive-menu .bf-sb-heading:first-child {
+    margin-top: 0 !important;
+}
+
+@media (min-width: 992px) {
+    #responsive-menu.responsive-menu:not(.active-menu) .bf-sb-heading {
+        margin: 10px auto 6px !important;
+        padding: 0 !important;
+        width: 28px !important;
+        height: 1px !important;
+        overflow: hidden !important;
+        text-indent: -999px !important;
+        background: var(--bfs-sep) !important;
+    }
+}
+
 #responsive-menu.responsive-menu .sb-top {
     display: flex !important;
     flex-direction: column !important;
