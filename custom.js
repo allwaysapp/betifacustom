@@ -944,7 +944,7 @@
   var TRUST_TEXT = {
     tr: {
       age: { t: '18+ Yaş Sınırı', d: 'Yalnızca 18 yaş ve üzeri kullanıcılar için uygundur.' },
-      license: { t: 'Lisanslı & Denetimli', d: 'Anjouan eGaming tarafından lisanslanmış ve düzenlenmektedir.' },
+      license: { t: 'Lisans & Denetimli', d: 'Anjouan eGaming tarafından lisanslanmış ve düzenlenmektedir.' },
       secure: { t: 'Güvenli Ödeme', d: '256-bit SSL şifreleme ile verileriniz güvende.' },
       fast: { t: 'Hızlı Çekim', d: 'Çekim talepleriniz en kısa sürede işleme alınır.' },
       support: { t: '7/24 Canlı Destek', d: 'Destek ekibimize her an ulaşabilirsiniz.' },
