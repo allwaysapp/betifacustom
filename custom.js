@@ -1023,9 +1023,7 @@
 
       var existing = document.getElementById('bf-hbadges');
       if (existing) {
-        if (host.nextElementSibling !== existing) {
-          host.parentNode.insertBefore(existing, host.nextSibling);
-        }
+        if (existing.parentNode !== host) host.appendChild(existing);
         return;
       }
 
@@ -1052,7 +1050,7 @@
       el.className = 'bf-hbadges';
       el.innerHTML = html;
 
-      host.parentNode.insertBefore(el, host.nextSibling);
+      host.appendChild(el);
       attachActions(el);
     }
   });
