@@ -3498,19 +3498,12 @@ div.provider-carousel {
     display: grid;
 }
 
-header#header .middle-header-container .categories {
-    font-size: 0 !important;
-    line-height: 0 !important;
-}
-
 header#header .middle-header-container .categories > a.category {
     display: none !important;
 }
 
 header#header .middle-header-container .bf-hbadges,
 .bf-hbadges {
-    position: relative !important;
-    z-index: 2 !important;
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
