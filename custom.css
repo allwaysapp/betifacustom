@@ -3499,11 +3499,18 @@ div.provider-carousel {
 }
 
 header#header .middle-header-container .categories {
+    font-size: 0 !important;
+    line-height: 0 !important;
+}
+
+header#header .middle-header-container .categories > a.category {
     display: none !important;
 }
 
 header#header .middle-header-container .bf-hbadges,
 .bf-hbadges {
+    position: relative !important;
+    z-index: 2 !important;
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
@@ -3549,8 +3556,8 @@ header#header .middle-header-container .bf-hbadges,
     width: auto !important;
     height: auto !important;
     object-fit: contain !important;
-    opacity: .78 !important;
-    transition: opacity .22s ease, transform .22s ease !important;
+    opacity: 1 !important;
+    transition: transform .22s ease !important;
 }
 
 a.bf-hbadge {
@@ -3570,8 +3577,7 @@ a.bf-hbadge:hover::before {
 }
 
 a.bf-hbadge:hover img {
-    opacity: 1 !important;
-    transform: scale(1.04) !important;
+    transform: scale(1.06) !important;
 }
 
 a.bf-hbadge:active {
@@ -3587,13 +3593,10 @@ span.bf-hbadge {
     width: auto !important;
     min-width: 52px !important;
     padding: 0 10px !important;
-    border-color: rgba(255, 255, 255, .05) !important;
-    background: rgba(255, 255, 255, .028) !important;
 }
 
 .bf-hbadge--license img {
     max-height: 26px !important;
-    opacity: .62 !important;
 }
 
 .bf-hbadge--ucl img {
