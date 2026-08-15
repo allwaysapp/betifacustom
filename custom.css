@@ -4383,3 +4383,10 @@ footer#footer .footer-contents-col .content-block {
     height: 100%;
     display: block
 }
+
+
+header#header div.middle-header div.middle-header-container div.header-buttons div.wallet-menu div.current-wallet a.wallet-button {
+    color: var(--wallet-btn-color) !important;
+    background: #3f9e28 !important;
+    border-radius: var(--radius-sm);
+}
