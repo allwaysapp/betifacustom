@@ -633,8 +633,34 @@
         '</section>';
         return shell('bf-appbar', h);
       });
+
+      // Bölüm veri gelmeden çizildiği için adresler ilk turda boş kalır.
+      syncAppLinks();
     }
   });
+
+  /**
+   * Mobil uygulama bağlantılarını panel verisiyle eşitler.
+   *
+   * `bf-appbar`, diğer bölümlerden farklı olarak veriyi beklemeden çizilir —
+   * içeriğinin neredeyse tamamı sabit olduğu için API'ye ulaşılamasa bile
+   * görünmesi istenir. Ancak bu, ilk çizimde uygulama adresinin henüz
+   * bilinmediği ve bağlantıların `#` kaldığı anlamına gelir. `mount()` var
+   * olan bir bölümü yeniden kurmadığından adres sonradan kendiliğinden
+   * düzelmez; her turda buradan güncellenir.
+   */
+  function syncAppLinks() {
+    var url = (DATA && DATA.social && DATA.social.app && DATA.social.app.url) || '';
+    if (!url) return;
+
+    var bar = document.getElementById('bf-appbar');
+    if (!bar) return;
+
+    var links = bar.querySelectorAll('.bf-appcta__btn, .bf-store');
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].getAttribute('href') !== url) links[i].setAttribute('href', url);
+    }
+  }
 
   function slotRows(list, kind) {
     var arrow = kind === 'hot' ? A.slot.hotArrow : A.slot.coldArrow;
@@ -849,7 +875,7 @@
         '</span>' +
       '</span>' +
       '<span class="sb-top-title">' + esc(label) + '</span>' +
-      '<span class="sb-top-arrow" aria-hidden="true">\u203a</span>';
+      '<span class="sb-top-arrow" aria-hidden="true">›</span>';
     return a;
   }
 
