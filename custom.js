@@ -1,23 +1,10 @@
 (function () {
   if (window.__BetifaHome) return;
 
-  // Yönetim panelinin adresi. Panel taşınırsa değişecek tek satır burasıdır.
   var PANEL_URL = 'https://panel.betifagunceladres.com';
-
-  // Statik veri: sayfa açılışında bir kez çekilir (slot listeleri, jackpot
-  // oyunları, sosyal linkler, sabit istatistikler).
   var DATA_URL = PANEL_URL + '/api/public/static';
-
-  // Canlı veri: yalnızca aktif oyuncu sayısı ve jackpot tutarı. Periyodik çekilir.
   var LIVE_URL = PANEL_URL + '/api/public/live';
-
-  // Canlı sayaç akışı. LIVE_INTERVAL, sunucudaki `LIVE_TICK_MS` ile aynı
-  // olmalıdır — hesaplama adımları bu aralığa göre kurulur.
   var LIVE_INTERVAL = 17000;
-
-  // Aktif oyuncu sayacı: çoğu zaman sabit durur, yeni değer geldiğinde bu
-  // sürede döner. Jackpot: aralığın çoğuna yayılarak akar, kalan ~2 saniye
-  // sabit kalır.
   var TICK_ANIM = 800;
   var FLOW_ANIM = 15000;
 
@@ -100,8 +87,6 @@
     for (var i = 0; i < FEATURES.length; i++) {
       try { FEATURES[i].run(); } catch (e) {}
     }
-    // Yeni oluşturulan bölümler statik veriyle çizilir; elde daha güncel bir
-    // canlı değer varsa animasyonsuz olarak hemen üzerine yazılır.
     try { paintLive(false); } catch (e) {}
   }
 
@@ -482,8 +467,6 @@
     'bf-appbar': function (mode) {
       return document.getElementById('bf-stats') || document.getElementById('bf-products') || homeAnchor(mode);
     },
-    // Sıralama: .top-picks-widget → bf-jackpot → bf-slots
-    // Jackpot bloğu Hot/Cold slot listelerinin üstünde durur.
     'bf-jackpot': function () { return q('.top-picks-widget'); },
     'bf-slots': function () { return document.getElementById('bf-jackpot') || q('.top-picks-widget'); },
     'bf-partners': function () { return q('#footer'); }
@@ -643,21 +626,10 @@
         return shell('bf-appbar', h);
       });
 
-      // Bölüm veri gelmeden çizildiği için adresler ilk turda boş kalır.
       syncAppLinks();
     }
   });
 
-  /**
-   * Mobil uygulama bağlantılarını panel verisiyle eşitler.
-   *
-   * `bf-appbar`, diğer bölümlerden farklı olarak veriyi beklemeden çizilir —
-   * içeriğinin neredeyse tamamı sabit olduğu için API'ye ulaşılamasa bile
-   * görünmesi istenir. Ancak bu, ilk çizimde uygulama adresinin henüz
-   * bilinmediği ve bağlantıların `#` kaldığı anlamına gelir. `mount()` var
-   * olan bir bölümü yeniden kurmadığından adres sonradan kendiliğinden
-   * düzelmez; her turda buradan güncellenir.
-   */
   function syncAppLinks() {
     var url = (DATA && DATA.social && DATA.social.app && DATA.social.app.url) || '';
     if (!url) return;
@@ -1042,6 +1014,33 @@
     }
   });
 
+  register({
+    id: 'bf-seal',
+    run: function () {
+      var footer = q('#footer');
+      if (!footer) return;
+      var anchor = document.getElementById('bf-trust') || q('.footer-contents', footer);
+      if (!anchor || !anchor.parentNode) return;
+
+      var existing = document.getElementById('trust-seal-container');
+      if (existing) {
+        if (anchor.nextElementSibling !== existing) {
+          anchor.parentNode.insertBefore(existing, anchor.nextSibling);
+        }
+        return;
+      }
+
+      var el = document.createElement('div');
+      el.id = 'trust-seal-container';
+      el.innerHTML =
+        '<a id="trust-seal-container-a" href="https://gamecheck.tech/seal-scan/betifa-com?referrer=betifa.com" target="_blank">' +
+          '<img src="https://seal.gamecheck.cloud/seal/a13ee73c-1410-4e88-ab43-66d61812d0c4.png" alt="Gamecheck Trust SEAL" width="217" height="64" />' +
+        '</a>';
+
+      anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    }
+  });
+
   var HEADER_BADGES = [
     { key: 'btc',     img: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/YtDERdBF6vSfHXi1ykzuVZzNDRuRIVBrbEh5P1lY.svg', label: 'Bitcoin', action: 'deposit' },
     { key: 'trust',   img: 'https://vendor-provider.fra1.cdn.digitaloceanspaces.com/ebetlab/kojqlwkejjoizdGJKQWf/statics/FlRpcfFtZbPeN8ttocVkcHQZ2kxmJU6SNadHDzgn.webp', label: 'Trust Wallet', action: 'deposit' },
@@ -1229,15 +1228,6 @@
     onResize(function () { if (!wrap.hidden) position(); });
   }
 
-  /* ==================================================================== */
-  /* Canlı sayaçlar                                                        */
-  /*                                                                       */
-  /* Panelin canlı ucu 15–20 saniyede bir çekilir ve gelen değer yalnızca  */
-  /* ilgili DOM elemanının içeriğine yazılır. Sayfa yenilenmez, başka      */
-  /* hiçbir alan etkilenmez. API'ye ulaşılamazsa son bilinen değer ekranda */
-  /* kalır; bölüm gizlenmez, hata gösterilmez.                             */
-  /* ==================================================================== */
-
   var LIVE = { players: null, jackpot: null };
   var liveTimer = null;
   var liveBusy = false;
@@ -1252,13 +1242,7 @@
   var REDUCED_MOTION = !!(window.matchMedia
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-  // Şerit hücresinin yüksekliği (em). Yazı boyutundan bağımsız çalışsın diye
-  // em cinsinden; dönüş mesafeleri de aynı birimle hesaplanır.
   var CELL_EM = 1.15;
-
-  /* ------------------------------------------------------------------ */
-  /* Odometre stilleri                                                   */
-  /* ------------------------------------------------------------------ */
 
   function injectOdometerStyles() {
     if (odoStyled || document.getElementById('bf-odo-styles')) return;
@@ -1270,8 +1254,6 @@
       '.bf-odo__d{display:block;height:' + CELL_EM + 'em;overflow:hidden}' +
       '.bf-odo__r{display:block;will-change:transform}' +
       '.bf-odo__r>span{display:block;height:' + CELL_EM + 'em;line-height:' + CELL_EM + 'em}' +
-      // Tik modu geçişi CSS ile; akış modu her karede elle konumlandığı için
-      // geçişi olmamalı, yoksa iki animasyon birbiriyle yarışır.
       '.bf-odo__r--tick{transition:transform ' + TICK_ANIM + 'ms cubic-bezier(.22,1,.36,1)}' +
       '@media (prefers-reduced-motion:reduce){.bf-odo__r--tick{transition:none}}';
 
@@ -1294,16 +1276,6 @@
     return flat;
   }
 
-  /* ------------------------------------------------------------------ */
-  /* TİK MODU — aktif oyuncu sayacı                                      */
-  /*                                                                     */
-  /* Sayı çoğu zaman sabit durur. Yeni değer geldiğinde her hane, eski   */
-  /* rakamdan yenisine aradaki tüm rakamların üzerinden geçerek döner:   */
-  /* 1'den 9'a çıkarken 2,3,4,5,6,7,8 görünür. Üst hane devrettiğinde    */
-  /* 9'dan 0'a geçilir, gerçek bir kilometre sayacı gibi.                */
-  /* ------------------------------------------------------------------ */
-
-  /** Eski rakamdan yenisine, seçilen yönde uğranacak rakamların listesi. */
   function digitPath(from, to, direction) {
     var a = from.charCodeAt(0) - 48;
     var b = to.charCodeAt(0) - 48;
@@ -1311,7 +1283,6 @@
     var path = [a];
     var current = a;
 
-    // En fazla 10 adım — devretme dahil tüm rakamlar bir turda biter.
     for (var guard = 0; current !== b && guard < 10; guard++) {
       current = direction > 0 ? (current + 1) % 10 : (current + 9) % 10;
       path.push(current);
@@ -1349,8 +1320,6 @@
       var reel = document.createElement('span');
       reel.className = 'bf-odo__r bf-odo__r--tick';
 
-      // Artışta şerit yukarı kayar: eski rakam üstte, yeni en altta.
-      // Azalışta şerit aşağı kayar: sıra ters dizilir, baştaki konumdan 0'a gelinir.
       var ordered = direction > 0 ? path : path.slice().reverse();
       var span = (ordered.length - 1) * CELL_EM;
 
@@ -1376,7 +1345,6 @@
 
     if (!reels.length) return;
 
-    // Başlangıç konumu çizildikten sonra hedefe kaydır ki geçiş tetiklensin.
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         for (var k = 0; k < reels.length; k++) {
@@ -1386,24 +1354,6 @@
     });
   }
 
-  /* ------------------------------------------------------------------ */
-  /* AKIŞ MODU — jackpot tutarı                                          */
-  /*                                                                     */
-  /* Jackpot sürekli ve tek yönlü arttığı için hiç durmaz: iki istek     */
-  /* arasındaki sürenin çoğuna yayılarak akar, son birkaç saniye sabit   */
-  /* kalır. Her hane kendi hızında döner — birler hanesi hızlı, onlar    */
-  /* on kat yavaş, yüzler yüz kat yavaş. Gerçek bir kilometre sayacının  */
-  /* dişli mantığı.                                                      */
-  /* ------------------------------------------------------------------ */
-
-  /**
-   * Bir hanenin o andaki makara konumu.
-   *
-   * Gerçek bir kilometre sayacının dişli mantığı: birler hanesi değerle
-   * birlikte sürekli döner, üst haneler yalnızca altlarındaki hanelerin
-   * tamamı 9 iken hareket eder. Böylece sayı tam bir değerdeyken bütün
-   * haneler net durur; makaralar sadece devretme anında araya girer.
-   */
   function wheelPosition(value, place) {
     var whole = Math.floor(value);
     var fraction = value - whole;
@@ -1411,14 +1361,11 @@
 
     var digit = Math.floor(whole / unit) % 10;
 
-    // Bir hane yalnızca altındaki hanelerin tamamı 9 iken devreder.
-    // Birler hanesi ise değerle birlikte sürekli döner.
     var carrying = place === 0 || (whole % unit) === unit - 1;
 
     return digit + (carrying ? fraction : 0);
   }
 
-  /** Metnin rakam olmayan iskeleti — yapı değişmediyse DOM yeniden kurulmaz. */
   function signature(text) {
     return text.replace(/\d/g, '#');
   }
@@ -1446,7 +1393,6 @@
       var reel = document.createElement('span');
       reel.className = 'bf-odo__r bf-odo__r--flow';
 
-      // 0-9 ve devretme için bir tane daha 0.
       for (var d = 0; d <= 10; d++) {
         var digit = document.createElement('span');
         digit.textContent = String(d % 10);
@@ -1469,8 +1415,6 @@
       var wheel = structure.wheels[i];
       var position = wheelPosition(value, wheel.place);
 
-      // Konum değişmediyse dokunma: üst haneler zamanın çoğunda sabit durur,
-      // gereksiz stil yazımı her karede yeniden hesaplamaya yol açar.
       if (wheel.last !== undefined && Math.abs(position - wheel.last) < 0.0005) continue;
 
       wheel.last = position;
@@ -1481,7 +1425,6 @@
   function paintFlow(el, key, state) {
     injectOdometerStyles();
 
-    // Ondalık basamak sayısı: metindeki rakam adedi ile tam kısmın uzunluğu farkı.
     var digitCount = (state.text.match(/\d/g) || []).length;
     var decimals = Math.max(0, digitCount - String(Math.floor(Math.abs(state.value))).length);
 
@@ -1511,29 +1454,23 @@
     function step(now) {
       if (!started) started = now;
 
-      // `isConnected` eski WebView sürümlerinde yok; `document.contains`
-      // her yerde var ve aynı sorunun cevabını verir.
       if (!document.contains(el)) {
         flowFrames[key] = null;
         return;
       }
 
-      // Doğrusal ilerleme — akış yavaşlamadan devam etsin.
       var t = Math.min(1, (now - started) / FLOW_ANIM);
       renderFlow(structure, from + (to - from) * t);
 
       if (t < 1) {
         flowFrames[key] = requestAnimationFrame(step);
       } else {
-        // Kalan süre boyunca sabit kalır, sonraki veri akışı yeniden başlatır.
         flowFrames[key] = null;
       }
     }
 
     flowFrames[key] = requestAnimationFrame(step);
   }
-
-  /* ------------------------------------------------------------------ */
 
   function paintLive(animate) {
     for (var i = 0; i < LIVE_TARGETS.length; i++) {
@@ -1546,8 +1483,6 @@
 
       var known = el.getAttribute('data-bf-value');
 
-      // Animasyonsuz çağrı yalnızca yeni oluşturulmuş elemanı doldurur;
-      // aksi halde her DOM değişikliğinde akışı baştan başlatırdı.
       if (!animate) {
         if (known !== null) continue;
 
@@ -1575,7 +1510,6 @@
   }
 
   function fetchLive() {
-    // Sekme arka plandayken istek atılmaz.
     if (liveBusy || document.hidden) return;
     liveBusy = true;
 
@@ -1590,7 +1524,6 @@
         paintLive(true);
       })
       .catch(function () {
-        // Hata yutulur: son bilinen değer ekranda kalır.
         liveBusy = false;
       });
   }
@@ -1606,7 +1539,6 @@
     };
   }
 
-  /** İlk animasyonun başlangıç noktası: statik yüklemedeki değer. */
   function seedValue(key) {
     if (!DATA) return null;
 
@@ -1623,7 +1555,6 @@
     fetchLive();
     liveTimer = setInterval(fetchLive, LIVE_INTERVAL);
 
-    // Sekmeye geri dönüldüğünde beklemeden tazele.
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) fetchLive();
     });
