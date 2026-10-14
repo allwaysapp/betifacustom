@@ -4390,3 +4390,5 @@ header#header div.middle-header div.middle-header-container div.header-buttons d
     background: #3f9e28 !important;
     border-radius: var(--radius-sm);
 }
+
+#trust-seal-container{display:block;flex-shrink:0;margin-right:16px!important}
