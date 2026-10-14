@@ -1017,9 +1017,7 @@
   register({
     id: 'bf-seal',
     run: function () {
-      var footer = q('#footer');
-      if (!footer) return;
-      var anchor = q('.safe-online-casino-seal', footer);
+      var anchor = q('.safe-online-casino-seal');
       if (!anchor || !anchor.parentNode) return;
 
       var existing = document.getElementById('trust-seal-container');
