@@ -1019,13 +1019,13 @@
     run: function () {
       var footer = q('#footer');
       if (!footer) return;
-      var anchor = document.getElementById('bf-trust') || q('.footer-contents', footer);
+      var anchor = q('.safe-online-casino-seal', footer);
       if (!anchor || !anchor.parentNode) return;
 
       var existing = document.getElementById('trust-seal-container');
       if (existing) {
-        if (anchor.nextElementSibling !== existing) {
-          anchor.parentNode.insertBefore(existing, anchor.nextSibling);
+        if (anchor.previousElementSibling !== existing) {
+          anchor.parentNode.insertBefore(existing, anchor);
         }
         return;
       }
@@ -1037,7 +1037,7 @@
           '<img src="https://seal.gamecheck.cloud/seal/a13ee73c-1410-4e88-ab43-66d61812d0c4.png" alt="Gamecheck Trust SEAL" width="217" height="64" />' +
         '</a>';
 
-      anchor.parentNode.insertBefore(el, anchor.nextSibling);
+      anchor.parentNode.insertBefore(el, anchor);
     }
   });
 
